@@ -116,6 +116,7 @@ h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 .jbtn:active{transform:translateY(2px);box-shadow:none}
 .j1{background:var(--p1)} .j2{background:var(--p2);color:var(--ink)} .jb{background:var(--good)}
 .jbtn.jt{background:var(--good);font-size:22px;padding:18px 28px}
+.ytb{display:inline-block;background:#CC0000;color:#FFF;font:800 15px var(--disp);padding:9px 16px;border-radius:12px;text-decoration:none;margin-top:6px;box-shadow:0 3px 0 rgba(43,35,64,.18)}
 .gamegrid .gcard:nth-child(odd):last-child{grid-column:1/-1}
 .alltime{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;align-items:center}
 .atlbl{font:800 12px var(--disp);letter-spacing:.12em;color:var(--mut)}
@@ -177,21 +178,23 @@ svg.ang{width:min(300px,70vw);height:auto}
     <div class="gamegrid">
       <button class="gcard" data-game="pv"><span class="em">🔢</span><h3>Place Value Face-Off</h3><p>Tens, ones, tenths, and hundredths. Know your places!</p></button>
       <button class="gcard" data-game="rd"><span class="em">🎯</span><h3>Rounding Rush</h3><p>Round big numbers and decimals before time runs out.</p></button>
-      <button class="gcard" data-game="an"><span class="em">📐</span><h3>Angle Attack</h3><p>Name the angle type and guess the degrees.</p></button>
+      <button class="gcard" data-game="fv"><span class="em">🎈</span><h3>Super Fun Trivia</h3><p>Squishies, family, colors, and silly stuff!</p></button>
       <button class="gcard" data-game="lt"><span class="em">⚡</span><h3>Lightning Round</h3><p>Fast adding, subtracting, and times tables. 10 seconds each!</p></button>
     </div>
 
     <p class="sectlbl">Just for Fun</p>
     <div class="gamegrid">
-      <button class="gcard" data-game="mz"><span class="em">🌀</span><h3>Maze Race</h3><p>Same maze, two runners. First one to the star wins!</p></button>
+      <button class="gcard" data-game="ch"><span class="em">📣</span><h3>Cheer Practice</h3><p>Let's Fight, More More More, jumps, motions, and spirit!</p></button>
       <button class="gcard" data-game="tr"><span class="em">🧠</span><h3>Trivia Face-Off</h3><p>Animals, space, sports, and more. Buzz in first!</p></button>
       <button class="gcard" data-game="od"><span class="em">👀</span><h3>Odd One Out</h3><p>Three match, one doesn't. Spot the sneaky one!</p></button>
       <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Over 40 dance-offs, silly races, and team challenges!</p></button>
+      <button class="gcard" data-game="gm"><span class="em">🤸</span><h3>Gymnastics Spotlight</h3><p>Bella performs, Coach Emma calls the moves and grades!</p></button>
+      <button class="gcard" data-game="sg"><span class="em">🎤</span><h3>Singing Star</h3><p>Emma sings karaoke, Judge Bella gives the stars!</p></button>
       <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
     </div>
 
     <button class="big" id="tourney">🏆 Grand Tournament (lots of moving, a little math!)</button>
-    <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In the maze: Player 1 <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> · Player 2 arrow keys. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
+    <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
   </section>
 
   <!-- SPLASH -->
@@ -439,7 +442,42 @@ function genOD(){
   t.tiles=true; return t;
 }
 
-function genMX(){return pick([genPV,genRD,genAN,genLT,genTR,genOD])()}
+const FUNQ=[
+ ["What is Emma's mom's name?","Ariana",["Samira","Rachel","Jessica"]],
+ ["What is Bella's mom's name?","Samira",["Ariana","Rachel","Monica"]],
+ ["What is Emma's grandma's name?","Rachel",["Ariana","Samira","Linda"]],
+ ["What are the Forks Falcons school colors?","Burgundy and yellow",["Blue and white","Green and orange","Pink and purple"]],
+ ["What kind of bird is the Forks mascot?","Falcon",["Eagle","Penguin","Chicken"]],
+ ["What are most squishies made of?","Soft squishy foam",["Rocks","Glass","Spaghetti"]],
+ ["What does a slow-rising squishy do after you squeeze it?","Slowly puffs back into shape",["It pops","It melts","It runs away"]],
+ ["Lots of squishies are scented like...","Sweet treats",["Old socks","Broccoli","Wet dog"]],
+ ["Which of these would make the WORST squishy?","A cactus",["A peach","A bread loaf","A panda"]],
+ ["What color do red and yellow make?","Orange",["Green","Purple","Brown"]],
+ ["What color do blue and yellow make?","Green",["Orange","Pink","Gray"]],
+ ["How many legs does a ladybug have?","6",["4","8","100"]],
+ ["Which animal says NEIGH?","Horse",["Cow","Duck","Snake"]],
+ ["What shape is a pizza slice, usually?","Triangle",["Square","Circle","Heart"]],
+ ["How many minutes are in one hour?","60",["30","100","24"]],
+ ["What do bees make?","Honey",["Ketchup","Butter","Jelly"]],
+ ["What is a group of puppies called?","A litter",["A flock","A puddle","A squad"]],
+ ["Which season comes right after summer?","Fall",["Winter","Spring","Beach season"]],
+ ["How many horns does a unicorn have?","1",["2","3","None, they're bald"]],
+ ["What candy comes on a stick?","Lollipop",["Gummy bear","Chocolate bar","Jellybean"]],
+ ["A rainbow needs rain and...","Sunshine",["Snow","Thunder","Glitter"]],
+ ["What do you say when someone sneezes?","Bless you",["Good job","Happy birthday","Encore"]],
+ ["What is frozen water called?","Ice",["Steam","Soup","Juice"]],
+ ["Which one can actually fly?","Falcon",["Penguin","Ostrich","Pig"]],
+];
+let funUsed=new Set();
+function genFV(){
+  let i,guard=0;
+  do{i=rint(0,FUNQ.length-1);guard++;}while(funUsed.has(i)&&guard<200);
+  funUsed.add(i);
+  const [prompt,ans,wrong]=FUNQ[i];
+  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
+}
+
+function genMX(){return pick([genPV,genRD,genFV,genLT,genTR,genOD])()}
 
 function q(prompt,visual,options,correct,keepOrder){
   const opts=keepOrder?[...options]:shuffle([...options]);
@@ -557,12 +595,98 @@ const ACTS=[
  {t:"team",em:"⭐",txt:"TEAM CHALLENGE! Do 10 jumping jacks in PERFECT sync, then tap WE DID IT!"},
  {t:"team",em:"👯",txt:"TEAM CHALLENGE! Copy the captain! One leads a dance, the other copies everything!",secs:20},
 ];
+const CHEER_ACTS=[
+ {t:"team",em:"🥊",txt:"Do the LET'S FIGHT dance together! Full volume, full Falcon spirit!",secs:25},
+ {t:"team",em:"🔥",txt:"Do the MORE MORE MORE cheer together! Louder every single time!",secs:20},
+ {t:"team",em:"🦅",txt:"Perform the Forks Falcons cheer dance together, in sync!",secs:25},
+ {t:"team",em:"📢",txt:"Chant GO FALCONS GO three times together, louder each time, then tap WE DID IT!"},
+ {t:"team",em:"💪",txt:"Motion drill in sync: High V! Low V! T! Touchdown! Clasp! Hit them sharp together until time ends!",secs:20},
+ {t:"team",em:"⭐",txt:"Jump round! Each of you does YOUR favorite cheer jump 3 times. Spread eagle, tuck, or toe touch, pick the jump that feels right for YOU! Then tap WE DID IT!"},
+ {t:"team",em:"🧘",txt:"Stretch circle! Each of you holds YOUR best stretch: lunge, butterfly, straddle, or split. Only go as far as feels comfy. Every level scores!",secs:15},
+ {t:"team",em:"🦩",txt:"Liberty poses! Both balance on one leg like cheer captains until time ends!",secs:10},
+ {t:"team",em:"✨",txt:"Spirit fingers and the two biggest smiles in Pennsylvania until time ends!",secs:10},
+ {t:"team",em:"🎤",txt:"Invent a 4-move FALCONS cheer together and perform it, then tap WE DID IT!"},
+ {t:"team",em:"🎀",txt:"Pom pom blast! Shake your invisible pom poms together as fast as you can!",secs:10},
+ {t:"team",em:"🦵",txt:"High kick 8-count together! Kick YOUR comfortable height, sharp on every count!",secs:15},
+ {t:"team",em:"👏",txt:"Clap pattern together: clap, clap, stomp, stomp, spirit fingers! Repeat until time ends!",secs:15},
+ {t:"team",em:"🏰",txt:"Make a two-person pose together, feet on the FLOOR (no climbing!). Hold it 5 seconds, then tap WE DID IT!"},
+ {t:"team",em:"🏆",txt:"Make up a victory cheer for the judge and perform it together, then tap WE DID IT!"},
+ {t:"team",em:"🪞",txt:"Mirror motions! One calls out V, T, touchdown, the other hits them. Switch halfway!",secs:20},
+ {t:"team",em:"📣",txt:"Cheer each other's names! GO EMMA! GO BELLA! Three big rounds, then tap WE DID IT!"},
+ {t:"team",em:"🫨",txt:"Hit your final performance pose together and FREEZE until time ends! Don't laugh!",secs:10},
+];
+/* ---------------- SOLO spotlight games ---------------- */
+const GYM_MOVES=[
+ {em:"🤸",txt:"Cartwheel time! Show your best cartwheel!"},
+ {em:"🙆",txt:"Forward roll, nice and tucked!"},
+ {em:"🌉",txt:"Bridge hold! Only if it feels comfy, hold it for 5 seconds!"},
+ {em:"🤸‍♀️",txt:"Handstand kick-up practice! Do it near a wall, 3 tries!"},
+ {em:"🦘",txt:"Tuck jump! Knees up high, 3 in a row!"},
+ {em:"🩰",txt:"Beam walk! Walk an imaginary beam line, toes pointed, no wobbles!"},
+ {em:"🦢",txt:"Arabesque! Hold your prettiest arabesque for 5 seconds!"},
+ {em:"✌️",txt:"V-sit! Hold a V shape with your legs up for 5 seconds!"},
+ {em:"🕯️",txt:"Candlestick roll! Roll back, legs to the sky, roll up!"},
+ {em:"🫏",txt:"Donkey kicks! Hands down, kick those heels up 3 times!"},
+ {em:"🦵",txt:"Split leap, YOUR level! Leap as big as feels good!"},
+ {em:"⭐",txt:"Freestyle! Show the coach your favorite move of all!"},
+];
+const SONG_LIST=[
+ {em:"🖤",txt:"Sing BLACK by Pearl Jam! Big feelings!",yt:"black pearl jam karaoke"},
+ {em:"🌲",txt:"Sing CEDAR! Make it beautiful!",yt:"cedar karaoke"},
+ {em:"🎸",txt:"Sing COME AS YOU ARE by Nirvana!",yt:"come as you are nirvana karaoke"},
+ {em:"⛓️",txt:"Sing WOULD? by Alice in Chains!",yt:"would alice in chains karaoke"},
+ {em:"🎶",txt:"Singer's choice! Pick any song you love!",yt:"karaoke with lyrics"},
+ {em:"🧑‍⚖️",txt:"Judge's pick! The judge chooses your song!",yt:"karaoke with lyrics"},
+ {em:"🤫",txt:"Whisper-sing a song and still give it feeling!",yt:"karaoke with lyrics"},
+ {em:"🎤",txt:"Big finale voice! Sing like it's the last song of the concert!",yt:"karaoke with lyrics"},
+];
+let soloUsed=new Set();
+function startSoloQ(){
+  S.cur=null;
+  const cfg=S.solo, items=cfg.items;
+  let i,g2=0; do{i=rint(0,items.length-1);g2++}while(soloUsed.has(S.aid+":"+i)&&g2<200);
+  soloUsed.add(S.aid+":"+i);
+  const it=items[i];
+  $("qCount").textContent=`${S.qn} / ${S.qmax}`;
+  $("prompt").innerHTML=esc(it.txt); $("prompt").style.display="";
+  let vh=`<div class="bigem">${it.em}</div>`;
+  if(it.yt) vh+=`<a class="ytb" href="https://www.youtube.com/results?search_query=${encodeURIComponent(it.yt)}" target="_blank" rel="noopener">📺 Karaoke on YouTube</a>`;
+  $("visual").innerHTML=vh;
+  const pn=S.names[cfg.perf], cn=S.names[1-cfg.perf];
+  $("flash").textContent=`${pn} performs. ${cn} is the ${cfg.coach}!`;
+  $("flash").className="flash ok";
+  [0,1].forEach(p=>{
+    const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.style.gap="8px"; body.innerHTML="";
+    if(p===cfg.perf){
+      body.innerHTML=`<div class="movehint">YOU'RE ON! 🌟</div>`;
+    }else{
+      const b1=document.createElement("button"); b1.className="abtn done"; b1.textContent=`⭐⭐ ${cfg.top} (+2)`;
+      b1.addEventListener("click",()=>soloGrade(2));
+      const b2=document.createElement("button"); b2.className="abtn done"; b2.style.fontSize="20px"; b2.textContent=`⭐ ${cfg.low} (+1)`;
+      b2.addEventListener("click",()=>soloGrade(1));
+      body.appendChild(b1); body.appendChild(b2);
+    }
+  });
+  sTick();
+}
+function soloGrade(pts){
+  if(!S||!S.solo||S.resolved)return;
+  S.resolved=true;
+  const perf=S.solo.perf;
+  S.score[perf]+=pts; sOK(); if(pts===2)sWIN();
+  $("pts"+(perf+1)).textContent=S.score[perf];
+  $("flash").textContent=pts===2?`${S.names[perf]} NAILED it! +2 ⭐⭐`:`Great job, ${S.names[perf]}! +1 ⭐`;
+  $("flash").className="flash ok";
+  later(nextQ,1500);
+}
+
 let PH=null, phUsed=new Set();
 function startPhQ(){
   S.cur=null;
-  let i,g2=0; do{i=rint(0,ACTS.length-1);g2++}while(phUsed.has(i)&&g2<100);
-  phUsed.add(i);
-  const a=ACTS[i];
+  const list=S.acts;
+  let i,g2=0; do{i=rint(0,list.length-1);g2++}while(phUsed.has(S.aid+":"+i)&&g2<200);
+  phUsed.add(S.aid+":"+i);
+  const a=list[i];
   PH={a,phase:a.t==="race"?"race":"move",left:a.secs||0,iv:null};
   $("qCount").textContent=`Move ${S.qn} / ${S.qmax}`;
   $("prompt").innerHTML=esc(a.txt); $("prompt").style.display="";
@@ -646,15 +770,17 @@ function phDone(p){
 const GAMES={
   pv:{label:"Place Value",em:"🔢",title:"Place Value Face-Off",gen:genPV,n:10,tn:6,t:15000},
   rd:{label:"Rounding",em:"🎯",title:"Rounding Rush",gen:genRD,n:10,tn:6,t:15000},
-  an:{label:"Angles",em:"📐",title:"Angle Attack",gen:genAN,n:10,tn:6,t:15000},
+  fv:{label:"Fun Trivia",em:"🎈",title:"Super Fun Trivia",gen:genFV,n:10,tn:6,t:15000},
   lt:{label:"Lightning",em:"⚡",title:"Lightning Round",gen:genLT,n:15,tn:10,t:10000},
-  mz:{label:"Maze Race",em:"🌀",title:"Maze Race",maze:true,n:3,tn:2},
   tr:{label:"Trivia",em:"🧠",title:"Trivia Face-Off",gen:genTR,n:10,tn:6,t:15000},
   od:{label:"Odd One Out",em:"👀",title:"Odd One Out",gen:genOD,n:10,tn:6,t:15000},
   mx:{label:"Mystery Mix",em:"🎲",title:"Mystery Mix",gen:genMX,n:12,tn:6,t:15000},
-  ph:{label:"Move It!",em:"💃",title:"Move It! Challenge",ph:true,n:8,tn:3},
+  ph:{label:"Move It!",em:"💃",title:"Move It! Challenge",ph:true,acts:ACTS,n:8,tn:3},
+  ch:{label:"Cheer Practice",em:"📣",title:"Falcons Cheer Practice",ph:true,acts:CHEER_ACTS,n:8,tn:3},
+  gm:{label:"Gymnastics",em:"🤸",title:"Bella's Gymnastics Spotlight",solo:{perf:1,items:GYM_MOVES,coach:"coach",top:"NAILED IT!",low:"GREAT TRY!"},n:6,tn:3},
+  sg:{label:"Singing",em:"🎤",title:"Emma's Singing Star",solo:{perf:0,items:SONG_LIST,coach:"judge",top:"ROCKSTAR!",low:"GREAT SHOW!"},n:6,tn:3},
 };
-const TOURNEY=["ph","pv","mz","ph","tr","lt","ph","od"];
+const TOURNEY=["ch","pv","gm","fv","ph","sg","lt","ch"];
 const KEYS1={a:0,s:1,d:2,f:3}, KEYS2={h:0,j:1,k:2,l:3};
 const MKEYS1={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0]};
 const MKEYS2={ArrowUp:[0,-1],ArrowLeft:[-1,0],ArrowDown:[0,1],ArrowRight:[1,0]};
@@ -667,8 +793,8 @@ function show(id){["menu","splash","game","resultWrap"].forEach(s=>$(s).hidden=(
 function startSet(keys,mode){
   clearTimers();
   const p1=$("name1").value.trim()||"Player 1", p2=$("name2").value.trim()||"Player 2";
-  S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],maze:false,ph:false};
-  phUsed=new Set();
+  S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],ph:false,solo:null,acts:null,aid:""};
+  phUsed=new Set(); soloUsed=new Set();
   $("gn1").textContent=p1;$("gn2").textContent=p2;
   $("pw1").textContent=p1.toUpperCase();$("pw2").textContent=p2.toUpperCase();
   $("pts1").textContent="0";$("pts2").textContent="0";
@@ -677,8 +803,9 @@ function startSet(keys,mode){
 function nextSegment(){
   const g=GAMES[S.keys[S.ki]];
   S.qn=0; S.qmax = S.mode==="tourney" ? (g.tn||g.n) : g.n;
-  S.gen=g.gen; S.tms=g.t; S.maze=!!g.maze; S.ph=!!g.ph;
-  trivUsed=new Set();
+  S.gen=g.gen; S.tms=g.t; S.ph=!!g.ph; S.solo=g.solo||null;
+  S.acts=g.acts||null; S.aid=S.keys[S.ki];
+  trivUsed=new Set(); funUsed=new Set();
   $("gLabel").textContent=g.label;
   $("spEm").textContent=g.em;$("spTitle").textContent=g.title;
   $("spSub").textContent = S.mode==="tourney" ? `Game ${S.ki+1} of ${S.keys.length}. Get ready...` : "Get ready...";
@@ -692,13 +819,9 @@ function nextQ(){
   $("flash").textContent=" ";$("flash").className="flash";
   $("pad1").classList.remove("locked");$("pad2").classList.remove("locked");
   const bar=$("tbar");
-  if(S.maze){
-    $("qCount").textContent=`Maze ${S.qn} / ${S.qmax}`;
-    $("prompt").innerHTML="Race through your maze to the ⭐! Same maze on both sides.";
-    $("prompt").style.display="";
-    $("visual").innerHTML="";
+  if(S.solo){
     bar.style.transition="none"; bar.style.width="100%";
-    startMazeQ();
+    startSoloQ();
     return;
   }
   if(S.ph){
@@ -732,7 +855,7 @@ function renderPads(){
   });
 }
 function answer(p,i,btn){
-  if(!S||S.maze||S.ph||S.resolved||S.locked[p]||!S.cur)return;
+  if(!S||S.ph||S.solo||S.resolved||S.locked[p]||!S.cur)return;
   const body=$("pb"+(p+1));
   btn=btn||body.querySelectorAll(".abtn")[i];
   if(!btn)return;
@@ -792,12 +915,7 @@ $("rematch").addEventListener("click",()=>startSet(S.keys,S.mode));
 $("toMenu").addEventListener("click",()=>{clearTimers();S=null;show("menu")});
 document.addEventListener("keydown",e=>{
   if(!S||$("game").hidden)return;
-  if(S.maze){
-    const k=e.key.length===1?e.key.toLowerCase():e.key;
-    if(MKEYS1[k]){mazeMove(0,MKEYS1[k][0],MKEYS1[k][1]);e.preventDefault();return;}
-    if(MKEYS2[k]){mazeMove(1,MKEYS2[k][0],MKEYS2[k][1]);e.preventDefault();return;}
-    return;
-  }
+  if(S.solo)return;
   if(S.ph){
     if(e.repeat||!PH||PH.phase!=="race")return;
     const k=e.key.toLowerCase();
