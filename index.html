@@ -43,7 +43,12 @@ h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 .namebox{background:var(--card);border:3px solid var(--line);border-radius:16px;padding:10px 14px;display:flex;flex-direction:column;gap:4px;min-width:150px}
 .namebox label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .namebox.n1 label{color:var(--p1)} .namebox.n2 label{color:var(--p2)}
-.namebox input{font:800 18px var(--disp);border:0;outline:0;background:transparent;color:var(--ink);width:140px}
+.namebox input{font:800 18px var(--disp);border:0;outline:0;background:transparent;color:var(--ink);width:120px}
+.nrow{display:flex;align-items:center;gap:8px}
+.av{width:38px;height:38px;flex:0 0 auto}
+.sc{gap:8px}
+.sc .nm{margin-right:auto}
+.sc .av{width:32px;height:32px}
 .sectlbl{font:800 13px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:4px 0 -6px;text-align:center}
 .gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .gcard{background:var(--card);border:3px solid var(--line);border-radius:20px;padding:14px 16px;text-align:left;cursor:pointer;font-family:var(--body);transition:transform .12s, border-color .12s}
@@ -158,8 +163,8 @@ svg.ang{width:min(300px,70vw);height:auto}
       <p>Two players. One screen. Fastest correct answer wins the point!</p>
     </div>
     <div class="names">
-      <div class="namebox n1"><label>Player 1</label><input id="name1" value="Emma" maxlength="12"></div>
-      <div class="namebox n2"><label>Player 2</label><input id="name2" value="Bella" maxlength="12"></div>
+      <div class="namebox n1"><label>Player 1</label><div class="nrow"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C16 6 8 20 9 34c1 12-3 20 2 24 4 3 8-2 8-2s4 4 13 4 13-4 13-4 4 5 8 2c5-4 1-12 2-24C56 20 48 6 32 6Z" fill="#5E3A21"/><path d="M12 40c-2 6-5 12-1 15 3 2 6-1 7-4M52 40c2 6 5 12 1 15-3 2-6-1-7-4" fill="none" stroke="#C9A36B" stroke-width="4" stroke-linecap="round"/><circle cx="32" cy="33" r="15" fill="#F2C49B"/><path d="M18 30q3-12 14-12t14 12q-6-7-14-7t-14 7Z" fill="#5E3A21"/><circle cx="26" cy="33" r="2.7" fill="#4A2C17"/><circle cx="38" cy="33" r="2.7" fill="#4A2C17"/><circle cx="26.8" cy="32.2" r=".8" fill="#FFF"/><circle cx="38.8" cy="32.2" r=".8" fill="#FFF"/><circle cx="21" cy="38" r="2.4" fill="#F0A58E" opacity=".65"/><circle cx="43" cy="38" r="2.4" fill="#F0A58E" opacity=".65"/><path d="M25 40q7 7 14 0" fill="#FFF" stroke="#B3455A" stroke-width="2" stroke-linejoin="round"/></svg><input id="name1" value="Emma" maxlength="12"></div></div>
+      <div class="namebox n2"><label>Player 2</label><div class="nrow"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C18 6 11 17 11 29c0 10-1 22 2 27 2 4 7 1 8-10M32 6c14 0 21 11 21 23 0 10 1 22-2 27-2 4-7 1-8-10" fill="#6B4A2B"/><path d="M13 46q-1 8 2 10M51 46q1 8-2 10" stroke="#C9A36B" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="13" y="20" width="38" height="26" rx="13" fill="#6B4A2B"/><circle cx="32" cy="33" r="15" fill="#F6D1B2"/><path d="M17 31q2-13 15-13t15 13q-7-8-15-8t-15 8Z" fill="#6B4A2B"/><circle cx="26" cy="32" r="3" fill="#4A2C17"/><circle cx="38" cy="32" r="3" fill="#4A2C17"/><circle cx="27" cy="31" r=".9" fill="#FFF"/><circle cx="39" cy="31" r=".9" fill="#FFF"/><ellipse cx="32" cy="41" rx="5.5" ry="4" fill="#8C2332"/><path d="M28.5 42q3.5 7 7 0 0-3-3.5-3t-3.5 3Z" fill="#F08BA0"/><circle cx="20.5" cy="37" r="2.2" fill="#F0A58E" opacity=".65"/><circle cx="43.5" cy="37" r="2.2" fill="#F0A58E" opacity=".65"/></svg><input id="name2" value="Bella" maxlength="12"></div></div>
     </div>
 
     <div class="alltime">
@@ -173,7 +178,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="gcard" data-game="pv"><span class="em">🔢</span><h3>Place Value Face-Off</h3><p>Decimals to the thousandths. Know your places!</p></button>
       <button class="gcard" data-game="rd"><span class="em">🎯</span><h3>Rounding Rush</h3><p>Round big numbers and decimals before time runs out.</p></button>
       <button class="gcard" data-game="an"><span class="em">📐</span><h3>Angle Attack</h3><p>Name the angle type and guess the degrees.</p></button>
-      <button class="gcard" data-game="lt"><span class="em">⚡</span><h3>Lightning Round</h3><p>Fast adding, subtracting, and times tables. 7 seconds each!</p></button>
+      <button class="gcard" data-game="lt"><span class="em">⚡</span><h3>Lightning Round</h3><p>Fast adding, subtracting, and times tables. 10 seconds each!</p></button>
     </div>
 
     <p class="sectlbl">Just for Fun</p>
@@ -181,11 +186,11 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="gcard" data-game="mz"><span class="em">🌀</span><h3>Maze Race</h3><p>Same maze, two runners. First one to the star wins!</p></button>
       <button class="gcard" data-game="tr"><span class="em">🧠</span><h3>Trivia Face-Off</h3><p>Animals, space, sports, and more. Buzz in first!</p></button>
       <button class="gcard" data-game="od"><span class="em">👀</span><h3>Odd One Out</h3><p>Three match, one doesn't. Spot the sneaky one!</p></button>
-      <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Dance-offs and silly races. Get up and get timed!</p></button>
+      <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Over 40 dance-offs, silly races, and team challenges!</p></button>
       <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
     </div>
 
-    <button class="big" id="tourney">🏆 Grand Tournament (all 9 games!)</button>
+    <button class="big" id="tourney">🏆 Grand Tournament (lots of moving, a little math!)</button>
     <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In the maze: Player 1 <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> · Player 2 arrow keys. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
   </section>
 
@@ -199,11 +204,11 @@ svg.ang{width:min(300px,70vw);height:auto}
   <!-- GAME -->
   <section class="screen" id="game" hidden>
     <div class="scorebar">
-      <div class="sc sc1"><span class="nm" id="gn1">Emma</span><span class="pts" id="pts1">0</span></div>
+      <div class="sc sc1"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C16 6 8 20 9 34c1 12-3 20 2 24 4 3 8-2 8-2s4 4 13 4 13-4 13-4 4 5 8 2c5-4 1-12 2-24C56 20 48 6 32 6Z" fill="#5E3A21"/><circle cx="32" cy="33" r="15" fill="#F2C49B"/><path d="M18 30q3-12 14-12t14 12q-6-7-14-7t-14 7Z" fill="#5E3A21"/><circle cx="26" cy="33" r="2.7" fill="#4A2C17"/><circle cx="38" cy="33" r="2.7" fill="#4A2C17"/><path d="M25 40q7 7 14 0" fill="#FFF" stroke="#B3455A" stroke-width="2" stroke-linejoin="round"/></svg><span class="nm" id="gn1">Emma</span><span class="pts" id="pts1">0</span></div>
       <div class="mid"><span class="gname" id="gLabel">Place Value</span><span class="qcount" id="qCount">1 / 10</span></div>
-      <div class="sc sc2"><span class="nm" id="gn2">Bella</span><span class="pts" id="pts2">0</span></div>
+      <div class="sc sc2"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C18 6 11 17 11 29c0 10-1 22 2 27 2 4 7 1 8-10M32 6c14 0 21 11 21 23 0 10 1 22-2 27-2 4-7 1-8-10" fill="#6B4A2B"/><rect x="13" y="20" width="38" height="26" rx="13" fill="#6B4A2B"/><circle cx="32" cy="33" r="15" fill="#F6D1B2"/><path d="M17 31q2-13 15-13t15 13q-7-8-15-8t-15 8Z" fill="#6B4A2B"/><circle cx="26" cy="32" r="3" fill="#4A2C17"/><circle cx="38" cy="32" r="3" fill="#4A2C17"/><ellipse cx="32" cy="41" rx="5.5" ry="4" fill="#8C2332"/><path d="M28.5 42q3.5 7 7 0 0-3-3.5-3t-3.5 3Z" fill="#F08BA0"/></svg><span class="nm" id="gn2">Bella</span><span class="pts" id="pts2">0</span></div>
     </div>
-    <div class="timer"><i id="tbar"></i></div>
+    <div class="timer" id="timerWrap"><i id="tbar"></i></div>
     <div class="qcard">
       <div class="prompt" id="prompt"></div>
       <div id="visual"></div>
@@ -277,12 +282,12 @@ function beep(freqs,dur,type){try{
 const sOK=()=>beep([660,880],.14), sNO=()=>beep([160],.22,"sawtooth"),
       sWIN=()=>beep([523,659,784,1047],.18), sTick=()=>beep([880],.06);
 
-/* ---------------- MATH generators ---------------- */
-const PLACE_IDX={hundreds:0,tens:1,ones:2,tenths:3,hundredths:4,thousandths:5};
-function freshDigits(){return [rint(1,9),rint(0,9),rint(0,9),rint(0,9),rint(0,9),rint(0,9)]}
-const dstr=d=>`${d[0]}${d[1]}${d[2]}.${d[3]}${d[4]}${d[5]}`;
+/* ---------------- MATH generators (beginner friendly) ---------------- */
+const PLACE_IDX={tens:0,ones:1,tenths:2,hundredths:3};
+function freshDigits(){return [rint(1,9),rint(0,9),rint(0,9),rint(0,9)]}
+const dstr=d=>`${d[0]}${d[1]}.${d[2]}${d[3]}`;
 function digitValue(dig,idx){
-  return [fmt(dig*100),fmt(dig*10),String(dig),(dig/10).toFixed(1),(dig/100).toFixed(2),(dig/1000).toFixed(3)][idx];
+  return [fmt(dig*10),String(dig),(dig/10).toFixed(1),(dig/100).toFixed(2)][idx];
 }
 function genPV(){
   const kind=rint(1,3);
@@ -298,17 +303,17 @@ function genPV(){
   if(kind===2){
     let d,uniq;
     do{d=freshDigits();const c={};d.forEach(x=>c[x]=(c[x]||0)+1);
-       uniq=d.map((x,i)=>c[x]===1?i:-1).filter(i=>i>=0);
+       uniq=d.map((x,i)=>(c[x]===1&&x>0)?i:-1).filter(i=>i>=0);
     }while(!uniq.length);
     const i=pick(uniq), dig=d[i];
     const correct=digitValue(dig,i);
     const opts=new Set([correct]);
-    shuffle([0,1,2,3,4,5].filter(j=>j!==i)).forEach(j=>{if(opts.size<4)opts.add(digitValue(dig,j))});
-    const html=`<div class="bignum">${dstr(d).split("").map((ch,k)=>k===(i<3?i:i+1)?`<b>${ch}</b>`:ch).join("")}</div>`;
+    shuffle([0,1,2,3].filter(j=>j!==i)).forEach(j=>{if(opts.size<4)opts.add(digitValue(dig,j))});
+    const html=`<div class="bignum">${dstr(d).split("").map((ch,k)=>k===(i<2?i:i+1)?`<b>${ch}</b>`:ch).join("")}</div>`;
     return q(`What is the <b>value</b> of the underlined digit ${dig}?`,html,[...opts],correct);
   }
   const dig=rint(1,9);
-  const pmap={ones:2,tenths:3,hundredths:4};
+  const pmap={ones:1,tenths:2};
   const pname=pick(Object.keys(pmap)), pos=pmap[pname];
   const mk=()=>{let d;do{d=freshDigits()}while(d[pos]===dig);return dstr(d)};
   const good=freshDigits(); good[pos]=dig;
@@ -317,24 +322,22 @@ function genPV(){
 }
 
 function genRD(){
-  if(Math.random()<0.45){
-    const v=rint(1042,98765);
-    const [label,pow]=pick([["ten",1],["hundred",2],["thousand",3]]);
+  if(Math.random()<0.6){
+    const two=Math.random()<0.55;
+    const v= two? rint(21,99) : rint(110,949);
+    const pow= two? 1 : pick([1,2]);
+    const label= pow===1?"ten":"hundred";
     const ans=fmt(roundWhole(v,pow));
     const f=10**pow;
-    const opts=new Set([ans,fmt(Math.floor(v/f)*f),fmt((Math.floor(v/f)+1)*f),fmt(roundWhole(v,pow===3?2:pow+1))]);
-    let bump=2; while(opts.size<4){opts.add(fmt(roundWhole(v,pow)+f*bump));bump++;}
+    const opts=new Set([ans,fmt(Math.floor(v/f)*f),fmt((Math.floor(v/f)+1)*f)]);
+    let bump=2; while(opts.size<4){opts.add(fmt(Math.floor(v/f)*f+f*bump));bump++;}
     return q(`Round to the nearest <b>${label}</b>:`,`<div class="bignum">${fmt(v)}</div>`,[...opts],ans);
   }
-  const v=rint(2000,99999), dec=3;
-  const [label,keep]=pick([["whole number",0],["tenth",1],["hundredth",2]]);
-  const ans=roundDigits(v,dec,keep);
-  const f=10**(dec-keep), lo=Math.floor(v/f);
-  const down= keep===0?fmt(lo):numStr(lo,keep);
-  const up=   keep===0?fmt(lo+1):numStr(lo+1,keep);
-  const opts=new Set([ans,down,up,roundDigits(v,dec,keep===2?1:keep+1)]);
-  let bump=2; while(opts.size<4){opts.add(keep===0?fmt(lo+bump):numStr(lo+bump,keep));bump++;}
-  return q(`Round to the nearest <b>${label}</b>:`,`<div class="bignum">${numStr(v,3)}</div>`,[...opts],ans);
+  const w=rint(2,89), t=rint(1,9);
+  const ans=fmt(t>=5?w+1:w);
+  const opts=new Set([ans,fmt(w),fmt(w+1)]);
+  let bump=2; while(opts.size<4){opts.add(fmt(w+bump));bump++;}
+  return q(`Round to the nearest <b>whole number</b>:`,`<div class="bignum">${w}.${t}</div>`,[...opts],ans);
 }
 
 function angleSVG(deg){
@@ -363,10 +366,10 @@ function genAN(){
 function genLT(){
   const kind=rint(1,3);
   let a,b,ans,sym;
-  if(kind===1){a=rint(14,89);b=rint(13,89);ans=a+b;sym="+";}
-  else if(kind===2){a=rint(30,99);b=rint(11,a-5);ans=a-b;sym="-";}
-  else {a=rint(3,12);b=rint(3,12);ans=a*b;sym="×";}
-  const deltas=shuffle([1,2,10,-1,-2,-10,kind===3?a:4,kind===3?-b:-4]);
+  if(kind===1){a=rint(5,15);b=rint(3,12);ans=a+b;sym="+";}
+  else if(kind===2){a=rint(9,20);b=rint(2,a-2);ans=a-b;sym="-";}
+  else {a=rint(2,9);b=rint(2,9);ans=a*b;sym="×";}
+  const deltas=shuffle([1,2,-1,-2,3,-3,kind===3?a:4,kind===3?-b:-4]);
   const opts=new Set([String(ans)]);
   deltas.forEach(d=>{const v=ans+d; if(v>0&&opts.size<4)opts.add(String(v))});
   return q("",`<div class="bignum">${a} ${sym} ${b} = ?</div>`,[...opts],String(ans));
@@ -532,6 +535,27 @@ const ACTS=[
  {t:"race",em:"🪢",txt:"First to do 15 invisible jump rope hops, smash your DONE button!"},
  {t:"race",em:"🚪",txt:"First to run and touch a door and come back, smash your DONE button!"},
  {t:"race",em:"🙇",txt:"First to take 5 super fancy bows, smash your DONE button!"},
+ {t:"race",em:"🏋️",txt:"First to do 10 squats, smash your DONE button!"},
+ {t:"race",em:"🦵",txt:"First to do 20 high knees, smash your DONE button!"},
+ {t:"race",em:"🦶",txt:"First to hop on one foot 10 times, smash your DONE button!"},
+ {t:"race",em:"🦀",txt:"Crab walk across the room and back! First one back smashes DONE!"},
+ {t:"race",em:"🐻",txt:"Bear crawl to the wall and back! First one back smashes DONE!"},
+ {t:"race",em:"⛷️",txt:"First to do 10 ski jumps side to side, smash your DONE button!"},
+ {t:"race",em:"👍",txt:"Thumb war! Best of 3. The WINNER smashes their DONE button!"},
+ {t:"race",em:"✂️",txt:"Rock, paper, scissors! Best of 3. The WINNER smashes their DONE button!"},
+ {t:"race",em:"👁️",txt:"Staring contest! No blinking, no laughing. The WINNER smashes their DONE button!"},
+ {t:"dance",em:"🐔",txt:"Chicken dance! Flap those wings until the timer ends!",secs:20},
+ {t:"dance",em:"🦷",txt:"Floss dance! Swing those arms until the timer ends!",secs:15},
+ {t:"dance",em:"💦",txt:"The sprinkler! Water that lawn until the timer ends!",secs:15},
+ {t:"dance",em:"🩰",txt:"Ballerina time! Twirl and leap gracefully until the timer ends!",secs:15},
+ {t:"dance",em:"🗿",txt:"FREEZE! Be a statue. No moving, no laughing, until the timer ends!",secs:10},
+ {t:"dance",em:"🦍",txt:"Gorilla dance! Stomp and pound your chest until the timer ends!",secs:15},
+ {t:"dance",em:"🌀",txt:"Washing machine wiggle! Spin cycle until the timer ends!",secs:15},
+ {t:"dance",em:"🥋",txt:"Karate moves! Chop and kick the air until the timer ends!",secs:15},
+ {t:"dance",em:"🏊",txt:"Backstroke swim! Swim through the living room until the timer ends!",secs:15},
+ {t:"team",em:"🚂",txt:"TEAM CHALLENGE! Conga line! One lap around the room together, then tap WE DID IT!"},
+ {t:"team",em:"⭐",txt:"TEAM CHALLENGE! Do 10 jumping jacks in PERFECT sync, then tap WE DID IT!"},
+ {t:"team",em:"👯",txt:"TEAM CHALLENGE! Copy the captain! One leads a dance, the other copies everything!",secs:20},
 ];
 let PH=null, phUsed=new Set();
 function startPhQ(){
@@ -620,17 +644,17 @@ function phDone(p){
 
 /* ---------------- game engine ---------------- */
 const GAMES={
-  pv:{label:"Place Value",em:"🔢",title:"Place Value Face-Off",gen:genPV,n:10,tn:6,t:14000},
-  rd:{label:"Rounding",em:"🎯",title:"Rounding Rush",gen:genRD,n:10,tn:6,t:14000},
-  an:{label:"Angles",em:"📐",title:"Angle Attack",gen:genAN,n:10,tn:6,t:14000},
-  lt:{label:"Lightning",em:"⚡",title:"Lightning Round",gen:genLT,n:15,tn:10,t:7000},
+  pv:{label:"Place Value",em:"🔢",title:"Place Value Face-Off",gen:genPV,n:10,tn:6,t:15000},
+  rd:{label:"Rounding",em:"🎯",title:"Rounding Rush",gen:genRD,n:10,tn:6,t:15000},
+  an:{label:"Angles",em:"📐",title:"Angle Attack",gen:genAN,n:10,tn:6,t:15000},
+  lt:{label:"Lightning",em:"⚡",title:"Lightning Round",gen:genLT,n:15,tn:10,t:10000},
   mz:{label:"Maze Race",em:"🌀",title:"Maze Race",maze:true,n:3,tn:2},
-  tr:{label:"Trivia",em:"🧠",title:"Trivia Face-Off",gen:genTR,n:10,tn:6,t:12000},
-  od:{label:"Odd One Out",em:"👀",title:"Odd One Out",gen:genOD,n:10,tn:6,t:10000},
-  mx:{label:"Mystery Mix",em:"🎲",title:"Mystery Mix",gen:genMX,n:12,tn:6,t:14000},
-  ph:{label:"Move It!",em:"💃",title:"Move It! Challenge",ph:true,n:6,tn:3},
+  tr:{label:"Trivia",em:"🧠",title:"Trivia Face-Off",gen:genTR,n:10,tn:6,t:15000},
+  od:{label:"Odd One Out",em:"👀",title:"Odd One Out",gen:genOD,n:10,tn:6,t:15000},
+  mx:{label:"Mystery Mix",em:"🎲",title:"Mystery Mix",gen:genMX,n:12,tn:6,t:15000},
+  ph:{label:"Move It!",em:"💃",title:"Move It! Challenge",ph:true,n:8,tn:3},
 };
-const TOURNEY=["pv","rd","mz","an","ph","tr","lt","od","mx"];
+const TOURNEY=["ph","pv","mz","ph","tr","lt","ph","od"];
 const KEYS1={a:0,s:1,d:2,f:3}, KEYS2={h:0,j:1,k:2,l:3};
 const MKEYS1={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0]};
 const MKEYS2={ArrowUp:[0,-1],ArrowLeft:[-1,0],ArrowDown:[0,1],ArrowRight:[1,0]};
@@ -644,6 +668,7 @@ function startSet(keys,mode){
   clearTimers();
   const p1=$("name1").value.trim()||"Player 1", p2=$("name2").value.trim()||"Player 2";
   S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],maze:false,ph:false};
+  phUsed=new Set();
   $("gn1").textContent=p1;$("gn2").textContent=p2;
   $("pw1").textContent=p1.toUpperCase();$("pw2").textContent=p2.toUpperCase();
   $("pts1").textContent="0";$("pts2").textContent="0";
@@ -653,7 +678,7 @@ function nextSegment(){
   const g=GAMES[S.keys[S.ki]];
   S.qn=0; S.qmax = S.mode==="tourney" ? (g.tn||g.n) : g.n;
   S.gen=g.gen; S.tms=g.t; S.maze=!!g.maze; S.ph=!!g.ph;
-  trivUsed=new Set(); phUsed=new Set();
+  trivUsed=new Set();
   $("gLabel").textContent=g.label;
   $("spEm").textContent=g.em;$("spTitle").textContent=g.title;
   $("spSub").textContent = S.mode==="tourney" ? `Game ${S.ki+1} of ${S.keys.length}. Get ready...` : "Get ready...";
