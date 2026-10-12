@@ -190,6 +190,8 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Over 40 dance-offs, silly races, and team challenges!</p></button>
       <button class="gcard" data-game="gm"><span class="em">🤸</span><h3>Gymnastics Spotlight</h3><p>Bella performs, Coach Emma calls the moves and grades!</p></button>
       <button class="gcard" data-game="sg"><span class="em">🎤</span><h3>Singing Star</h3><p>Emma sings karaoke, Judge Bella gives the stars!</p></button>
+      <button class="gcard" data-game="td"><span class="em">🎭</span><h3>Truth or Dare</h3><p>Silly truths, goofy dares, points for both!</p></button>
+      <button class="gcard" data-game="gq"><span class="em">👵</span><h3>Ask Grandma Rachel</h3><p>Quiz Grandma on kid stuff and see what she knows!</p></button>
       <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
     </div>
 
@@ -445,7 +447,7 @@ function genOD(){
 const FUNQ=[
  ["What is Emma's mom's name?","Ariana",["Samira","Rachel","Jessica"]],
  ["What is Bella's mom's name?","Samira",["Ariana","Rachel","Monica"]],
- ["What is Emma's grandma's name?","Rachel",["Ariana","Samira","Linda"]],
+ ["What is Bella's grandma's name?","Rachel",["Ariana","Samira","Linda"]],
  ["What are the Forks Falcons school colors?","Burgundy and yellow",["Blue and white","Green and orange","Pink and purple"]],
  ["What kind of bird is the Forks mascot?","Falcon",["Eagle","Penguin","Chicken"]],
  ["What are most squishies made of?","Soft squishy foam",["Rocks","Glass","Spaghetti"]],
@@ -628,7 +630,61 @@ const GYM_MOVES=[
  {em:"🕯️",txt:"Candlestick roll! Roll back, legs to the sky, roll up!"},
  {em:"🫏",txt:"Donkey kicks! Hands down, kick those heels up 3 times!"},
  {em:"🦵",txt:"Split leap, YOUR level! Leap as big as feels good!"},
+ {em:"🌪️",txt:"Round-off! Find lots of open space first, then show your round-off!"},
+ {em:"🤸",txt:"BIG SKILL: Back handspring! ONLY if you already do these at practice and a grown-up says go. Otherwise coach taps Different One!"},
+ {em:"🔄",txt:"BIG SKILL: Back tuck! ONLY if this is already your skill at the gym and a grown-up is watching. Otherwise coach taps Different One!"},
+ {em:"🚀",txt:"BIG SKILL: Layout! ONLY if you already train these and a grown-up says go. Otherwise coach taps Different One!"},
  {em:"⭐",txt:"Freestyle! Show the coach your favorite move of all!"},
+];
+const TRUTHS=[
+ "What's the funniest sound you can make? Make it RIGHT NOW!",
+ "What's the weirdest food combo you secretly think is yummy?",
+ "If you had to marry a FOOD, which food would it be and why?",
+ "What's the silliest thing you've ever done at school?",
+ "Which cartoon character are you secretly most like?",
+ "What's your most embarrassing burp or hiccup story?",
+ "If you were invisible for one day at school, what would you do?",
+ "What's a weird smell that you secretly love?",
+ "Flying or talking to animals: which superpower and WHY?",
+ "What's one silly thing you do when nobody is watching?",
+ "If your pet could talk, what's the FIRST thing it would tattle about you?",
+ "What song do you sing in the shower at full volume?",
+ "What would you name a pet potato?",
+ "What's the funniest dream you remember?",
+];
+const DARES=[
+ "Talk like a pirate until your next turn, matey!",
+ "Do your best chicken impression for 10 seconds!",
+ "Sing Happy Birthday in a monster voice!",
+ "Let your friend give you a brand-new silly hairstyle in 30 seconds!",
+ "Dance with NO music for 15 seconds like it's the best song ever!",
+ "Say the alphabet backwards as far as you can!",
+ "Act like a grumpy old teacher giving homework to invisible students!",
+ "Keep a totally serious face for 20 seconds while your friend tries to make you laugh!",
+ "Walk across the room like a runway supermodel with a shoe balanced on your head!",
+ "Speak in a fancy royal queen voice until your next turn!",
+ "Do 5 jumping jacks while saying your own name backwards!",
+ "Be a news reporter and give a VERY serious report about what's inside the fridge!",
+ "Hug a pillow and tell it it's your best friend, super dramatically!",
+ "Meow every time you finish a sentence until your next turn!",
+];
+const GRANDMA_Q=[
+ "Grandma, what does the slang word SLAY mean?",
+ "Grandma, what is a squishy?",
+ "Grandma, what is a Squishmallow?",
+ "Grandma, what is Roblox?",
+ "Grandma, what does GOAT stand for when someone is 'the GOAT'?",
+ "Grandma, can you do a TikTok dance? Show us ANY dance!",
+ "Grandma, what does 'no cap' mean?",
+ "Grandma, what are the Forks Falcons school colors?",
+ "Grandma, what does LOL stand for?",
+ "Grandma, what does BRB stand for?",
+ "Grandma, what does it mean when kids say 'bet'?",
+ "Grandma, what is a 'glow up'?",
+ "Grandma, which is faster: a diving falcon or a running cheetah?",
+ "Grandma, what was YOUR favorite candy when you were 10?",
+ "Grandma, what games did YOU play at recess when you were our age?",
+ "Grandma, what's the magic word to get ANYTHING from you?",
 ];
 const SONG_LIST=[
  {em:"🖤",txt:"Sing BLACK by Pearl Jam! Big feelings!",yt:"black pearl jam karaoke"},
@@ -664,10 +720,84 @@ function startSoloQ(){
       b1.addEventListener("click",()=>soloGrade(2));
       const b2=document.createElement("button"); b2.className="abtn done"; b2.style.fontSize="20px"; b2.textContent=`⭐ ${cfg.low} (+1)`;
       b2.addEventListener("click",()=>soloGrade(1));
-      body.appendChild(b1); body.appendChild(b2);
+      const b3=document.createElement("button"); b3.className="abtn"; b3.style.textAlign="center"; b3.textContent="🔁 Different one!";
+      b3.addEventListener("click",()=>{if(S&&S.solo&&!S.resolved)startSoloQ();});
+      body.appendChild(b1); body.appendChild(b2); body.appendChild(b3);
     }
   });
   sTick();
+}
+
+/* ---------------- Truth or Dare ---------------- */
+let todUsed=new Set();
+function startTodQ(){
+  S.cur=null;
+  const active=(S.qn-1)%2, judge=1-active;
+  $("qCount").textContent=`Turn ${S.qn} / ${S.qmax}`;
+  $("prompt").innerHTML=`It's <b>${esc(S.names[active])}'s</b> turn! Pick one:`;
+  $("prompt").style.display="";
+  $("visual").innerHTML=`<div class="bigem">🎭</div>`;
+  $("flash").textContent="Choose bravely!"; $("flash").className="flash";
+  [0,1].forEach(p=>{
+    const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.style.gap="8px"; body.innerHTML="";
+    if(p===active){
+      const bt=document.createElement("button"); bt.className="abtn done"; bt.textContent="🗣️ TRUTH";
+      bt.addEventListener("click",()=>todReveal(active,"truth"));
+      const bd=document.createElement("button"); bd.className="abtn done"; bd.textContent="🔥 DARE";
+      bd.addEventListener("click",()=>todReveal(active,"dare"));
+      body.appendChild(bt); body.appendChild(bd);
+    }else{
+      body.innerHTML=`<div class="movehint">WAIT FOR IT... 👀</div>`;
+    }
+  });
+  sTick();
+}
+function todReveal(active,kind){
+  if(!S||!S.tod||S.resolved)return;
+  const list=kind==="truth"?TRUTHS:DARES;
+  let i,g2=0; do{i=rint(0,list.length-1);g2++}while(todUsed.has(kind+":"+i)&&g2<200);
+  todUsed.add(kind+":"+i);
+  $("prompt").innerHTML=`<b>${kind==="truth"?"TRUTH":"DARE"}</b> for ${esc(S.names[active])}: ${esc(list[i])}`;
+  $("visual").innerHTML=`<div class="bigem">${kind==="truth"?"🗣️":"🔥"}</div>`;
+  $("flash").textContent="Go go go!"; $("flash").className="flash ok";
+  [0,1].forEach(p=>{
+    const body=$("pb"+(p+1)); body.innerHTML="";
+    if(p===active){
+      body.innerHTML=`<div class="movehint">YOU'RE ON! 🌟</div>`;
+    }else{
+      const b=document.createElement("button"); b.className="abtn done"; b.textContent="DONE! Point for BOTH! 🎉";
+      b.addEventListener("click",()=>teamPoint());
+      body.appendChild(b);
+    }
+  });
+}
+
+/* ---------------- Ask Grandma Rachel ---------------- */
+let gqUsed=new Set();
+function startGqQ(){
+  S.cur=null;
+  let i,g2=0; do{i=rint(0,GRANDMA_Q.length-1);g2++}while(gqUsed.has(i)&&g2<200);
+  gqUsed.add(i);
+  $("qCount").textContent=`${S.qn} / ${S.qmax}`;
+  $("prompt").innerHTML=`Read this to Grandma Rachel, nice and loud: <b>${esc(GRANDMA_Q[i])}</b>`;
+  $("prompt").style.display="";
+  $("visual").innerHTML=`<div class="bigem">👵</div><div class="judges">
+    <button class="jbtn jb" id="gqYes">✅ Grandma got it!</button>
+    <button class="jbtn j1" id="gqNo">😂 Grandma had NO idea!</button></div>`;
+  $("flash").textContent="Ask Grandma and listen close!"; $("flash").className="flash";
+  [0,1].forEach(p=>{
+    const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.innerHTML=`<div class="movehint">ASK GRANDMA! 📣</div>`;
+  });
+  $("gqYes").addEventListener("click",()=>gqPoint("Grandma crushed it! Point for everyone! 🎉"));
+  $("gqNo").addEventListener("click",()=>gqPoint("Hilarious! Now teach Grandma the answer. Point for everyone anyway! 🎉"));
+  sTick();
+}
+function gqPoint(msg){
+  if(!S||!S.gq||S.resolved)return;
+  S.resolved=true; S.score[0]++; S.score[1]++; sWIN();
+  $("pts1").textContent=S.score[0]; $("pts2").textContent=S.score[1];
+  $("flash").textContent=msg; $("flash").className="flash ok";
+  later(nextQ,1700);
 }
 function soloGrade(pts){
   if(!S||!S.solo||S.resolved)return;
@@ -779,8 +909,10 @@ const GAMES={
   ch:{label:"Cheer Practice",em:"📣",title:"Falcons Cheer Practice",ph:true,acts:CHEER_ACTS,n:8,tn:3},
   gm:{label:"Gymnastics",em:"🤸",title:"Bella's Gymnastics Spotlight",solo:{perf:1,items:GYM_MOVES,coach:"coach",top:"NAILED IT!",low:"GREAT TRY!"},n:6,tn:3},
   sg:{label:"Singing",em:"🎤",title:"Emma's Singing Star",solo:{perf:0,items:SONG_LIST,coach:"judge",top:"ROCKSTAR!",low:"GREAT SHOW!"},n:6,tn:3},
+  td:{label:"Truth or Dare",em:"🎭",title:"Truth or Dare",tod:true,n:8,tn:4},
+  gq:{label:"Ask Grandma",em:"👵",title:"Ask Grandma Rachel",gq:true,n:8,tn:4},
 };
-const TOURNEY=["ch","pv","gm","fv","ph","sg","lt","ch"];
+const TOURNEY=["ch","pv","gm","fv","ph","sg","td","lt","ch"];
 const KEYS1={a:0,s:1,d:2,f:3}, KEYS2={h:0,j:1,k:2,l:3};
 const MKEYS1={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0]};
 const MKEYS2={ArrowUp:[0,-1],ArrowLeft:[-1,0],ArrowDown:[0,1],ArrowRight:[1,0]};
@@ -793,8 +925,8 @@ function show(id){["menu","splash","game","resultWrap"].forEach(s=>$(s).hidden=(
 function startSet(keys,mode){
   clearTimers();
   const p1=$("name1").value.trim()||"Player 1", p2=$("name2").value.trim()||"Player 2";
-  S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],ph:false,solo:null,acts:null,aid:""};
-  phUsed=new Set(); soloUsed=new Set();
+  S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],ph:false,solo:null,tod:false,gq:false,acts:null,aid:""};
+  phUsed=new Set(); soloUsed=new Set(); todUsed=new Set(); gqUsed=new Set();
   $("gn1").textContent=p1;$("gn2").textContent=p2;
   $("pw1").textContent=p1.toUpperCase();$("pw2").textContent=p2.toUpperCase();
   $("pts1").textContent="0";$("pts2").textContent="0";
@@ -804,6 +936,7 @@ function nextSegment(){
   const g=GAMES[S.keys[S.ki]];
   S.qn=0; S.qmax = S.mode==="tourney" ? (g.tn||g.n) : g.n;
   S.gen=g.gen; S.tms=g.t; S.ph=!!g.ph; S.solo=g.solo||null;
+  S.tod=!!g.tod; S.gq=!!g.gq;
   S.acts=g.acts||null; S.aid=S.keys[S.ki];
   trivUsed=new Set(); funUsed=new Set();
   $("gLabel").textContent=g.label;
@@ -819,9 +952,9 @@ function nextQ(){
   $("flash").textContent=" ";$("flash").className="flash";
   $("pad1").classList.remove("locked");$("pad2").classList.remove("locked");
   const bar=$("tbar");
-  if(S.solo){
+  if(S.solo||S.tod||S.gq){
     bar.style.transition="none"; bar.style.width="100%";
-    startSoloQ();
+    if(S.solo)startSoloQ(); else if(S.tod)startTodQ(); else startGqQ();
     return;
   }
   if(S.ph){
@@ -855,7 +988,7 @@ function renderPads(){
   });
 }
 function answer(p,i,btn){
-  if(!S||S.ph||S.solo||S.resolved||S.locked[p]||!S.cur)return;
+  if(!S||S.ph||S.solo||S.tod||S.gq||S.resolved||S.locked[p]||!S.cur)return;
   const body=$("pb"+(p+1));
   btn=btn||body.querySelectorAll(".abtn")[i];
   if(!btn)return;
@@ -915,7 +1048,7 @@ $("rematch").addEventListener("click",()=>startSet(S.keys,S.mode));
 $("toMenu").addEventListener("click",()=>{clearTimers();S=null;show("menu")});
 document.addEventListener("keydown",e=>{
   if(!S||$("game").hidden)return;
-  if(S.solo)return;
+  if(S.solo||S.tod||S.gq)return;
   if(S.ph){
     if(e.repeat||!PH||PH.phase!=="race")return;
     const k=e.key.toLowerCase();
