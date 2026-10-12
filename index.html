@@ -190,6 +190,8 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Over 40 dance-offs, silly races, and team challenges!</p></button>
       <button class="gcard" data-game="gm"><span class="em">🤸</span><h3>Gymnastics Spotlight</h3><p>Bella performs, Coach Emma calls the moves and grades!</p></button>
       <button class="gcard" data-game="sg"><span class="em">🎤</span><h3>Singing Star</h3><p>Emma sings karaoke, Judge Bella gives the stars!</p></button>
+      <button class="gcard" data-game="rb"><span class="em">🟥</span><h3>Roblox Trivia</h3><p>Robux, obbies, Adopt Me!, and Piggy. Buzz in first!</p></button>
+      <button class="gcard" data-game="sq"><span class="em">🧁</span><h3>Squishy Trivia</h3><p>All squishies, all the time. Slow-rising questions!</p></button>
       <button class="gcard" data-game="td"><span class="em">🎭</span><h3>Truth or Dare</h3><p>Silly truths, goofy dares, points for both!</p></button>
       <button class="gcard" data-game="gq"><span class="em">👵</span><h3>Ask Grandma Rachel</h3><p>Quiz Grandma on kid stuff and see what she knows!</p></button>
       <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
@@ -450,12 +452,6 @@ const FUNQ=[
  ["What is Bella's grandma's name?","Rachel",["Ariana","Samira","Linda"]],
  ["What are the Forks Falcons school colors?","Burgundy and yellow",["Blue and white","Green and orange","Pink and purple"]],
  ["What kind of bird is the Forks mascot?","Falcon",["Eagle","Penguin","Chicken"]],
- ["What are most squishies made of?","Soft squishy foam",["Rocks","Glass","Spaghetti"]],
- ["What does a slow-rising squishy do after you squeeze it?","Slowly puffs back into shape",["It pops","It melts","It runs away"]],
- ["Lots of squishies are scented like...","Sweet treats",["Old socks","Broccoli","Wet dog"]],
- ["Which of these would make the WORST squishy?","A cactus",["A peach","A bread loaf","A panda"]],
- ["What is the money called in Roblox?","Robux",["V-Bucks","Coins","Gems"]],
- ["What makes a squishy SO satisfying to squeeze?","It's soft and rises back slowly",["It's super heavy","It's ice cold","It beeps"]],
  ["What color do red and yellow make?","Orange",["Green","Purple","Brown"]],
  ["What color do blue and yellow make?","Green",["Orange","Pink","Gray"]],
  ["How many legs does a ladybug have?","6",["4","8","100"]],
@@ -481,7 +477,55 @@ function genFV(){
   return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
 }
 
-function genMX(){return pick([genPV,genRD,genFV,genLT,genTR,genOD])()}
+const RBX_Q=[
+ ["What is the money called in Roblox?","Robux",["V-Bucks","Gems","Acorns"]],
+ ["What do you play as in Roblox?","Your avatar",["A playing card","A cursor","A potato"]],
+ ["Which of these is a REAL famous Roblox game?","Adopt Me!",["Feed Me!","Nap Time!","Homework Simulator"]],
+ ["In Roblox, what is an 'obby'?","An obstacle course",["A grumpy mod","A pet rock","A secret password"]],
+ ["What happens when you fall off the map in an obby?","You respawn and try again",["The game deletes","You automatically win","Your tablet melts"]],
+ ["Which REAL Roblox classic is about making pizza?","Work at a Pizza Place",["Pizza School","Cheese Quest","Pepperoni Panic"]],
+ ["What is Brookhaven in Roblox?","A roleplay town game",["A math game","A glitch","A kind of hat"]],
+ ["Who makes most of the games on Roblox?","Players and creators",["Only robots","Teachers","The president"]],
+ ["What is a 'noob' in Roblox?","A brand-new player",["A secret boss","A type of hat","A snack"]],
+ ["Which REAL Roblox game has a scary piggy?","Piggy",["Moo Moo","Quack Attack","Oink City"]],
+ ["What do players collect in Adopt Me!?","Pets",["Homework","Taxes","Mustaches"]],
+ ["What is a VIP server?","A private server for you and your friends",["A pizza order","A school bus","A cheat code"]],
+ ["What should you NEVER share in Roblox chat?","Your password",["Your favorite color","Your pet's nickname","Your high score"]],
+ ["What CAN'T you do in Roblox?","Smell the games",["Play with friends","Dress up your avatar","Build your own game"]],
+];
+const SQ_Q=[
+ ["What are most squishies made of?","Soft slow-rising foam",["Rocks","Glass","Spaghetti"]],
+ ["What does a slow-rising squishy do after a squeeze?","Slowly puffs back into shape",["It pops","It melts","It runs away"]],
+ ["Lots of squishies are scented like...","Sweet treats",["Old socks","Broccoli","Wet dog"]],
+ ["Which of these would make the WORST squishy?","A cactus",["A peach","A bread loaf","A panda"]],
+ ["What makes a squishy SO satisfying to squeeze?","It's soft and rises back slowly",["It's super heavy","It's ice cold","It beeps"]],
+ ["What is a JUMBO squishy?","An extra-big squishy",["A broken one","A flying one","An invisible one"]],
+ ["What food do TONS of squishies look like?","Bread, buns, and cakes",["Steak dinners","Pickles","Soup"]],
+ ["Why should you keep long, sharp nails away from squishies?","They can rip the foam",["Nails make them grow","They turn to gold","They get ticklish"]],
+ ["Mochi squishies feel extra...","Soft and a little sticky",["Crunchy","Furry","Spiky"]],
+ ["Where is the BEST place to keep your squishies?","Somewhere clean, dry, and out of the sun",["Underwater","In the oven","Buried in the yard"]],
+ ["What is a squishy collection?","All the squishies you've gathered",["A kind of soup","A dance move","A spelling test"]],
+ ["Which animal is a SUPER popular squishy shape?","Panda",["Mosquito","Tarantula","Worm"]],
+ ["Your squishy got dirty! What's the safe fix?","Wipe it gently with a damp cloth",["The dishwasher","The microwave","Paint over it"]],
+ ["What do people say squeezing a squishy helps with?","Calming down and relaxing",["Getting louder","Learning to fly","Time travel"]],
+];
+let rbUsed=new Set(), sqUsed=new Set();
+function genRB(){
+  let i,guard=0;
+  do{i=rint(0,RBX_Q.length-1);guard++;}while(rbUsed.has(i)&&guard<200);
+  rbUsed.add(i);
+  const [prompt,ans,wrong]=RBX_Q[i];
+  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
+}
+function genSQ(){
+  let i,guard=0;
+  do{i=rint(0,SQ_Q.length-1);guard++;}while(sqUsed.has(i)&&guard<200);
+  sqUsed.add(i);
+  const [prompt,ans,wrong]=SQ_Q[i];
+  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
+}
+
+function genMX(){return pick([genPV,genRD,genFV,genLT,genTR,genOD,genRB,genSQ])()}
 
 function q(prompt,visual,options,correct,keepOrder){
   const opts=keepOrder?[...options]:shuffle([...options]);
@@ -916,6 +960,8 @@ const GAMES={
   sg:{label:"Singing",em:"🎤",title:"Emma's Singing Star",solo:{perf:0,items:SONG_LIST,coach:"judge",top:"ROCKSTAR!",low:"GREAT SHOW!"},n:6,tn:3},
   td:{label:"Truth or Dare",em:"🎭",title:"Truth or Dare",tod:true,n:8,tn:4},
   gq:{label:"Ask Grandma",em:"👵",title:"Ask Grandma Rachel",gq:true,n:8,tn:4},
+  rb:{label:"Roblox Trivia",em:"🟥",title:"Roblox Trivia",gen:genRB,n:10,tn:6,t:15000},
+  sq:{label:"Squishy Trivia",em:"🧁",title:"Squishy Trivia",gen:genSQ,n:10,tn:6,t:15000},
 };
 const TOURNEY=["ch","pv","gm","fv","ph","sg","td","lt","ch"];
 const KEYS1={a:0,s:1,d:2,f:3}, KEYS2={h:0,j:1,k:2,l:3};
@@ -943,7 +989,7 @@ function nextSegment(){
   S.gen=g.gen; S.tms=g.t; S.ph=!!g.ph; S.solo=g.solo||null;
   S.tod=!!g.tod; S.gq=!!g.gq;
   S.acts=g.acts||null; S.aid=S.keys[S.ki];
-  trivUsed=new Set(); funUsed=new Set();
+  trivUsed=new Set(); funUsed=new Set(); rbUsed=new Set(); sqUsed=new Set();
   $("gLabel").textContent=g.label;
   $("spEm").textContent=g.em;$("spTitle").textContent=g.title;
   $("spSub").textContent = S.mode==="tourney" ? `Game ${S.ki+1} of ${S.keys.length}. Get ready...` : "Get ready...";
