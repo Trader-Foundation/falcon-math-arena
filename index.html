@@ -454,6 +454,8 @@ const FUNQ=[
  ["What does a slow-rising squishy do after you squeeze it?","Slowly puffs back into shape",["It pops","It melts","It runs away"]],
  ["Lots of squishies are scented like...","Sweet treats",["Old socks","Broccoli","Wet dog"]],
  ["Which of these would make the WORST squishy?","A cactus",["A peach","A bread loaf","A panda"]],
+ ["What is the money called in Roblox?","Robux",["V-Bucks","Coins","Gems"]],
+ ["What makes a squishy SO satisfying to squeeze?","It's soft and rises back slowly",["It's super heavy","It's ice cold","It beeps"]],
  ["What color do red and yellow make?","Orange",["Green","Purple","Brown"]],
  ["What color do blue and yellow make?","Green",["Orange","Pink","Gray"]],
  ["How many legs does a ladybug have?","6",["4","8","100"]],
@@ -630,10 +632,10 @@ const GYM_MOVES=[
  {em:"🕯️",txt:"Candlestick roll! Roll back, legs to the sky, roll up!"},
  {em:"🫏",txt:"Donkey kicks! Hands down, kick those heels up 3 times!"},
  {em:"🦵",txt:"Split leap, YOUR level! Leap as big as feels good!"},
- {em:"🌪️",txt:"Round-off! Find lots of open space first, then show your round-off!"},
- {em:"🤸",txt:"BIG SKILL: Back handspring! ONLY if you already do these at practice and a grown-up says go. Otherwise coach taps Different One!"},
- {em:"🔄",txt:"BIG SKILL: Back tuck! ONLY if this is already your skill at the gym and a grown-up is watching. Otherwise coach taps Different One!"},
- {em:"🚀",txt:"BIG SKILL: Layout! ONLY if you already train these and a grown-up says go. Otherwise coach taps Different One!"},
+ {em:"🌪️",txt:"Round-off! Find lots of open space first, then show your round-off!",pri:1},
+ {em:"🤸",txt:"BIG SKILL: Back handspring! ONLY if you already do these at practice and a grown-up says go. Otherwise coach taps Different One!",pri:2},
+ {em:"🔄",txt:"BIG SKILL: Back tuck! ONLY if this is already your skill at the gym and a grown-up is watching. Otherwise coach taps Different One!",pri:3},
+ {em:"🚀",txt:"BIG SKILL: Layout! ONLY if you already train these and a grown-up says go. Otherwise coach taps Different One!",pri:4},
  {em:"⭐",txt:"Freestyle! Show the coach your favorite move of all!"},
 ];
 const TRUTHS=[
@@ -700,7 +702,10 @@ let soloUsed=new Set();
 function startSoloQ(){
   S.cur=null;
   const cfg=S.solo, items=cfg.items;
-  let i,g2=0; do{i=rint(0,items.length-1);g2++}while(soloUsed.has(S.aid+":"+i)&&g2<200);
+  let i=-1;
+  const pris=items.map((it,k)=>it.pri?[it.pri,k]:null).filter(Boolean).sort((a,b)=>a[0]-b[0]);
+  for(const [,k] of pris){ if(!soloUsed.has(S.aid+":"+k)){ i=k; break; } }
+  if(i<0){ let g2=0; do{i=rint(0,items.length-1);g2++}while((soloUsed.has(S.aid+":"+i)||items[i].pri)&&g2<200); }
   soloUsed.add(S.aid+":"+i);
   const it=items[i];
   $("qCount").textContent=`${S.qn} / ${S.qmax}`;
