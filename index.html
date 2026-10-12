@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+</head>
+<body style="margin:0">
+<title>Emma vs Bella Math Arena</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap">
+<style>
+/* Layout: one shared question card center stage, mirrored answer pads left and right, scoreboard pinned on top. */
+:root{
+  --bg:#FFFBEF;          /* warm cream */
+  --ink:#3B1218;         /* falcon maroon ink */
+  --card:#FFFFFF;
+  --p1:#8C2332;          /* Falcons burgundy */
+  --p1-soft:#F6DEE2;
+  --p1-deep:#6E1624;
+  --p2:#FFC72C;          /* Falcons gold */
+  --p2-soft:#FFF1C9;
+  --p2-deep:#7A5600;
+  --gold:#F2B705;
+  --good:#1B9E4B;
+  --bad:#D7263D;
+  --line:#F0E2C2;
+  --mut:#8A6A52;
+  --disp:"Baloo 2",system-ui,sans-serif;
+  --body:"Nunito",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);margin:0;padding-block:12px;padding-inline:16px}
+h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
+.wrap{max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.screen[hidden]{display:none!important}
+
+/* ---------- Menu ---------- */
+.hero{text-align:center;padding-block:8px 0}
+.hero h1{font-size:clamp(30px,7vw,52px);line-height:1.05}
+.hero .vs{color:var(--gold);-webkit-text-stroke:1px var(--ink)}
+.hero p{margin:6px 0 0;font-weight:700;color:var(--mut)}
+.names{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.namebox{background:var(--card);border:3px solid var(--line);border-radius:16px;padding:10px 14px;display:flex;flex-direction:column;gap:4px;min-width:150px}
+.namebox label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.namebox.n1 label{color:var(--p1)} .namebox.n2 label{color:var(--p2)}
+.namebox input{font:800 18px var(--disp);border:0;outline:0;background:transparent;color:var(--ink);width:140px}
+.sectlbl{font:800 13px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:4px 0 -6px;text-align:center}
+.gamegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.gcard{background:var(--card);border:3px solid var(--line);border-radius:20px;padding:14px 16px;text-align:left;cursor:pointer;font-family:var(--body);transition:transform .12s, border-color .12s}
+.gcard:hover{transform:translateY(-3px);border-color:var(--gold)}
+.gcard:focus-visible,.abtn:focus-visible,.big:focus-visible,.dp:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.gcard .em{font-size:28px;line-height:1}
+.gcard h3{font-size:19px;margin-top:5px}
+.gcard p{margin:4px 0 0;font-size:13px;font-weight:700;color:var(--mut)}
+.big{display:block;width:100%;border:0;border-radius:20px;background:var(--p1);color:#FFF;font:800 20px var(--disp);padding:15px;cursor:pointer}
+.big:hover{background:var(--p1-deep)}
+.hint{text-align:center;font-size:13px;font-weight:700;color:var(--mut);margin:0}
+.key{display:inline-block;background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:6px;padding:0 7px;font:800 12px var(--disp)}
+
+/* ---------- Game ---------- */
+.scorebar{display:flex;align-items:stretch;gap:10px}
+.sc{flex:1;border-radius:16px;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;border:3px solid transparent}
+.sc .nm{font:800 17px var(--disp);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc .pts{font:800 26px var(--disp);font-variant-numeric:tabular-nums}
+.sc1{background:var(--p1-soft);border-color:var(--p1);color:var(--p1-deep)}
+.sc2{background:var(--p2-soft);border-color:var(--p2);color:var(--p2-deep)}
+.mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-width:86px}
+.mid .gname{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);text-align:center}
+.mid .qcount{font:800 15px var(--disp)}
+.timer{height:10px;border-radius:99px;background:#EFE6D2;overflow:hidden}
+.timer i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--gold),var(--p1));border-radius:99px}
+.qcard{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:16px;text-align:center;display:flex;flex-direction:column;gap:8px;align-items:center}
+.qcard .prompt{font-weight:800;font-size:clamp(16px,2.6vw,20px);max-width:40ch}
+.qcard .bignum{font:800 clamp(32px,7.5vw,56px)/1.1 var(--disp);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.qcard .bignum b{color:var(--p1);text-decoration:underline 4px var(--gold)}
+.pads{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pad{border-radius:22px;padding:12px;display:flex;flex-direction:column;gap:8px;border:3px solid;min-width:0}
+.pad1{background:var(--p1-soft);border-color:var(--p1)}
+.pad2{background:var(--p2-soft);border-color:var(--p2)}
+.pad .who{font:800 14px var(--disp);text-align:center;letter-spacing:.04em}
+.pad1 .who{color:var(--p1-deep)} .pad2 .who{color:var(--p2-deep)}
+.abtn{position:relative;border:0;border-radius:14px;background:#FFF;color:var(--ink);font:800 17px var(--disp);padding:12px 10px 12px 34px;text-align:left;cursor:pointer;box-shadow:0 3px 0 rgba(43,35,64,.18);font-variant-numeric:tabular-nums}
+.abtn:active{transform:translateY(2px);box-shadow:none}
+.abtn .kk{position:absolute;left:8px;top:50%;translate:0 -50%;background:var(--bg);border:2px solid var(--line);border-radius:6px;font-size:11px;padding:0 5px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tiles .abtn{padding:14px 6px;text-align:center;font-size:30px;line-height:1.2}
+.tiles .abtn .kk{left:4px;top:6px;translate:0 0}
+.pad.locked{opacity:.45;filter:saturate(.4)}
+.pad.locked .abtn,.pad.locked .dp{cursor:not-allowed}
+.abtn.correct{background:var(--good);color:#FFF}
+.abtn.wrongpick{background:var(--bad);color:#FFF;animation:shake .3s}
+@keyframes shake{25%{translate:-4px 0}50%{translate:4px 0}75%{translate:-3px 0}}
+.flash{min-height:24px;font:800 16px var(--disp);text-align:center}
+.flash.ok{color:var(--good)} .flash.no{color:var(--bad)}
+.quit{align-self:center;border:0;background:transparent;color:var(--mut);font:800 13px var(--body);cursor:pointer;text-decoration:underline}
+
+/* ---------- Maze ---------- */
+.mcanvas{width:100%;border-radius:12px;background:#FFF;display:block;touch-action:manipulation}
+.dpad{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:190px;margin:0 auto;width:100%}
+.dp{border:0;border-radius:12px;background:#FFF;font:800 20px var(--disp);padding:10px 0;cursor:pointer;box-shadow:0 3px 0 rgba(43,35,64,.18)}
+.dp:active{transform:translateY(2px);box-shadow:none}
+.dp.blank{visibility:hidden}
+
+/* ---------- Move It! ---------- */
+.bigem{font-size:64px;line-height:1}
+.count{font:800 92px/1 var(--disp);color:var(--ink);font-variant-numeric:tabular-nums}
+.movehint{font:800 20px var(--disp);text-align:center;padding:26px 6px;color:var(--mut);letter-spacing:.04em}
+.abtn.done{text-align:center;font-size:28px;padding:28px 10px}
+.judges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.jbtn{border:0;border-radius:16px;font:800 18px var(--disp);padding:14px 18px;cursor:pointer;box-shadow:0 3px 0 rgba(43,35,64,.18);color:#FFF}
+.jbtn:active{transform:translateY(2px);box-shadow:none}
+.j1{background:var(--p1)} .j2{background:var(--p2);color:var(--ink)} .jb{background:var(--good)}
+.jbtn.jt{background:var(--good);font-size:22px;padding:18px 28px}
+.gamegrid .gcard:nth-child(odd):last-child{grid-column:1/-1}
+.alltime{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.atlbl{font:800 12px var(--disp);letter-spacing:.12em;color:var(--mut)}
+.atrow{display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;justify-content:center}
+.at1{font:800 20px var(--disp);color:var(--p1-deep)}
+.at2{font:800 20px var(--disp);color:var(--p2-deep)}
+.atg{font:700 12px var(--body);color:var(--mut)}
+.atreset{border:0;background:transparent;color:var(--mut);font:700 12px var(--body);cursor:pointer;text-decoration:underline}
+
+/* ---------- Splash / Results ---------- */
+.splash{text-align:center;padding-block:40px}
+.splash .em{font-size:56px}
+.splash h2{font-size:clamp(26px,6vw,40px)}
+.trophy{font-size:72px;line-height:1}
+.result{position:relative;text-align:center;background:var(--card);border:3px solid var(--line);border-radius:24px;padding:28px 18px;overflow:hidden}
+.result h2{font-size:clamp(26px,6vw,40px)}
+.result .final{display:flex;justify-content:center;gap:18px;margin-top:12px;flex-wrap:wrap}
+.fs{border-radius:16px;padding:10px 22px;font:800 18px var(--disp)}
+.fs1{background:var(--p1-soft);color:var(--p1-deep);border:3px solid var(--p1)}
+.fs2{background:var(--p2-soft);color:var(--p2-deep);border:3px solid var(--p2)}
+.fs .n{font-size:30px;display:block}
+.rbtns{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.rbtns .big{width:auto;padding:12px 22px;font-size:17px}
+canvas.confetti{position:absolute;inset:0;pointer-events:none}
+svg.ang{width:min(300px,70vw);height:auto}
+@media (max-width:560px){
+  .gamegrid{grid-template-columns:1fr}
+  .abtn{font-size:15px;padding-left:12px}
+  .abtn .kk,.tiles .abtn .kk{display:none}
+  .tiles .abtn{font-size:24px}
+  .mid{min-width:64px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+
+<div class="wrap">
+
+  <!-- MENU -->
+  <section class="screen" id="menu">
+    <div class="hero">
+      <h1>MATH <span class="vs">ARENA</span></h1>
+      <p>🦅 Forks Falcons Edition · Go burgundy and gold! 🦅</p>
+      <p>Two players. One screen. Fastest correct answer wins the point!</p>
+    </div>
+    <div class="names">
+      <div class="namebox n1"><label>Player 1</label><input id="name1" value="Emma" maxlength="12"></div>
+      <div class="namebox n2"><label>Player 2</label><input id="name2" value="Bella" maxlength="12"></div>
+    </div>
+
+    <div class="alltime">
+      <div class="atlbl">🦅 ALL-TIME SCOREBOARD 🦅</div>
+      <div class="atrow"><span class="at1" id="at1">Emma: 0</span><span class="atg" id="atg">0 games played</span><span class="at2" id="at2">Bella: 0</span></div>
+      <button class="atreset" id="atReset">reset scoreboard</button>
+    </div>
+
+    <p class="sectlbl">Brain Games</p>
+    <div class="gamegrid">
+      <button class="gcard" data-game="pv"><span class="em">🔢</span><h3>Place Value Face-Off</h3><p>Decimals to the thousandths. Know your places!</p></button>
+      <button class="gcard" data-game="rd"><span class="em">🎯</span><h3>Rounding Rush</h3><p>Round big numbers and decimals before time runs out.</p></button>
+      <button class="gcard" data-game="an"><span class="em">📐</span><h3>Angle Attack</h3><p>Name the angle type and guess the degrees.</p></button>
+      <button class="gcard" data-game="lt"><span class="em">⚡</span><h3>Lightning Round</h3><p>Fast adding, subtracting, and times tables. 7 seconds each!</p></button>
+    </div>
+
+    <p class="sectlbl">Just for Fun</p>
+    <div class="gamegrid">
+      <button class="gcard" data-game="mz"><span class="em">🌀</span><h3>Maze Race</h3><p>Same maze, two runners. First one to the star wins!</p></button>
+      <button class="gcard" data-game="tr"><span class="em">🧠</span><h3>Trivia Face-Off</h3><p>Animals, space, sports, and more. Buzz in first!</p></button>
+      <button class="gcard" data-game="od"><span class="em">👀</span><h3>Odd One Out</h3><p>Three match, one doesn't. Spot the sneaky one!</p></button>
+      <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Dance-offs and silly races. Get up and get timed!</p></button>
+      <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
+    </div>
+
+    <button class="big" id="tourney">🏆 Grand Tournament (all 9 games!)</button>
+    <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In the maze: Player 1 <span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> · Player 2 arrow keys. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
+  </section>
+
+  <!-- SPLASH -->
+  <section class="screen splash" id="splash" hidden>
+    <div class="em" id="spEm">🔢</div>
+    <h2 id="spTitle">Place Value Face-Off</h2>
+    <p id="spSub" style="font-weight:700;color:var(--mut)">Get ready...</p>
+  </section>
+
+  <!-- GAME -->
+  <section class="screen" id="game" hidden>
+    <div class="scorebar">
+      <div class="sc sc1"><span class="nm" id="gn1">Emma</span><span class="pts" id="pts1">0</span></div>
+      <div class="mid"><span class="gname" id="gLabel">Place Value</span><span class="qcount" id="qCount">1 / 10</span></div>
+      <div class="sc sc2"><span class="nm" id="gn2">Bella</span><span class="pts" id="pts2">0</span></div>
+    </div>
+    <div class="timer"><i id="tbar"></i></div>
+    <div class="qcard">
+      <div class="prompt" id="prompt"></div>
+      <div id="visual"></div>
+    </div>
+    <div class="flash" id="flash">&nbsp;</div>
+    <div class="pads">
+      <div class="pad pad1" id="pad1"><div class="who" id="pw1">EMMA</div><div class="padbody" id="pb1"></div></div>
+      <div class="pad pad2" id="pad2"><div class="who" id="pw2">BELLA</div><div class="padbody" id="pb2"></div></div>
+    </div>
+    <button class="quit" id="quit">end game early</button>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen" id="resultWrap" hidden>
+    <div class="result">
+      <canvas class="confetti" id="confetti"></canvas>
+      <div class="trophy" id="trophyEm">🏆</div>
+      <h2 id="winLine">Emma wins!</h2>
+      <p id="winSub" style="font-weight:700;color:var(--mut);margin:6px 0 0"></p>
+      <div class="final">
+        <div class="fs fs1"><span id="fn1">Emma</span><span class="n" id="fp1">0</span></div>
+        <div class="fs fs2"><span id="fn2">Bella</span><span class="n" id="fp2">0</span></div>
+      </div>
+      <p id="allLine" style="font-weight:800;color:var(--mut);margin:12px 0 0"></p>
+      <div class="rbtns">
+        <button class="big" id="rematch">🔁 Rematch</button>
+        <button class="big" id="toMenu" style="background:#8A6A52">🏠 Game Menu</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+"use strict";
+/* ---------------- helpers ---------------- */
+const $=id=>document.getElementById(id);
+const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[rint(0,a.length-1)];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rint(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
+const fmt=n=>n.toLocaleString("en-US");
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+/* Exact rounding with integer digit math (no floating point).
+   v = all digits as one integer, dec = how many are decimal digits, keep = decimals to keep. */
+function roundDigits(v,dec,keep){
+  const f=10**(dec-keep);
+  let q=Math.floor(v/f);
+  if(v%f >= f/2) q++;
+  if(keep===0) return fmt(q);
+  const s=String(q).padStart(keep+1,"0");
+  return fmt(Number(s.slice(0,-keep)))+"."+s.slice(-keep);
+}
+function numStr(v,dec){
+  if(dec===0) return fmt(v);
+  const s=String(v).padStart(dec+1,"0");
+  return fmt(Number(s.slice(0,-dec)))+"."+s.slice(-dec);
+}
+function roundWhole(v,pow){const f=10**pow;let q=Math.floor(v/f);if(v%f>=f/2)q++;return q*f;}
+
+/* ---------------- sounds ---------------- */
+let AC=null;
+function beep(freqs,dur,type){try{
+  AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+  let t=AC.currentTime;
+  freqs.forEach(f=>{const o=AC.createOscillator(),g=AC.createGain();
+    o.type=type||"triangle";o.frequency.value=f;
+    g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);
+    g.gain.exponentialRampToValueAtTime(.001,t+dur);
+    o.connect(g).connect(AC.destination);o.start(t);o.stop(t+dur);t+=dur*.7;});
+}catch(e){}}
+const sOK=()=>beep([660,880],.14), sNO=()=>beep([160],.22,"sawtooth"),
+      sWIN=()=>beep([523,659,784,1047],.18), sTick=()=>beep([880],.06);
+
+/* ---------------- MATH generators ---------------- */
+const PLACE_IDX={hundreds:0,tens:1,ones:2,tenths:3,hundredths:4,thousandths:5};
+function freshDigits(){return [rint(1,9),rint(0,9),rint(0,9),rint(0,9),rint(0,9),rint(0,9)]}
+const dstr=d=>`${d[0]}${d[1]}${d[2]}.${d[3]}${d[4]}${d[5]}`;
+function digitValue(dig,idx){
+  return [fmt(dig*100),fmt(dig*10),String(dig),(dig/10).toFixed(1),(dig/100).toFixed(2),(dig/1000).toFixed(3)][idx];
+}
+function genPV(){
+  const kind=rint(1,3);
+  if(kind===1){
+    const d=freshDigits();
+    const pname=pick(Object.keys(PLACE_IDX));
+    const correct=String(d[PLACE_IDX[pname]]);
+    const opts=new Set([correct]);
+    shuffle([...d]).forEach(x=>{if(opts.size<4)opts.add(String(x))});
+    while(opts.size<4)opts.add(String(rint(0,9)));
+    return q(`Which digit is in the <b>${pname}</b> place?`,`<div class="bignum">${dstr(d)}</div>`,[...opts],correct);
+  }
+  if(kind===2){
+    let d,uniq;
+    do{d=freshDigits();const c={};d.forEach(x=>c[x]=(c[x]||0)+1);
+       uniq=d.map((x,i)=>c[x]===1?i:-1).filter(i=>i>=0);
+    }while(!uniq.length);
+    const i=pick(uniq), dig=d[i];
+    const correct=digitValue(dig,i);
+    const opts=new Set([correct]);
+    shuffle([0,1,2,3,4,5].filter(j=>j!==i)).forEach(j=>{if(opts.size<4)opts.add(digitValue(dig,j))});
+    const html=`<div class="bignum">${dstr(d).split("").map((ch,k)=>k===(i<3?i:i+1)?`<b>${ch}</b>`:ch).join("")}</div>`;
+    return q(`What is the <b>value</b> of the underlined digit ${dig}?`,html,[...opts],correct);
+  }
+  const dig=rint(1,9);
+  const pmap={ones:2,tenths:3,hundredths:4};
+  const pname=pick(Object.keys(pmap)), pos=pmap[pname];
+  const mk=()=>{let d;do{d=freshDigits()}while(d[pos]===dig);return dstr(d)};
+  const good=freshDigits(); good[pos]=dig;
+  const opts=[dstr(good),mk(),mk(),mk()];
+  return q(`Which number has a <b>${dig}</b> in the <b>${pname}</b> place?`,"",opts,dstr(good));
+}
+
+function genRD(){
+  if(Math.random()<0.45){
+    const v=rint(1042,98765);
+    const [label,pow]=pick([["ten",1],["hundred",2],["thousand",3]]);
+    const ans=fmt(roundWhole(v,pow));
+    const f=10**pow;
+    const opts=new Set([ans,fmt(Math.floor(v/f)*f),fmt((Math.floor(v/f)+1)*f),fmt(roundWhole(v,pow===3?2:pow+1))]);
+    let bump=2; while(opts.size<4){opts.add(fmt(roundWhole(v,pow)+f*bump));bump++;}
+    return q(`Round to the nearest <b>${label}</b>:`,`<div class="bignum">${fmt(v)}</div>`,[...opts],ans);
+  }
+  const v=rint(2000,99999), dec=3;
+  const [label,keep]=pick([["whole number",0],["tenth",1],["hundredth",2]]);
+  const ans=roundDigits(v,dec,keep);
+  const f=10**(dec-keep), lo=Math.floor(v/f);
+  const down= keep===0?fmt(lo):numStr(lo,keep);
+  const up=   keep===0?fmt(lo+1):numStr(lo+1,keep);
+  const opts=new Set([ans,down,up,roundDigits(v,dec,keep===2?1:keep+1)]);
+  let bump=2; while(opts.size<4){opts.add(keep===0?fmt(lo+bump):numStr(lo+bump,keep));bump++;}
+  return q(`Round to the nearest <b>${label}</b>:`,`<div class="bignum">${numStr(v,3)}</div>`,[...opts],ans);
+}
+
+function angleSVG(deg){
+  const r=110,cx=30,cy=130, rad=deg*Math.PI/180;
+  const x2=cx+r*Math.cos(rad), y2=cy-r*Math.sin(rad);
+  const ar=34, ax=cx+ar*Math.cos(rad), ay=cy-ar*Math.sin(rad);
+  return `<svg class="ang" viewBox="0 0 300 160" role="img" aria-label="an angle of ${deg} degrees">
+    <path d="M ${cx+ar} ${cy} A ${ar} ${ar} 0 0 0 ${ax.toFixed(1)} ${ay.toFixed(1)}" fill="none" stroke="#F2B705" stroke-width="7" stroke-linecap="round"/>
+    <line x1="${cx}" y1="${cy}" x2="${cx+r+120}" y2="${cy}" stroke="#3B1218" stroke-width="7" stroke-linecap="round"/>
+    <line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#3B1218" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="${cx}" cy="${cy}" r="7" fill="#8C2332"/>
+  </svg>`;
+}
+function genAN(){
+  if(Math.random()<0.5){
+    const type=pick(["Acute","Right","Obtuse","Straight"]);
+    const deg= type==="Acute"?rint(20,75): type==="Right"?90: type==="Obtuse"?rint(105,165):180;
+    return q(`What <b>kind</b> of angle is this?`,angleSVG(deg),shuffle(["Acute","Right","Obtuse","Straight"]),type,true);
+  }
+  const choices=[30,45,60,90,120,135,150];
+  const deg=pick(choices);
+  const opts=shuffle(choices.filter(c=>c!==deg)).slice(0,3).concat(deg).map(d=>d+"°");
+  return q(`About how many <b>degrees</b>?`,angleSVG(deg),opts,deg+"°");
+}
+
+function genLT(){
+  const kind=rint(1,3);
+  let a,b,ans,sym;
+  if(kind===1){a=rint(14,89);b=rint(13,89);ans=a+b;sym="+";}
+  else if(kind===2){a=rint(30,99);b=rint(11,a-5);ans=a-b;sym="-";}
+  else {a=rint(3,12);b=rint(3,12);ans=a*b;sym="×";}
+  const deltas=shuffle([1,2,10,-1,-2,-10,kind===3?a:4,kind===3?-b:-4]);
+  const opts=new Set([String(ans)]);
+  deltas.forEach(d=>{const v=ans+d; if(v>0&&opts.size<4)opts.add(String(v))});
+  return q("",`<div class="bignum">${a} ${sym} ${b} = ?</div>`,[...opts],String(ans));
+}
+
+/* ---------------- FUN generators ---------------- */
+const TRIVIA=[
+ ["What is the fastest land animal?","Cheetah",["Lion","Horse","Ostrich"]],
+ ["What is the biggest animal that has ever lived?","Blue whale",["Elephant","T. rex","Giraffe"]],
+ ["How many hearts does an octopus have?","3",["1","2","8"]],
+ ["How many legs does a spider have?","8",["6","10","12"]],
+ ["Which is the only mammal that can truly fly?","Bat",["Flying squirrel","Ostrich","Penguin"]],
+ ["Which planet is called the Red Planet?","Mars",["Jupiter","Venus","Mercury"]],
+ ["Which planet is famous for its big rings?","Saturn",["Mars","Neptune","Earth"]],
+ ["What is the largest planet in our solar system?","Jupiter",["Saturn","Earth","Uranus"]],
+ ["How many planets are in our solar system?","8",["7","9","10"]],
+ ["Who was the first person to walk on the Moon?","Neil Armstrong",["Buzz Lightyear","Albert Einstein","George Washington"]],
+ ["The Sun is actually a...","Star",["Planet","Comet","Moon"]],
+ ["What is the largest ocean on Earth?","Pacific",["Atlantic","Indian","Arctic"]],
+ ["How many continents are there?","7",["5","6","8"]],
+ ["What is the capital of the United States?","Washington, D.C.",["New York City","Los Angeles","Philadelphia"]],
+ ["What is the capital of Pennsylvania?","Harrisburg",["Philadelphia","Pittsburgh","Easton"]],
+ ["What is the tallest mountain in the world?","Mount Everest",["Kilimanjaro","Denali","Pikes Peak"]],
+ ["How many states are in the USA?","50",["48","51","52"]],
+ ["In which city is the Statue of Liberty?","New York City",["Boston","Washington, D.C.","Chicago"]],
+ ["How many bones does an adult human have?","206",["106","306","500"]],
+ ["What is the largest organ of the human body?","Skin",["Heart","Brain","Lungs"]],
+ ["What does your heart pump around your body?","Blood",["Water","Air","Food"]],
+ ["Which insect makes honey?","Bee",["Ant","Butterfly","Beetle"]],
+ ["What do caterpillars turn into?","Butterflies",["Bees","Worms","Dragonflies"]],
+ ["How many sides does a hexagon have?","6",["5","7","8"]],
+ ["How many sides does a stop sign have?","8",["6","7","10"]],
+ ["How many items are in a dozen?","12",["10","11","20"]],
+ ["How many degrees are in a right angle?","90",["45","100","180"]],
+ ["How many colors are in a rainbow?","7",["5","6","8"]],
+ ["What is frozen water called?","Ice",["Steam","Snowcone","Fog"]],
+ ["How many innings are in a baseball game?","9",["7","10","12"]],
+ ["In soccer, which player can use their hands?","Goalie",["Striker","Referee","Coach"]],
+ ["How many players from one team are on a basketball court?","5",["4","6","7"]],
+ ["Which ocean animal has 8 arms?","Octopus",["Shark","Dolphin","Crab"]],
+ ["What do pandas mostly eat?","Bamboo",["Fish","Honey","Pizza"]],
+ ["Which bird is famous for copying what people say?","Parrot",["Eagle","Penguin","Owl"]],
+ ["What is a baby frog called?","Tadpole",["Puppy","Cub","Chick"]],
+];
+let trivUsed=new Set();
+function genTR(){
+  let i; let guard=0;
+  do{i=rint(0,TRIVIA.length-1);guard++;}while(trivUsed.has(i)&&guard<200);
+  trivUsed.add(i);
+  const [prompt,ans,wrong]=TRIVIA[i];
+  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
+}
+
+const ODD_PAIRS=[["b","d"],["p","q"],["6","9"],["M","W"],["n","u"],["Z","N"],["O","Q"],["S","5"],
+ ["🐶","🐺"],["🙂","🙃"],["😺","😾"],["🍪","🌑"],["🌝","🌚"],["⛄","☃️"],["🐢","🐊"],["🦁","🐯"],["✋","🤚"]];
+const ODD_SEQ=["🟥🟨🟦","⭐🌙☀️","🍎🍌🍇","🔺🔵⬛","🐟🐙🦀"];
+function genOD(){
+  if(Math.random()<0.55){
+    let [a,b]=pick(ODD_PAIRS); if(Math.random()<0.5)[a,b]=[b,a];
+    const t=q(`Tap the one that's <b>different</b>!`,"",shuffle([a,a,a,b]),b,true);
+    t.tiles=true; return t;
+  }
+  const base=pick(ODD_SEQ);
+  let odd; const chars=[...base];
+  do{odd=shuffle([...chars]).join("")}while(odd===base);
+  const t=q(`Three match. Tap the <b>odd one out</b>!`,"",shuffle([base,base,base,odd]),odd,true);
+  t.tiles=true; return t;
+}
+
+function genMX(){return pick([genPV,genRD,genAN,genLT,genTR,genOD])()}
+
+function q(prompt,visual,options,correct,keepOrder){
+  const opts=keepOrder?[...options]:shuffle([...options]);
+  return {prompt,visual,opts,ci:opts.indexOf(correct)};
+}
+
+/* ---------------- MAZE ---------------- */
+const MZ_N=13;
+function genMaze(n){
+  const g=Array.from({length:n},()=>Array(n).fill(1));
+  const stack=[[1,1]]; g[1][1]=0;
+  while(stack.length){
+    const [x,y]=stack[stack.length-1];
+    const dirs=shuffle([[2,0],[-2,0],[0,2],[0,-2]]).filter(([dx,dy])=>{
+      const nx=x+dx,ny=y+dy;
+      return nx>0&&ny>0&&nx<n-1&&ny<n-1&&g[ny][nx]===1;
+    });
+    if(!dirs.length){stack.pop();continue;}
+    const [dx,dy]=dirs[0];
+    g[y+dy/2][x+dx/2]=0; g[y+dy][x+dx]=0;
+    stack.push([x+dx,y+dy]);
+  }
+  return g;
+}
+let M=null;
+function startMazeQ(){
+  M={g:genMaze(MZ_N),pos:[[1,1],[1,1]]};
+  [0,1].forEach(p=>{
+    const body=$("pb"+(p+1)); body.innerHTML="";
+    const c=document.createElement("canvas");
+    c.className="mcanvas"; c.width=MZ_N*22; c.height=MZ_N*22; c.id="mc"+p;
+    body.appendChild(c);
+    const dp=document.createElement("div"); dp.className="dpad";
+    [["blank"],["▲",0,-1],["blank"],["◀",-1,0],["▼",0,1],["▶",1,0]].forEach(spec=>{
+      const b=document.createElement("button");
+      if(spec[0]==="blank"){b.className="dp blank";b.tabIndex=-1;b.setAttribute("aria-hidden","true");}
+      else{b.className="dp";b.textContent=spec[0];
+        b.addEventListener("click",()=>mazeMove(p,spec[1],spec[2]));}
+      dp.appendChild(b);
+    });
+    body.appendChild(dp);
+    drawMaze(p);
+  });
+}
+function drawMaze(p){
+  const c=$("mc"+p); if(!c)return;
+  const x=c.getContext("2d"), cs=c.width/MZ_N, g=M.g;
+  x.fillStyle="#FFFFFF"; x.fillRect(0,0,c.width,c.height);
+  x.fillStyle="#3B1218";
+  for(let r=0;r<MZ_N;r++)for(let k=0;k<MZ_N;k++)if(g[r][k])x.fillRect(k*cs,r*cs,cs+0.5,cs+0.5);
+  x.font=`${cs*0.9}px serif`; x.textAlign="center"; x.textBaseline="middle";
+  x.fillText("⭐",(MZ_N-2)*cs+cs/2,(MZ_N-2)*cs+cs/2+1);
+  const [px,py]=M.pos[p];
+  x.fillStyle=p===0?"#8C2332":"#E0A400";
+  x.beginPath(); x.arc(px*cs+cs/2,py*cs+cs/2,cs*0.33,0,6.3); x.fill();
+}
+function mazeMove(p,dx,dy){
+  if(!S||!S.maze||S.resolved||!M)return;
+  const [x,y]=M.pos[p], nx=x+dx, ny=y+dy;
+  if(nx<0||ny<0||nx>=MZ_N||ny>=MZ_N||M.g[ny][nx])return;
+  M.pos[p]=[nx,ny]; drawMaze(p);
+  if(nx===MZ_N-2&&ny===MZ_N-2){
+    S.resolved=true; S.score[p]++; sOK();
+    $("pts"+(p+1)).textContent=S.score[p];
+    $("flash").textContent=`${S.names[p]} escaped first! 🎉`;
+    $("flash").className="flash ok";
+    later(nextQ,1600);
+  }
+}
+
+/* ---------------- MOVE IT! physical challenges ---------------- */
+const ACTS=[
+ {t:"dance",em:"🥪",txt:"It's Peanut Butter Jelly time! Do the Peanut Butter Jelly dance until the timer ends!",secs:20},
+ {t:"dance",em:"🤿",txt:"Scuba dance! Mask on, swim those arms, and blow bubbles until the timer ends!",secs:20},
+ {t:"dance",em:"🤖",txt:"Robot dance! Stiff arms, beep boop, until the timer ends!",secs:20},
+ {t:"dance",em:"🍝",txt:"Dance like a wiggly noodle! No bones allowed!",secs:15},
+ {t:"dance",em:"🎸",txt:"Air guitar solo! Rock out as hard as you can!",secs:15},
+ {t:"dance",em:"🦩",txt:"Flamingo challenge! Stand on ONE leg until the timer ends. No touching down!",secs:15},
+ {t:"dance",em:"🦸",txt:"Hold your best superhero pose! Capes optional!",secs:10},
+ {t:"dance",em:"🐒",txt:"Act like a monkey until the timer ends! Ooh ooh ah ah!",secs:15},
+ {t:"dance",em:"🏃",txt:"Slow-motion run! Run in place as SLOW and dramatic as you can!",secs:15},
+ {t:"team",em:"📣",txt:"TEAM CHALLENGE! Do the Forks Falcons cheer dance together! Loud and proud, go Falcons!",secs:25},
+ {t:"team",em:"🪞",txt:"TEAM CHALLENGE! Mirror dance! One leads, one copies. Switch halfway!",secs:20},
+ {t:"team",em:"🚣",txt:"TEAM CHALLENGE! Row the invisible boat together, in perfect sync!",secs:15},
+ {t:"team",em:"🤝",txt:"TEAM CHALLENGE! Invent a secret handshake with at least 5 moves, then tap WE DID IT!"},
+ {t:"team",em:"🙌",txt:"TEAM CHALLENGE! Do 10 jumping high-fives together, then tap WE DID IT!"},
+ {t:"team",em:"🦅",txt:"TEAM CHALLENGE! Flap your wings and fly one falcon lap around the room together, then tap WE DID IT!"},
+ {t:"race",em:"⭐",txt:"First to do 10 jumping jacks, smash your DONE button!"},
+ {t:"race",em:"🐸",txt:"First to do 8 frog jumps, smash your DONE button!"},
+ {t:"race",em:"🙆",txt:"First to touch your toes 10 times, smash your DONE button!"},
+ {t:"race",em:"🌀",txt:"First to spin around 5 times, smash your DONE button! Careful, dizzy!"},
+ {t:"race",em:"🥊",txt:"First to throw 12 air punches, smash your DONE button!"},
+ {t:"race",em:"🪢",txt:"First to do 15 invisible jump rope hops, smash your DONE button!"},
+ {t:"race",em:"🚪",txt:"First to run and touch a door and come back, smash your DONE button!"},
+ {t:"race",em:"🙇",txt:"First to take 5 super fancy bows, smash your DONE button!"},
+];
+let PH=null, phUsed=new Set();
+function startPhQ(){
+  S.cur=null;
+  let i,g2=0; do{i=rint(0,ACTS.length-1);g2++}while(phUsed.has(i)&&g2<100);
+  phUsed.add(i);
+  const a=ACTS[i];
+  PH={a,phase:a.t==="race"?"race":"move",left:a.secs||0,iv:null};
+  $("qCount").textContent=`Move ${S.qn} / ${S.qmax}`;
+  $("prompt").innerHTML=esc(a.txt); $("prompt").style.display="";
+  if(a.t==="race"){
+    $("visual").innerHTML=`<div class="bigem">${a.em}</div>`;
+    $("flash").textContent="Ready... GO! 🏁"; $("flash").className="flash ok";
+    [0,1].forEach(p=>{
+      const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.innerHTML="";
+      const b=document.createElement("button"); b.className="abtn done"; b.textContent="DONE! 🙌";
+      b.addEventListener("click",()=>phDone(p)); body.appendChild(b);
+    });
+    sTick();
+    later(()=>{ if(S&&!S.resolved){S.resolved=true;$("flash").textContent="Out of steam! No point this time.";$("flash").className="flash no";later(nextQ,1600);} },60000);
+  }else if(a.t==="team"&&!a.secs){
+    $("visual").innerHTML=`<div class="bigem">${a.em}</div><div class="judges"><button class="jbtn jt" id="teamBtn">WE DID IT! 🙌</button></div>`;
+    $("flash").textContent="Work together, Falcons! 🦅"; $("flash").className="flash ok";
+    [0,1].forEach(p=>{
+      const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column";
+      body.innerHTML=`<div class="movehint">TEAM UP!</div>`;
+    });
+    $("teamBtn").addEventListener("click",teamPoint);
+    sTick();
+  }else{
+    $("visual").innerHTML=`<div class="bigem">${a.em}</div><div class="count" id="cnum">${a.secs}</div>`;
+    $("flash").textContent=a.t==="team"?"Work together, Falcons! 🦅":"GO GO GO! 💥"; $("flash").className="flash ok";
+    [0,1].forEach(p=>{
+      const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column";
+      body.innerHTML=`<div class="movehint">${a.t==="team"?"TEAM UP!":"GET MOVING!"}</div>`;
+    });
+    sTick();
+    PH.iv=setInterval(()=>{
+      PH.left--;
+      const c=$("cnum"); if(c)c.textContent=Math.max(PH.left,0);
+      if(PH.left<=3&&PH.left>0)sTick();
+      if(PH.left<=0){clearInterval(PH.iv);PH.iv=null;if(a.t==="team"){teamPoint();}else{sWIN();judgePhase();}}
+    },1000);
+  }
+}
+function teamPoint(){
+  if(!S||S.resolved)return;
+  S.resolved=true; S.score[0]++; S.score[1]++; sWIN();
+  $("pts1").textContent=S.score[0]; $("pts2").textContent=S.score[1];
+  $("flash").textContent="Team point! You both earned it! 🎉";
+  $("flash").className="flash ok";
+  later(nextQ,1600);
+}
+function judgePhase(){
+  if(!S)return;
+  $("flash").textContent="Judges! Tap the winner, or give Both a point!";
+  $("flash").className="flash";
+  const n1=esc(S.names[0]), n2=esc(S.names[1]);
+  $("visual").innerHTML=`<div class="judges">
+    <button class="jbtn j1" data-j="0">🏆 ${n1}</button>
+    <button class="jbtn jb" data-j="2">🤝 Both!</button>
+    <button class="jbtn j2" data-j="1">🏆 ${n2}</button></div>`;
+  $("visual").querySelectorAll(".jbtn").forEach(b=>b.addEventListener("click",()=>{
+    if(!S||S.resolved)return; S.resolved=true;
+    const j=Number(b.dataset.j); sOK();
+    if(j===2){
+      S.score[0]++;S.score[1]++;
+      $("pts1").textContent=S.score[0];$("pts2").textContent=S.score[1];
+      $("flash").textContent="A point for everybody! 🎉";
+    }else{
+      S.score[j]++;$("pts"+(j+1)).textContent=S.score[j];
+      $("flash").textContent=`${S.names[j]} wins the round! 🎉`;
+    }
+    $("flash").className="flash ok";
+    later(nextQ,1500);
+  }));
+}
+function phDone(p){
+  if(!S||!S.ph||S.resolved||!PH||PH.phase!=="race")return;
+  S.resolved=true; S.score[p]++; sOK();
+  $("pts"+(p+1)).textContent=S.score[p];
+  $("flash").textContent=`${S.names[p]} finished first! 💨`;
+  $("flash").className="flash ok";
+  later(nextQ,1500);
+}
+
+/* ---------------- game engine ---------------- */
+const GAMES={
+  pv:{label:"Place Value",em:"🔢",title:"Place Value Face-Off",gen:genPV,n:10,tn:6,t:14000},
+  rd:{label:"Rounding",em:"🎯",title:"Rounding Rush",gen:genRD,n:10,tn:6,t:14000},
+  an:{label:"Angles",em:"📐",title:"Angle Attack",gen:genAN,n:10,tn:6,t:14000},
+  lt:{label:"Lightning",em:"⚡",title:"Lightning Round",gen:genLT,n:15,tn:10,t:7000},
+  mz:{label:"Maze Race",em:"🌀",title:"Maze Race",maze:true,n:3,tn:2},
+  tr:{label:"Trivia",em:"🧠",title:"Trivia Face-Off",gen:genTR,n:10,tn:6,t:12000},
+  od:{label:"Odd One Out",em:"👀",title:"Odd One Out",gen:genOD,n:10,tn:6,t:10000},
+  mx:{label:"Mystery Mix",em:"🎲",title:"Mystery Mix",gen:genMX,n:12,tn:6,t:14000},
+  ph:{label:"Move It!",em:"💃",title:"Move It! Challenge",ph:true,n:6,tn:3},
+};
+const TOURNEY=["pv","rd","mz","an","ph","tr","lt","od","mx"];
+const KEYS1={a:0,s:1,d:2,f:3}, KEYS2={h:0,j:1,k:2,l:3};
+const MKEYS1={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0]};
+const MKEYS2={ArrowUp:[0,-1],ArrowLeft:[-1,0],ArrowDown:[0,1],ArrowRight:[1,0]};
+let S=null, timers=[];
+
+function clearTimers(){timers.forEach(clearTimeout);timers=[];if(PH&&PH.iv){clearInterval(PH.iv);PH.iv=null}}
+function later(fn,ms){timers.push(setTimeout(fn,ms))}
+function show(id){["menu","splash","game","resultWrap"].forEach(s=>$(s).hidden=(s!==id))}
+
+function startSet(keys,mode){
+  clearTimers();
+  const p1=$("name1").value.trim()||"Player 1", p2=$("name2").value.trim()||"Player 2";
+  S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],maze:false,ph:false};
+  $("gn1").textContent=p1;$("gn2").textContent=p2;
+  $("pw1").textContent=p1.toUpperCase();$("pw2").textContent=p2.toUpperCase();
+  $("pts1").textContent="0";$("pts2").textContent="0";
+  nextSegment();
+}
+function nextSegment(){
+  const g=GAMES[S.keys[S.ki]];
+  S.qn=0; S.qmax = S.mode==="tourney" ? (g.tn||g.n) : g.n;
+  S.gen=g.gen; S.tms=g.t; S.maze=!!g.maze; S.ph=!!g.ph;
+  trivUsed=new Set(); phUsed=new Set();
+  $("gLabel").textContent=g.label;
+  $("spEm").textContent=g.em;$("spTitle").textContent=g.title;
+  $("spSub").textContent = S.mode==="tourney" ? `Game ${S.ki+1} of ${S.keys.length}. Get ready...` : "Get ready...";
+  show("splash"); sTick();
+  later(()=>{show("game");nextQ()},1700);
+}
+function nextQ(){
+  clearTimers();
+  if(S.qn>=S.qmax){ S.ki++; if(S.ki<S.keys.length) return nextSegment(); return finish(); }
+  S.qn++; S.resolved=false; S.locked=[false,false];
+  $("flash").textContent=" ";$("flash").className="flash";
+  $("pad1").classList.remove("locked");$("pad2").classList.remove("locked");
+  const bar=$("tbar");
+  if(S.maze){
+    $("qCount").textContent=`Maze ${S.qn} / ${S.qmax}`;
+    $("prompt").innerHTML="Race through your maze to the ⭐! Same maze on both sides.";
+    $("prompt").style.display="";
+    $("visual").innerHTML="";
+    bar.style.transition="none"; bar.style.width="100%";
+    startMazeQ();
+    return;
+  }
+  if(S.ph){
+    bar.style.transition="none"; bar.style.width="100%";
+    startPhQ();
+    return;
+  }
+  S.cur=S.gen();
+  $("qCount").textContent=`${S.qn} / ${S.qmax}`;
+  $("prompt").innerHTML=S.cur.prompt; $("prompt").style.display=S.cur.prompt?"":"none";
+  $("visual").innerHTML=S.cur.visual||"";
+  renderPads();
+  bar.style.transition="none"; bar.style.width="100%";
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition=`width ${S.tms}ms linear`;bar.style.width="0%";}));
+  later(()=>timeUp(),S.tms);
+}
+function renderPads(){
+  [0,1].forEach(p=>{
+    const body=$("pb"+(p+1)); body.innerHTML="";
+    if(S.cur.tiles)body.className="padbody tiles"; else body.className="padbody";
+    body.style.display="flex";
+    if(S.cur.tiles){body.style.display="grid";}
+    else{body.style.flexDirection="column";body.style.gap="8px";}
+    const hint=p===0?["A","S","D","F"]:["H","J","K","L"];
+    S.cur.opts.forEach((o,i)=>{
+      const b=document.createElement("button");
+      b.className="abtn"; b.innerHTML=`<span class="kk">${hint[i]}</span>${o}`;
+      b.addEventListener("click",()=>answer(p,i,b));
+      body.appendChild(b);
+    });
+  });
+}
+function answer(p,i,btn){
+  if(!S||S.maze||S.ph||S.resolved||S.locked[p]||!S.cur)return;
+  const body=$("pb"+(p+1));
+  btn=btn||body.querySelectorAll(".abtn")[i];
+  if(!btn)return;
+  if(i===S.cur.ci){
+    S.resolved=true; S.score[p]++; sOK();
+    $("pts"+(p+1)).textContent=S.score[p];
+    btn.classList.add("correct");
+    $("flash").textContent=`${S.names[p]} takes the point! 🎉`;
+    $("flash").className="flash ok";
+    later(nextQ,1200);
+  }else{
+    S.locked[p]=true; sNO();
+    btn.classList.add("wrongpick"); $("pad"+(p+1)).classList.add("locked");
+    if(S.locked[0]&&S.locked[1]){ S.resolved=true; reveal("Both locked out!"); }
+  }
+}
+function timeUp(){ if(!S||S.resolved)return; S.resolved=true; reveal("Time's up!"); }
+function reveal(msg){
+  [1,2].forEach(n=>{const b=$("pb"+n).querySelectorAll(".abtn")[S.cur.ci]; if(b)b.classList.add("correct");});
+  $("flash").textContent=`${msg} Answer: ${S.cur.opts[S.cur.ci].replace(/<[^>]*>/g,"")}`;
+  $("flash").className="flash no";
+  later(nextQ,1700);
+}
+function finish(){
+  clearTimers(); show("resultWrap");
+  const [a,b]=S.score, tie=a===b, w=a>=b?0:1;
+  $("fn1").textContent=S.names[0]; $("fn2").textContent=S.names[1];
+  $("fp1").textContent=a; $("fp2").textContent=b;
+  $("trophyEm").textContent=tie?"🤝":"🏆";
+  $("winLine").textContent=tie?"It's a tie!":`${S.names[w]} wins!`;
+  $("winSub").textContent=tie?"Rematch to settle it?":"Great game, both of you!";
+  const t=loadTotals();
+  t.p[0]+=a; t.p[1]+=b; t.names=[S.names[0],S.names[1]]; t.games++;
+  saveTotals(t); renderTotals();
+  $("allLine").textContent=`🦅 All-time: ${t.names[0]} ${t.p[0]} · ${t.names[1]} ${t.p[1]} (${t.games} ${t.games===1?"game":"games"})`;
+  sWIN(); if(!tie)confetti();
+}
+function confetti(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const c=$("confetti"),x=c.getContext("2d");
+  c.width=c.offsetWidth;c.height=c.offsetHeight;
+  const cols=["#8C2332","#FFC72C","#F2B705","#FFFFFF","#5A1220"];
+  const ps=Array.from({length:120},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height,w:rint(6,11),h:rint(8,16),v:1.5+Math.random()*2.5,r:Math.random()*6.28,col:pick(cols)}));
+  let n=0;
+  (function tick(){
+    x.clearRect(0,0,c.width,c.height);
+    ps.forEach(p=>{p.y+=p.v;p.r+=.05;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.col;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});
+    if(++n<340)requestAnimationFrame(tick); else x.clearRect(0,0,c.width,c.height);
+  })();
+}
+
+/* ---------------- wiring ---------------- */
+document.querySelectorAll(".gcard").forEach(b=>b.addEventListener("click",()=>startSet([b.dataset.game],"single")));
+$("tourney").addEventListener("click",()=>startSet(TOURNEY,"tourney"));
+$("quit").addEventListener("click",()=>finish());
+$("rematch").addEventListener("click",()=>startSet(S.keys,S.mode));
+$("toMenu").addEventListener("click",()=>{clearTimers();S=null;show("menu")});
+document.addEventListener("keydown",e=>{
+  if(!S||$("game").hidden)return;
+  if(S.maze){
+    const k=e.key.length===1?e.key.toLowerCase():e.key;
+    if(MKEYS1[k]){mazeMove(0,MKEYS1[k][0],MKEYS1[k][1]);e.preventDefault();return;}
+    if(MKEYS2[k]){mazeMove(1,MKEYS2[k][0],MKEYS2[k][1]);e.preventDefault();return;}
+    return;
+  }
+  if(S.ph){
+    if(e.repeat||!PH||PH.phase!=="race")return;
+    const k=e.key.toLowerCase();
+    if(k in KEYS1)phDone(0); else if(k in KEYS2)phDone(1);
+    return;
+  }
+  if(e.repeat)return;
+  const k=e.key.toLowerCase();
+  if(k in KEYS1)answer(0,KEYS1[k]);
+  else if(k in KEYS2)answer(1,KEYS2[k]);
+});
+/* ---------------- all-time scoreboard ---------------- */
+function loadTotals(){
+  try{const t=JSON.parse(localStorage.getItem("arenaTotals")||"null");
+    if(t&&Array.isArray(t.p)&&Array.isArray(t.names))return t;}catch(e){}
+  return {p:[0,0],names:[$("name1").value.trim()||"Player 1",$("name2").value.trim()||"Player 2"],games:0};
+}
+function saveTotals(t){try{localStorage.setItem("arenaTotals",JSON.stringify(t))}catch(e){}}
+function renderTotals(){
+  const t=loadTotals();
+  $("at1").textContent=`${t.names[0]}: ${t.p[0]}`;
+  $("at2").textContent=`${t.names[1]}: ${t.p[1]}`;
+  $("atg").textContent=`${t.games} ${t.games===1?"game":"games"} played`;
+}
+let resetArmed=false;
+$("atReset").addEventListener("click",()=>{
+  if(!resetArmed){
+    resetArmed=true; $("atReset").textContent="tap again to wipe the scoreboard";
+    setTimeout(()=>{resetArmed=false;$("atReset").textContent="reset scoreboard"},3000);
+    return;
+  }
+  saveTotals({p:[0,0],names:[$("name1").value.trim()||"Player 1",$("name2").value.trim()||"Player 2"],games:0});
+  resetArmed=false; $("atReset").textContent="reset scoreboard"; renderTotals();
+});
+renderTotals();
+show("menu");
+</script>
+</body>
+</html>
