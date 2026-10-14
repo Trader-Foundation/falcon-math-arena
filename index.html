@@ -117,6 +117,46 @@ h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 .j1{background:var(--p1)} .j2{background:var(--p2);color:var(--ink)} .jb{background:var(--good)}
 .jbtn.jt{background:var(--good);font-size:22px;padding:18px 28px}
 .ytb{display:inline-block;background:#CC0000;color:#FFF;font:800 15px var(--disp);padding:9px 16px;border-radius:12px;text-decoration:none;margin-top:6px;box-shadow:0 3px 0 rgba(43,35,64,.18)}
+
+/* ---------- Emma's Speed Math ---------- */
+.smcard{background:var(--card);border:3px solid var(--p1);border-radius:24px;padding:18px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+.smmodes{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:520px}
+.smmode{border:3px solid var(--line);border-radius:20px;background:#FFF;font:800 22px var(--disp);padding:20px 10px;cursor:pointer;color:var(--ink)}
+.smmode:active{transform:translateY(2px)}
+.smmode .me{font-size:34px;display:block}
+.smmodes .smmode:nth-child(odd):last-child{grid-column:1/-1}
+.smtoggle{display:flex;gap:8px}
+.smtog{border:3px solid var(--line);border-radius:14px;background:#FFF;font:800 15px var(--disp);padding:10px 16px;cursor:pointer;color:var(--mut)}
+.smtog.on{border-color:var(--p1);color:var(--p1-deep);background:var(--p1-soft)}
+.smtop{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:520px;margin:0 auto}
+.smtime{font:800 54px/1 var(--disp);font-variant-numeric:tabular-nums;color:var(--p1-deep)}
+.smtime.hurry{color:var(--bad);animation:pulse .5s infinite alternate}
+@keyframes pulse{to{transform:scale(1.15)}}
+.smsolved{font:800 20px var(--disp);color:var(--good)}
+.smprob{font:800 clamp(48px,12vw,80px)/1.1 var(--disp);font-variant-numeric:tabular-nums;text-align:center}
+.smprob.yay{color:var(--good)} .smprob.oops{color:var(--bad)}
+.smentry{min-height:70px;font:800 56px/1.2 var(--disp);text-align:center;color:var(--p1);letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.kpad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:400px;margin:0 auto;width:100%;touch-action:manipulation}
+.kbtn{border:0;border-radius:18px;background:#FFF;font:800 36px var(--disp);color:var(--ink);min-height:74px;cursor:pointer;box-shadow:0 4px 0 rgba(43,35,64,.22)}
+.kbtn:active{transform:translateY(3px);box-shadow:none}
+.kbtn.back{font-size:28px;background:var(--p1-soft)}
+.penbox{width:100%;max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.penbox input{width:100%;border:4px dashed var(--p1);border-radius:20px;background:#FFF;font:800 56px var(--disp);text-align:center;color:var(--p1);padding:18px 8px;outline:none}
+.penhint{font:700 13px var(--body);color:var(--mut);text-align:center}
+.smbig{border:0;border-radius:18px;background:var(--p1);color:#FFF;font:800 19px var(--disp);padding:14px 22px;cursor:pointer}
+.smbig.alt{background:var(--mut)}
+.smgrade{font:800 64px/1 var(--disp);color:var(--p1-deep)}
+.smstat{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.smpill{background:var(--p1-soft);border:3px solid var(--p1);border-radius:16px;padding:8px 18px;font:800 17px var(--disp);color:var(--p1-deep)}
+.smpill.g{background:#DDF3E4;border-color:var(--good);color:#116233}
+.record{font:800 22px var(--disp);color:var(--gold);-webkit-text-stroke:.5px var(--ink)}
+.misslist{display:flex;flex-direction:column;gap:6px;width:100%;max-width:420px}
+.missrow{background:#FDEDEF;border:2px solid var(--bad);border-radius:12px;padding:8px 12px;font:800 16px var(--disp);color:#8E1B2A}
+.chart{display:flex;align-items:flex-end;gap:8px;height:120px;justify-content:center;width:100%;max-width:480px;margin:0 auto}
+.cbar{flex:1;max-width:44px;background:linear-gradient(180deg,var(--gold),var(--p1));border-radius:8px 8px 0 0;display:flex;align-items:flex-start;justify-content:center;font:800 13px var(--disp);color:#FFF;padding-top:3px;min-height:16px}
+.histrow{display:flex;justify-content:space-between;gap:8px;background:#FFF;border:2px solid var(--line);border-radius:12px;padding:8px 12px;font:700 14px var(--body);align-items:center}
+.histrow b{font-family:var(--disp)}
+.sect{font:800 14px var(--disp);letter-spacing:.08em;color:var(--mut);text-transform:uppercase;margin-top:6px}
 .gamegrid .gcard:nth-child(odd):last-child{grid-column:1/-1}
 .alltime{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;align-items:center}
 .atlbl{font:800 12px var(--disp);letter-spacing:.12em;color:var(--mut)}
@@ -197,6 +237,12 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
     </div>
 
+    <p class="sectlbl">⭐ Emma's Zone ⭐</p>
+    <div class="gamegrid">
+      <button class="gcard" id="smOpen"><span class="em">⚡</span><h3>Speed Math Sprint</h3><p>One minute. Giant buttons or Apple Pencil. Beat your record!</p></button>
+      <button class="gcard" id="smProgOpen"><span class="em">📈</span><h3>My Progress</h3><p>Every sprint saved. Records, grades, and tricky ones.</p></button>
+    </div>
+
     <button class="big" id="tourney">🏆 Grand Tournament (lots of moving, a little math!)</button>
     <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
   </section>
@@ -226,6 +272,84 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="pad pad2" id="pad2"><div class="who" id="pw2">BELLA</div><div class="padbody" id="pb2"></div></div>
     </div>
     <button class="quit" id="quit">end game early</button>
+  </section>
+
+  <!-- EMMA'S SPEED MATH -->
+  <section class="screen" id="speed" hidden>
+    <div class="smcard" id="smSetup">
+      <h2 style="font-size:28px">⚡ Emma's Speed Math ⚡</h2>
+      <p style="margin:0;font-weight:700;color:var(--mut)">Pick a game. You get ONE minute. Tap to start!</p>
+      <div class="smmodes">
+        <button class="smmode" data-m="add"><span class="me">➕</span>Adding</button>
+        <button class="smmode" data-m="sub"><span class="me">➖</span>Taking Away</button>
+        <button class="smmode" data-m="mul"><span class="me">✖️</span>Times</button>
+        <button class="smmode" data-m="div"><span class="me">➗</span>Sharing</button>
+        <button class="smmode" data-m="mix"><span class="me">🌀</span>Surprise Mix</button>
+      </div>
+      <div class="smtoggle">
+        <button class="smtog" id="togPad">🔢 Big Buttons</button>
+        <button class="smtog" id="togPen">✍️ Apple Pencil</button>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig alt" id="smToProg">📈 My Progress</button>
+        <button class="smbig alt" id="smHome">🏠 All Games</button>
+      </div>
+    </div>
+
+    <div class="smcard" id="smDrill" hidden>
+      <div class="smtop">
+        <span class="smsolved" id="smSolved">⭐ 0</span>
+        <span class="smtime" id="smTime">60</span>
+        <span class="smsolved" style="visibility:hidden">⭐ 0</span>
+      </div>
+      <div class="smprob" id="smProb">3 + 4</div>
+      <div class="smentry" id="smEntry">&nbsp;</div>
+      <div class="kpad" id="kpad">
+        <button class="kbtn">1</button><button class="kbtn">2</button><button class="kbtn">3</button>
+        <button class="kbtn">4</button><button class="kbtn">5</button><button class="kbtn">6</button>
+        <button class="kbtn">7</button><button class="kbtn">8</button><button class="kbtn">9</button>
+        <button class="kbtn back">⌫</button><button class="kbtn">0</button><button class="kbtn back" id="kquit">✖</button>
+      </div>
+      <div class="penbox" id="penbox" hidden>
+        <input id="penIn" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="✍️">
+        <div class="penhint">Write your answer in the box with the Pencil. It checks itself!</div>
+        <button class="smbig alt" id="penQuit">stop early</button>
+      </div>
+    </div>
+
+    <div class="smcard" id="smResult" hidden>
+      <canvas class="confetti" id="smConf"></canvas>
+      <div id="smRecord" class="record" hidden>🎉 NEW RECORD! 🎉</div>
+      <div class="smgrade" id="smGrade">A+</div>
+      <div class="smstat">
+        <span class="smpill g" id="smOkPill">12 solved</span>
+        <span class="smpill" id="smAccPill">90% right</span>
+        <span class="smpill" id="smBestPill">Best: 12</span>
+      </div>
+      <div class="sect" id="smMissLbl" hidden>Ones to practice</div>
+      <div class="misslist" id="smMiss"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig" id="smAgain">🔁 Same Game</button>
+        <button class="smbig alt" id="smPick">🎮 Pick Another</button>
+        <button class="smbig alt" id="smToProg2">📈 My Progress</button>
+      </div>
+    </div>
+
+    <div class="smcard" id="smProg" hidden>
+      <h2 style="font-size:24px">📈 Emma's Progress</h2>
+      <div class="smstat" id="smBests"></div>
+      <div class="sect">Last 10 sprints (problems solved)</div>
+      <div class="chart" id="smChart"></div>
+      <div class="sect">Recent sprints</div>
+      <div class="misslist" id="smHist" style="max-width:480px"></div>
+      <div class="sect" id="smTrickyLbl">Tricky ones to practice</div>
+      <div class="misslist" id="smTricky"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig" id="smGo">⚡ Do a Sprint!</button>
+        <button class="smbig alt" id="smHome2">🏠 All Games</button>
+      </div>
+      <button class="atreset" id="smReset">reset Emma's progress</button>
+    </div>
   </section>
 
   <!-- RESULT -->
@@ -971,7 +1095,7 @@ let S=null, timers=[];
 
 function clearTimers(){timers.forEach(clearTimeout);timers=[];if(PH&&PH.iv){clearInterval(PH.iv);PH.iv=null}}
 function later(fn,ms){timers.push(setTimeout(fn,ms))}
-function show(id){["menu","splash","game","resultWrap"].forEach(s=>$(s).hidden=(s!==id))}
+function show(id){["menu","splash","game","resultWrap","speed"].forEach(s=>$(s).hidden=(s!==id))}
 
 function startSet(keys,mode){
   clearTimers();
@@ -1135,6 +1259,201 @@ $("atReset").addEventListener("click",()=>{
   resetArmed=false; $("atReset").textContent="reset scoreboard"; renderTotals();
 });
 renderTotals();
+
+/* ================= EMMA'S SPEED MATH ================= */
+const SM={mode:"add",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[],left:60,iv:null,lock:false,last:"",timers:[]};
+const SM_MODES={add:"➕ Adding",sub:"➖ Taking Away",mul:"✖️ Times",div:"➗ Sharing",mix:"🌀 Surprise Mix"};
+function smLater(fn,ms){SM.timers.push(setTimeout(fn,ms))}
+function smClear(){SM.timers.forEach(clearTimeout);SM.timers=[];if(SM.iv){clearInterval(SM.iv);SM.iv=null}}
+function smShow(sub){["smSetup","smDrill","smResult","smProg"].forEach(s=>$(s).hidden=(s!==sub));show("speed")}
+
+function smLoadRuns(){try{const r=JSON.parse(localStorage.getItem("emmaSpeedRuns")||"[]");return Array.isArray(r)?r:[]}catch(e){return[]}}
+function smSaveRuns(r){try{localStorage.setItem("emmaSpeedRuns",JSON.stringify(r.slice(-200)))}catch(e){}}
+function smBestFor(mode){const r=smLoadRuns().filter(x=>x.mode===mode);return r.length?Math.max(...r.map(x=>x.ok)):0}
+
+function smGen(){
+  const m=SM.mode==="mix"?pick(["add","sub","mul","div"]):SM.mode;
+  let a,b,ans,txt,guard=0;
+  do{
+    if(m==="add"){a=rint(1,9);b=rint(1,9);ans=a+b;txt=`${a} + ${b}`}
+    else if(m==="sub"){a=rint(2,10);b=rint(1,a-1);ans=a-b;txt=`${a} - ${b}`}
+    else if(m==="mul"){a=rint(2,9);b=rint(1,9);ans=a*b;txt=`${a} × ${b}`}
+    else{b=rint(2,9);ans=rint(1,9);a=b*ans;txt=`${a} ÷ ${b}`}
+    guard++;
+  }while(txt===SM.last&&guard<20);
+  SM.last=txt; SM.ans=ans;
+  $("smProb").textContent=txt;
+  $("smProb").className="smprob";
+  SM.entry=""; smPaint();
+}
+function smPaint(){
+  $("smEntry").textContent=SM.entry||" ";
+  if(SM.style==="pen"){const p=$("penIn"); if(p.value!==SM.entry)p.value=SM.entry;}
+}
+function smKey(d){
+  if(SM.lock||!SM.iv)return;
+  if(SM.entry.length>=2)return;
+  SM.entry+=d; smPaint();
+  if(SM.entry.length===String(SM.ans).length)smCheck();
+}
+function smBack(){if(SM.lock)return;SM.entry=SM.entry.slice(0,-1);smPaint()}
+function smCheck(){
+  SM.att++;
+  if(Number(SM.entry)===SM.ans){
+    SM.ok++; $("smSolved").textContent=`⭐ ${SM.ok}`;
+    $("smProb").className="smprob yay"; sOK();
+    SM.lock=true; smLater(()=>{SM.lock=false;smGen()},160);
+  }else{
+    SM.miss.push([$("smProb").textContent,SM.ans]);
+    $("smProb").className="smprob oops"; sNO();
+    $("smProb").textContent=`${$("smProb").textContent} = ${SM.ans}`;
+    SM.lock=true;
+    smLater(()=>{SM.lock=false;smGen()},1100);
+  }
+}
+function smStart(mode){
+  smClear();
+  SM.mode=mode; SM.ok=0; SM.att=0; SM.miss=[]; SM.left=60; SM.lock=true; SM.last="";
+  $("smSolved").textContent="⭐ 0"; $("smTime").textContent="60"; $("smTime").className="smtime";
+  $("kpad").hidden=(SM.style==="pen"); $("penbox").hidden=(SM.style!=="pen");
+  smShow("smDrill");
+  $("smProb").textContent="Ready..."; $("smEntry").textContent=" ";
+  sTick();
+  smLater(()=>{$("smProb").textContent="Set...";sTick()},800);
+  smLater(()=>{
+    sWIN(); SM.lock=false; smGen();
+    if(SM.style==="pen"){$("penIn").value="";$("penIn").focus()}
+    SM.iv=setInterval(()=>{
+      SM.left--;
+      $("smTime").textContent=Math.max(SM.left,0);
+      if(SM.left<=5)$("smTime").className="smtime hurry";
+      if(SM.left<=3&&SM.left>0)sTick();
+      if(SM.left<=0)smEnd();
+    },1000);
+  },1600);
+}
+function smEnd(){
+  smClear(); SM.lock=true;
+  beep([150],.5,"square"); smLater(()=>sWIN(),550);
+  const best=smBestFor(SM.mode), isRec=SM.ok>best&&SM.ok>0;
+  const runs=smLoadRuns();
+  runs.push({t:Date.now(),mode:SM.mode,ok:SM.ok,att:SM.att,miss:SM.miss.slice(0,12)});
+  smSaveRuns(runs);
+  const [g,em]=smGrade(SM.ok,SM.att);
+  $("smGrade").textContent=`${em} ${g}`;
+  $("smOkPill").textContent=`${SM.ok} solved`;
+  const acc=SM.att?Math.round(100*SM.ok/SM.att):0;
+  $("smAccPill").textContent=`${acc}% right`;
+  $("smBestPill").textContent=`Best in ${SM_MODES[SM.mode]}: ${Math.max(best,SM.ok)}`;
+  $("smRecord").hidden=!isRec;
+  const ml=$("smMiss"); ml.innerHTML="";
+  const seen=new Set();
+  SM.miss.forEach(([p,a])=>{const k=p+a;if(seen.has(k))return;seen.add(k);
+    const d=document.createElement("div");d.className="missrow";d.textContent=`${p.replace(/ = .*$/,"")} = ${a}`;ml.appendChild(d);});
+  $("smMissLbl").hidden=!SM.miss.length;
+  smShow("smResult");
+  if(isRec)smConfetti();
+}
+function smGrade(ok,att){
+  const acc=att?ok/att:0;
+  if(ok>=25&&acc>=.9)return["A+","🏆"];
+  if(ok>=20&&acc>=.85)return["A","🌟"];
+  if(ok>=16&&acc>=.8)return["B+","💪"];
+  if(ok>=12&&acc>=.75)return["B","👍"];
+  if(ok>=9)return["C+","🙂"];
+  if(ok>=6)return["C","🌱"];
+  return["Warming Up","🌱"];
+}
+function smConfetti(){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const c=$("smConf"),x=c.getContext("2d");
+  c.width=c.offsetWidth||600;c.height=c.offsetHeight||400;
+  const cols=["#8C2332","#FFC72C","#F2B705","#FFFFFF","#1B9E4B"];
+  const ps=Array.from({length:110},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height,w:rint(6,11),h:rint(8,16),v:1.5+Math.random()*2.5,r:Math.random()*6.28,col:pick(cols)}));
+  let n=0;
+  (function tick(){
+    x.clearRect(0,0,c.width,c.height);
+    ps.forEach(p=>{p.y+=p.v;p.r+=.05;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.col;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});
+    if(++n<300)requestAnimationFrame(tick); else x.clearRect(0,0,c.width,c.height);
+  })();
+}
+function smRenderProg(){
+  const runs=smLoadRuns();
+  const bests=$("smBests"); bests.innerHTML="";
+  Object.keys(SM_MODES).forEach(m=>{
+    const b=smBestFor(m);
+    const s=document.createElement("span");s.className="smpill";
+    s.textContent=`${SM_MODES[m].split(" ")[0]} best: ${b}`;bests.appendChild(s);
+  });
+  const ch=$("smChart"); ch.innerHTML="";
+  const last=runs.slice(-10);
+  const mx=Math.max(5,...last.map(r=>r.ok));
+  last.forEach(r=>{
+    const b=document.createElement("div");b.className="cbar";
+    b.style.height=Math.max(14,Math.round(110*r.ok/mx))+"px";
+    b.textContent=r.ok; b.title=SM_MODES[r.mode];
+    ch.appendChild(b);
+  });
+  if(!last.length)ch.innerHTML='<span style="font-weight:700;color:var(--mut)">No sprints yet. Do your first one!</span>';
+  const hist=$("smHist"); hist.innerHTML="";
+  runs.slice(-10).reverse().forEach(r=>{
+    const d=new Date(r.t), [g,em]=smGrade(r.ok,r.att);
+    const row=document.createElement("div");row.className="histrow";
+    row.innerHTML=`<span>${d.getMonth()+1}/${d.getDate()}</span><span>${SM_MODES[r.mode].split(" ")[0]}</span><b>${r.ok} solved</b><span>${r.att?Math.round(100*r.ok/r.att):0}%</span><b>${em} ${g}</b>`;
+    hist.appendChild(row);
+  });
+  const counts={};
+  runs.slice(-30).forEach(r=>(r.miss||[]).forEach(([p,a])=>{const k=p.replace(/ = .*$/,"")+" = "+a;counts[k]=(counts[k]||0)+1;}));
+  const top=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const tl=$("smTricky"); tl.innerHTML="";
+  top.forEach(([k,n])=>{const d=document.createElement("div");d.className="missrow";d.textContent=`${k}  (missed ${n}×)`;tl.appendChild(d);});
+  $("smTrickyLbl").hidden=!top.length;
+  smShow("smProg");
+}
+function smSetStyle(st){
+  SM.style=st; try{localStorage.setItem("emmaSpeedStyle",st)}catch(e){}
+  $("togPad").classList.toggle("on",st==="pad");
+  $("togPen").classList.toggle("on",st==="pen");
+}
+try{smSetStyle(localStorage.getItem("emmaSpeedStyle")||"pad")}catch(e){smSetStyle("pad")}
+
+$("smOpen").addEventListener("click",()=>smShow("smSetup"));
+$("smProgOpen").addEventListener("click",smRenderProg);
+$("togPad").addEventListener("click",()=>smSetStyle("pad"));
+$("togPen").addEventListener("click",()=>smSetStyle("pen"));
+document.querySelectorAll(".smmode").forEach(b=>b.addEventListener("click",()=>smStart(b.dataset.m)));
+$("smHome").addEventListener("click",()=>{smClear();show("menu")});
+$("smHome2").addEventListener("click",()=>{smClear();show("menu")});
+$("smToProg").addEventListener("click",smRenderProg);
+$("smToProg2").addEventListener("click",smRenderProg);
+$("smGo").addEventListener("click",()=>smShow("smSetup"));
+$("smAgain").addEventListener("click",()=>smStart(SM.mode));
+$("smPick").addEventListener("click",()=>smShow("smSetup"));
+$("kquit").addEventListener("click",()=>{if(SM.iv)smEnd()});
+$("penQuit").addEventListener("click",()=>{if(SM.iv)smEnd()});
+$("kpad").querySelectorAll(".kbtn").forEach(b=>{
+  const t=b.textContent;
+  if(/^[0-9]$/.test(t))b.addEventListener("click",()=>smKey(t));
+  else if(t==="⌫")b.addEventListener("click",smBack);
+});
+$("penIn").addEventListener("input",()=>{
+  if(SM.lock||!SM.iv){$("penIn").value=SM.entry;return}
+  const v=$("penIn").value.replace(/[^0-9]/g,"").slice(0,2);
+  SM.entry=v; $("smEntry").textContent=SM.entry||" ";
+  if(SM.entry.length===String(SM.ans).length)smCheck();
+});
+document.addEventListener("keydown",e=>{
+  if($("speed").hidden||$("smDrill").hidden)return;
+  if(/^[0-9]$/.test(e.key)){smKey(e.key);e.preventDefault();}
+  else if(e.key==="Backspace"){smBack();e.preventDefault();}
+});
+let smResetArm=false;
+$("smReset").addEventListener("click",()=>{
+  if(!smResetArm){smResetArm=true;$("smReset").textContent="tap again to erase ALL progress";
+    setTimeout(()=>{smResetArm=false;$("smReset").textContent="reset Emma's progress"},3000);return;}
+  smSaveRuns([]); smResetArm=false; $("smReset").textContent="reset Emma's progress"; smRenderProg();
+});
+
 show("menu");
 </script>
 </body>
