@@ -138,6 +138,10 @@ body.smlock{overflow:hidden;height:100%}
 #smDrill.fx .kbtn{min-height:clamp(50px,9.5vh,78px);font-size:clamp(26px,4.5vh,36px)}
 #smDrill.fx .smtime{font-size:clamp(34px,6vh,54px)}
 .smct{font:800 18px var(--disp);color:var(--mut);font-variant-numeric:tabular-nums}
+.cheer{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));left:50%;translate:-50% 0;z-index:60;
+  background:var(--good);color:#FFF;font:800 20px var(--disp);padding:12px 24px;border-radius:99px;
+  box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none;white-space:nowrap;animation:cheerpop 2.6s forwards}
+@keyframes cheerpop{0%{opacity:0;transform:scale(.6)}12%{opacity:1;transform:scale(1.08)}22%{transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
 .smtime{font:800 54px/1 var(--disp);font-variant-numeric:tabular-nums;color:var(--p1-deep)}
 .smtime.hurry{color:var(--bad);animation:pulse .5s infinite alternate}
 @keyframes pulse{to{transform:scale(1.15)}}
@@ -1282,6 +1286,23 @@ const SM={mode:"add",kind:"sprint",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[]
 const SM_MODES={add:"➕ Adding",sub:"➖ Taking Away",mul:"✖️ Times",div:"➗ Sharing",mix:"🌀 Surprise Mix"};
 const SM_TEST_SECS=230, SM_TEST_N=100;
 function smFmtTime(s){return s>=100?`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`:String(Math.max(s,0))}
+const CHEERS=["Great job, Emma! Keep going!","You're doing amazing!","Wow, you are FAST!","Keep it up, superstar!",
+ "You've got this, Emma!","Awesome work! Don't stop!","Emma, you're on fire!","Look at you go!",
+ "Brain power! Keep rolling!","So proud of you! Keep pushing!"];
+let lastCheer="";
+function smCheer(){
+  let msg; do{msg=pick(CHEERS)}while(msg===lastCheer&&CHEERS.length>1);
+  lastCheer=msg;
+  const d=document.createElement("div"); d.className="cheer"; d.textContent="⭐ "+msg;
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),2800);
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(msg);
+    u.rate=1.02; u.pitch=1.15; u.volume=1;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
 function smLater(fn,ms){SM.timers.push(setTimeout(fn,ms))}
 function smClear(){SM.timers.forEach(clearTimeout);SM.timers=[];if(SM.iv){clearInterval(SM.iv);SM.iv=null}}
 function smShow(sub){["smSetup","smDrill","smResult","smProg"].forEach(s=>$(s).hidden=(s!==sub));show("speed")}
@@ -1356,9 +1377,12 @@ function smStart(mode,kind){
   smLater(()=>{
     sWIN(); SM.lock=false; smGen();
     if(SM.style==="pen"){$("penIn").value="";$("penIn").focus()}
+    const total=secs;
     SM.iv=setInterval(()=>{
       SM.left--;
       $("smTime").textContent=smFmtTime(SM.left);
+      const gone=total-SM.left;
+      if(gone>0&&SM.left>6&&gone%30===0)smCheer();
       if(SM.left<=5)$("smTime").className="smtime hurry";
       if(SM.left<=3&&SM.left>0)sTick();
       if(SM.left<=0)smEnd();
