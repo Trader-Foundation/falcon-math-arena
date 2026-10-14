@@ -1356,6 +1356,16 @@ function smEnd(){
 }
 function smGrade(ok,att){
   const acc=att?ok/att:0;
+  const starter=smLoadRuns().length<15;
+  if(starter){
+    if(ok>=15&&acc>=.8)return["A+","🏆"];
+    if(ok>=11&&acc>=.75)return["A","🌟"];
+    if(ok>=8&&acc>=.7)return["B+","💪"];
+    if(ok>=6)return["B","👍"];
+    if(ok>=4)return["C+","🙂"];
+    if(ok>=2)return["C","🌱"];
+    return["Warming Up","🌱"];
+  }
   if(ok>=25&&acc>=.9)return["A+","🏆"];
   if(ok>=20&&acc>=.85)return["A","🌟"];
   if(ok>=16&&acc>=.8)return["B+","💪"];
