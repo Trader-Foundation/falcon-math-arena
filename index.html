@@ -129,6 +129,15 @@ h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
 .smtog{border:3px solid var(--line);border-radius:14px;background:#FFF;font:800 15px var(--disp);padding:10px 16px;cursor:pointer;color:var(--mut)}
 .smtog.on{border-color:var(--p1);color:var(--p1-deep);background:var(--p1-soft)}
 .smtop{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:520px;margin:0 auto}
+body.smlock{overflow:hidden;height:100%}
+#smDrill.fx{position:fixed;inset:0;z-index:50;border-radius:0;border:0;background:var(--bg);margin:0;max-width:none;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:1vh;
+  padding:calc(8px + env(safe-area-inset-top,0px)) 16px calc(10px + env(safe-area-inset-bottom,0px));overflow:hidden}
+#smDrill.fx .smprob{font-size:clamp(36px,8.5vh,72px)}
+#smDrill.fx .smentry{min-height:7vh;font-size:clamp(34px,7vh,54px)}
+#smDrill.fx .kbtn{min-height:clamp(50px,9.5vh,78px);font-size:clamp(26px,4.5vh,36px)}
+#smDrill.fx .smtime{font-size:clamp(34px,6vh,54px)}
+.smct{font:800 18px var(--disp);color:var(--mut);font-variant-numeric:tabular-nums}
 .smtime{font:800 54px/1 var(--disp);font-variant-numeric:tabular-nums;color:var(--p1-deep)}
 .smtime.hurry{color:var(--bad);animation:pulse .5s infinite alternate}
 @keyframes pulse{to{transform:scale(1.15)}}
@@ -286,6 +295,14 @@ svg.ang{width:min(300px,70vw);height:auto}
         <button class="smmode" data-m="div"><span class="me">➗</span>Sharing</button>
         <button class="smmode" data-m="mix"><span class="me">🌀</span>Surprise Mix</button>
       </div>
+      <div class="sect">💯 Real Test · 100 problems · big kid level</div>
+      <div class="smmodes">
+        <button class="smmode" data-m="add" data-k="test"><span class="me">➕</span>Add Test</button>
+        <button class="smmode" data-m="sub" data-k="test"><span class="me">➖</span>Subtract Test</button>
+        <button class="smmode" data-m="mul" data-k="test"><span class="me">✖️</span>Times Test</button>
+        <button class="smmode" data-m="div" data-k="test"><span class="me">➗</span>Divide Test</button>
+        <button class="smmode" data-m="mix" data-k="test"><span class="me">🌀</span>Mix Test</button>
+      </div>
       <div class="smtoggle">
         <button class="smtog" id="togPad">🔢 Big Buttons</button>
         <button class="smtog" id="togPen">✍️ Apple Pencil</button>
@@ -300,7 +317,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="smtop">
         <span class="smsolved" id="smSolved">⭐ 0</span>
         <span class="smtime" id="smTime">60</span>
-        <span class="smsolved" style="visibility:hidden">⭐ 0</span>
+        <span class="smct" id="smCt" style="visibility:hidden">0/100</span>
       </div>
       <div class="smprob" id="smProb">3 + 4</div>
       <div class="smentry" id="smEntry">&nbsp;</div>
@@ -1261,62 +1278,78 @@ $("atReset").addEventListener("click",()=>{
 renderTotals();
 
 /* ================= EMMA'S SPEED MATH ================= */
-const SM={mode:"add",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[],left:60,iv:null,lock:false,last:"",timers:[]};
+const SM={mode:"add",kind:"sprint",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[],left:60,iv:null,lock:false,last:"",timers:[],penStale:""};
 const SM_MODES={add:"➕ Adding",sub:"➖ Taking Away",mul:"✖️ Times",div:"➗ Sharing",mix:"🌀 Surprise Mix"};
+const SM_TEST_SECS=230, SM_TEST_N=100;
+function smFmtTime(s){return s>=100?`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`:String(Math.max(s,0))}
 function smLater(fn,ms){SM.timers.push(setTimeout(fn,ms))}
 function smClear(){SM.timers.forEach(clearTimeout);SM.timers=[];if(SM.iv){clearInterval(SM.iv);SM.iv=null}}
 function smShow(sub){["smSetup","smDrill","smResult","smProg"].forEach(s=>$(s).hidden=(s!==sub));show("speed")}
 
 function smLoadRuns(){try{const r=JSON.parse(localStorage.getItem("emmaSpeedRuns")||"[]");return Array.isArray(r)?r:[]}catch(e){return[]}}
 function smSaveRuns(r){try{localStorage.setItem("emmaSpeedRuns",JSON.stringify(r.slice(-200)))}catch(e){}}
-function smBestFor(mode){const r=smLoadRuns().filter(x=>x.mode===mode);return r.length?Math.max(...r.map(x=>x.ok)):0}
+function smBestFor(mode,kind){const r=smLoadRuns().filter(x=>x.mode===mode&&(x.kind||"sprint")===(kind||"sprint"));return r.length?Math.max(...r.map(x=>x.ok)):0}
 
 function smGen(){
   const m=SM.mode==="mix"?pick(["add","sub","mul","div"]):SM.mode;
   let a,b,ans,txt,guard=0;
+  const T=SM.kind==="test";
   do{
-    if(m==="add"){a=rint(1,9);b=rint(1,9);ans=a+b;txt=`${a} + ${b}`}
-    else if(m==="sub"){a=rint(2,10);b=rint(1,a-1);ans=a-b;txt=`${a} - ${b}`}
-    else if(m==="mul"){a=rint(2,9);b=rint(1,9);ans=a*b;txt=`${a} × ${b}`}
-    else{b=rint(2,9);ans=rint(1,9);a=b*ans;txt=`${a} ÷ ${b}`}
+    if(m==="add"){a=rint(T?2:1,T?12:9);b=rint(T?2:1,T?12:9);ans=a+b;txt=`${a} + ${b}`}
+    else if(m==="sub"){ if(T){a=rint(5,24);b=rint(2,a-2);} else {a=rint(2,10);b=rint(1,a-1);} ans=a-b;txt=`${a} - ${b}`}
+    else if(m==="mul"){a=rint(2,T?12:9);b=rint(T?2:1,T?12:9);ans=a*b;txt=`${a} × ${b}`}
+    else{b=rint(2,T?12:9);ans=rint(T?2:1,T?12:9);a=b*ans;txt=`${a} ÷ ${b}`}
     guard++;
   }while(txt===SM.last&&guard<20);
   SM.last=txt; SM.ans=ans;
   $("smProb").textContent=txt;
   $("smProb").className="smprob";
-  SM.entry=""; smPaint();
+  SM.entry=""; SM.penStale="";
+  if(SM.style==="pen"){$("penIn").value="";smLater(()=>{if(!SM.entry)$("penIn").value=""},400);}
+  smPaint();
 }
 function smPaint(){
   $("smEntry").textContent=SM.entry||" ";
-  if(SM.style==="pen"){const p=$("penIn"); if(p.value!==SM.entry)p.value=SM.entry;}
 }
 function smKey(d){
   if(SM.lock||!SM.iv)return;
-  if(SM.entry.length>=2)return;
+  if(SM.entry.length>=3)return;
   SM.entry+=d; smPaint();
   if(SM.entry.length===String(SM.ans).length)smCheck();
 }
 function smBack(){if(SM.lock)return;SM.entry=SM.entry.slice(0,-1);smPaint()}
 function smCheck(){
   SM.att++;
+  if(SM.kind==="test")$("smCt").textContent=`${SM.att}/${SM_TEST_N}`;
+  if(SM.style==="pen")SM.penStale=$("penIn").value.replace(/[^0-9]/g,"");
+  let delay;
   if(Number(SM.entry)===SM.ans){
     SM.ok++; $("smSolved").textContent=`⭐ ${SM.ok}`;
     $("smProb").className="smprob yay"; sOK();
-    SM.lock=true; smLater(()=>{SM.lock=false;smGen()},160);
+    delay=160;
   }else{
     SM.miss.push([$("smProb").textContent,SM.ans]);
     $("smProb").className="smprob oops"; sNO();
     $("smProb").textContent=`${$("smProb").textContent} = ${SM.ans}`;
-    SM.lock=true;
-    smLater(()=>{SM.lock=false;smGen()},1100);
+    delay=1100;
   }
+  SM.lock=true;
+  if(SM.kind==="test"&&SM.att>=SM_TEST_N){smLater(smEnd,delay);}
+  else smLater(()=>{SM.lock=false;smGen()},delay);
 }
-function smStart(mode){
+function smStart(mode,kind){
   smClear();
-  SM.mode=mode; SM.ok=0; SM.att=0; SM.miss=[]; SM.left=60; SM.lock=true; SM.last="";
-  $("smSolved").textContent="⭐ 0"; $("smTime").textContent="60"; $("smTime").className="smtime";
+  SM.mode=mode; SM.kind=kind||"sprint";
+  const secs=SM.kind==="test"?SM_TEST_SECS:60;
+  SM.ok=0; SM.att=0; SM.miss=[]; SM.left=secs; SM.lock=true; SM.last=""; SM.penStale="";
+  $("smSolved").textContent="⭐ 0";
+  $("smTime").textContent=smFmtTime(secs); $("smTime").className="smtime";
+  $("smCt").style.visibility=SM.kind==="test"?"visible":"hidden";
+  $("smCt").textContent=`0/${SM_TEST_N}`;
   $("kpad").hidden=(SM.style==="pen"); $("penbox").hidden=(SM.style!=="pen");
   smShow("smDrill");
+  $("smDrill").classList.add("fx"); document.body.classList.add("smlock");
+  window.scrollTo(0,0);
   $("smProb").textContent="Ready..."; $("smEntry").textContent=" ";
   sTick();
   smLater(()=>{$("smProb").textContent="Set...";sTick()},800);
@@ -1325,7 +1358,7 @@ function smStart(mode){
     if(SM.style==="pen"){$("penIn").value="";$("penIn").focus()}
     SM.iv=setInterval(()=>{
       SM.left--;
-      $("smTime").textContent=Math.max(SM.left,0);
+      $("smTime").textContent=smFmtTime(SM.left);
       if(SM.left<=5)$("smTime").className="smtime hurry";
       if(SM.left<=3&&SM.left>0)sTick();
       if(SM.left<=0)smEnd();
@@ -1334,17 +1367,19 @@ function smStart(mode){
 }
 function smEnd(){
   smClear(); SM.lock=true;
+  $("smDrill").classList.remove("fx"); document.body.classList.remove("smlock");
+  try{$("penIn").blur()}catch(e){}
   beep([150],.5,"square"); smLater(()=>sWIN(),550);
-  const best=smBestFor(SM.mode), isRec=SM.ok>best&&SM.ok>0;
+  const best=smBestFor(SM.mode,SM.kind), isRec=SM.ok>best&&SM.ok>0;
   const runs=smLoadRuns();
-  runs.push({t:Date.now(),mode:SM.mode,ok:SM.ok,att:SM.att,miss:SM.miss.slice(0,12)});
+  runs.push({t:Date.now(),mode:SM.mode,kind:SM.kind,ok:SM.ok,att:SM.att,miss:SM.miss.slice(0,12)});
   smSaveRuns(runs);
-  const [g,em]=smGrade(SM.ok,SM.att);
+  const [g,em]=SM.kind==="test"?smGradeTest(SM.ok):smGrade(SM.ok,SM.att);
   $("smGrade").textContent=`${em} ${g}`;
-  $("smOkPill").textContent=`${SM.ok} solved`;
+  $("smOkPill").textContent=SM.kind==="test"?`${SM.ok} of ${SM_TEST_N} right`:`${SM.ok} solved`;
   const acc=SM.att?Math.round(100*SM.ok/SM.att):0;
-  $("smAccPill").textContent=`${acc}% right`;
-  $("smBestPill").textContent=`Best in ${SM_MODES[SM.mode]}: ${Math.max(best,SM.ok)}`;
+  $("smAccPill").textContent=SM.kind==="test"?`${SM.att} answered`:`${acc}% right`;
+  $("smBestPill").textContent=`Best ${SM.kind==="test"?"test ":""}in ${SM_MODES[SM.mode]}: ${Math.max(best,SM.ok)}`;
   $("smRecord").hidden=!isRec;
   const ml=$("smMiss"); ml.innerHTML="";
   const seen=new Set();
@@ -1374,6 +1409,15 @@ function smGrade(ok,att){
   if(ok>=6)return["C","🌱"];
   return["Warming Up","🌱"];
 }
+function smGradeTest(ok){
+  if(ok>=90)return["A+","🏆"];
+  if(ok>=80)return["A","🌟"];
+  if(ok>=70)return["B+","💪"];
+  if(ok>=60)return["B","👍"];
+  if(ok>=45)return["C+","🙂"];
+  if(ok>=30)return["C","🌱"];
+  return["Keep Going","💪"];
+}
 function smConfetti(){
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   const c=$("smConf"),x=c.getContext("2d");
@@ -1391,9 +1435,9 @@ function smRenderProg(){
   const runs=smLoadRuns();
   const bests=$("smBests"); bests.innerHTML="";
   Object.keys(SM_MODES).forEach(m=>{
-    const b=smBestFor(m);
     const s=document.createElement("span");s.className="smpill";
-    s.textContent=`${SM_MODES[m].split(" ")[0]} best: ${b}`;bests.appendChild(s);
+    s.textContent=`${SM_MODES[m].split(" ")[0]} ⚡${smBestFor(m,"sprint")} 💯${smBestFor(m,"test")}`;
+    bests.appendChild(s);
   });
   const ch=$("smChart"); ch.innerHTML="";
   const last=runs.slice(-10);
@@ -1407,9 +1451,10 @@ function smRenderProg(){
   if(!last.length)ch.innerHTML='<span style="font-weight:700;color:var(--mut)">No sprints yet. Do your first one!</span>';
   const hist=$("smHist"); hist.innerHTML="";
   runs.slice(-10).reverse().forEach(r=>{
-    const d=new Date(r.t), [g,em]=smGrade(r.ok,r.att);
+    const d=new Date(r.t), test=(r.kind||"sprint")==="test";
+    const [g,em]=test?smGradeTest(r.ok):smGrade(r.ok,r.att);
     const row=document.createElement("div");row.className="histrow";
-    row.innerHTML=`<span>${d.getMonth()+1}/${d.getDate()}</span><span>${SM_MODES[r.mode].split(" ")[0]}</span><b>${r.ok} solved</b><span>${r.att?Math.round(100*r.ok/r.att):0}%</span><b>${em} ${g}</b>`;
+    row.innerHTML=`<span>${d.getMonth()+1}/${d.getDate()}</span><span>${test?"💯":"⚡"} ${SM_MODES[r.mode].split(" ")[0]}</span><b>${r.ok}${test?"/100":" solved"}</b><span>${r.att?Math.round(100*r.ok/r.att):0}%</span><b>${em} ${g}</b>`;
     hist.appendChild(row);
   });
   const counts={};
@@ -1431,13 +1476,13 @@ $("smOpen").addEventListener("click",()=>smShow("smSetup"));
 $("smProgOpen").addEventListener("click",smRenderProg);
 $("togPad").addEventListener("click",()=>smSetStyle("pad"));
 $("togPen").addEventListener("click",()=>smSetStyle("pen"));
-document.querySelectorAll(".smmode").forEach(b=>b.addEventListener("click",()=>smStart(b.dataset.m)));
+document.querySelectorAll(".smmode").forEach(b=>b.addEventListener("click",()=>smStart(b.dataset.m,b.dataset.k||"sprint")));
 $("smHome").addEventListener("click",()=>{smClear();show("menu")});
 $("smHome2").addEventListener("click",()=>{smClear();show("menu")});
 $("smToProg").addEventListener("click",smRenderProg);
 $("smToProg2").addEventListener("click",smRenderProg);
 $("smGo").addEventListener("click",()=>smShow("smSetup"));
-$("smAgain").addEventListener("click",()=>smStart(SM.mode));
+$("smAgain").addEventListener("click",()=>smStart(SM.mode,SM.kind));
 $("smPick").addEventListener("click",()=>smShow("smSetup"));
 $("kquit").addEventListener("click",()=>{if(SM.iv)smEnd()});
 $("penQuit").addEventListener("click",()=>{if(SM.iv)smEnd()});
@@ -1447,8 +1492,10 @@ $("kpad").querySelectorAll(".kbtn").forEach(b=>{
   else if(t==="⌫")b.addEventListener("click",smBack);
 });
 $("penIn").addEventListener("input",()=>{
-  if(SM.lock||!SM.iv){$("penIn").value=SM.entry;return}
-  const v=$("penIn").value.replace(/[^0-9]/g,"").slice(0,2);
+  if(SM.lock||!SM.iv)return;
+  let v=$("penIn").value.replace(/[^0-9]/g,"");
+  if(SM.penStale&&v.startsWith(SM.penStale))v=v.slice(SM.penStale.length);
+  v=v.slice(0,3);
   SM.entry=v; $("smEntry").textContent=SM.entry||" ";
   if(SM.entry.length===String(SM.ans).length)smCheck();
 });
