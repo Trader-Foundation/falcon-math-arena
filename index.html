@@ -170,6 +170,24 @@ body.smlock{overflow:hidden;height:100%}
 .histrow{display:flex;justify-content:space-between;gap:8px;background:#FFF;border:2px solid var(--line);border-radius:12px;padding:8px 12px;font:700 14px var(--body);align-items:center}
 .histrow b{font-family:var(--disp)}
 .sect{font:800 14px var(--disp);letter-spacing:.08em;color:var(--mut);text-transform:uppercase;margin-top:6px}
+
+/* ---------- Clean landing + Reading ---------- */
+.bigsects{display:flex;flex-direction:column;gap:14px;max-width:560px;margin:0 auto;width:100%}
+.bigsect{display:flex;align-items:center;gap:16px;border:0;border-radius:24px;padding:20px 22px;cursor:pointer;text-align:left;color:#FFF;box-shadow:0 5px 0 rgba(43,35,64,.25)}
+.bigsect:active{transform:translateY(3px);box-shadow:none}
+.bigsect .be{font-size:44px;line-height:1}
+.bigsect h3{font-size:24px;margin:0;color:#FFF}
+.bigsect p{margin:2px 0 0;font-size:13.5px;font-weight:700;color:rgba(255,255,255,.85)}
+.bs-games{background:linear-gradient(135deg,#8C2332,#6E1624)}
+.bs-math{background:linear-gradient(135deg,#B07D0A,#8A5F00)}
+.bs-read{background:linear-gradient(135deg,#2E6B4F,#1C4A34)}
+.backlink{align-self:center;border:0;background:transparent;color:var(--mut);font:800 14px var(--body);cursor:pointer;text-decoration:underline}
+.rdp{font:600 16px/1.75 var(--body);color:var(--ink);max-width:62ch;text-align:left;text-indent:1.4em;margin:0 0 10px}
+.rdbox{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:20px 18px;max-width:680px;margin:0 auto}
+.rdopt{display:block;width:100%;border:0;border-radius:14px;background:#FFF;color:var(--ink);font:700 16px var(--body);padding:14px 14px;text-align:left;cursor:pointer;box-shadow:0 3px 0 rgba(43,35,64,.18);margin-top:10px}
+.rdopt:active{transform:translateY(2px);box-shadow:none}
+.rdopt.yes{background:var(--good);color:#FFF}
+.rdopt.no{background:var(--bad);color:#FFF}
 .gamegrid .gcard:nth-child(odd):last-child{grid-column:1/-1}
 .alltime{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;align-items:center}
 .atlbl{font:800 12px var(--disp);letter-spacing:.12em;color:var(--mut)}
@@ -227,6 +245,17 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="atreset" id="atReset">reset scoreboard</button>
     </div>
 
+    <div class="bigsects">
+      <button class="bigsect bs-games" id="gamesBtn"><span class="be">🎮</span><span><h3>Games</h3><p>All the Emma vs Bella games, cheer, trivia, and the tournament</p></span></button>
+      <button class="bigsect bs-math" id="mathBtn"><span class="be">➗</span><span><h3>Math</h3><p>Speed sprints, the Real Test, and Emma's progress</p></span></button>
+      <button class="bigsect bs-read" id="readBtn"><span class="be">📚</span><span><h3>Reading</h3><p>Story time, quiz questions, and the 1-minute speed read</p></span></button>
+    </div>
+    <button class="backlink" id="shelfBtn">🏆 Emma's Prize Shelf: medals and squishies</button>
+  </section>
+
+  <!-- GAMES MENU -->
+  <section class="screen" id="gamesMenu" hidden>
+    <div class="hero"><h1 style="font-size:clamp(24px,5vw,38px)">🎮 GAME ROOM</h1></div>
     <p class="sectlbl">Brain Games</p>
     <div class="gamegrid">
       <button class="gcard" data-game="pv"><span class="em">🔢</span><h3>Place Value Face-Off</h3><p>Tens, ones, tenths, and hundredths. Know your places!</p></button>
@@ -250,14 +279,9 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
     </div>
 
-    <p class="sectlbl">⭐ Emma's Zone ⭐</p>
-    <div class="gamegrid">
-      <button class="gcard" id="smOpen"><span class="em">⚡</span><h3>Speed Math Sprint</h3><p>One minute. Giant buttons or Apple Pencil. Beat your record!</p></button>
-      <button class="gcard" id="smProgOpen"><span class="em">📈</span><h3>My Progress</h3><p>Every sprint saved. Records, grades, and tricky ones.</p></button>
-    </div>
-
     <button class="big" id="tourney">🏆 Grand Tournament (lots of moving, a little math!)</button>
     <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
+    <button class="backlink" id="gamesBack">⬅ back to home</button>
   </section>
 
   <!-- SPLASH -->
@@ -347,6 +371,7 @@ svg.ang{width:min(300px,70vw);height:auto}
         <span class="smpill" id="smAccPill">90% right</span>
         <span class="smpill" id="smBestPill">Best: 12</span>
       </div>
+      <div id="smRw"></div>
       <div class="sect" id="smMissLbl" hidden>Ones to practice</div>
       <div class="misslist" id="smMiss"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
@@ -370,6 +395,86 @@ svg.ang{width:min(300px,70vw);height:auto}
         <button class="smbig alt" id="smHome2">🏠 All Games</button>
       </div>
       <button class="atreset" id="smReset">reset Emma's progress</button>
+    </div>
+  </section>
+
+  <!-- READING -->
+  <section class="screen" id="reading" hidden>
+    <div class="smcard" id="rdHome">
+      <h2 style="font-size:26px">📚 Emma's Reading</h2>
+      <div class="gamegrid" style="max-width:560px">
+        <button class="gcard" id="rdStoryBtn"><span class="em">🕵️</span><h3>Story + Quiz</h3><p>Read the mystery, then answer 7 questions!</p></button>
+        <button class="gcard" id="flBtn"><span class="em">⏱️</span><h3>1-Minute Speed Read</h3><p>Read out loud, tap your last word, beat your record!</p></button>
+      </div>
+      <button class="backlink" id="rdBack">⬅ back to home</button>
+    </div>
+
+    <div class="rdbox" id="rdStory" hidden>
+      <h2 style="text-align:center;font-size:24px">The Case of the Silver Star Sitters</h2>
+      <p style="text-align:center;font-weight:700;color:var(--mut)">Read the whole story. Take your time! The quiz comes after.</p>
+      <div id="rdParas"></div>
+      <div style="text-align:center;margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="smbig" id="rdToQuiz">✅ I read it! Quiz me!</button>
+        <button class="smbig alt" id="rdStoryBack">⬅ back</button>
+      </div>
+    </div>
+
+    <div class="smcard" id="rdQuiz" hidden>
+      <div class="smct" id="rdQc">1 / 7</div>
+      <div class="prompt" id="rdQ" style="font-weight:800;font-size:18px;max-width:56ch"></div>
+      <div style="width:100%;max-width:560px" id="rdOpts"></div>
+      <div class="flash" id="rdFlash">&nbsp;</div>
+    </div>
+
+    <div class="smcard" id="rdRes">
+      <div class="smgrade" id="rdGrade">🏆</div>
+      <div class="smstat"><span class="smpill g" id="rdScore">7 of 7</span><span class="smpill" id="rdBest">Best: 7</span></div>
+      <div id="rdRw"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig" id="rdRetry">🔁 Try the quiz again</button>
+        <button class="smbig alt" id="rdHome2">📚 Reading Home</button>
+      </div>
+    </div>
+
+    <div class="smcard" id="flHome" hidden>
+      <h2 style="font-size:24px">⏱️ 1-Minute Speed Read</h2>
+      <p style="margin:0;font-weight:700;color:var(--mut);max-width:48ch">Read OUT LOUD for one minute. When the buzzer goes, tap the last word you read. Read the SAME story again tomorrow and watch your number grow!</p>
+      <div class="gamegrid" style="max-width:560px" id="flPicks"></div>
+      <button class="backlink" id="flBack">⬅ back</button>
+    </div>
+
+    <div class="rdbox" id="flRead" hidden>
+      <div style="position:sticky;top:0;background:var(--card);padding:6px 0;text-align:center;z-index:5;border-bottom:2px solid var(--line)">
+        <span class="smtime" id="flTime" style="font-size:40px">60</span>
+        <div id="flMsg" style="font:800 15px var(--disp);color:var(--mut)">Tap START, then read out loud!</div>
+        <button class="smbig" id="flStart">▶️ START my 1-minute read</button>
+      </div>
+      <div id="flWords" style="font:600 19px/2 var(--body);margin-top:12px"></div>
+    </div>
+
+    <div class="smcard" id="flRes">
+      <div class="smgrade" id="flWpm">0</div>
+      <div style="font:800 18px var(--disp);color:var(--mut)">words in one minute!</div>
+      <div id="flRecord" class="record" hidden>🎉 NEW RECORD! 🎉</div>
+      <div class="smstat" id="flStats"></div>
+      <div class="sect">Your reads of this story</div>
+      <div class="chart" id="flChart"></div>
+      <div id="flRw"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig" id="flAgain">🔁 Read it again</button>
+        <button class="smbig alt" id="flHome2">⏱️ Pick a story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIZE SHELF -->
+  <section class="screen" id="shelf" hidden>
+    <div class="smcard">
+      <h2 style="font-size:26px">🏆 Emma's Prize Shelf</h2>
+      <div class="smstat"><span class="smpill" id="shMedals">🥇 0 gold medals</span><span class="smpill g" id="shCount">🧸 0 squishies</span></div>
+      <p style="margin:0;font-weight:700;color:var(--mut);max-width:46ch">Earn a new squishy every 2 activities you finish. Earn gold medals for records and A grades!</p>
+      <div class="gamegrid" style="max-width:560px" id="shGrid"></div>
+      <button class="backlink" id="shBack">⬅ back to home</button>
     </div>
   </section>
 
@@ -1116,7 +1221,7 @@ let S=null, timers=[];
 
 function clearTimers(){timers.forEach(clearTimeout);timers=[];if(PH&&PH.iv){clearInterval(PH.iv);PH.iv=null}}
 function later(fn,ms){timers.push(setTimeout(fn,ms))}
-function show(id){["menu","splash","game","resultWrap","speed"].forEach(s=>$(s).hidden=(s!==id))}
+function show(id){["menu","gamesMenu","splash","game","resultWrap","speed","reading","shelf"].forEach(s=>$(s).hidden=(s!==id))}
 
 function startSet(keys,mode){
   clearTimers();
@@ -1426,6 +1531,9 @@ function smEnd(){
   SM.miss.forEach(([p,a])=>{const k=p+a;if(seen.has(k))return;seen.add(k);
     const d=document.createElement("div");d.className="missrow";d.textContent=`${p.replace(/ = .*$/,"")} = ${a}`;ml.appendChild(d);});
   $("smMissLbl").hidden=!SM.miss.length;
+  const medal=(isRec?1:0)+((g==="A"||g==="A+")?1:0);
+  const msgs=rwEarn(medal?{medals:medal,why:medal===2?"a record AND an A!":isRec?"a new record!":"an A grade!"}:null);
+  rwBanner("smRw",msgs);
   smShow("smResult");
   if(isRec)smConfetti();
 }
@@ -1512,8 +1620,9 @@ function smSetStyle(st){
 }
 try{smSetStyle(localStorage.getItem("emmaSpeedStyle")||"pad")}catch(e){smSetStyle("pad")}
 
-$("smOpen").addEventListener("click",()=>smShow("smSetup"));
-$("smProgOpen").addEventListener("click",smRenderProg);
+$("gamesBtn").addEventListener("click",()=>show("gamesMenu"));
+$("gamesBack").addEventListener("click",()=>show("menu"));
+$("mathBtn").addEventListener("click",()=>smShow("smSetup"));
 $("togPad").addEventListener("click",()=>smSetStyle("pad"));
 $("togPen").addEventListener("click",()=>smSetStyle("pen"));
 document.querySelectorAll(".smmode").forEach(b=>b.addEventListener("click",()=>smStart(b.dataset.m,b.dataset.k||"sprint")));
@@ -1543,6 +1652,221 @@ $("smReset").addEventListener("click",()=>{
     setTimeout(()=>{smResetArm=false;$("smReset").textContent="reset Emma's progress"},3000);return;}
   smSaveRuns([]); smResetArm=false; $("smReset").textContent="reset Emma's progress"; smRenderProg();
 });
+
+/* ================= PRIZE SHELF (medals + squishies) ================= */
+const SQUISHIES=[["🍓","Berry"],["🧁","Cupcake"],["🐼","Panda Puff"],["🍞","Toasty"],["🦄","Sparkle"],["🍑","Peachy"],
+ ["🐸","Hoppy"],["🍩","Sprinkles"],["🐱","Mochi"],["🌈","Rainy"],["🍉","Melony"],["🐧","Waddles"],
+ ["🦊","Foxy"],["🍪","Chippy"],["🐢","Sheldon"],["🌙","Luna"],["🍋","Zesty"],["🐥","Peep"],
+ ["🧇","Waffles"],["🦋","Flutter"],["🍦","Swirly"],["🐙","Squiddy"],["⭐","Twinkle"],["🫧","Bubbles"]];
+function rwLoad(){try{const r=JSON.parse(localStorage.getItem("emmaRewards")||"null");if(r&&Array.isArray(r.sq))return r}catch(e){}return{medals:0,sq:[],acts:0}}
+function rwSave(r){try{localStorage.setItem("emmaRewards",JSON.stringify(r))}catch(e){}}
+function rwEarn(opts){
+  const r=rwLoad(); const msgs=[];
+  r.acts++;
+  if(r.acts%2===0&&r.sq.length<SQUISHIES.length){
+    const unowned=SQUISHIES.filter(s=>!r.sq.includes(s[1]));
+    const nw=pick(unowned); r.sq.push(nw[1]);
+    msgs.push(`${nw[0]} A new squishy joined your shelf: <b>${nw[1]}</b>!`);
+  }
+  if(opts&&opts.medals){r.medals+=opts.medals;
+    msgs.push(`🥇 ${opts.medals===1?"You earned a GOLD MEDAL":"You earned "+opts.medals+" GOLD MEDALS"}: ${esc(opts.why||"amazing work!")}`);}
+  rwSave(r);
+  return msgs;
+}
+function rwBanner(elId,msgs){
+  const el=$(elId); if(!el)return; el.innerHTML="";
+  msgs.forEach(m=>{
+    const d=document.createElement("div");
+    d.style.cssText="background:var(--p2-soft);border:3px solid var(--gold);border-radius:14px;padding:10px 16px;font:800 16px var(--disp);color:var(--p2-deep);margin-top:8px";
+    d.innerHTML=m; el.appendChild(d);
+  });
+  if(msgs.length)sWIN();
+}
+function shelfRender(){
+  const r=rwLoad();
+  $("shMedals").textContent=`🥇 ${r.medals} gold medal${r.medals===1?"":"s"}`;
+  $("shCount").textContent=`🧸 ${r.sq.length} of ${SQUISHIES.length} squishies`;
+  const g=$("shGrid"); g.innerHTML="";
+  SQUISHIES.forEach(([em,nm])=>{
+    const own=r.sq.includes(nm);
+    const d=document.createElement("div");
+    d.className="gcard"; d.style.textAlign="center"; d.style.cursor="default";
+    d.innerHTML=own?`<span class="em" style="font-size:40px">${em}</span><h3 style="font-size:16px">${nm}</h3>`
+                   :`<span class="em" style="font-size:40px;filter:grayscale(1);opacity:.35">❓</span><h3 style="font-size:16px;color:var(--mut)">???</h3>`;
+    g.appendChild(d);
+  });
+  show("shelf");
+}
+$("shelfBtn").addEventListener("click",shelfRender);
+$("shBack").addEventListener("click",()=>show("menu"));
+
+/* ================= READING: story + quiz ================= */
+const RD_STORY=[
+"Kristy Thomas called the emergency meeting to order at exactly 5:30, the way she always did, sitting in Claudia's director's chair with a pencil tucked behind her ear. But this time, nobody argued about snacks or schedules. This time, there was a problem nobody had ever seen before: the Baby-Sitters Club had been fired.",
+"\"Mrs. Delaney left a message,\" Kristy said, reading from the club notebook. \"She says we are no longer needed. And she told Mrs. Newton the same thing. Two families in one week.\"",
+"Claudia dug a bag of licorice out from inside a hollowed-out sculpture and passed it around. \"Maybe they went on vacation?\" she offered, though she did not sound like she believed it.",
+"Stacey shook her head. She had been treasurer long enough to notice patterns, and she did not like this one. \"Two cancellations is not a coincidence. It's a trend. And trends have reasons.\"",
+"Mary Anne, who kept the club record book neater than a library, flipped back through the pages. Her finger stopped on the last job at the Delaneys'. \"Dawn sat for them on Tuesday. It says everything went fine. The kids played pirate ship, had spaghetti, and went to bed on time.\"",
+"Everyone turned to Dawn, who had just moved from California that winter and was still the newest member. Her cheeks went pink. \"It DID go fine,\" she said. \"I even cleaned the kitchen before Mrs. Delaney got home. She thanked me twice.\"",
+"Kristy drummed her pencil against the chair. Being president meant more than running meetings. It meant protecting the club. \"Then something happened after you left. We need information before we panic. Mary Anne, call Mrs. Newton and politely ask if we did anything wrong. Do not apologize for anything yet, because we do not know if we did anything.\"",
+"Mary Anne turned pale. Talking on the phone to adults made her stomach flip like a gymnast. But she was the club secretary, and the notebook in her lap was proof that the club had done nothing wrong. She dialed. The whole room held its breath and listened to one side of the strangest conversation in club history.",
+"\"Yes... I see... a flyer? ... No, ma'am, we did not send any flyer.\" When she hung up, Mary Anne's eyes were wide. \"Somebody put flyers in mailboxes all over the neighborhood. It says the Baby-Sitters Club is doubling its prices, and that parents should hire a new group called the Silver Star Sitters instead. The flyer has our club name on it, like WE wrote it.\"",
+"For a second nobody spoke. Then everybody spoke at once, until Kristy stood up on the chair and whistled. \"A fake flyer means someone wants our jobs badly enough to lie. We are not going to lie back. We are going to prove the truth. Ideas?\"",
+"\"Fingerprints!\" said Claudia. \"A stakeout!\" said Dawn. \"Math,\" said Stacey calmly, and everyone stared at her. She held up the flyer that Mrs. Newton had dropped off. \"Look at the bottom. It says Silver Star Sitters charges half of what we charge. But their phone number has a New York City area code. I lived in New York. Nobody from the city is riding a train to Stoneybrook to babysit at half price. This is not a real business. It's probably kids, and probably kids close enough to put flyers in mailboxes by hand. No stamps, see?\"",
+"Dawn snapped her fingers. \"The Marshall twins! They started that dog-walking club last month, and they told Jamie Newton that babysitting was easy money. Their cousin lives in New York. I bet they borrowed his phone number to look official.\"",
+"It was a good theory, but Kristy knew a theory was not proof. So the club made a plan worthy of the record book. Claudia designed a beautiful flyer of their own, announcing that the Baby-Sitters Club would hold one afternoon of Kids' Games in the Park, no charge, as a thank-you to the neighborhood. If the Silver Star Sitters were real sitters, they would show up too, because real sitters love kids. If they were fakes, they would stay home.",
+"Saturday came, bright and windy. Half the neighborhood showed up at the park. Kristy organized a kickball game so big it needed two pitchers. Mary Anne ran the face-painting table with Claudia, and Dawn taught everyone a California beach game with a frisbee. Stacey sat at the welcome table with the sign-in sheet, watching.",
+"The Marshall twins showed up at three o'clock. They did not play with a single kid. Instead, they walked around sticking silver star flyers under the picnic tables, until a gust of wind grabbed the whole stack and scattered the flyers across the grass like confetti. And there, printed across the top of every page, was the exact same swirly star that was painted on the side of the twins' famous dog-walking wagon.",
+"Mrs. Newton picked one up, looked at the star, looked at the wagon parked by the fence, and started to laugh. She did not need a detective to explain it. By Monday, the phone in Claudia's room was ringing again, and this time it did not stop. The Delaneys booked three jobs. The Newtons booked four.",
+"At the next meeting, Kristy proposed a new rule for the record book, and for once every single member voted yes on the first try: \"When somebody tells lies about you, do not argue. Just show the truth so loudly that the lie gets embarrassed and goes home.\""
+];
+const RD_QS=[
+ ["What is the main problem at the beginning of the story?",
+  ["The club cannot agree on a meeting time","Two families have suddenly stopped hiring the club","Dawn forgot to clean the Delaneys' kitchen","Claudia lost the club notebook"],1],
+ ["Why does Kristy tell Mary Anne NOT to apologize when she calls Mrs. Newton?",
+  ["Because apologizing is against the club rules","Because Mrs. Newton should apologize","Because the club does not yet know if it did anything wrong","Because Kristy wants to apologize herself"],2],
+ ["Which clue makes Stacey believe the Silver Star Sitters are not a real business?",
+  ["The flyer uses the wrong colors","The phone number has a New York City area code","The flyer is full of spelling mistakes","The twins signed their names"],1],
+ ["What does the detail about the flyers having no stamps tell the reader?",
+  ["The flyers were delivered by hand by someone nearby","The flyers were printed at the post office","The sitters could not afford stamps","The flyers were mailed from New York"],0],
+ ["Why does the club hold the Kids' Games day in the park?",
+  ["To earn extra money for the club","To celebrate Dawn joining the club","To catch the twins stealing flyers","To show the neighborhood the truth and test who the Silver Star Sitters really are"],3],
+ ["How is the mystery finally solved?",
+  ["The wind scatters the flyers, showing the same star that is on the twins' wagon","Mary Anne finds the twins' names in the record book","The twins confess at the welcome table","Mrs. Newton hires a detective"],0],
+ ["What lesson does Kristy's new club rule teach?",
+  ["Never trust families who cancel jobs","Answer lies with proof and actions instead of arguing","Always charge less than the competition","Emergency meetings solve every problem"],1],
+];
+let RD={i:0,ok:0,lock:false};
+function rdOpenStory(){
+  const box=$("rdParas");
+  if(!box.childElementCount)RD_STORY.forEach(p=>{const el=document.createElement("p");el.className="rdp";el.textContent=p;box.appendChild(el)});
+  ["rdHome","rdQuiz","rdRes","flHome","flRead","flRes"].forEach(s=>$(s).hidden=true);
+  $("rdStory").hidden=false; show("reading"); window.scrollTo(0,0);
+}
+function rdShowSub(sub){["rdHome","rdStory","rdQuiz","rdRes","flHome","flRead","flRes"].forEach(s=>$(s).hidden=(s!==sub));show("reading");window.scrollTo(0,0)}
+function rdStartQuiz(){RD={i:0,ok:0,lock:false};rdShowSub("rdQuiz");rdPaintQ()}
+function rdPaintQ(){
+  const [q,opts]=RD_QS[RD.i];
+  $("rdQc").textContent=`${RD.i+1} / ${RD_QS.length}`;
+  $("rdQ").textContent=q;
+  $("rdFlash").textContent=" ";$("rdFlash").className="flash";
+  const box=$("rdOpts"); box.innerHTML="";
+  opts.forEach((o,i)=>{
+    const b=document.createElement("button"); b.className="rdopt"; b.textContent=o;
+    b.addEventListener("click",()=>rdAnswer(i,b)); box.appendChild(b);
+  });
+  RD.lock=false;
+}
+function rdAnswer(i,btn){
+  if(RD.lock)return; RD.lock=true;
+  const ci=RD_QS[RD.i][2];
+  const btns=$("rdOpts").querySelectorAll(".rdopt");
+  if(i===ci){RD.ok++;btn.classList.add("yes");sOK();$("rdFlash").textContent="That's right! 🎉";$("rdFlash").className="flash ok";}
+  else{btn.classList.add("no");btns[ci].classList.add("yes");sNO();$("rdFlash").textContent="Good try! The green one is it.";$("rdFlash").className="flash no";}
+  setTimeout(()=>{RD.i++; if(RD.i<RD_QS.length)rdPaintQ(); else rdFinish();},i===ci?900:1700);
+}
+function rdFinish(){
+  let best=0; try{best=Number(localStorage.getItem("emmaReadBest")||0)}catch(e){}
+  const nb=Math.max(best,RD.ok); try{localStorage.setItem("emmaReadBest",String(nb))}catch(e){}
+  const em=RD.ok>=7?"🏆 A+":RD.ok>=6?"🌟 A":RD.ok>=5?"💪 B+":RD.ok>=4?"👍 B":"🌱 Good practice!";
+  $("rdGrade").textContent=em;
+  $("rdScore").textContent=`${RD.ok} of ${RD_QS.length}`;
+  $("rdBest").textContent=`Best: ${nb}`;
+  const msgs=rwEarn(RD.ok>=6?{medals:1,why:"a super reading score!"}:null);
+  rwBanner("rdRw",msgs);
+  rdShowSub("rdRes");
+}
+
+/* ================= READING: 1-minute fluency ================= */
+const FL_PASSAGES=[
+ {id:"falcon",title:"🦅 The Falcon Who Hated Heights",text:"Finn was a falcon with a big problem. He was afraid of heights. Every other falcon in his family loved to zoom off the tallest cliffs and dive like lightning toward the river below. Finn preferred to walk. He told everyone that walking was good exercise, but the truth was that one look over the edge made his feathers shake. One morning his little sister Pip landed beside him with a worm in her beak. She was small, but she was brave, and she had a plan. Instead of starting at the top of the cliff, she took Finn to a rock that was only as tall as a mailbox. Jump from here, she said. Finn laughed, hopped off, and landed before he even had time to be scared. The next day they found a taller rock, about the size of a car. Then a boulder as tall as a house. Each jump felt almost easy, because it was only a little higher than the one before. By the end of the month, Finn stood at the top of the great cliff itself. His heart drummed, but he remembered every small jump that had carried him here. He spread his wings, counted to three, and dove. The wind whistled past his face, the river flashed silver below, and Finn the falcon, who once hated heights, let out the loudest, happiest cry the canyon had ever heard. From that day on, whenever something looked too big, Finn remembered the mailbox rock, and he started small."},
+ {id:"squish",title:"🧁 The Squishy Shop Mystery",text:"Mia saved her allowance for six whole weeks to visit the famous squishy shop on Maple Street. The shop had shelves from the floor to the ceiling, stacked with squishies shaped like pandas, peaches, waffles, and clouds. But when Mia arrived on Saturday morning, the owner, Mr. Lee, looked worried. His most famous squishy, a golden cupcake named Sunny, was missing from the front window. Mia loved mysteries almost as much as she loved squishies, so she offered to help. First she checked the window shelf. There were tiny crumbs there, which was strange, because squishies are not food. Then she noticed little paw prints on the glass, far too small for a dog. The prints led behind the counter, past a stack of boxes, and stopped at a cozy hole in the wall. Mia knelt down and peeked inside. There was Sunny the cupcake squishy, perfectly safe, squeezed tight by a sleeping mouse who had mistaken it for the softest bed in the world. Mia laughed so hard that the mouse woke up and scurried deeper into the wall. Mr. Lee was so thankful that he let Mia pick any squishy in the store for free. She chose a little gray mouse squishy, of course, and named it Crumbs. From then on, every time Mia squeezed Crumbs, she remembered the day she solved the case of the missing cupcake, and she smiled all over again."},
+ {id:"gokart",title:"🏁 The Boardwalk Go-Kart Race",text:"Every summer, the boardwalk held one special go-kart race for kids, and this year Josie was finally tall enough to enter. She had watched the race from the fence for three summers in a row, eating ice cream and dreaming about the checkered flag. Now she sat in kart number seven, her helmet snug, her hands tight on the wheel. The starter raised the flag. Three, two, one, go! The karts shot forward with a buzz like a hundred bees. Josie did not take the lead right away. A boy in a red kart zipped ahead of her, and a girl in a green kart cut past on the first turn. But Josie remembered what her grandfather always said. Smooth is fast. Instead of jerking the wheel and slamming the pedal, she took every turn in one calm, easy curve. Lap after lap, she crept closer. The red kart spun out in a corner because its driver turned too hard. The green kart had to slow down after bumping a tire wall. Josie just kept gliding, smooth and steady, like water finding its way downhill. On the final lap, she slipped past the green kart on the inside and crossed the finish line first. The crowd cheered, the flag waved, and Josie pumped her fist in the air. Her grandfather met her at the gate with two ice cream cones and the biggest grin on the whole boardwalk."},
+];
+let FL={p:null,iv:null,left:60,running:false,done:false};
+function flLoad(){try{const r=JSON.parse(localStorage.getItem("emmaFluency")||"{}");return typeof r==="object"&&r?r:{}}catch(e){return{}}}
+function flSave(r){try{localStorage.setItem("emmaFluency",JSON.stringify(r))}catch(e){}}
+function flRenderHome(){
+  const data=flLoad();
+  const box=$("flPicks"); box.innerHTML="";
+  FL_PASSAGES.forEach(p=>{
+    const runs=data[p.id]||[];
+    const best=runs.length?Math.max(...runs.map(x=>x.w)):0;
+    const b=document.createElement("button"); b.className="gcard";
+    b.innerHTML=`<span class="em">${p.title.split(" ")[0]}</span><h3 style="font-size:17px">${p.title.slice(p.title.indexOf(" ")+1)}</h3><p>Read ${runs.length} time${runs.length===1?"":"s"}${best?` · Best: ${best} words`:""}</p>`;
+    b.addEventListener("click",()=>flOpen(p));
+    box.appendChild(b);
+  });
+  rdShowSub("flHome");
+}
+function flOpen(p){
+  FL={p,iv:null,left:60,running:false,done:false};
+  const words=p.text.split(/\s+/);
+  const box=$("flWords"); box.innerHTML="";
+  words.forEach((w,i)=>{
+    const s=document.createElement("span");
+    s.textContent=w+" ";
+    s.dataset.i=i+1;
+    s.addEventListener("click",()=>flPick(i+1,s));
+    box.appendChild(s);
+  });
+  $("flTime").textContent="60"; $("flTime").className="smtime"; $("flTime").style.fontSize="40px";
+  $("flMsg").textContent="Tap START, then read out loud!";
+  $("flStart").hidden=false;
+  rdShowSub("flRead");
+}
+$("flStart").addEventListener("click",()=>{
+  if(FL.running)return;
+  FL.running=true; $("flStart").hidden=true;
+  $("flMsg").textContent="GO! Read out loud! 📖";
+  sWIN();
+  FL.iv=setInterval(()=>{
+    FL.left--;
+    $("flTime").textContent=Math.max(FL.left,0);
+    if(FL.left<=3&&FL.left>0)sTick();
+    if(FL.left<=0){
+      clearInterval(FL.iv);FL.iv=null;FL.done=true;FL.running=false;
+      beep([150],.5,"square");
+      $("flMsg").textContent="⏰ STOP! Tap the LAST word you read!";
+      $("flTime").className="smtime hurry";
+    }
+  },1000);
+});
+function flPick(n,el){
+  if(!FL.done)return;
+  FL.done=false;
+  el.style.cssText="background:var(--gold);border-radius:6px;font-weight:800";
+  const data=flLoad(); const runs=data[FL.p.id]||[];
+  const best=runs.length?Math.max(...runs.map(x=>x.w)):0;
+  const isRec=n>best&&runs.length>0;
+  runs.push({t:Date.now(),w:n}); data[FL.p.id]=runs.slice(-25); flSave(data);
+  $("flWpm").textContent=n;
+  $("flRecord").hidden=!isRec;
+  const st=$("flStats"); st.innerHTML="";
+  const mk=(txt,g)=>{const s=document.createElement("span");s.className="smpill"+(g?" g":"");s.textContent=txt;st.appendChild(s)};
+  mk(`Read #${runs.length} of this story`);
+  mk(`Best: ${Math.max(best,n)} words`,true);
+  if(runs.length>1){const prev=runs[runs.length-2].w;const d=n-prev;mk(d>=0?`+${d} vs last time!`:`${d} vs last time`);}
+  const ch=$("flChart"); ch.innerHTML="";
+  const last=runs.slice(-8); const mx=Math.max(10,...last.map(r=>r.w));
+  last.forEach(r=>{const b=document.createElement("div");b.className="cbar";b.style.height=Math.max(14,Math.round(110*r.w/mx))+"px";b.textContent=r.w;ch.appendChild(b)});
+  const msgs=rwEarn(isRec?{medals:1,why:"a new reading speed record!"}:null);
+  rwBanner("flRw",msgs);
+  setTimeout(()=>rdShowSub("flRes"),600);
+}
+
+/* reading wiring */
+$("readBtn").addEventListener("click",()=>rdShowSub("rdHome"));
+$("rdBack").addEventListener("click",()=>show("menu"));
+$("rdStoryBtn").addEventListener("click",rdOpenStory);
+$("rdStoryBack").addEventListener("click",()=>rdShowSub("rdHome"));
+$("rdToQuiz").addEventListener("click",rdStartQuiz);
+$("rdRetry").addEventListener("click",rdStartQuiz);
+$("rdHome2").addEventListener("click",()=>rdShowSub("rdHome"));
+$("flBtn").addEventListener("click",flRenderHome);
+$("flBack").addEventListener("click",()=>rdShowSub("rdHome"));
+$("flAgain").addEventListener("click",()=>flOpen(FL.p));
+$("flHome2").addEventListener("click",flRenderHome);
 
 show("menu");
 </script>
