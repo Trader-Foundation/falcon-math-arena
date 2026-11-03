@@ -154,6 +154,11 @@ body.smlock{overflow:hidden;height:100%}
 .kbtn{border:0;border-radius:18px;background:#FFF;font:800 36px var(--disp);color:var(--ink);min-height:74px;cursor:pointer;box-shadow:0 4px 0 rgba(43,35,64,.22)}
 .kbtn:active{transform:translateY(3px);box-shadow:none}
 .kbtn.back{font-size:28px;background:var(--p1-soft)}
+.kbtn.ghost{visibility:hidden;pointer-events:none}
+.kbtn.delbtn{grid-column:1/-1;font-size:20px;letter-spacing:.14em;background:var(--p1-soft);color:var(--p1-deep);min-height:56px}
+#smExit{position:absolute;top:10px;right:12px;z-index:60;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--mut);font:800 13px var(--disp);letter-spacing:.1em;padding:7px 12px;cursor:pointer}
+#smDrill{position:relative}
+#smDrill.fx #smExit{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:14px}
 .penbox{width:100%;max-width:460px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
 .penbox input{width:100%;border:4px dashed var(--p1);border-radius:20px;background:#FFF;font:800 56px var(--disp);text-align:center;color:var(--p1);padding:18px 8px;outline:none}
 .penhint{font:700 13px var(--body);color:var(--mut);text-align:center}
@@ -363,6 +368,7 @@ svg.ang{width:min(300px,70vw);height:auto}
     </div>
 
     <div class="smcard" id="smDrill" hidden>
+      <button id="smExit">EXIT</button>
       <div class="smtop">
         <span class="smsolved" id="smSolved">⭐ 0</span>
         <span class="smtime" id="smTime">60</span>
@@ -374,12 +380,12 @@ svg.ang{width:min(300px,70vw);height:auto}
         <button class="kbtn">1</button><button class="kbtn">2</button><button class="kbtn">3</button>
         <button class="kbtn">4</button><button class="kbtn">5</button><button class="kbtn">6</button>
         <button class="kbtn">7</button><button class="kbtn">8</button><button class="kbtn">9</button>
-        <button class="kbtn back">⌫</button><button class="kbtn">0</button><button class="kbtn back" id="kquit">✖</button>
+        <button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button><button class="kbtn">0</button><button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button>
+        <button class="kbtn delbtn">DELETE</button>
       </div>
       <div class="penbox" id="penbox" hidden>
         <input id="penIn" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="✍️">
         <div class="penhint">Write your answer in the box with the Pencil. It checks itself!</div>
-        <button class="smbig alt" id="penQuit">stop early</button>
       </div>
     </div>
 
@@ -1776,12 +1782,19 @@ $("pickSBack").addEventListener("click",()=>smShow("smSetup"));
 $("pickTBack").addEventListener("click",()=>smShow("smSetup"));
 $("smAgain").addEventListener("click",()=>smStart(SM.mode,SM.kind));
 $("smPick").addEventListener("click",()=>smShow(SM.kind==="test"?"smPickT":"smPickS"));
-$("kquit").addEventListener("click",()=>{if(SM.iv)smEnd()});
-$("penQuit").addEventListener("click",()=>{if(SM.iv)smEnd()});
+function smAbandon(){
+  smClear(); SM.lock=true;
+  $("smDrill").classList.remove("fx"); document.body.classList.remove("smlock");
+  try{$("penIn").blur()}catch(e){}
+  try{speechSynthesis.cancel()}catch(e){}
+  if(CH.active){CH.active=false; if(CH.iv){clearInterval(CH.iv);CH.iv=null;}}
+  smShow("smSetup");
+}
+$("smExit").addEventListener("click",smAbandon);
 $("kpad").querySelectorAll(".kbtn").forEach(b=>{
   const t=b.textContent;
   if(/^[0-9]$/.test(t))b.addEventListener("click",()=>smKey(t));
-  else if(t==="⌫")b.addEventListener("click",smBack);
+  else if(t==="DELETE")b.addEventListener("click",smBack);
 });
 $("penIn").addEventListener("input",penHandler);
 document.addEventListener("keydown",e=>{
