@@ -155,11 +155,18 @@ body.smlock{overflow:hidden;height:100%}
 .kbtn:active{transform:translateY(3px);box-shadow:none}
 .kbtn.back{font-size:28px;background:var(--p1-soft)}
 .kbtn.ghost{visibility:hidden;pointer-events:none}
-.kbtn.delbtn{grid-column:1/-1;font-size:17px;letter-spacing:.14em;background:var(--p1-soft);color:var(--p1-deep);min-height:44px;margin-top:16px;box-shadow:0 2px 0 rgba(43,35,64,.18)}
 .kbtn.entbtn{grid-column:1/-1;font-size:26px;letter-spacing:.16em;background:var(--good);color:#FFF;min-height:72px}
+.kwrap{display:flex;align-items:stretch;justify-content:center;gap:12px;width:100%;max-width:520px;margin:0 auto;touch-action:manipulation}
+.kwrap .kpad{flex:1;max-width:300px;margin:0}
+.kbtn.delcirc{flex:0 0 auto;align-self:center;width:72px;height:72px;border-radius:50%;font-size:12px;letter-spacing:.06em;background:var(--p1-soft);color:var(--p1-deep)}
+.kbtn.entside{flex:0 0 100px;border-radius:22px;font-size:22px;letter-spacing:.1em;background:var(--good);color:#FFF;min-height:100%}
+@media (max-width:480px){
+  .kwrap{gap:8px}
+  .kbtn.delcirc{width:58px;height:58px;font-size:10px}
+  .kbtn.entside{flex:0 0 78px;font-size:18px}
+}
 #smDrill.fx .kbtn{min-height:clamp(42px,7.6vh,68px)}
-#smDrill.fx .delbtn{min-height:clamp(32px,4.8vh,44px);margin-top:clamp(8px,1.8vh,16px)}
-#smDrill.fx .entbtn{min-height:clamp(52px,8vh,72px)}
+#smDrill.fx .kbtn.delcirc{width:clamp(50px,8vh,72px);height:clamp(50px,8vh,72px)}
 #smExit{position:absolute;top:10px;right:12px;z-index:60;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--mut);font:800 13px var(--disp);letter-spacing:.1em;padding:7px 12px;cursor:pointer}
 #smDrill{position:relative}
 #smDrill.fx #smExit{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:14px}
@@ -380,13 +387,15 @@ svg.ang{width:min(300px,70vw);height:auto}
       </div>
       <div class="smprob" id="smProb">3 + 4</div>
       <div class="smentry" id="smEntry">&nbsp;</div>
-      <div class="kpad" id="kpad">
-        <button class="kbtn">1</button><button class="kbtn">2</button><button class="kbtn">3</button>
-        <button class="kbtn">4</button><button class="kbtn">5</button><button class="kbtn">6</button>
-        <button class="kbtn">7</button><button class="kbtn">8</button><button class="kbtn">9</button>
-        <button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button><button class="kbtn">0</button><button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button>
-        <button class="kbtn entbtn">ENTER</button>
-        <button class="kbtn delbtn">DELETE</button>
+      <div class="kwrap" id="kwrap">
+        <button class="kbtn delcirc" id="kdel">DELETE</button>
+        <div class="kpad" id="kpad">
+          <button class="kbtn">1</button><button class="kbtn">2</button><button class="kbtn">3</button>
+          <button class="kbtn">4</button><button class="kbtn">5</button><button class="kbtn">6</button>
+          <button class="kbtn">7</button><button class="kbtn">8</button><button class="kbtn">9</button>
+          <button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button><button class="kbtn">0</button><button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button>
+        </div>
+        <button class="kbtn entside" id="kent">ENTER</button>
       </div>
       <div class="penbox" id="penbox" hidden>
         <input id="penIn" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="✍️">
@@ -1545,7 +1554,7 @@ function smStart(mode,kind,fromChallenge){
   $("smTime").textContent=smFmtTime(secs); $("smTime").className="smtime";
   $("smCt").style.visibility=SM.kind==="test"?"visible":"hidden";
   $("smCt").textContent=`0/${SM_TEST_N}`;
-  $("kpad").hidden=(SM.style==="pen"); $("penbox").hidden=(SM.style!=="pen");
+  $("kwrap").hidden=(SM.style==="pen"); $("penbox").hidden=(SM.style!=="pen");
   smShow("smDrill");
   $("smDrill").classList.add("fx"); document.body.classList.add("smlock");
   window.scrollTo(0,0);
@@ -1802,9 +1811,9 @@ $("smExit").addEventListener("click",smAbandon);
 $("kpad").querySelectorAll(".kbtn").forEach(b=>{
   const t=b.textContent;
   if(/^[0-9]$/.test(t))b.addEventListener("click",()=>smKey(t));
-  else if(t==="DELETE")b.addEventListener("click",smBack);
-  else if(t==="ENTER")b.addEventListener("click",smSubmit);
 });
+$("kdel").addEventListener("click",smBack);
+$("kent").addEventListener("click",smSubmit);
 $("penEnter").addEventListener("click",smSubmit);
 $("penIn").addEventListener("input",penHandler);
 document.addEventListener("keydown",e=>{
