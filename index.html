@@ -455,6 +455,14 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="misslist" id="smHist" style="max-width:480px"></div>
       <div class="sect" id="smTrickyLbl">Tricky ones to practice</div>
       <div class="misslist" id="smTricky"></div>
+      <div class="sect">🪄 Magic Sync — move progress to another browser</div>
+      <div style="max-width:480px;width:100%;display:flex;flex-direction:column;gap:8px;align-items:center">
+        <p style="margin:0;font-weight:700;color:var(--mut);font-size:14px;text-align:center">Tap Copy here, then open the game in the other browser, paste the code on its Progress page, and tap Merge. Nothing gets erased — both sides join together!</p>
+        <button class="smbig alt" id="syncCopy" style="width:100%">📋 Copy my progress code</button>
+        <textarea id="syncIn" rows="2" placeholder="Paste a progress code here…" style="width:100%;border:3px solid #E8D9B5;border-radius:14px;padding:10px;font-family:inherit;font-size:14px;font-weight:700;resize:none"></textarea>
+        <button class="smbig" id="syncMerge" style="width:100%">🔀 Merge it in!</button>
+        <div id="syncMsg" style="font-weight:800;min-height:22px;font-size:15px"></div>
+      </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
         <button class="smbig" id="smGo">⚡ Do a Sprint!</button>
         <button class="smbig alt" id="smHome2">🏠 All Games</button>
@@ -1838,6 +1846,89 @@ $("smReset").addEventListener("click",()=>{
   if(!smResetArm){smResetArm=true;$("smReset").textContent="tap again to erase ALL progress";
     setTimeout(()=>{smResetArm=false;$("smReset").textContent="reset Emma's progress"},3000);return;}
   smSaveRuns([]); smResetArm=false; $("smReset").textContent="reset Emma's progress"; smRenderProg();
+});
+
+/* ================= MAGIC SYNC (merge progress between browsers) ================= */
+function syncExport(){
+  const o={v:1};
+  ["emmaSpeedRuns","emmaRewards","emmaFluency","emmaReadBest","arenaTotals"].forEach(k=>{
+    try{const v=localStorage.getItem(k); if(v!=null)o[k]=v}catch(e){}
+  });
+  return "EMMA1."+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
+}
+function syncMergeIn(code){
+  code=(code||"").trim();
+  if(code.indexOf("EMMA1.")!==0) return "That doesn't look like a progress code. Copy it from the other browser first!";
+  let o;
+  try{o=JSON.parse(decodeURIComponent(escape(atob(code.slice(6)))))}catch(e){return "Hmm, that code got scrambled. Try copying it again."}
+  if(!o||typeof o!=="object") return "Hmm, that code got scrambled. Try copying it again.";
+  // Speed-math runs: keep every run from both sides (dedup by time+mode)
+  try{
+    const theirs=JSON.parse(o.emmaSpeedRuns||"[]");
+    if(Array.isArray(theirs)){
+      const seen={},all=[];
+      smLoadRuns().concat(theirs).forEach(r=>{
+        if(!r||typeof r.t!=="number")return;
+        const k=r.t+"|"+(r.mode||"")+"|"+(r.kind||"");
+        if(!seen[k]){seen[k]=1;all.push(r)}
+      });
+      all.sort((a,b)=>a.t-b.t); smSaveRuns(all);
+    }
+  }catch(e){}
+  // Rewards: union of squishies, best of medals/activity count
+  try{
+    const theirs=JSON.parse(o.emmaRewards||"null");
+    if(theirs&&Array.isArray(theirs.sq)){
+      const mine=rwLoad(), sq=mine.sq.slice();
+      theirs.sq.forEach(i=>{if(sq.indexOf(i)<0)sq.push(i)});
+      rwSave({medals:Math.max(mine.medals||0,Number(theirs.medals)||0),sq:sq,acts:Math.max(mine.acts||0,Number(theirs.acts)||0)});
+    }
+  }catch(e){}
+  // Reading fluency: keep every speed-read from both sides
+  try{
+    const theirs=JSON.parse(o.emmaFluency||"{}");
+    if(theirs&&typeof theirs==="object"){
+      const mine=flLoad();
+      Object.keys(theirs).forEach(p=>{
+        const seen={},out=[];
+        (mine[p]||[]).concat(Array.isArray(theirs[p])?theirs[p]:[]).forEach(r=>{
+          if(r&&typeof r.t==="number"&&!seen[r.t]){seen[r.t]=1;out.push(r)}
+        });
+        out.sort((a,b)=>a.t-b.t); mine[p]=out.slice(-25);
+      });
+      flSave(mine);
+    }
+  }catch(e){}
+  // Story-quiz best: keep the higher one
+  try{
+    const b=Math.max(Number(localStorage.getItem("emmaReadBest")||0),Number(o.emmaReadBest)||0);
+    if(b)localStorage.setItem("emmaReadBest",String(b));
+  }catch(e){}
+  // Game-room scoreboard: keep the bigger totals
+  try{
+    const theirs=JSON.parse(o.arenaTotals||"null");
+    if(theirs&&Array.isArray(theirs.p)){
+      const mine=loadTotals();
+      mine.p=[Math.max(Number(mine.p[0])||0,Number(theirs.p[0])||0),Math.max(Number(mine.p[1])||0,Number(theirs.p[1])||0)];
+      mine.games=Math.max(Number(mine.games)||0,Number(theirs.games)||0);
+      saveTotals(mine);
+    }
+  }catch(e){}
+  return "";
+}
+function syncSay(msg,good){const m=$("syncMsg");m.textContent=msg;m.style.color=good?"#1B9E4B":"#B3261E";}
+$("syncCopy").addEventListener("click",()=>{
+  const code=syncExport();
+  const done=()=>syncSay("Copied! Now paste it in the other browser. ✅",true);
+  const fallback=()=>{const t=$("syncIn");t.value=code;t.focus();t.select();syncSay("Code is in the box below — copy it yourself!",true)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(done).catch(fallback)}else{fallback()}
+});
+$("syncMerge").addEventListener("click",()=>{
+  const err=syncMergeIn($("syncIn").value);
+  if(err){syncSay(err,false);return}
+  $("syncIn").value="";
+  syncSay("Merged! All progress from both browsers is together now. 🎉",true);
+  smRenderProg();
 });
 
 /* ================= PRIZE SHELF (medals + squishies) ================= */
