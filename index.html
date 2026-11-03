@@ -174,6 +174,8 @@ body.smlock{overflow:hidden;height:100%}
 .penbox input{width:100%;border:4px dashed var(--p1);border-radius:20px;background:#FFF;font:800 56px var(--disp);text-align:center;color:var(--p1);padding:18px 8px;outline:none}
 .penhint{font:700 13px var(--body);color:var(--mut);text-align:center}
 .smbig{border:0;border-radius:18px;background:var(--p1);color:#FFF;font:800 19px var(--disp);padding:14px 22px;cursor:pointer}
+a.smbig{text-decoration:none;display:inline-block;text-align:center}
+.smbig.txtdad{background:#1D7ED8}
 .smbig.alt{background:var(--mut)}
 .smgrade{font:800 64px/1 var(--disp);color:var(--p1-deep)}
 .smstat{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -417,6 +419,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="sect" id="smMissLbl" hidden>Ones to practice</div>
       <div class="misslist" id="smMiss"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <a class="smbig txtdad" id="smTextDad" href="#">📱 Text Dad my score!</a>
         <button class="smbig" id="chNext" hidden>😮‍💨 Break time! ➡️</button>
         <button class="smbig" id="smAgain">🔁 Same Game</button>
         <button class="smbig alt" id="smPick">🎮 Pick Another</button>
@@ -439,6 +442,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="smstat"><span class="smpill g" id="chTotal">Total: 0 solved</span></div>
       <p style="margin:0;font-weight:800;color:var(--good);font-size:18px" id="chPraise">You finished ALL FOUR parts. That's a champion's practice! 🏆</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <a class="smbig txtdad" id="chTextDad" href="#">📱 Text Dad today's scores!</a>
         <button class="smbig" id="chProg">📈 My Progress</button>
         <button class="smbig alt" id="chHome">🏠 Home</button>
       </div>
@@ -1452,6 +1456,8 @@ renderTotals();
 const SM={mode:"add",kind:"sprint",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[],left:60,iv:null,lock:false,last:"",timers:[],penStale:""};
 const SM_MODES={add:"➕ Adding",sub:"➖ Taking Away",mul:"✖️ Times",div:"➗ Sharing",mix:"🌀 Surprise Mix"};
 const SM_TEST_SECS=300, SM_TEST_N=100;
+const DAD_NUM="+17329399393";
+function smsHref(msg){return `sms:${DAD_NUM}?body=${encodeURIComponent(msg)}`}
 try{if(!localStorage.getItem("emmaRunsResetV1")){localStorage.removeItem("emmaSpeedRuns");localStorage.setItem("emmaRunsResetV1","1");}}catch(e){}
 function smFmtTime(s){return s>=100?`${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`:String(Math.max(s,0))}
 const CHEERS=["Great job, Emma! Keep going!","You're doing amazing!","Wow, you are FAST!","Keep it up, superstar!",
@@ -1597,6 +1603,9 @@ function smEnd(){
   SM.miss.forEach(([p,a])=>{const k=p+a;if(seen.has(k))return;seen.add(k);
     const d=document.createElement("div");d.className="missrow";d.textContent=`${p.replace(/ = .*$/,"")} = ${a}`;ml.appendChild(d);});
   $("smMissLbl").hidden=!SM.miss.length;
+  const accTxt=SM.att?Math.round(100*SM.ok/SM.att):0;
+  const kindTxt=SM.kind==="test"?`Real Test (${SM.ok} of 100)`:`sprint: ${SM.ok} solved`;
+  $("smTextDad").href=smsHref(`Emma's ${SM_MODES[SM.mode]} ${kindTxt}, ${accTxt}% right, grade ${em} ${g}${isRec?" 🎉 NEW RECORD!":""}`);
   const medal=(isRec?1:0)+((g==="A"||g==="A+")?1:0);
   const msgs=rwEarn(medal?{medals:medal,why:medal===2?"a record AND an A!":isRec?"a new record!":"an A grade!"}:null);
   rwBanner("smRw",msgs);
@@ -1770,6 +1779,8 @@ function chToday(){
     rows.appendChild(d);
   });
   $("chTotal").textContent=`Total today: ${total} problems solved!`;
+  const parts=CH.results.map(r=>`${SM_MODES[r.mode].split(" ")[0]}${r.ok} (${r.em}${r.g})`).join(", ");
+  $("chTextDad").href=smsHref(`Emma finished ALL 4 sprints today! ${parts}. Total: ${total} problems solved! 🏆`);
   smShow("smToday");
   chSpeak(`Amazing, Emma! You finished all four parts and solved ${total} problems today!`);
   const c=$("chConf"); c.width=c.offsetWidth||600; c.height=c.offsetHeight||400;
