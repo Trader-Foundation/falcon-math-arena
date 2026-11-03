@@ -155,7 +155,11 @@ body.smlock{overflow:hidden;height:100%}
 .kbtn:active{transform:translateY(3px);box-shadow:none}
 .kbtn.back{font-size:28px;background:var(--p1-soft)}
 .kbtn.ghost{visibility:hidden;pointer-events:none}
-.kbtn.delbtn{grid-column:1/-1;font-size:20px;letter-spacing:.14em;background:var(--p1-soft);color:var(--p1-deep);min-height:56px}
+.kbtn.delbtn{grid-column:1/-1;font-size:20px;letter-spacing:.14em;background:var(--p1-soft);color:var(--p1-deep);min-height:52px}
+.kbtn.entbtn{grid-column:1/-1;font-size:24px;letter-spacing:.16em;background:var(--good);color:#FFF;min-height:64px}
+#smDrill.fx .kbtn{min-height:clamp(42px,7.6vh,68px)}
+#smDrill.fx .delbtn{min-height:clamp(36px,5.5vh,50px)}
+#smDrill.fx .entbtn{min-height:clamp(46px,7vh,62px)}
 #smExit{position:absolute;top:10px;right:12px;z-index:60;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--mut);font:800 13px var(--disp);letter-spacing:.1em;padding:7px 12px;cursor:pointer}
 #smDrill{position:relative}
 #smDrill.fx #smExit{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:14px}
@@ -382,10 +386,12 @@ svg.ang{width:min(300px,70vw);height:auto}
         <button class="kbtn">7</button><button class="kbtn">8</button><button class="kbtn">9</button>
         <button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button><button class="kbtn">0</button><button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button>
         <button class="kbtn delbtn">DELETE</button>
+        <button class="kbtn entbtn">ENTER</button>
       </div>
       <div class="penbox" id="penbox" hidden>
         <input id="penIn" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="✍️">
-        <div class="penhint">Write your answer in the box with the Pencil. It checks itself!</div>
+        <div class="penhint">Write your answer with the Pencil, then tap ENTER!</div>
+        <button class="kbtn entbtn" id="penEnter">ENTER</button>
       </div>
     </div>
 
@@ -1488,7 +1494,6 @@ function penHandler(){
   if(SM.penStale&&v.startsWith(SM.penStale))v=v.slice(SM.penStale.length);
   v=v.slice(0,3);
   SM.entry=v; $("smEntry").textContent=SM.entry||" ";
-  if(SM.entry.length===String(SM.ans).length)smCheck();
 }
 function smFreshPen(){
   const old=$("penIn"); if(!old)return;
@@ -1505,9 +1510,12 @@ function smKey(d){
   if(SM.lock||!SM.iv)return;
   if(SM.entry.length>=3)return;
   SM.entry+=d; smPaint();
-  if(SM.entry.length===String(SM.ans).length)smCheck();
 }
 function smBack(){if(SM.lock)return;SM.entry=SM.entry.slice(0,-1);smPaint()}
+function smSubmit(){
+  if(SM.lock||!SM.iv||!SM.entry)return;
+  smCheck();
+}
 function smCheck(){
   SM.att++;
   if(SM.kind==="test")$("smCt").textContent=`${SM.att}/${SM_TEST_N}`;
@@ -1795,12 +1803,15 @@ $("kpad").querySelectorAll(".kbtn").forEach(b=>{
   const t=b.textContent;
   if(/^[0-9]$/.test(t))b.addEventListener("click",()=>smKey(t));
   else if(t==="DELETE")b.addEventListener("click",smBack);
+  else if(t==="ENTER")b.addEventListener("click",smSubmit);
 });
+$("penEnter").addEventListener("click",smSubmit);
 $("penIn").addEventListener("input",penHandler);
 document.addEventListener("keydown",e=>{
   if($("speed").hidden||$("smDrill").hidden)return;
   if(/^[0-9]$/.test(e.key)){smKey(e.key);e.preventDefault();}
   else if(e.key==="Backspace"){smBack();e.preventDefault();}
+  else if(e.key==="Enter"){smSubmit();e.preventDefault();}
 });
 let smResetArm=false;
 $("smReset").addEventListener("click",()=>{
