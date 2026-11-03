@@ -315,7 +315,8 @@ svg.ang{width:min(300px,70vw);height:auto}
   <section class="screen" id="speed" hidden>
     <div class="smcard" id="smSetup">
       <h2 style="font-size:28px">⚡ Emma's Speed Math ⚡</h2>
-      <p style="margin:0;font-weight:700;color:var(--mut)">Pick a game. You get ONE minute. Tap to start!</p>
+      <button class="big" id="chStart" style="max-width:520px">⭐ TODAY'S CHALLENGE: all 4 sprints! ⭐</button>
+      <p style="margin:0;font-weight:700;color:var(--mut)">Or pick one game. You get ONE minute. Tap to start!</p>
       <div class="smmodes">
         <button class="smmode" data-m="add"><span class="me">➕</span>Adding</button>
         <button class="smmode" data-m="sub"><span class="me">➖</span>Taking Away</button>
@@ -375,9 +376,30 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="sect" id="smMissLbl" hidden>Ones to practice</div>
       <div class="misslist" id="smMiss"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig" id="chNext" hidden>😮‍💨 Break time! ➡️</button>
         <button class="smbig" id="smAgain">🔁 Same Game</button>
         <button class="smbig alt" id="smPick">🎮 Pick Another</button>
         <button class="smbig alt" id="smToProg2">📈 My Progress</button>
+      </div>
+    </div>
+
+    <div class="smcard" id="smBreak" hidden>
+      <h2 style="font-size:26px" id="chBreakTitle">😮‍💨 Break Time!</h2>
+      <div class="smtime" id="chBreakTime" style="font-size:64px">3:00</div>
+      <p style="margin:0;font-weight:700;color:var(--mut);max-width:44ch" id="chBreakMsg">Stand up, shake it out, grab some water! The timer will beep when it's time.</p>
+      <button class="smbig" id="chGo" hidden>🚀 I'm ready!</button>
+      <button class="backlink" id="chSkip">skip the break</button>
+    </div>
+
+    <div class="smcard" id="smToday" hidden>
+      <canvas class="confetti" id="chConf"></canvas>
+      <h2 style="font-size:26px">⭐ Emma's Scores Today ⭐</h2>
+      <div class="misslist" id="chRows" style="max-width:480px"></div>
+      <div class="smstat"><span class="smpill g" id="chTotal">Total: 0 solved</span></div>
+      <p style="margin:0;font-weight:800;color:var(--good);font-size:18px" id="chPraise">You finished ALL FOUR parts. That's a champion's practice! 🏆</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig" id="chProg">📈 My Progress</button>
+        <button class="smbig alt" id="chHome">🏠 Home</button>
       </div>
     </div>
 
@@ -1410,7 +1432,7 @@ function smCheer(){
 }
 function smLater(fn,ms){SM.timers.push(setTimeout(fn,ms))}
 function smClear(){SM.timers.forEach(clearTimeout);SM.timers=[];if(SM.iv){clearInterval(SM.iv);SM.iv=null}}
-function smShow(sub){["smSetup","smDrill","smResult","smProg"].forEach(s=>$(s).hidden=(s!==sub));show("speed")}
+function smShow(sub){["smSetup","smDrill","smResult","smProg","smBreak","smToday"].forEach(s=>$(s).hidden=(s!==sub));show("speed")}
 
 function smLoadRuns(){try{const r=JSON.parse(localStorage.getItem("emmaSpeedRuns")||"[]");return Array.isArray(r)?r:[]}catch(e){return[]}}
 function smSaveRuns(r){try{localStorage.setItem("emmaSpeedRuns",JSON.stringify(r.slice(-200)))}catch(e){}}
@@ -1479,8 +1501,9 @@ function smCheck(){
   if(SM.kind==="test"&&SM.att>=SM_TEST_N){smLater(smEnd,delay);}
   else smLater(()=>{SM.lock=false;smGen()},delay);
 }
-function smStart(mode,kind){
+function smStart(mode,kind,fromChallenge){
   smClear();
+  if(!fromChallenge)CH.active=false;
   SM.mode=mode; SM.kind=kind||"sprint";
   const secs=SM.kind==="test"?SM_TEST_SECS:60;
   SM.ok=0; SM.att=0; SM.miss=[]; SM.left=secs; SM.lock=true; SM.last=""; SM.penStale="";
@@ -1534,6 +1557,16 @@ function smEnd(){
   const medal=(isRec?1:0)+((g==="A"||g==="A+")?1:0);
   const msgs=rwEarn(medal?{medals:medal,why:medal===2?"a record AND an A!":isRec?"a new record!":"an A grade!"}:null);
   rwBanner("smRw",msgs);
+  if(CH.active){
+    CH.results.push({mode:SM.mode,ok:SM.ok,att:SM.att,g:g,em:em});
+    const last=CH.idx>=CH_ORDER.length-1;
+    $("chNext").hidden=false;
+    $("chNext").textContent=last?"⭐ See today's scores!":"😮‍💨 Break time! ➡️";
+    $("smAgain").hidden=true;$("smPick").hidden=true;$("smToProg2").hidden=true;
+  }else{
+    $("chNext").hidden=true;
+    $("smAgain").hidden=false;$("smPick").hidden=false;$("smToProg2").hidden=false;
+  }
   smShow("smResult");
   if(isRec)smConfetti();
 }
@@ -1566,9 +1599,9 @@ function smGradeTest(ok){
   if(ok>=30)return["C","🌱"];
   return["Keep Going","💪"];
 }
-function smConfetti(){
+function smConfetti(id){
   if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  const c=$("smConf"),x=c.getContext("2d");
+  const c=$(id||"smConf"),x=c.getContext("2d");
   c.width=c.offsetWidth||600;c.height=c.offsetHeight||400;
   const cols=["#8C2332","#FFC72C","#F2B705","#FFFFFF","#1B9E4B"];
   const ps=Array.from({length:110},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height,w:rint(6,11),h:rint(8,16),v:1.5+Math.random()*2.5,r:Math.random()*6.28,col:pick(cols)}));
@@ -1619,6 +1652,71 @@ function smSetStyle(st){
   $("togPen").classList.toggle("on",st==="pen");
 }
 try{smSetStyle(localStorage.getItem("emmaSpeedStyle")||"pad")}catch(e){smSetStyle("pad")}
+
+/* ================= TODAY'S CHALLENGE (4 sprints + breaks) ================= */
+const CH_ORDER=["add","sub","mul","div"];
+const CH={active:false,idx:0,results:[],iv:null};
+function chSpeak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=1.02;u.pitch=1.15;speechSynthesis.speak(u)}catch(e){}}
+function chBegin(){
+  CH.active=true;CH.idx=0;CH.results=[];
+  chSpeak("Today's challenge! Four sprints. Let's go, Emma!");
+  smStart(CH_ORDER[0],"sprint",true);
+}
+function chAfterResult(){
+  if(CH.idx>=CH_ORDER.length-1){chToday();return;}
+  smShow("smBreak");
+  const next=SM_MODES[CH_ORDER[CH.idx+1]];
+  $("chBreakTitle").textContent="😮‍💨 Break Time!";
+  $("chBreakMsg").textContent=`Stand up, shake it out, grab some water! Next up: ${next}.`;
+  $("chGo").hidden=true;$("chSkip").hidden=false;
+  let left=180;
+  $("chBreakTime").textContent="3:00";$("chBreakTime").className="smtime";
+  chSpeak("Break time! Three minutes. Shake it out!");
+  if(CH.iv)clearInterval(CH.iv);
+  CH.iv=setInterval(()=>{
+    left--;
+    $("chBreakTime").textContent=`${Math.floor(left/60)}:${String(left%60).padStart(2,"0")}`;
+    if(left<=3&&left>0)sTick();
+    if(left<=0){clearInterval(CH.iv);CH.iv=null;chBreakOver();}
+  },1000);
+}
+function chBreakOver(){
+  beep([150],.5,"square");
+  const next=SM_MODES[CH_ORDER[CH.idx+1]];
+  $("chBreakTitle").textContent="⏰ Break's over!";
+  $("chBreakTime").textContent="0:00";$("chBreakTime").className="smtime hurry";
+  $("chBreakMsg").textContent=`Ready for ${next}?`;
+  $("chGo").hidden=false;$("chSkip").hidden=true;
+  chSpeak(`Break is over, Emma! Time for ${next.replace(/^\S+ /,"")}!`);
+}
+function chNextSprint(){
+  if(CH.iv){clearInterval(CH.iv);CH.iv=null;}
+  CH.idx++;
+  smStart(CH_ORDER[CH.idx],"sprint",true);
+}
+function chToday(){
+  CH.active=false;
+  const rows=$("chRows"); rows.innerHTML="";
+  let total=0;
+  CH.results.forEach(r=>{
+    total+=r.ok;
+    const acc=r.att?Math.round(100*r.ok/r.att):0;
+    const d=document.createElement("div"); d.className="histrow";
+    d.innerHTML=`<span>${SM_MODES[r.mode]}</span><b>${r.ok} solved</b><span>${acc}%</span><b>${r.em} ${r.g}</b>`;
+    rows.appendChild(d);
+  });
+  $("chTotal").textContent=`Total today: ${total} problems solved!`;
+  smShow("smToday");
+  chSpeak(`Amazing, Emma! You finished all four parts and solved ${total} problems today!`);
+  const c=$("chConf"); c.width=c.offsetWidth||600; c.height=c.offsetHeight||400;
+  smConfetti("chConf"); sWIN();
+}
+$("chStart").addEventListener("click",chBegin);
+$("chNext").addEventListener("click",chAfterResult);
+$("chGo").addEventListener("click",chNextSprint);
+$("chSkip").addEventListener("click",()=>{if(CH.iv){clearInterval(CH.iv);CH.iv=null;}chNextSprint()});
+$("chProg").addEventListener("click",smRenderProg);
+$("chHome").addEventListener("click",()=>show("menu"));
 
 $("gamesBtn").addEventListener("click",()=>show("gamesMenu"));
 $("gamesBack").addEventListener("click",()=>show("menu"));
