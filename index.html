@@ -156,17 +156,17 @@ body.smlock{overflow:hidden;height:100%}
 .kbtn.back{font-size:28px;background:var(--p1-soft)}
 .kbtn.ghost{visibility:hidden;pointer-events:none}
 .kbtn.entbtn{grid-column:1/-1;font-size:26px;letter-spacing:.16em;background:var(--good);color:#FFF;min-height:72px}
-.kwrap{display:flex;align-items:stretch;justify-content:center;gap:12px;width:100%;max-width:520px;margin:0 auto;touch-action:manipulation}
-.kwrap .kpad{flex:1;max-width:300px;margin:0}
-.kbtn.delcirc{flex:0 0 auto;align-self:center;width:72px;height:72px;border-radius:50%;font-size:12px;letter-spacing:.06em;background:var(--p1-soft);color:var(--p1-deep)}
-.kbtn.entside{flex:0 0 100px;border-radius:22px;font-size:22px;letter-spacing:.1em;background:var(--good);color:#FFF;min-height:100%}
+.kpad.kpad4{grid-template-columns:repeat(4,1fr);max-width:480px}
+.kbtn.kdelbtn{font-size:15px;letter-spacing:.05em;background:var(--p1-soft);color:var(--p1-deep)}
+.kbtn.entbar{background:var(--good);color:#FFF;font-size:21px;letter-spacing:.08em;border-radius:22px 22px 22px 0}
+.kbtn.entarm{background:var(--good);margin-right:-10px;border-radius:18px 0 0 18px}
+.kbtn.entarm:active,.kbtn.entbar:active{transform:none;box-shadow:0 4px 0 rgba(43,35,64,.22);filter:brightness(.92)}
 @media (max-width:480px){
-  .kwrap{gap:8px}
-  .kbtn.delcirc{width:58px;height:58px;font-size:10px}
-  .kbtn.entside{flex:0 0 78px;font-size:18px}
+  .kbtn.kdelbtn{font-size:12px}
+  .kbtn.entbar{font-size:16px}
+  .kbtn.entarm{margin-right:-8px}
 }
 #smDrill.fx .kbtn{min-height:clamp(42px,7.6vh,68px)}
-#smDrill.fx .kbtn.delcirc{width:clamp(50px,8vh,72px);height:clamp(50px,8vh,72px)}
 #smExit{position:absolute;top:10px;right:12px;z-index:60;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--mut);font:800 13px var(--disp);letter-spacing:.1em;padding:7px 12px;cursor:pointer}
 #smDrill{position:relative}
 #smDrill.fx #smExit{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:14px}
@@ -389,15 +389,14 @@ svg.ang{width:min(300px,70vw);height:auto}
       </div>
       <div class="smprob" id="smProb">3 + 4</div>
       <div class="smentry" id="smEntry">&nbsp;</div>
-      <div class="kwrap" id="kwrap">
-        <button class="kbtn delcirc" id="kdel">DELETE</button>
-        <div class="kpad" id="kpad">
-          <button class="kbtn">1</button><button class="kbtn">2</button><button class="kbtn">3</button>
-          <button class="kbtn">4</button><button class="kbtn">5</button><button class="kbtn">6</button>
-          <button class="kbtn">7</button><button class="kbtn">8</button><button class="kbtn">9</button>
-          <button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button><button class="kbtn">0</button><button class="kbtn ghost" tabindex="-1" aria-hidden="true"></button>
-        </div>
-        <button class="kbtn entside" id="kent">ENTER</button>
+      <div class="kpad kpad4" id="kpad">
+        <button class="kbtn" style="grid-area:1/1">1</button><button class="kbtn" style="grid-area:1/2">2</button><button class="kbtn" style="grid-area:1/3">3</button>
+        <button class="kbtn" style="grid-area:2/1">4</button><button class="kbtn" style="grid-area:2/2">5</button><button class="kbtn" style="grid-area:2/3">6</button>
+        <button class="kbtn" style="grid-area:3/1">7</button><button class="kbtn" style="grid-area:3/2">8</button><button class="kbtn" style="grid-area:3/3">9</button>
+        <button class="kbtn kdelbtn" id="kdel" style="grid-area:4/1">DELETE</button>
+        <button class="kbtn" style="grid-area:4/2">0</button>
+        <button class="kbtn entarm" id="kentArm" style="grid-area:4/3" aria-label="Enter"></button>
+        <button class="kbtn entbar" id="kent" style="grid-area:1/4/5/5">ENTER</button>
       </div>
       <div class="penbox" id="penbox" hidden>
         <input id="penIn" type="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="✍️">
@@ -1560,7 +1559,7 @@ function smStart(mode,kind,fromChallenge){
   $("smTime").textContent=smFmtTime(secs); $("smTime").className="smtime";
   $("smCt").style.visibility=SM.kind==="test"?"visible":"hidden";
   $("smCt").textContent=`0/${SM_TEST_N}`;
-  $("kwrap").hidden=(SM.style==="pen"); $("penbox").hidden=(SM.style!=="pen");
+  $("kpad").hidden=(SM.style==="pen"); $("penbox").hidden=(SM.style!=="pen");
   smShow("smDrill");
   $("smDrill").classList.add("fx"); document.body.classList.add("smlock");
   window.scrollTo(0,0);
@@ -1825,6 +1824,7 @@ $("kpad").querySelectorAll(".kbtn").forEach(b=>{
 });
 $("kdel").addEventListener("click",smBack);
 $("kent").addEventListener("click",smSubmit);
+$("kentArm").addEventListener("click",smSubmit);
 $("penEnter").addEventListener("click",smSubmit);
 $("penIn").addEventListener("input",penHandler);
 document.addEventListener("keydown",e=>{
