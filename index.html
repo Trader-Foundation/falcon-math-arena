@@ -371,7 +371,7 @@ svg.ang{width:min(300px,70vw);height:auto}
 
     <div class="smcard" id="smPickT" hidden>
       <h2 style="font-size:26px">💯 Pick your Real Test!</h2>
-      <p style="margin:0;font-weight:700;color:var(--mut)">100 problems, 5 minutes on the clock. Decimal × is 10 bigger problems with NO clock. Tap one to START!</p>
+      <p style="margin:0;font-weight:700;color:var(--mut)">100 problems, 5 minutes on the clock. Decimal × is 15 big ones with NO clock. Tap one to START!</p>
       <div class="smmodes">
         <button class="smmode" data-m="add" data-k="test"><span class="me">➕</span>Add Test</button>
         <button class="smmode" data-m="sub" data-k="test"><span class="me">➖</span>Subtract Test</button>
@@ -1466,7 +1466,7 @@ renderTotals();
 /* ================= EMMA'S SPEED MATH ================= */
 const SM={mode:"add",kind:"sprint",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[],left:60,iv:null,lock:false,last:"",timers:[],penStale:""};
 const SM_MODES={add:"➕ Adding",sub:"➖ Taking Away",mul:"✖️ Times",div:"➗ Sharing",mix:"🌀 Surprise Mix",dec:"🔟 Decimal ×"};
-const SM_TEST_SECS=300, SM_TEST_N=100, SM_DEC_N=10;
+const SM_TEST_SECS=300, SM_TEST_N=100, SM_DEC_N=15;
 function smTestN(){return SM.mode==="dec"?SM_DEC_N:SM_TEST_N}
 function smMaxLen(){return SM.mode==="dec"?6:3}
 const DAD_NUM="+17329399393";
@@ -1504,10 +1504,11 @@ function smGen(){
   const T=SM.kind==="test";
   do{
     if(m==="dec"){
-      const kind=rint(1,3);
-      if(kind===1){let a10=rint(11,99);if(a10%10===0)a10++;b=rint(2,9);ans=Math.round(a10*b)/10;txt=`${(a10/10).toFixed(1)} × ${b}`}
-      else if(kind===2){let a10=rint(11,49);if(a10%10===0)a10++;b=rint(11,25);ans=Math.round(a10*b)/10;txt=`${(a10/10).toFixed(1)} × ${b}`}
-      else{const a10=rint(2,9);b=rint(12,60);ans=Math.round(a10*b)/10;txt=`0.${a10} × ${b}`}
+      let a10=rint(11,99); if(a10%10===0)a10++;
+      b=rint(11,99); if(b%10===0)b++;
+      ans=Math.round(a10*b)/10;
+      const dstr=(a10/10).toFixed(1);
+      txt=Math.random()<0.5?`${dstr} × ${b}`:`${b} × ${dstr}`;
     }
     else if(m==="add"){a=rint(T?2:1,T?10:9);b=rint(T?2:1,T?10:9);ans=a+b;txt=`${a} + ${b}`}
     else if(m==="sub"){ if(T){a=rint(5,10);b=rint(2,a-1);} else {a=rint(2,10);b=rint(1,a-1);} ans=a-b;txt=`${a} - ${b}`}
