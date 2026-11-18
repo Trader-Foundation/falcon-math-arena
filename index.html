@@ -6,10 +6,10 @@
 <meta name="robots" content="noindex">
 </head>
 <body style="margin:0">
-<title>Emma vs Bella Math Arena</title>
+<title>Emma's 5th Grade Hub</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap">
 <style>
-/* Layout: one shared question card center stage, mirrored answer pads left and right, scoreboard pinned on top. */
+/* Emma's 5th grade study hub: class math, speed math, reading, science. Forks Falcons colors. */
 :root{
   --bg:#FFFBEF;          /* warm cream */
   --ink:#3B1218;         /* falcon maroon ink */
@@ -202,6 +202,20 @@ a.smbig{text-decoration:none;display:inline-block;text-align:center}
 .bs-games{background:linear-gradient(135deg,#8C2332,#6E1624)}
 .bs-math{background:linear-gradient(135deg,#B07D0A,#8A5F00)}
 .bs-read{background:linear-gradient(135deg,#2E6B4F,#1C4A34)}
+.bs-boss{background:linear-gradient(135deg,#C98A00,#8A5A00);border:4px solid #FFD95A}
+.bs-boss .be{animation:wobble 2.4s ease-in-out infinite}
+.butter{display:flex;align-items:center;gap:16px;width:100%;max-width:560px;box-sizing:border-box;border-radius:24px;padding:16px 20px;border:4px solid #F2B705;background:linear-gradient(135deg,#FFF6C8,#FFE07A);color:#5A3E00;text-align:left;box-shadow:0 6px 0 rgba(122,86,0,.25)}
+.butter h3{margin:0;font:800 24px var(--disp);color:#5A3E00}
+.butter p{margin:4px 0 0;font:700 15px/1.4 var(--body);color:#7A5600}
+.butter .bb{font-size:100px;line-height:1;flex:none;filter:drop-shadow(0 6px 0 rgba(122,86,0,.25));animation:wobble 2.4s ease-in-out infinite}
+.butter.locked{background:var(--card);border-style:dashed;border-color:var(--line);box-shadow:none}
+.butter.locked h3,.butter.locked p{color:var(--mut)}
+.butter.locked .bb{filter:grayscale(1);opacity:.3;animation:none}
+.butter .smbig{margin-top:10px}
+.butterwin{font-size:120px;line-height:1;animation:wobble 2.4s ease-in-out infinite;margin:4px 0}
+@keyframes wobble{0%,100%{transform:rotate(-4deg) scale(1)}50%{transform:rotate(4deg) scale(1.07)}}
+@media (max-width:420px){.butter{flex-direction:column;text-align:center}.butter .bb{font-size:84px}}
+@media (prefers-reduced-motion:reduce){.butter .bb,.butterwin,.bs-boss .be{animation:none}}
 .backlink{align-self:center;border:0;background:transparent;color:var(--mut);font:800 14px var(--body);cursor:pointer;text-decoration:underline}
 .rdp{font:600 16px/1.75 var(--body);color:var(--ink);max-width:62ch;text-align:left;text-indent:1.4em;margin:0 0 10px}
 .rdbox{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:20px 18px;max-width:680px;margin:0 auto}
@@ -251,98 +265,170 @@ svg.ang{width:min(300px,70vw);height:auto}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+
+/* ---------- School This Week ---------- */
+.bs-school{background:linear-gradient(135deg,#1D5FA8,#123F75)}
+.schead{display:flex;align-items:center;gap:10px;width:100%;max-width:560px;font:800 15px var(--disp);letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-top:6px}
+.schead .tag{background:var(--bad);color:#FFF;border-radius:999px;padding:3px 10px;font-size:12px;letter-spacing:.04em}
+.scbest{display:inline-block;margin-top:6px;background:#DDF3E4;color:#116233;border-radius:999px;padding:2px 10px;font:800 12px var(--disp)}
+.scopts{width:100%;max-width:600px;display:grid;grid-template-columns:1fr;gap:12px}
+.scopts.two{grid-template-columns:1fr 1fr}
+.scopts.grid{grid-template-columns:1fr 1fr}
+.scopts .rdopt{margin:0;min-height:64px;font-size:19px;padding:16px;border:3px solid var(--line);touch-action:manipulation}
+.scopts.two .rdopt,.scopts.grid .rdopt{text-align:center;font:800 24px var(--disp);min-height:84px}
+.scopts.two .rdopt{font-size:22px}
+.scq{font:800 22px/1.35 var(--body);max-width:30ch;color:var(--ink)}
+.scq.math{font:800 clamp(30px,8vw,44px)/1.2 var(--disp);max-width:none}
+.scwhy{background:var(--p2-soft);border:3px solid var(--gold);border-radius:16px;padding:12px 16px;font:700 17px/1.45 var(--body);color:var(--ink);max-width:560px;text-align:left}
+.scbar{width:100%;max-width:560px;height:12px;background:var(--line);border-radius:999px;overflow:hidden}
+.scbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--good));border-radius:999px;transition:width .3s}
+.scmiss{display:flex;flex-direction:column;gap:8px;width:100%;max-width:560px;text-align:left}
+.scmiss .missrow{font:700 15px/1.4 var(--body)}
+.scmiss .missrow b{font-family:var(--disp)}
+.scnote{font:700 14px/1.45 var(--body);color:var(--mut);max-width:52ch;margin:0}
+@media (max-width:420px){.scopts.two .rdopt{font-size:19px}}
+.sccard{border-color:#1D5FA8}
+.bs-sci{background:linear-gradient(135deg,#6A3FA0,#46277A)}
+.bs-arg{background:linear-gradient(135deg,#1D5FA8,#123F75)}
+.bs-speed{background:linear-gradient(135deg,#8C2332,#6E1624)}
+.hud{position:sticky;top:6px;z-index:30;display:flex;align-items:center;gap:12px;width:100%;max-width:560px;margin:0 auto;border:0;border-radius:20px;padding:10px 14px;background:linear-gradient(135deg,#8C2332,#6E1624);color:#FFF;cursor:pointer;box-shadow:0 4px 0 rgba(43,35,64,.25);text-align:left;touch-action:manipulation}
+.hud .hp{font:800 26px/1 var(--disp);color:var(--p2);white-space:nowrap}
+.hud .hp small{font-size:13px;color:#FFE7A6;display:block;letter-spacing:.06em}
+.hud .hmid{flex:1;min-width:0}
+.hud .hn{font:800 14px/1.25 var(--disp);color:#FFF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud .hbar{height:12px;border-radius:99px;background:rgba(255,255,255,.25);overflow:hidden;margin-top:5px}
+.hud .hbar i{display:block;height:100%;background:linear-gradient(90deg,#FFE07A,#FFC72C);border-radius:99px;transition:width .4s}
+.hud .hs{font:800 24px/1 var(--disp);white-space:nowrap}
+.ptpop{position:fixed;top:calc(70px + env(safe-area-inset-top,0px));right:22px;z-index:70;background:var(--p2);color:var(--p2-deep);font:800 22px var(--disp);padding:6px 16px;border-radius:99px;box-shadow:0 4px 10px rgba(0,0,0,.2);pointer-events:none;animation:ptrise 1.1s forwards}
+@keyframes ptrise{0%{opacity:0;transform:translateY(10px) scale(.7)}20%{opacity:1;transform:translateY(0) scale(1.1)}80%{opacity:1}100%{opacity:0;transform:translateY(-24px)}}
+.ptpop.combo{top:calc(120px + env(safe-area-inset-top,0px));background:#FF7A1A;color:#FFF}
+.cheer.gold{background:var(--p2);color:var(--p2-deep);white-space:normal;text-align:center;max-width:92vw}
+.shpts{font:800 clamp(44px,12vw,64px)/1 var(--disp);color:var(--p1-deep)}
+.shpts small{display:block;font-size:16px;color:var(--mut);letter-spacing:.06em}
+.howearn{width:100%;max-width:560px;background:var(--p2-soft);border:3px solid var(--gold);border-radius:18px;padding:12px 16px;text-align:left;font:700 16px/1.6 var(--body);color:var(--ink)}
+.howearn b{font-family:var(--disp)}
+.ladder{width:100%;max-width:560px;display:flex;flex-direction:column;gap:10px}
+.lrung{display:flex;align-items:center;gap:14px;background:#FFF;border:3px solid var(--line);border-radius:20px;padding:10px 14px;text-align:left}
+.lrung .le{width:110px;text-align:center;line-height:1;flex:none}
+.lrung h3{font-size:20px}
+.lrung p{margin:2px 0 0;font:700 14px var(--body);color:var(--mut)}
+.lrung.got{border-color:var(--good);background:#F1FBF4}
+.lrung.next{border-color:var(--gold);box-shadow:0 0 0 4px var(--p2-soft)}
+.lrung.lock .le{filter:grayscale(1);opacity:.3}
+.lrung .lbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}
+.lrung .lbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--good))}
+.ptiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;max-width:560px}
+.ptile{background:#F2F7FD;border:3px solid #BFD6F2;border-radius:16px;padding:10px 12px;text-align:left}
+.ptile b{display:block;font:800 30px/1.1 var(--disp);color:#123F75}
+.ptile span{font:700 14px var(--body);color:var(--mut)}
+.pdays{display:flex;gap:8px;justify-content:center;width:100%;max-width:480px;margin:-4px auto 0;font:700 11px var(--body);color:var(--mut)}
+.pdays span{flex:1;max-width:44px;text-align:center}
+.pnotes{width:100%;max-width:560px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.pnote{background:#FFF;border:2px solid var(--line);border-left:8px solid var(--gold);border-radius:12px;padding:10px 12px;font:700 15px/1.45 var(--body)}
+.pnote.warn{border-left-color:var(--bad)} .pnote.good{border-left-color:var(--good)}
+.bs-shelf{background:linear-gradient(135deg,#7A5600,#5A3E00)}
+.foldlbl{font:800 14px var(--disp);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:6px 4px -4px}
+.bigsect.fold{border-left:12px solid rgba(255,255,255,.35)}
+.bigsect .fa{margin-left:auto;font:800 44px/1 var(--disp);color:rgba(255,255,255,.8)}
+.subhead{width:100%;max-width:560px;font:800 17px var(--disp);color:var(--p1-deep);text-align:left;border-bottom:3px solid var(--line);padding-bottom:4px;margin-top:6px}
+.subhead.arg{color:#123F75;border-color:#BFD6F2}
+.gcard.argcard{border-color:#BFD6F2;background:#F2F7FD}
+.gcard.speedcard{grid-column:1/-1;background:linear-gradient(135deg,#8C2332,#6E1624);border-color:#6E1624}
+.gcard.speedcard h3,.gcard.speedcard p{color:#FFF}
+.scpic{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:560px}
+.pp{flex:1;max-width:230px;background:#FFF;border:3px solid var(--line);border-radius:22px;padding:10px 8px 12px;text-align:center}
+.pp .pt{font:800 13px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--p1)}
+.pp .pe{font-size:clamp(70px,17vw,104px);line-height:1.15;display:block}
+.pp .pl{font:800 17px/1.25 var(--disp);color:var(--ink)}
+.parr{font:800 44px var(--disp);color:var(--p1)}
+
+
+/* ---------- Quest map ---------- */
+.bs-quest{background:linear-gradient(135deg,#1B9E4B,#11713A)}
+.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.qhi{font:800 clamp(28px,7vw,40px)/1.1 var(--disp);color:var(--p1-deep)}
+.qnote{margin:0;font:700 16px/1.45 var(--body);color:var(--mut);max-width:44ch}
+.qmap{position:relative;width:100%;max-width:440px;aspect-ratio:360/540;margin:0 auto;border-radius:26px;overflow:hidden;border:4px solid var(--p1);box-shadow:0 6px 0 rgba(43,35,64,.18)}
+.qmap svg{position:absolute;inset:0;width:100%;height:100%}
+.qnode{position:absolute;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;border:4px solid var(--p1-deep);background:#FFF;font-size:30px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 0 rgba(43,35,64,.3);padding:0;touch-action:manipulation}
+.qnode .qn{position:absolute;top:-8px;left:-8px;background:var(--p1);color:#FFF;font:800 14px var(--disp);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #FFF}
+.qnode .qs{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:13px;white-space:nowrap;letter-spacing:-1px}
+.qnode.done{background:var(--p2);border-color:var(--p2-deep)}
+.qnode.locked{background:#E9E2D6;border-color:#B9AC98;filter:grayscale(.7)}
+.qnode.locked .qn{background:#A2937D}
+.qnode.cur{animation:qpulse 1.3s ease-in-out infinite}
+.qnode.sel{outline:4px solid var(--gold);outline-offset:4px}
+.qnode.castle{width:84px;height:84px;font-size:40px}
+@keyframes qpulse{0%,100%{box-shadow:0 0 0 0 rgba(242,183,5,.8),0 4px 0 rgba(43,35,64,.3)}50%{box-shadow:0 0 0 12px rgba(242,183,5,0),0 4px 0 rgba(43,35,64,.3)}}
+.qbird{position:absolute;transform:translate(-50%,-128%);font-size:38px;transition:left .8s ease,top .8s ease;pointer-events:none;animation:qhop 1s ease-in-out infinite;filter:drop-shadow(0 3px 0 rgba(0,0,0,.2))}
+@keyframes qhop{0%,100%{margin-top:0}50%{margin-top:-6px}}
+.qpanel{background:var(--card);border:3px solid var(--line);border-radius:22px;padding:14px 16px;width:100%;max-width:440px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.qpanel .ql{font:800 13px var(--disp);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.qpanel h3{font-size:24px}
+.qpanel p{margin:0;font-weight:700;color:var(--mut)}
+.qpanel .smbig{width:100%;font-size:22px;padding:16px}
+.qprog{width:100%;max-width:440px;display:flex;flex-direction:column;gap:6px;font:800 16px var(--disp);color:var(--p1-deep)}
+.qtasks{width:100%;max-width:440px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.qtask{display:flex;align-items:center;gap:12px;background:#FFF;border:3px solid var(--line);border-radius:16px;padding:10px 14px;font:700 16px var(--body);color:var(--ink);cursor:pointer;min-height:56px;text-align:left;width:100%}
+.qtask .ck{font-size:24px;flex:none}
+.qtask small{display:block;color:var(--mut);font-size:13px}
+.qtask.done{background:#DDF3E4;border-color:var(--good)}
+.qtask.cur{border-color:var(--gold);box-shadow:0 0 0 3px var(--p2-soft)}
+.qtask.locked{opacity:.6}
+.qwin{background:var(--p2-soft);border:3px solid var(--gold);border-radius:20px;padding:14px;font:800 20px var(--disp);color:var(--p2-deep);max-width:440px;width:100%}
+.qlinks{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+@media (prefers-reduced-motion:reduce){.qbird,.qnode.cur{animation:none}}
+
 </style>
 
 <div class="wrap">
+  <button class="hud" id="hud" aria-label="My points and prize shelf"></button>
+
+  <!-- QUEST MAP -->
+  <section class="screen" id="quest" hidden>
+    <div class="smcard" style="border-color:#1B9E4B">
+      <div class="qhi" id="qHi">Hi Emma! 💛</div>
+      <p class="qnote" id="qNote"></p>
+      <div class="qprog"><span id="qProgTxt">0 of 10 levels done</span><div class="scbar"><i id="qProgBar" style="width:0"></i></div></div>
+      <div class="qmap" id="qMap"></div>
+      <div class="qwin" id="qWin" hidden>🏰 You made it to Falcon Castle! Quest complete! 🎉</div>
+      <div class="qpanel" id="qPanel"></div>
+      <div class="sect">✅ Today's tasks</div>
+      <div class="qtasks" id="qTasks"></div>
+      <div class="qlinks">
+        <button class="smbig alt" id="qAll">🏫 All my subjects</button>
+        <button class="smbig alt" id="qShelf">🏆 Prize Shelf</button>
+      </div>
+      <div id="qSave" style="font:700 13px var(--body);color:var(--mut)"></div>
+    </div>
+  </section>
 
   <!-- MENU -->
-  <section class="screen" id="menu">
+  <section class="screen" id="menu" hidden>
     <div class="hero">
-      <h1>MATH <span class="vs">ARENA</span></h1>
-      <p>🦅 Forks Falcons Edition · Go burgundy and gold! 🦅</p>
-      <p>Two players. One screen. Fastest correct answer wins the point!</p>
-    </div>
-    <div class="names">
-      <div class="namebox n1"><label>Player 1</label><div class="nrow"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C16 6 8 20 9 34c1 12-3 20 2 24 4 3 8-2 8-2s4 4 13 4 13-4 13-4 4 5 8 2c5-4 1-12 2-24C56 20 48 6 32 6Z" fill="#5E3A21"/><path d="M12 40c-2 6-5 12-1 15 3 2 6-1 7-4M52 40c2 6 5 12 1 15-3 2-6-1-7-4" fill="none" stroke="#C9A36B" stroke-width="4" stroke-linecap="round"/><circle cx="32" cy="33" r="15" fill="#F2C49B"/><path d="M18 30q3-12 14-12t14 12q-6-7-14-7t-14 7Z" fill="#5E3A21"/><circle cx="27.4" cy="33" r="2.7" fill="#4A2C17"/><circle cx="36.6" cy="32.2" r="2.7" fill="#4A2C17"/><circle cx="26.8" cy="32.2" r=".8" fill="#FFF"/><circle cx="38.8" cy="32.2" r=".8" fill="#FFF"/><circle cx="21" cy="38" r="2.4" fill="#F0A58E" opacity=".65"/><circle cx="43" cy="38" r="2.4" fill="#F0A58E" opacity=".65"/><path d="M25 40q7 7 14 0" fill="#FFF" stroke="#B3455A" stroke-width="2" stroke-linejoin="round"/><path d="M30 43q2 3.5 4 0 0-2.5-2-2.5t-2 2.5Z" fill="#F08BA0"/></svg><input id="name1" value="Emma" maxlength="12"></div></div>
-      <div class="namebox n2"><label>Player 2</label><div class="nrow"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C18 6 11 17 11 29c0 10-1 22 2 27 2 4 7 1 8-10M32 6c14 0 21 11 21 23 0 10 1 22-2 27-2 4-7 1-8-10" fill="#6B4A2B"/><path d="M13 46q-1 8 2 10M51 46q1 8-2 10" stroke="#C9A36B" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="13" y="20" width="38" height="26" rx="13" fill="#6B4A2B"/><circle cx="32" cy="33" r="15" fill="#F6D1B2"/><path d="M17 31q2-13 15-13t15 13q-7-8-15-8t-15 8Z" fill="#6B4A2B"/><path d="M22.5 32q3.5-2.5 7 0" stroke="#4A2C17" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="38" cy="32" r="3" fill="#4A2C17"/><circle cx="39" cy="31" r=".9" fill="#FFF"/><ellipse cx="32" cy="41" rx="5.5" ry="4" fill="#8C2332"/><path d="M28.5 42q3.5 7 7 0 0-3-3.5-3t-3.5 3Z" fill="#F08BA0"/><circle cx="20.5" cy="37" r="2.2" fill="#F0A58E" opacity=".65"/><circle cx="43.5" cy="37" r="2.2" fill="#F0A58E" opacity=".65"/></svg><input id="name2" value="Bella" maxlength="12"></div></div>
-    </div>
-
-    <div class="alltime">
-      <div class="atlbl">🦅 ALL-TIME SCOREBOARD 🦅</div>
-      <div class="atrow"><span class="at1" id="at1">Emma: 0</span><span class="atg" id="atg">0 games played</span><span class="at2" id="at2">Bella: 0</span></div>
-      <button class="atreset" id="atReset">reset scoreboard</button>
+      <h1>EMMA'S <span class="vs">5TH GRADE</span></h1>
+      <p>🦅 Forks Elementary · Mrs. Mattes' class 🦅</p>
+      <p>Practice what you're learning in school this week!</p>
     </div>
 
     <div class="bigsects">
-      <button class="bigsect bs-games" id="gamesBtn"><span class="be">🎮</span><span><h3>Games</h3><p>All the Emma vs Bella games, cheer, trivia, and the tournament</p></span></button>
-      <button class="bigsect bs-math" id="mathBtn"><span class="be">➗</span><span><h3>Math</h3><p>Speed sprints, the Real Test, and Emma's progress</p></span></button>
-      <button class="bigsect bs-read" id="readBtn"><span class="be">📚</span><span><h3>Reading</h3><p>Story time, quiz questions, and the 1-minute speed read</p></span></button>
+      <button class="bigsect bs-quest" id="questBtn"><span class="be">🗺️</span><span><h3>My Quest Map</h3><p>Today's levels and tasks. Walk your falcon to Falcon Castle!</p></span></button>
+      <div class="foldlbl">📁 My subject folders</div>
+      <button class="bigsect bs-math fold" id="mathBtn"><span class="be">➗</span><span><h3>Math</h3><p>Class math, the Decimal × Test, and Speed Math</p></span><span class="fa">›</span></button>
+      <button class="bigsect bs-read fold" id="readBtn"><span class="be">📚</span><span><h3>English</h3><p>Reading, fact or opinion, persuasive and argument writing</p></span><span class="fa">›</span></button>
+      <button class="bigsect bs-sci fold" id="sciBtn"><span class="be">🧪</span><span><h3>Science</h3><p>Physical and chemical changes, with picture questions</p></span><span class="fa">›</span></button>
+      <div class="foldlbl">⭐ Prizes</div>
+      <button class="bigsect bs-boss" id="bossBtn"><span class="be">🏰</span><span><h3>Castle Challenge</h3><p>A fun mix of everything you've practiced. No timer! Get 18 of 23 to win the Huge Butter Squishy.</p></span></button>
+      <button class="bigsect bs-shelf" id="shelfBtn"><span class="be">🏆</span><span><h3>Prize Shelf</h3><p>Your gold medals and squishies</p></span></button>
     </div>
-    <button class="backlink" id="shelfBtn">🏆 Emma's Prize Shelf: medals and squishies</button>
-  </section>
-
-  <!-- GAMES MENU -->
-  <section class="screen" id="gamesMenu" hidden>
-    <div class="hero"><h1 style="font-size:clamp(24px,5vw,38px)">🎮 GAME ROOM</h1></div>
-    <p class="sectlbl">Brain Games</p>
-    <div class="gamegrid">
-      <button class="gcard" data-game="pv"><span class="em">🔢</span><h3>Place Value Face-Off</h3><p>Tens, ones, tenths, and hundredths. Know your places!</p></button>
-      <button class="gcard" data-game="rd"><span class="em">🎯</span><h3>Rounding Rush</h3><p>Round big numbers and decimals before time runs out.</p></button>
-      <button class="gcard" data-game="fv"><span class="em">🎈</span><h3>Super Fun Trivia</h3><p>Squishies, family, colors, and silly stuff!</p></button>
-      <button class="gcard" data-game="lt"><span class="em">⚡</span><h3>Lightning Round</h3><p>Fast adding, subtracting, and times tables. 10 seconds each!</p></button>
-    </div>
-
-    <p class="sectlbl">Just for Fun</p>
-    <div class="gamegrid">
-      <button class="gcard" data-game="ch"><span class="em">📣</span><h3>Cheer Practice</h3><p>Let's Fight, More More More, jumps, motions, and spirit!</p></button>
-      <button class="gcard" data-game="tr"><span class="em">🧠</span><h3>Trivia Face-Off</h3><p>Animals, space, sports, and more. Buzz in first!</p></button>
-      <button class="gcard" data-game="od"><span class="em">👀</span><h3>Odd One Out</h3><p>Three match, one doesn't. Spot the sneaky one!</p></button>
-      <button class="gcard" data-game="ph"><span class="em">💃</span><h3>Move It! Challenge</h3><p>Over 40 dance-offs, silly races, and team challenges!</p></button>
-      <button class="gcard" data-game="gm"><span class="em">🤸</span><h3>Gymnastics Spotlight</h3><p>Bella performs, Coach Emma calls the moves and grades!</p></button>
-      <button class="gcard" data-game="sg"><span class="em">🎤</span><h3>Singing Star</h3><p>Emma sings karaoke, Judge Bella gives the stars!</p></button>
-      <button class="gcard" data-game="rb"><span class="em">🟥</span><h3>Roblox Trivia</h3><p>Robux, obbies, Adopt Me!, and Piggy. Buzz in first!</p></button>
-      <button class="gcard" data-game="sq"><span class="em">🧁</span><h3>Squishy Trivia</h3><p>All squishies, all the time. Slow-rising questions!</p></button>
-      <button class="gcard" data-game="td"><span class="em">🎭</span><h3>Truth or Dare</h3><p>Silly truths, goofy dares, points for both!</p></button>
-      <button class="gcard" data-game="gq"><span class="em">👵</span><h3>Ask Grandma Rachel</h3><p>Quiz Grandma on kid stuff and see what she knows!</p></button>
-      <button class="gcard" data-game="mx"><span class="em">🎲</span><h3>Mystery Mix</h3><p>Every question is a surprise category!</p></button>
-    </div>
-
-    <button class="big" id="tourney">🏆 Grand Tournament (lots of moving, a little math!)</button>
-    <p class="hint">Tap your side, or use keys: Player 1 <span class="key">A</span><span class="key">S</span><span class="key">D</span><span class="key">F</span> · Player 2 <span class="key">H</span><span class="key">J</span><span class="key">K</span><span class="key">L</span>. In Move It races, smash any of your keys (or your DONE button) when you finish! A wrong answer locks you out for that question, so think before you tap!</p>
-    <button class="backlink" id="gamesBack">⬅ back to home</button>
-  </section>
-
-  <!-- SPLASH -->
-  <section class="screen splash" id="splash" hidden>
-    <div class="em" id="spEm">🔢</div>
-    <h2 id="spTitle">Place Value Face-Off</h2>
-    <p id="spSub" style="font-weight:700;color:var(--mut)">Get ready...</p>
-  </section>
-
-  <!-- GAME -->
-  <section class="screen" id="game" hidden>
-    <div class="scorebar">
-      <div class="sc sc1"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C16 6 8 20 9 34c1 12-3 20 2 24 4 3 8-2 8-2s4 4 13 4 13-4 13-4 4 5 8 2c5-4 1-12 2-24C56 20 48 6 32 6Z" fill="#5E3A21"/><circle cx="32" cy="33" r="15" fill="#F2C49B"/><path d="M18 30q3-12 14-12t14 12q-6-7-14-7t-14 7Z" fill="#5E3A21"/><circle cx="27.4" cy="33" r="2.7" fill="#4A2C17"/><circle cx="36.6" cy="32.2" r="2.7" fill="#4A2C17"/><path d="M25 40q7 7 14 0" fill="#FFF" stroke="#B3455A" stroke-width="2" stroke-linejoin="round"/><path d="M30 43q2 3.5 4 0 0-2.5-2-2.5t-2 2.5Z" fill="#F08BA0"/></svg><span class="nm" id="gn1">Emma</span><span class="pts" id="pts1">0</span></div>
-      <div class="mid"><span class="gname" id="gLabel">Place Value</span><span class="qcount" id="qCount">1 / 10</span></div>
-      <div class="sc sc2"><svg class="av" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6C18 6 11 17 11 29c0 10-1 22 2 27 2 4 7 1 8-10M32 6c14 0 21 11 21 23 0 10 1 22-2 27-2 4-7 1-8-10" fill="#6B4A2B"/><rect x="13" y="20" width="38" height="26" rx="13" fill="#6B4A2B"/><circle cx="32" cy="33" r="15" fill="#F6D1B2"/><path d="M17 31q2-13 15-13t15 13q-7-8-15-8t-15 8Z" fill="#6B4A2B"/><path d="M22.5 32q3.5-2.5 7 0" stroke="#4A2C17" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="38" cy="32" r="3" fill="#4A2C17"/><ellipse cx="32" cy="41" rx="5.5" ry="4" fill="#8C2332"/><path d="M28.5 42q3.5 7 7 0 0-3-3.5-3t-3.5 3Z" fill="#F08BA0"/></svg><span class="nm" id="gn2">Bella</span><span class="pts" id="pts2">0</span></div>
-    </div>
-    <div class="timer" id="timerWrap"><i id="tbar"></i></div>
-    <div class="qcard">
-      <div class="prompt" id="prompt"></div>
-      <div id="visual"></div>
-    </div>
-    <div class="flash" id="flash">&nbsp;</div>
-    <div class="pads">
-      <div class="pad pad1" id="pad1"><div class="who" id="pw1">EMMA</div><div class="padbody" id="pb1"></div></div>
-      <div class="pad pad2" id="pad2"><div class="who" id="pw2">BELLA</div><div class="padbody" id="pb2"></div></div>
-    </div>
-    <button class="quit" id="quit">end game early</button>
+    <button class="smbig alt" id="parentBtn" style="display:block;margin:10px auto 0">👨‍👩‍👧 For grown-ups: progress dashboard</button>
   </section>
 
   <!-- EMMA'S SPEED MATH -->
   <section class="screen" id="speed" hidden>
     <div class="smcard" id="smSetup">
-      <h2 style="font-size:28px">⚡ Emma's Speed Math ⚡</h2>
+      <h2 style="font-size:28px">⚡ Speed Math ⚡</h2>
       <button class="big" id="chStart" style="max-width:520px">⭐ TODAY'S CHALLENGE: all 4 sprints! ⭐</button>
       <div class="bigsects">
         <button class="bigsect bs-games" id="smSprBtn"><span class="be">⚡</span><span><h3>Speed Sprint</h3><p>One minute. How many can you solve?</p></span></button>
@@ -353,7 +439,7 @@ svg.ang{width:min(300px,70vw);height:auto}
         <button class="smtog" id="togPad">🔢 Big Buttons</button>
         <button class="smtog" id="togPen">✍️ Apple Pencil</button>
       </div>
-      <button class="backlink" id="smHome">⬅ back to home</button>
+      <button class="backlink" id="smHome">⬅ back to Math</button>
     </div>
 
     <div class="smcard" id="smPickS" hidden>
@@ -371,14 +457,13 @@ svg.ang{width:min(300px,70vw);height:auto}
 
     <div class="smcard" id="smPickT" hidden>
       <h2 style="font-size:26px">💯 Pick your Real Test!</h2>
-      <p style="margin:0;font-weight:700;color:var(--mut)">100 problems, 5 minutes on the clock. Decimal × is 15 big ones with NO clock. Tap one to START!</p>
+      <p style="margin:0;font-weight:700;color:var(--mut)">100 problems, 5 minutes on the clock. Tap one to START!</p>
       <div class="smmodes">
         <button class="smmode" data-m="add" data-k="test"><span class="me">➕</span>Add Test</button>
         <button class="smmode" data-m="sub" data-k="test"><span class="me">➖</span>Subtract Test</button>
         <button class="smmode" data-m="mul" data-k="test"><span class="me">✖️</span>Times Test</button>
         <button class="smmode" data-m="div" data-k="test"><span class="me">➗</span>Divide Test</button>
         <button class="smmode" data-m="mix" data-k="test"><span class="me">🌀</span>Mix Test</button>
-        <button class="smmode" data-m="dec" data-k="test"><span class="me">🔟</span>Decimal × Test</button>
       </div>
       <button class="backlink" id="pickTBack">⬅ back</button>
     </div>
@@ -424,6 +509,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
         <a class="smbig txtdad" id="smTextDad" href="#">📱 Text Dad my score!</a>
         <button class="smbig" id="chNext" hidden>😮‍💨 Break time! ➡️</button>
+        <button class="smbig mapback" hidden style="background:var(--good)">🗺️ Back to my map</button>
         <button class="smbig" id="smAgain">🔁 Same Game</button>
         <button class="smbig alt" id="smPick">🎮 Pick Another</button>
         <button class="smbig alt" id="smToProg2">📈 My Progress</button>
@@ -459,9 +545,9 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="misslist" id="smHist" style="max-width:480px"></div>
       <div class="sect" id="smTrickyLbl">Tricky ones to practice</div>
       <div class="misslist" id="smTricky"></div>
-      <div class="sect">🪄 Magic Sync — move progress to another browser</div>
+      <div class="sect">🪄 Magic Sync: move progress to another browser</div>
       <div style="max-width:480px;width:100%;display:flex;flex-direction:column;gap:8px;align-items:center">
-        <p style="margin:0;font-weight:700;color:var(--mut);font-size:14px;text-align:center">Tap Copy here, then open the game in the other browser, paste the code on its Progress page, and tap Merge. Nothing gets erased — both sides join together!</p>
+        <p style="margin:0;font-weight:700;color:var(--mut);font-size:14px;text-align:center">Tap Copy here, then open the app in the other browser, paste the code on its Progress page, and tap Merge. Nothing gets erased. Both sides join together!</p>
         <button class="smbig alt" id="syncCopy" style="width:100%">📋 Copy my progress code</button>
         <textarea id="syncIn" rows="2" placeholder="Paste a progress code here…" style="width:100%;border:3px solid #E8D9B5;border-radius:14px;padding:10px;font-family:inherit;font-size:14px;font-weight:700;resize:none"></textarea>
         <button class="smbig" id="syncMerge" style="width:100%">🔀 Merge it in!</button>
@@ -469,7 +555,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
         <button class="smbig" id="smGo">⚡ Do a Sprint!</button>
-        <button class="smbig alt" id="smHome2">🏠 All Games</button>
+        <button class="smbig alt" id="smHome2">🏠 Home</button>
       </div>
       <button class="atreset" id="smReset">reset Emma's progress</button>
     </div>
@@ -478,10 +564,23 @@ svg.ang{width:min(300px,70vw);height:auto}
   <!-- READING -->
   <section class="screen" id="reading" hidden>
     <div class="smcard" id="rdHome">
-      <h2 style="font-size:26px">📚 Emma's Reading</h2>
-      <div class="gamegrid" style="max-width:560px">
-        <button class="gcard" id="rdStoryBtn"><span class="em">🕵️</span><h3>Story + Quiz</h3><p>Read the mystery, then answer 7 questions!</p></button>
+      <h2 style="font-size:26px">📁 📚 English</h2>
+      <div class="subhead">📖 Reading and Writing</div>
+      <div class="gamegrid" style="max-width:560px;width:100%">
+        <button class="gcard" id="rdStoryBtn"><span class="em">🕵️</span><h3>Story + Quiz</h3><p>Read the mystery, then answer 10 questions!</p></button>
         <button class="gcard" id="flBtn"><span class="em">⏱️</span><h3>1-Minute Speed Read</h3><p>Read out loud, tap your last word, beat your record!</p></button>
+        <button class="gcard" data-sc="fo"><span class="em">🦁</span><h3>Fact or Opinion?</h3><p>Presidents, zoos, and more. Some tricky ones! Can it be proven?</p><span class="scbest" data-best="fo" hidden></span></button>
+        <button class="gcard" data-sc="per"><span class="em">✍️</span><h3>Persuasive Writing</h3><p>Claim, reasons, evidence, and the zoo essay.</p><span class="scbest" data-best="per" hidden></span></button>
+        <button class="gcard" data-sc="tf"><span class="em">📊</span><h3>Headings and Graphs</h3><p>Text features and finding the author's claim.</p><span class="scbest" data-best="tf" hidden></span></button>
+      </div>
+      <div class="subhead arg">🗣️ Argumentative Writing</div>
+      <p class="scnote">An argument takes a side and PROVES it. Claim, reasons, evidence, then answer the other side. No timer!</p>
+      <div class="gamegrid" style="max-width:560px;width:100%">
+        <button class="gcard argcard" data-sc="argb"><span class="em">🧱</span><h3>Argument Basics</h3><p>The parts of an argument essay. 13 questions.</p><span class="scbest" data-best="argb" hidden></span></button>
+        <button class="gcard argcard" data-sc="argc"><span class="em">🔎</span><h3>Claims and Evidence</h3><p>Pick the strongest claim and the best proof. 13 questions.</p><span class="scbest" data-best="argc" hidden></span></button>
+        <button class="gcard argcard" data-sc="arge"><span class="em">💪</span><h3>Strong or Weak Evidence?</h3><p>Does it really prove the claim? 13 quick ones.</p><span class="scbest" data-best="arge" hidden></span></button>
+        <button class="gcard argcard" data-sc="argr"><span class="em">🥊</span><h3>Counterclaims and Rebuttals</h3><p>Answer the other side. 13 questions.</p><span class="scbest" data-best="argr" hidden></span></button>
+        <button class="gcard argcard" data-sc="argmix"><span class="em">📝</span><h3>Argument Test Mix</h3><p>A little of everything. 15 questions.</p><span class="scbest" data-best="argmix" hidden></span></button>
       </div>
       <button class="backlink" id="rdBack">⬅ back to home</button>
     </div>
@@ -497,7 +596,7 @@ svg.ang{width:min(300px,70vw);height:auto}
     </div>
 
     <div class="smcard" id="rdQuiz" hidden>
-      <div class="smct" id="rdQc">1 / 7</div>
+      <div class="smct" id="rdQc">1 / 10</div>
       <div class="prompt" id="rdQ" style="font-weight:800;font-size:18px;max-width:56ch"></div>
       <div style="width:100%;max-width:560px" id="rdOpts"></div>
       <div class="flash" id="rdFlash">&nbsp;</div>
@@ -538,9 +637,99 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="chart" id="flChart"></div>
       <div id="flRw"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig mapback" hidden style="background:var(--good)">🗺️ Back to my map</button>
         <button class="smbig" id="flAgain">🔁 Read it again</button>
         <button class="smbig alt" id="flHome2">⏱️ Pick a story</button>
       </div>
+    </div>
+  </section>
+
+  <!-- SCHOOL: MATH + SCIENCE practice tests (from Mrs. Mattes' weekly emails) -->
+  <section class="screen" id="school" hidden>
+    <div class="smcard sccard" id="scMathHome">
+      <h2 style="font-size:26px">📁 ➗ Math</h2>
+      <div class="gamegrid" style="max-width:560px;width:100%">
+        <button class="gcard speedcard" id="speedBtn"><span class="em">⚡</span><h3>Speed Math</h3><p>Today's Challenge, 1-minute sprints, the Real Test, and My Progress</p></button>
+      </div>
+      <div class="subhead">✏️ Class Math (no timer)</div>
+      <p class="scnote">What Mrs. Mattes is teaching right now: decimals, powers of 10, and big multiplication. Take your time!</p>
+      <div class="gamegrid" style="max-width:560px;width:100%">
+        <button class="gcard" data-sc="p10"><span class="em">🔟</span><h3>Powers of 10</h3><p>× 10, × 100, × 1,000 and exponents like 10³.</p><span class="scbest" data-best="p10" hidden></span></button>
+        <button class="gcard" data-sc="mdec"><span class="em">✖️</span><h3>Multiply Decimals</h3><p>Where does the decimal point go?</p><span class="scbest" data-best="mdec" hidden></span></button>
+        <button class="gcard" data-sc="big"><span class="em">🧮</span><h3>Big Multiplication</h3><p>2-digit and 3-digit times 2-digit. Use scratch paper!</p><span class="scbest" data-best="big" hidden></span></button>
+        <button class="gcard" data-sc="m22"><span class="em">✖️</span><h3>2-Digit × 2-Digit</h3><p>Like 47 × 36. Multiply the ones, then the tens, then add.</p><span class="scbest" data-best="m22" hidden></span></button>
+        <button class="gcard" data-sc="sdec"><span class="em">➖</span><h3>Subtract Decimals</h3><p>Line up the decimal points first.</p><span class="scbest" data-best="sdec" hidden></span></button>
+        <button class="gcard" id="scDecTest"><span class="em">💯</span><h3>Decimal × Test</h3><p>18 big decimal times problems. Type the answer. No clock!</p></button>
+        <button class="gcard" data-sc="mmix"><span class="em">📝</span><h3>Math Test Mix</h3><p>A little of everything. 15 questions.</p><span class="scbest" data-best="mmix" hidden></span></button>
+      </div>
+      <button class="backlink" data-schome>⬅ back to home</button>
+    </div>
+
+    <div class="smcard sccard" id="scSciHome" hidden>
+      <h2 style="font-size:26px">📁 🧪 Science</h2>
+      <p class="scnote">Physical and chemical changes. Mrs. Mattes sent home 2 study guides for the test!</p>
+      <div class="gamegrid" style="max-width:560px;width:100%">
+        <button class="gcard" data-sc="pic" style="grid-column:1/-1"><span class="em">📸</span><h3>Picture Science</h3><p>Look at the BEFORE and AFTER pictures. Physical or chemical? Spot the clues! 15 questions.</p><span class="scbest" data-best="pic" hidden></span></button>
+        <button class="gcard" data-sc="sci"><span class="em">⚗️</span><h3>Physical or Chemical?</h3><p>Same stuff, or brand new stuff? 18 questions, some tricky!</p><span class="scbest" data-best="sci" hidden></span></button>
+        <button class="gcard" data-sc="sciw"><span class="em">🔬</span><h3>Study Guide Quiz</h3><p>Signs of a chemical change and the big words. 11 questions.</p><span class="scbest" data-best="sciw" hidden></span></button>
+      </div>
+      <button class="backlink" data-schome>⬅ back to home</button>
+    </div>
+
+        <div class="smcard sccard" id="scQuiz" hidden>
+      <div style="display:flex;justify-content:space-between;align-items:center;width:100%;max-width:600px;gap:10px">
+        <button class="backlink" id="scQuit" style="margin:0">✖ stop</button>
+        <div class="smct" id="scCount">1 / 10</div>
+        <div class="smct" id="scScore" style="color:var(--good)">⭐ 0</div>
+      </div>
+      <div class="scbar"><i id="scBar" style="width:0"></i></div>
+      <div class="sect" id="scTitle"></div>
+      <div class="scpic" id="scPic" hidden></div>
+      <div class="scq" id="scQ"></div>
+      <div class="scopts" id="scOpts"></div>
+      <div class="flash" id="scFlash">&nbsp;</div>
+      <div class="scwhy" id="scWhy" hidden></div>
+      <button class="smbig" id="scNext" hidden>Next ➡</button>
+    </div>
+
+    <div class="smcard sccard" id="scRes" hidden style="position:relative;overflow:hidden">
+      <canvas class="confetti" id="scConf"></canvas>
+      <div class="sect" id="scResTitle"></div>
+      <div class="smgrade" id="scGrade">🏆</div>
+      <div class="smstat"><span class="smpill g" id="scResScore">10 of 10</span><span class="smpill" id="scResBest">Best: 10</span></div>
+      <div id="scRw"></div>
+      <div class="sect" id="scMissH">Let's look at the ones to practice</div>
+      <div class="scmiss" id="scMiss"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <button class="smbig mapback" hidden style="background:var(--good)">🗺️ Back to my map</button>
+        <button class="smbig" id="scAgain">🔁 Try a new set</button>
+        <button class="smbig alt" id="scHome2">⬅ Pick another test</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROWN-UPS DASHBOARD -->
+  <section class="screen" id="parent" hidden>
+    <div class="smcard" style="border-color:#1D5FA8">
+      <h2 style="font-size:26px">👨‍👩‍👧 Emma's Progress Dashboard</h2>
+      <p class="scnote">Everything Emma has practiced on this device (plus anything merged with Magic Sync).</p>
+      <div class="ptiles" id="pTiles"></div>
+      <div class="subhead">📅 Activities per day (last 14 days)</div>
+      <div class="chart" id="pChart" style="height:140px"></div>
+      <div class="pdays" id="pDays"></div>
+      <div class="subhead">📚 By subject (last 14 days)</div>
+      <div class="gamegrid" style="max-width:560px;width:100%" id="pSubs"></div>
+      <div class="subhead">📌 What to work on next</div>
+      <div class="pnotes" id="pWork"></div>
+      <div class="subhead">🌱 Getting better at</div>
+      <div class="pnotes" id="pGood"></div>
+      <div class="subhead">🕑 Recent activity</div>
+      <div class="misslist" id="pRecent" style="max-width:560px"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <a class="smbig" id="pEmail" href="#">📧 Email this report</a>
+        <a class="smbig txtdad" id="pText" href="#">📱 Text Dad</a>
+      </div>
+      <button class="backlink" id="pBack">⬅ back to home</button>
     </div>
   </section>
 
@@ -548,31 +737,25 @@ svg.ang{width:min(300px,70vw);height:auto}
   <section class="screen" id="shelf" hidden>
     <div class="smcard">
       <h2 style="font-size:26px">🏆 Emma's Prize Shelf</h2>
+      <div class="shpts" id="shPts">0<small>SQUISH POINTS</small></div>
       <div class="smstat"><span class="smpill" id="shMedals">🥇 0 gold medals</span><span class="smpill g" id="shCount">🧸 0 squishies</span></div>
-      <p style="margin:0;font-weight:700;color:var(--mut);max-width:46ch">Earn a new squishy every 2 activities you finish. Earn gold medals for records and A grades!</p>
-      <div class="gamegrid" style="max-width:560px" id="shGrid"></div>
+      <div class="howearn">
+        <b>How to earn:</b><br>
+        ⭐ <b>1 point</b> for every right answer<br>
+        🎁 <b>Pass</b> a test = <b>10 bonus points</b> + a <b>bonus squishy</b><br>
+        🌟 Get an <b>A</b> = 10 more points and a gold medal<br>
+        🗺️ Every star on your map = <b>5 points</b><br>
+        🏰 Win the <b>Castle Challenge</b> = <b>50 points</b> + the Huge Butter Squishy!
+      </div>
+      <div id="shBig" style="width:100%;display:flex;justify-content:center"></div>
+      <div class="subhead">🪜 Squishy Ladder: bigger squishies as your points grow!</div>
+      <div class="ladder" id="shLad"></div>
+      <div class="subhead">🧸 My Squishy Collection (a bonus one every time you pass!)</div>
+      <div class="gamegrid" style="max-width:560px;width:100%" id="shGrid"></div>
       <button class="backlink" id="shBack">⬅ back to home</button>
     </div>
   </section>
 
-  <!-- RESULT -->
-  <section class="screen" id="resultWrap" hidden>
-    <div class="result">
-      <canvas class="confetti" id="confetti"></canvas>
-      <div class="trophy" id="trophyEm">🏆</div>
-      <h2 id="winLine">Emma wins!</h2>
-      <p id="winSub" style="font-weight:700;color:var(--mut);margin:6px 0 0"></p>
-      <div class="final">
-        <div class="fs fs1"><span id="fn1">Emma</span><span class="n" id="fp1">0</span></div>
-        <div class="fs fs2"><span id="fn2">Bella</span><span class="n" id="fp2">0</span></div>
-      </div>
-      <p id="allLine" style="font-weight:800;color:var(--mut);margin:12px 0 0"></p>
-      <div class="rbtns">
-        <button class="big" id="rematch">🔁 Rematch</button>
-        <button class="big" id="toMenu" style="background:#8A6A52">🏠 Game Menu</button>
-      </div>
-    </div>
-  </section>
 </div>
 
 <script>
@@ -616,857 +799,12 @@ function beep(freqs,dur,type){try{
 const sOK=()=>beep([660,880],.14), sNO=()=>beep([160],.22,"sawtooth"),
       sWIN=()=>beep([523,659,784,1047],.18), sTick=()=>beep([880],.06);
 
-/* ---------------- MATH generators (beginner friendly) ---------------- */
-const PLACE_IDX={tens:0,ones:1,tenths:2,hundredths:3};
-function freshDigits(){return [rint(1,9),rint(0,9),rint(0,9),rint(0,9)]}
-const dstr=d=>`${d[0]}${d[1]}.${d[2]}${d[3]}`;
-function digitValue(dig,idx){
-  return [fmt(dig*10),String(dig),(dig/10).toFixed(1),(dig/100).toFixed(2)][idx];
-}
-function genPV(){
-  const kind=rint(1,3);
-  if(kind===1){
-    const d=freshDigits();
-    const pname=pick(Object.keys(PLACE_IDX));
-    const correct=String(d[PLACE_IDX[pname]]);
-    const opts=new Set([correct]);
-    shuffle([...d]).forEach(x=>{if(opts.size<4)opts.add(String(x))});
-    while(opts.size<4)opts.add(String(rint(0,9)));
-    return q(`Which digit is in the <b>${pname}</b> place?`,`<div class="bignum">${dstr(d)}</div>`,[...opts],correct);
-  }
-  if(kind===2){
-    let d,uniq;
-    do{d=freshDigits();const c={};d.forEach(x=>c[x]=(c[x]||0)+1);
-       uniq=d.map((x,i)=>(c[x]===1&&x>0)?i:-1).filter(i=>i>=0);
-    }while(!uniq.length);
-    const i=pick(uniq), dig=d[i];
-    const correct=digitValue(dig,i);
-    const opts=new Set([correct]);
-    shuffle([0,1,2,3].filter(j=>j!==i)).forEach(j=>{if(opts.size<4)opts.add(digitValue(dig,j))});
-    const html=`<div class="bignum">${dstr(d).split("").map((ch,k)=>k===(i<2?i:i+1)?`<b>${ch}</b>`:ch).join("")}</div>`;
-    return q(`What is the <b>value</b> of the underlined digit ${dig}?`,html,[...opts],correct);
-  }
-  const dig=rint(1,9);
-  const pmap={ones:1,tenths:2};
-  const pname=pick(Object.keys(pmap)), pos=pmap[pname];
-  const mk=()=>{let d;do{d=freshDigits()}while(d[pos]===dig);return dstr(d)};
-  const good=freshDigits(); good[pos]=dig;
-  const opts=[dstr(good),mk(),mk(),mk()];
-  return q(`Which number has a <b>${dig}</b> in the <b>${pname}</b> place?`,"",opts,dstr(good));
-}
-
-function genRD(){
-  if(Math.random()<0.6){
-    const two=Math.random()<0.55;
-    const v= two? rint(21,99) : rint(110,949);
-    const pow= two? 1 : pick([1,2]);
-    const label= pow===1?"ten":"hundred";
-    const ans=fmt(roundWhole(v,pow));
-    const f=10**pow;
-    const opts=new Set([ans,fmt(Math.floor(v/f)*f),fmt((Math.floor(v/f)+1)*f)]);
-    let bump=2; while(opts.size<4){opts.add(fmt(Math.floor(v/f)*f+f*bump));bump++;}
-    return q(`Round to the nearest <b>${label}</b>:`,`<div class="bignum">${fmt(v)}</div>`,[...opts],ans);
-  }
-  const w=rint(2,89), t=rint(1,9);
-  const ans=fmt(t>=5?w+1:w);
-  const opts=new Set([ans,fmt(w),fmt(w+1)]);
-  let bump=2; while(opts.size<4){opts.add(fmt(w+bump));bump++;}
-  return q(`Round to the nearest <b>whole number</b>:`,`<div class="bignum">${w}.${t}</div>`,[...opts],ans);
-}
-
-function angleSVG(deg){
-  const r=110,cx=30,cy=130, rad=deg*Math.PI/180;
-  const x2=cx+r*Math.cos(rad), y2=cy-r*Math.sin(rad);
-  const ar=34, ax=cx+ar*Math.cos(rad), ay=cy-ar*Math.sin(rad);
-  return `<svg class="ang" viewBox="0 0 300 160" role="img" aria-label="an angle of ${deg} degrees">
-    <path d="M ${cx+ar} ${cy} A ${ar} ${ar} 0 0 0 ${ax.toFixed(1)} ${ay.toFixed(1)}" fill="none" stroke="#F2B705" stroke-width="7" stroke-linecap="round"/>
-    <line x1="${cx}" y1="${cy}" x2="${cx+r+120}" y2="${cy}" stroke="#3B1218" stroke-width="7" stroke-linecap="round"/>
-    <line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#3B1218" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="${cx}" cy="${cy}" r="7" fill="#8C2332"/>
-  </svg>`;
-}
-function genAN(){
-  if(Math.random()<0.5){
-    const type=pick(["Acute","Right","Obtuse","Straight"]);
-    const deg= type==="Acute"?rint(20,75): type==="Right"?90: type==="Obtuse"?rint(105,165):180;
-    return q(`What <b>kind</b> of angle is this?`,angleSVG(deg),shuffle(["Acute","Right","Obtuse","Straight"]),type,true);
-  }
-  const choices=[30,45,60,90,120,135,150];
-  const deg=pick(choices);
-  const opts=shuffle(choices.filter(c=>c!==deg)).slice(0,3).concat(deg).map(d=>d+"°");
-  return q(`About how many <b>degrees</b>?`,angleSVG(deg),opts,deg+"°");
-}
-
-function genLT(){
-  const kind=rint(1,3);
-  let a,b,ans,sym;
-  if(kind===1){a=rint(5,15);b=rint(3,12);ans=a+b;sym="+";}
-  else if(kind===2){a=rint(9,20);b=rint(2,a-2);ans=a-b;sym="-";}
-  else {a=rint(2,9);b=rint(2,9);ans=a*b;sym="×";}
-  const deltas=shuffle([1,2,-1,-2,3,-3,kind===3?a:4,kind===3?-b:-4]);
-  const opts=new Set([String(ans)]);
-  deltas.forEach(d=>{const v=ans+d; if(v>0&&opts.size<4)opts.add(String(v))});
-  return q("",`<div class="bignum">${a} ${sym} ${b} = ?</div>`,[...opts],String(ans));
-}
-
-/* ---------------- FUN generators ---------------- */
-const TRIVIA=[
- ["What is the fastest land animal?","Cheetah",["Lion","Horse","Ostrich"]],
- ["What is the biggest animal that has ever lived?","Blue whale",["Elephant","T. rex","Giraffe"]],
- ["How many hearts does an octopus have?","3",["1","2","8"]],
- ["How many legs does a spider have?","8",["6","10","12"]],
- ["Which is the only mammal that can truly fly?","Bat",["Flying squirrel","Ostrich","Penguin"]],
- ["Which planet is called the Red Planet?","Mars",["Jupiter","Venus","Mercury"]],
- ["Which planet is famous for its big rings?","Saturn",["Mars","Neptune","Earth"]],
- ["What is the largest planet in our solar system?","Jupiter",["Saturn","Earth","Uranus"]],
- ["How many planets are in our solar system?","8",["7","9","10"]],
- ["Who was the first person to walk on the Moon?","Neil Armstrong",["Buzz Lightyear","Albert Einstein","George Washington"]],
- ["The Sun is actually a...","Star",["Planet","Comet","Moon"]],
- ["What is the largest ocean on Earth?","Pacific",["Atlantic","Indian","Arctic"]],
- ["How many continents are there?","7",["5","6","8"]],
- ["What is the capital of the United States?","Washington, D.C.",["New York City","Los Angeles","Philadelphia"]],
- ["What is the capital of Pennsylvania?","Harrisburg",["Philadelphia","Pittsburgh","Easton"]],
- ["What is the tallest mountain in the world?","Mount Everest",["Kilimanjaro","Denali","Pikes Peak"]],
- ["How many states are in the USA?","50",["48","51","52"]],
- ["In which city is the Statue of Liberty?","New York City",["Boston","Washington, D.C.","Chicago"]],
- ["How many bones does an adult human have?","206",["106","306","500"]],
- ["What is the largest organ of the human body?","Skin",["Heart","Brain","Lungs"]],
- ["What does your heart pump around your body?","Blood",["Water","Air","Food"]],
- ["Which insect makes honey?","Bee",["Ant","Butterfly","Beetle"]],
- ["What do caterpillars turn into?","Butterflies",["Bees","Worms","Dragonflies"]],
- ["How many sides does a hexagon have?","6",["5","7","8"]],
- ["How many sides does a stop sign have?","8",["6","7","10"]],
- ["How many items are in a dozen?","12",["10","11","20"]],
- ["How many degrees are in a right angle?","90",["45","100","180"]],
- ["How many colors are in a rainbow?","7",["5","6","8"]],
- ["What is frozen water called?","Ice",["Steam","Snowcone","Fog"]],
- ["How many innings are in a baseball game?","9",["7","10","12"]],
- ["In soccer, which player can use their hands?","Goalie",["Striker","Referee","Coach"]],
- ["How many players from one team are on a basketball court?","5",["4","6","7"]],
- ["Which ocean animal has 8 arms?","Octopus",["Shark","Dolphin","Crab"]],
- ["What do pandas mostly eat?","Bamboo",["Fish","Honey","Pizza"]],
- ["Which bird is famous for copying what people say?","Parrot",["Eagle","Penguin","Owl"]],
- ["What is a baby frog called?","Tadpole",["Puppy","Cub","Chick"]],
-];
-let trivUsed=new Set();
-function genTR(){
-  let i; let guard=0;
-  do{i=rint(0,TRIVIA.length-1);guard++;}while(trivUsed.has(i)&&guard<200);
-  trivUsed.add(i);
-  const [prompt,ans,wrong]=TRIVIA[i];
-  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
-}
-
-const ODD_PAIRS=[["b","d"],["p","q"],["6","9"],["M","W"],["n","u"],["Z","N"],["O","Q"],["S","5"],
- ["🐶","🐺"],["🙂","🙃"],["😺","😾"],["🍪","🌑"],["🌝","🌚"],["⛄","☃️"],["🐢","🐊"],["🦁","🐯"],["✋","🤚"]];
-const ODD_SEQ=["🟥🟨🟦","⭐🌙☀️","🍎🍌🍇","🔺🔵⬛","🐟🐙🦀"];
-function genOD(){
-  if(Math.random()<0.55){
-    let [a,b]=pick(ODD_PAIRS); if(Math.random()<0.5)[a,b]=[b,a];
-    const t=q(`Tap the one that's <b>different</b>!`,"",shuffle([a,a,a,b]),b,true);
-    t.tiles=true; return t;
-  }
-  const base=pick(ODD_SEQ);
-  let odd; const chars=[...base];
-  do{odd=shuffle([...chars]).join("")}while(odd===base);
-  const t=q(`Three match. Tap the <b>odd one out</b>!`,"",shuffle([base,base,base,odd]),odd,true);
-  t.tiles=true; return t;
-}
-
-const FUNQ=[
- ["What is Emma's mom's name?","Ariana",["Samira","Rachel","Jessica"]],
- ["What is Bella's mom's name?","Samira",["Ariana","Rachel","Monica"]],
- ["What is Bella's grandma's name?","Rachel",["Ariana","Samira","Linda"]],
- ["What are the Forks Falcons school colors?","Burgundy and yellow",["Blue and white","Green and orange","Pink and purple"]],
- ["What kind of bird is the Forks mascot?","Falcon",["Eagle","Penguin","Chicken"]],
- ["What color do red and yellow make?","Orange",["Green","Purple","Brown"]],
- ["What color do blue and yellow make?","Green",["Orange","Pink","Gray"]],
- ["How many legs does a ladybug have?","6",["4","8","100"]],
- ["Which animal says NEIGH?","Horse",["Cow","Duck","Snake"]],
- ["What shape is a pizza slice, usually?","Triangle",["Square","Circle","Heart"]],
- ["How many minutes are in one hour?","60",["30","100","24"]],
- ["What do bees make?","Honey",["Ketchup","Butter","Jelly"]],
- ["What is a group of puppies called?","A litter",["A flock","A puddle","A squad"]],
- ["Which season comes right after summer?","Fall",["Winter","Spring","Beach season"]],
- ["How many horns does a unicorn have?","1",["2","3","None, they're bald"]],
- ["What candy comes on a stick?","Lollipop",["Gummy bear","Chocolate bar","Jellybean"]],
- ["A rainbow needs rain and...","Sunshine",["Snow","Thunder","Glitter"]],
- ["What do you say when someone sneezes?","Bless you",["Good job","Happy birthday","Encore"]],
- ["What is frozen water called?","Ice",["Steam","Soup","Juice"]],
- ["Which one can actually fly?","Falcon",["Penguin","Ostrich","Pig"]],
-];
-let funUsed=new Set();
-function genFV(){
-  let i,guard=0;
-  do{i=rint(0,FUNQ.length-1);guard++;}while(funUsed.has(i)&&guard<200);
-  funUsed.add(i);
-  const [prompt,ans,wrong]=FUNQ[i];
-  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
-}
-
-const RBX_Q=[
- ["What is the money called in Roblox?","Robux",["V-Bucks","Gems","Acorns"]],
- ["What do you play as in Roblox?","Your avatar",["A playing card","A cursor","A potato"]],
- ["Which of these is a REAL famous Roblox game?","Adopt Me!",["Feed Me!","Nap Time!","Homework Simulator"]],
- ["In Roblox, what is an 'obby'?","An obstacle course",["A grumpy mod","A pet rock","A secret password"]],
- ["What happens when you fall off the map in an obby?","You respawn and try again",["The game deletes","You automatically win","Your tablet melts"]],
- ["Which REAL Roblox classic is about making pizza?","Work at a Pizza Place",["Pizza School","Cheese Quest","Pepperoni Panic"]],
- ["What is Brookhaven in Roblox?","A roleplay town game",["A math game","A glitch","A kind of hat"]],
- ["Who makes most of the games on Roblox?","Players and creators",["Only robots","Teachers","The president"]],
- ["What is a 'noob' in Roblox?","A brand-new player",["A secret boss","A type of hat","A snack"]],
- ["Which REAL Roblox game has a scary piggy?","Piggy",["Moo Moo","Quack Attack","Oink City"]],
- ["What do players collect in Adopt Me!?","Pets",["Homework","Taxes","Mustaches"]],
- ["What is a VIP server?","A private server for you and your friends",["A pizza order","A school bus","A cheat code"]],
- ["What should you NEVER share in Roblox chat?","Your password",["Your favorite color","Your pet's nickname","Your high score"]],
- ["What CAN'T you do in Roblox?","Smell the games",["Play with friends","Dress up your avatar","Build your own game"]],
-];
-const SQ_Q=[
- ["What are most squishies made of?","Soft slow-rising foam",["Rocks","Glass","Spaghetti"]],
- ["What does a slow-rising squishy do after a squeeze?","Slowly puffs back into shape",["It pops","It melts","It runs away"]],
- ["Lots of squishies are scented like...","Sweet treats",["Old socks","Broccoli","Wet dog"]],
- ["Which of these would make the WORST squishy?","A cactus",["A peach","A bread loaf","A panda"]],
- ["What makes a squishy SO satisfying to squeeze?","It's soft and rises back slowly",["It's super heavy","It's ice cold","It beeps"]],
- ["What is a JUMBO squishy?","An extra-big squishy",["A broken one","A flying one","An invisible one"]],
- ["What food do TONS of squishies look like?","Bread, buns, and cakes",["Steak dinners","Pickles","Soup"]],
- ["Why should you keep long, sharp nails away from squishies?","They can rip the foam",["Nails make them grow","They turn to gold","They get ticklish"]],
- ["Mochi squishies feel extra...","Soft and a little sticky",["Crunchy","Furry","Spiky"]],
- ["Where is the BEST place to keep your squishies?","Somewhere clean, dry, and out of the sun",["Underwater","In the oven","Buried in the yard"]],
- ["What is a squishy collection?","All the squishies you've gathered",["A kind of soup","A dance move","A spelling test"]],
- ["Which animal is a SUPER popular squishy shape?","Panda",["Mosquito","Tarantula","Worm"]],
- ["Your squishy got dirty! What's the safe fix?","Wipe it gently with a damp cloth",["The dishwasher","The microwave","Paint over it"]],
- ["What do people say squeezing a squishy helps with?","Calming down and relaxing",["Getting louder","Learning to fly","Time travel"]],
-];
-let rbUsed=new Set(), sqUsed=new Set();
-function genRB(){
-  let i,guard=0;
-  do{i=rint(0,RBX_Q.length-1);guard++;}while(rbUsed.has(i)&&guard<200);
-  rbUsed.add(i);
-  const [prompt,ans,wrong]=RBX_Q[i];
-  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
-}
-function genSQ(){
-  let i,guard=0;
-  do{i=rint(0,SQ_Q.length-1);guard++;}while(sqUsed.has(i)&&guard<200);
-  sqUsed.add(i);
-  const [prompt,ans,wrong]=SQ_Q[i];
-  return q(esc(prompt),"",shuffle([ans,...wrong]).map(esc),esc(ans),true);
-}
-
-function genMX(){return pick([genPV,genRD,genFV,genLT,genTR,genOD,genRB,genSQ])()}
-
-function q(prompt,visual,options,correct,keepOrder){
-  const opts=keepOrder?[...options]:shuffle([...options]);
-  return {prompt,visual,opts,ci:opts.indexOf(correct)};
-}
-
-/* ---------------- MAZE ---------------- */
-const MZ_N=13;
-function genMaze(n){
-  const g=Array.from({length:n},()=>Array(n).fill(1));
-  const stack=[[1,1]]; g[1][1]=0;
-  while(stack.length){
-    const [x,y]=stack[stack.length-1];
-    const dirs=shuffle([[2,0],[-2,0],[0,2],[0,-2]]).filter(([dx,dy])=>{
-      const nx=x+dx,ny=y+dy;
-      return nx>0&&ny>0&&nx<n-1&&ny<n-1&&g[ny][nx]===1;
-    });
-    if(!dirs.length){stack.pop();continue;}
-    const [dx,dy]=dirs[0];
-    g[y+dy/2][x+dx/2]=0; g[y+dy][x+dx]=0;
-    stack.push([x+dx,y+dy]);
-  }
-  return g;
-}
-let M=null;
-function startMazeQ(){
-  M={g:genMaze(MZ_N),pos:[[1,1],[1,1]]};
-  [0,1].forEach(p=>{
-    const body=$("pb"+(p+1)); body.innerHTML="";
-    const c=document.createElement("canvas");
-    c.className="mcanvas"; c.width=MZ_N*22; c.height=MZ_N*22; c.id="mc"+p;
-    body.appendChild(c);
-    const dp=document.createElement("div"); dp.className="dpad";
-    [["blank"],["▲",0,-1],["blank"],["◀",-1,0],["▼",0,1],["▶",1,0]].forEach(spec=>{
-      const b=document.createElement("button");
-      if(spec[0]==="blank"){b.className="dp blank";b.tabIndex=-1;b.setAttribute("aria-hidden","true");}
-      else{b.className="dp";b.textContent=spec[0];
-        b.addEventListener("click",()=>mazeMove(p,spec[1],spec[2]));}
-      dp.appendChild(b);
-    });
-    body.appendChild(dp);
-    drawMaze(p);
-  });
-}
-function drawMaze(p){
-  const c=$("mc"+p); if(!c)return;
-  const x=c.getContext("2d"), cs=c.width/MZ_N, g=M.g;
-  x.fillStyle="#FFFFFF"; x.fillRect(0,0,c.width,c.height);
-  x.fillStyle="#3B1218";
-  for(let r=0;r<MZ_N;r++)for(let k=0;k<MZ_N;k++)if(g[r][k])x.fillRect(k*cs,r*cs,cs+0.5,cs+0.5);
-  x.font=`${cs*0.9}px serif`; x.textAlign="center"; x.textBaseline="middle";
-  x.fillText("⭐",(MZ_N-2)*cs+cs/2,(MZ_N-2)*cs+cs/2+1);
-  const [px,py]=M.pos[p];
-  x.fillStyle=p===0?"#8C2332":"#E0A400";
-  x.beginPath(); x.arc(px*cs+cs/2,py*cs+cs/2,cs*0.33,0,6.3); x.fill();
-}
-function mazeMove(p,dx,dy){
-  if(!S||!S.maze||S.resolved||!M)return;
-  const [x,y]=M.pos[p], nx=x+dx, ny=y+dy;
-  if(nx<0||ny<0||nx>=MZ_N||ny>=MZ_N||M.g[ny][nx])return;
-  M.pos[p]=[nx,ny]; drawMaze(p);
-  if(nx===MZ_N-2&&ny===MZ_N-2){
-    S.resolved=true; S.score[p]++; sOK();
-    $("pts"+(p+1)).textContent=S.score[p];
-    $("flash").textContent=`${S.names[p]} escaped first! 🎉`;
-    $("flash").className="flash ok";
-    later(nextQ,1600);
-  }
-}
-
-/* ---------------- MOVE IT! physical challenges ---------------- */
-const ACTS=[
- {t:"dance",em:"🥪",txt:"It's Peanut Butter Jelly time! Do the Peanut Butter Jelly dance until the timer ends!",secs:20},
- {t:"dance",em:"🤿",txt:"Scuba dance! Mask on, swim those arms, and blow bubbles until the timer ends!",secs:20},
- {t:"dance",em:"🤖",txt:"Robot dance! Stiff arms, beep boop, until the timer ends!",secs:20},
- {t:"dance",em:"🍝",txt:"Dance like a wiggly noodle! No bones allowed!",secs:15},
- {t:"dance",em:"🎸",txt:"Air guitar solo! Rock out as hard as you can!",secs:15},
- {t:"dance",em:"🦩",txt:"Flamingo challenge! Stand on ONE leg until the timer ends. No touching down!",secs:15},
- {t:"dance",em:"🦸",txt:"Hold your best superhero pose! Capes optional!",secs:10},
- {t:"dance",em:"🐒",txt:"Act like a monkey until the timer ends! Ooh ooh ah ah!",secs:15},
- {t:"dance",em:"🏃",txt:"Slow-motion run! Run in place as SLOW and dramatic as you can!",secs:15},
- {t:"team",em:"📣",txt:"TEAM CHALLENGE! Do the Forks Falcons cheer dance together! Loud and proud, go Falcons!",secs:25},
- {t:"team",em:"🪞",txt:"TEAM CHALLENGE! Mirror dance! One leads, one copies. Switch halfway!",secs:20},
- {t:"team",em:"🚣",txt:"TEAM CHALLENGE! Row the invisible boat together, in perfect sync!",secs:15},
- {t:"team",em:"🤝",txt:"TEAM CHALLENGE! Invent a secret handshake with at least 5 moves, then tap WE DID IT!"},
- {t:"team",em:"🙌",txt:"TEAM CHALLENGE! Do 10 jumping high-fives together, then tap WE DID IT!"},
- {t:"team",em:"🦅",txt:"TEAM CHALLENGE! Flap your wings and fly one falcon lap around the room together, then tap WE DID IT!"},
- {t:"race",em:"⭐",txt:"First to do 10 jumping jacks, smash your DONE button!"},
- {t:"race",em:"🐸",txt:"First to do 8 frog jumps, smash your DONE button!"},
- {t:"race",em:"🙆",txt:"First to touch your toes 10 times, smash your DONE button!"},
- {t:"race",em:"🌀",txt:"First to spin around 5 times, smash your DONE button! Careful, dizzy!"},
- {t:"race",em:"🥊",txt:"First to throw 12 air punches, smash your DONE button!"},
- {t:"race",em:"🪢",txt:"First to do 15 invisible jump rope hops, smash your DONE button!"},
- {t:"race",em:"🚪",txt:"First to run and touch a door and come back, smash your DONE button!"},
- {t:"race",em:"🙇",txt:"First to take 5 super fancy bows, smash your DONE button!"},
- {t:"race",em:"🏋️",txt:"First to do 10 squats, smash your DONE button!"},
- {t:"race",em:"🦵",txt:"First to do 20 high knees, smash your DONE button!"},
- {t:"race",em:"🦶",txt:"First to hop on one foot 10 times, smash your DONE button!"},
- {t:"race",em:"🦀",txt:"Crab walk across the room and back! First one back smashes DONE!"},
- {t:"race",em:"🐻",txt:"Bear crawl to the wall and back! First one back smashes DONE!"},
- {t:"race",em:"⛷️",txt:"First to do 10 ski jumps side to side, smash your DONE button!"},
- {t:"race",em:"👍",txt:"Thumb war! Best of 3. The WINNER smashes their DONE button!"},
- {t:"race",em:"✂️",txt:"Rock, paper, scissors! Best of 3. The WINNER smashes their DONE button!"},
- {t:"race",em:"👁️",txt:"Staring contest! No blinking, no laughing. The WINNER smashes their DONE button!"},
- {t:"dance",em:"🐔",txt:"Chicken dance! Flap those wings until the timer ends!",secs:20},
- {t:"dance",em:"🦷",txt:"Floss dance! Swing those arms until the timer ends!",secs:15},
- {t:"dance",em:"💦",txt:"The sprinkler! Water that lawn until the timer ends!",secs:15},
- {t:"dance",em:"🩰",txt:"Ballerina time! Twirl and leap gracefully until the timer ends!",secs:15},
- {t:"dance",em:"🗿",txt:"FREEZE! Be a statue. No moving, no laughing, until the timer ends!",secs:10},
- {t:"dance",em:"🦍",txt:"Gorilla dance! Stomp and pound your chest until the timer ends!",secs:15},
- {t:"dance",em:"🌀",txt:"Washing machine wiggle! Spin cycle until the timer ends!",secs:15},
- {t:"dance",em:"🥋",txt:"Karate moves! Chop and kick the air until the timer ends!",secs:15},
- {t:"dance",em:"🏊",txt:"Backstroke swim! Swim through the living room until the timer ends!",secs:15},
- {t:"team",em:"🚂",txt:"TEAM CHALLENGE! Conga line! One lap around the room together, then tap WE DID IT!"},
- {t:"team",em:"⭐",txt:"TEAM CHALLENGE! Do 10 jumping jacks in PERFECT sync, then tap WE DID IT!"},
- {t:"team",em:"👯",txt:"TEAM CHALLENGE! Copy the captain! One leads a dance, the other copies everything!",secs:20},
-];
-const CHEER_ACTS=[
- {t:"team",em:"🥊",txt:"Do the LET'S FIGHT dance together! Full volume, full Falcon spirit!",secs:25},
- {t:"team",em:"🔥",txt:"Do the MORE MORE MORE cheer together! Louder every single time!",secs:20},
- {t:"team",em:"🦅",txt:"Perform the Forks Falcons cheer dance together, in sync!",secs:25},
- {t:"team",em:"📢",txt:"Chant GO FALCONS GO three times together, louder each time, then tap WE DID IT!"},
- {t:"team",em:"💪",txt:"Motion drill in sync: High V! Low V! T! Touchdown! Clasp! Hit them sharp together until time ends!",secs:20},
- {t:"team",em:"⭐",txt:"Jump round! Each of you does YOUR favorite cheer jump 3 times. Spread eagle, tuck, or toe touch, pick the jump that feels right for YOU! Then tap WE DID IT!"},
- {t:"team",em:"🧘",txt:"Stretch circle! Each of you holds YOUR best stretch: lunge, butterfly, straddle, or split. Only go as far as feels comfy. Every level scores!",secs:15},
- {t:"team",em:"🦩",txt:"Liberty poses! Both balance on one leg like cheer captains until time ends!",secs:10},
- {t:"team",em:"✨",txt:"Spirit fingers and the two biggest smiles in Pennsylvania until time ends!",secs:10},
- {t:"team",em:"🎤",txt:"Invent a 4-move FALCONS cheer together and perform it, then tap WE DID IT!"},
- {t:"team",em:"🎀",txt:"Pom pom blast! Shake your invisible pom poms together as fast as you can!",secs:10},
- {t:"team",em:"🦵",txt:"High kick 8-count together! Kick YOUR comfortable height, sharp on every count!",secs:15},
- {t:"team",em:"👏",txt:"Clap pattern together: clap, clap, stomp, stomp, spirit fingers! Repeat until time ends!",secs:15},
- {t:"team",em:"🏰",txt:"Make a two-person pose together, feet on the FLOOR (no climbing!). Hold it 5 seconds, then tap WE DID IT!"},
- {t:"team",em:"🏆",txt:"Make up a victory cheer for the judge and perform it together, then tap WE DID IT!"},
- {t:"team",em:"🪞",txt:"Mirror motions! One calls out V, T, touchdown, the other hits them. Switch halfway!",secs:20},
- {t:"team",em:"📣",txt:"Cheer each other's names! GO EMMA! GO BELLA! Three big rounds, then tap WE DID IT!"},
- {t:"team",em:"🫨",txt:"Hit your final performance pose together and FREEZE until time ends! Don't laugh!",secs:10},
-];
-/* ---------------- SOLO spotlight games ---------------- */
-const GYM_MOVES=[
- {em:"🤸",txt:"Cartwheel time! Show your best cartwheel!"},
- {em:"🙆",txt:"Forward roll, nice and tucked!"},
- {em:"🌉",txt:"Bridge hold! Only if it feels comfy, hold it for 5 seconds!"},
- {em:"🤸‍♀️",txt:"Handstand kick-up practice! Do it near a wall, 3 tries!"},
- {em:"🦘",txt:"Tuck jump! Knees up high, 3 in a row!"},
- {em:"🩰",txt:"Beam walk! Walk an imaginary beam line, toes pointed, no wobbles!"},
- {em:"🦢",txt:"Arabesque! Hold your prettiest arabesque for 5 seconds!"},
- {em:"✌️",txt:"V-sit! Hold a V shape with your legs up for 5 seconds!"},
- {em:"🕯️",txt:"Candlestick roll! Roll back, legs to the sky, roll up!"},
- {em:"🫏",txt:"Donkey kicks! Hands down, kick those heels up 3 times!"},
- {em:"🦵",txt:"Split leap, YOUR level! Leap as big as feels good!"},
- {em:"🌪️",txt:"Round-off! Find lots of open space first, then show your round-off!",pri:1},
- {em:"🤸",txt:"BIG SKILL: Back handspring! ONLY if you already do these at practice and a grown-up says go. Otherwise coach taps Different One!",pri:2},
- {em:"🔄",txt:"BIG SKILL: Back tuck! ONLY if this is already your skill at the gym and a grown-up is watching. Otherwise coach taps Different One!",pri:3},
- {em:"🚀",txt:"BIG SKILL: Layout! ONLY if you already train these and a grown-up says go. Otherwise coach taps Different One!",pri:4},
- {em:"⭐",txt:"Freestyle! Show the coach your favorite move of all!"},
-];
-const TRUTHS=[
- "What's the funniest sound you can make? Make it RIGHT NOW!",
- "What's the weirdest food combo you secretly think is yummy?",
- "If you had to marry a FOOD, which food would it be and why?",
- "What's the silliest thing you've ever done at school?",
- "Which cartoon character are you secretly most like?",
- "What's your most embarrassing burp or hiccup story?",
- "If you were invisible for one day at school, what would you do?",
- "What's a weird smell that you secretly love?",
- "Flying or talking to animals: which superpower and WHY?",
- "What's one silly thing you do when nobody is watching?",
- "If your pet could talk, what's the FIRST thing it would tattle about you?",
- "What song do you sing in the shower at full volume?",
- "What would you name a pet potato?",
- "What's the funniest dream you remember?",
-];
-const DARES=[
- "Talk like a pirate until your next turn, matey!",
- "Do your best chicken impression for 10 seconds!",
- "Sing Happy Birthday in a monster voice!",
- "Let your friend give you a brand-new silly hairstyle in 30 seconds!",
- "Dance with NO music for 15 seconds like it's the best song ever!",
- "Say the alphabet backwards as far as you can!",
- "Act like a grumpy old teacher giving homework to invisible students!",
- "Keep a totally serious face for 20 seconds while your friend tries to make you laugh!",
- "Walk across the room like a runway supermodel with a shoe balanced on your head!",
- "Speak in a fancy royal queen voice until your next turn!",
- "Do 5 jumping jacks while saying your own name backwards!",
- "Be a news reporter and give a VERY serious report about what's inside the fridge!",
- "Hug a pillow and tell it it's your best friend, super dramatically!",
- "Meow every time you finish a sentence until your next turn!",
-];
-const GRANDMA_Q=[
- "Grandma, what does the slang word SLAY mean?",
- "Grandma, what is a squishy?",
- "Grandma, what is a Squishmallow?",
- "Grandma, what is Roblox?",
- "Grandma, what does GOAT stand for when someone is 'the GOAT'?",
- "Grandma, can you do a TikTok dance? Show us ANY dance!",
- "Grandma, what does 'no cap' mean?",
- "Grandma, what are the Forks Falcons school colors?",
- "Grandma, what does LOL stand for?",
- "Grandma, what does BRB stand for?",
- "Grandma, what does it mean when kids say 'bet'?",
- "Grandma, what is a 'glow up'?",
- "Grandma, which is faster: a diving falcon or a running cheetah?",
- "Grandma, what was YOUR favorite candy when you were 10?",
- "Grandma, what games did YOU play at recess when you were our age?",
- "Grandma, what's the magic word to get ANYTHING from you?",
-];
-const SONG_LIST=[
- {em:"🖤",txt:"Sing BLACK by Pearl Jam! Big feelings!",yt:"black pearl jam karaoke"},
- {em:"🌲",txt:"Sing CEDAR! Make it beautiful!",yt:"cedar karaoke"},
- {em:"🎸",txt:"Sing COME AS YOU ARE by Nirvana!",yt:"come as you are nirvana karaoke"},
- {em:"⛓️",txt:"Sing WOULD? by Alice in Chains!",yt:"would alice in chains karaoke"},
- {em:"🎶",txt:"Singer's choice! Pick any song you love!",yt:"karaoke with lyrics"},
- {em:"🧑‍⚖️",txt:"Judge's pick! The judge chooses your song!",yt:"karaoke with lyrics"},
- {em:"🤫",txt:"Whisper-sing a song and still give it feeling!",yt:"karaoke with lyrics"},
- {em:"🎤",txt:"Big finale voice! Sing like it's the last song of the concert!",yt:"karaoke with lyrics"},
-];
-let soloUsed=new Set();
-function startSoloQ(){
-  S.cur=null;
-  const cfg=S.solo, items=cfg.items;
-  let i=-1;
-  const pris=items.map((it,k)=>it.pri?[it.pri,k]:null).filter(Boolean).sort((a,b)=>a[0]-b[0]);
-  for(const [,k] of pris){ if(!soloUsed.has(S.aid+":"+k)){ i=k; break; } }
-  if(i<0){ let g2=0; do{i=rint(0,items.length-1);g2++}while((soloUsed.has(S.aid+":"+i)||items[i].pri)&&g2<200); }
-  soloUsed.add(S.aid+":"+i);
-  const it=items[i];
-  $("qCount").textContent=`${S.qn} / ${S.qmax}`;
-  $("prompt").innerHTML=esc(it.txt); $("prompt").style.display="";
-  let vh=`<div class="bigem">${it.em}</div>`;
-  if(it.yt) vh+=`<a class="ytb" href="https://www.youtube.com/results?search_query=${encodeURIComponent(it.yt)}" target="_blank" rel="noopener">📺 Karaoke on YouTube</a>`;
-  $("visual").innerHTML=vh;
-  const pn=S.names[cfg.perf], cn=S.names[1-cfg.perf];
-  $("flash").textContent=`${pn} performs. ${cn} is the ${cfg.coach}!`;
-  $("flash").className="flash ok";
-  [0,1].forEach(p=>{
-    const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.style.gap="8px"; body.innerHTML="";
-    if(p===cfg.perf){
-      body.innerHTML=`<div class="movehint">YOU'RE ON! 🌟</div>`;
-    }else{
-      const b1=document.createElement("button"); b1.className="abtn done"; b1.textContent=`⭐⭐ ${cfg.top} (+2)`;
-      b1.addEventListener("click",()=>soloGrade(2));
-      const b2=document.createElement("button"); b2.className="abtn done"; b2.style.fontSize="20px"; b2.textContent=`⭐ ${cfg.low} (+1)`;
-      b2.addEventListener("click",()=>soloGrade(1));
-      const b3=document.createElement("button"); b3.className="abtn"; b3.style.textAlign="center"; b3.textContent="🔁 Different one!";
-      b3.addEventListener("click",()=>{if(S&&S.solo&&!S.resolved)startSoloQ();});
-      body.appendChild(b1); body.appendChild(b2); body.appendChild(b3);
-    }
-  });
-  sTick();
-}
-
-/* ---------------- Truth or Dare ---------------- */
-let todUsed=new Set();
-function startTodQ(){
-  S.cur=null;
-  const active=(S.qn-1)%2, judge=1-active;
-  $("qCount").textContent=`Turn ${S.qn} / ${S.qmax}`;
-  $("prompt").innerHTML=`It's <b>${esc(S.names[active])}'s</b> turn! Pick one:`;
-  $("prompt").style.display="";
-  $("visual").innerHTML=`<div class="bigem">🎭</div>`;
-  $("flash").textContent="Choose bravely!"; $("flash").className="flash";
-  [0,1].forEach(p=>{
-    const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.style.gap="8px"; body.innerHTML="";
-    if(p===active){
-      const bt=document.createElement("button"); bt.className="abtn done"; bt.textContent="🗣️ TRUTH";
-      bt.addEventListener("click",()=>todReveal(active,"truth"));
-      const bd=document.createElement("button"); bd.className="abtn done"; bd.textContent="🔥 DARE";
-      bd.addEventListener("click",()=>todReveal(active,"dare"));
-      body.appendChild(bt); body.appendChild(bd);
-    }else{
-      body.innerHTML=`<div class="movehint">WAIT FOR IT... 👀</div>`;
-    }
-  });
-  sTick();
-}
-function todReveal(active,kind){
-  if(!S||!S.tod||S.resolved)return;
-  const list=kind==="truth"?TRUTHS:DARES;
-  let i,g2=0; do{i=rint(0,list.length-1);g2++}while(todUsed.has(kind+":"+i)&&g2<200);
-  todUsed.add(kind+":"+i);
-  $("prompt").innerHTML=`<b>${kind==="truth"?"TRUTH":"DARE"}</b> for ${esc(S.names[active])}: ${esc(list[i])}`;
-  $("visual").innerHTML=`<div class="bigem">${kind==="truth"?"🗣️":"🔥"}</div>`;
-  $("flash").textContent="Go go go!"; $("flash").className="flash ok";
-  [0,1].forEach(p=>{
-    const body=$("pb"+(p+1)); body.innerHTML="";
-    if(p===active){
-      body.innerHTML=`<div class="movehint">YOU'RE ON! 🌟</div>`;
-    }else{
-      const b=document.createElement("button"); b.className="abtn done"; b.textContent="DONE! Point for BOTH! 🎉";
-      b.addEventListener("click",()=>teamPoint());
-      body.appendChild(b);
-    }
-  });
-}
-
-/* ---------------- Ask Grandma Rachel ---------------- */
-let gqUsed=new Set();
-function startGqQ(){
-  S.cur=null;
-  let i,g2=0; do{i=rint(0,GRANDMA_Q.length-1);g2++}while(gqUsed.has(i)&&g2<200);
-  gqUsed.add(i);
-  $("qCount").textContent=`${S.qn} / ${S.qmax}`;
-  $("prompt").innerHTML=`Read this to Grandma Rachel, nice and loud: <b>${esc(GRANDMA_Q[i])}</b>`;
-  $("prompt").style.display="";
-  $("visual").innerHTML=`<div class="bigem">👵</div><div class="judges">
-    <button class="jbtn jb" id="gqYes">✅ Grandma got it!</button>
-    <button class="jbtn j1" id="gqNo">😂 Grandma had NO idea!</button></div>`;
-  $("flash").textContent="Ask Grandma and listen close!"; $("flash").className="flash";
-  [0,1].forEach(p=>{
-    const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.innerHTML=`<div class="movehint">ASK GRANDMA! 📣</div>`;
-  });
-  $("gqYes").addEventListener("click",()=>gqPoint("Grandma crushed it! Point for everyone! 🎉"));
-  $("gqNo").addEventListener("click",()=>gqPoint("Hilarious! Now teach Grandma the answer. Point for everyone anyway! 🎉"));
-  sTick();
-}
-function gqPoint(msg){
-  if(!S||!S.gq||S.resolved)return;
-  S.resolved=true; S.score[0]++; S.score[1]++; sWIN();
-  $("pts1").textContent=S.score[0]; $("pts2").textContent=S.score[1];
-  $("flash").textContent=msg; $("flash").className="flash ok";
-  later(nextQ,1700);
-}
-function soloGrade(pts){
-  if(!S||!S.solo||S.resolved)return;
-  S.resolved=true;
-  const perf=S.solo.perf;
-  S.score[perf]+=pts; sOK(); if(pts===2)sWIN();
-  $("pts"+(perf+1)).textContent=S.score[perf];
-  $("flash").textContent=pts===2?`${S.names[perf]} NAILED it! +2 ⭐⭐`:`Great job, ${S.names[perf]}! +1 ⭐`;
-  $("flash").className="flash ok";
-  later(nextQ,1500);
-}
-
-let PH=null, phUsed=new Set();
-function startPhQ(){
-  S.cur=null;
-  const list=S.acts;
-  let i,g2=0; do{i=rint(0,list.length-1);g2++}while(phUsed.has(S.aid+":"+i)&&g2<200);
-  phUsed.add(S.aid+":"+i);
-  const a=list[i];
-  PH={a,phase:a.t==="race"?"race":"move",left:a.secs||0,iv:null};
-  $("qCount").textContent=`Move ${S.qn} / ${S.qmax}`;
-  $("prompt").innerHTML=esc(a.txt); $("prompt").style.display="";
-  if(a.t==="race"){
-    $("visual").innerHTML=`<div class="bigem">${a.em}</div>`;
-    $("flash").textContent="Ready... GO! 🏁"; $("flash").className="flash ok";
-    [0,1].forEach(p=>{
-      const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column"; body.innerHTML="";
-      const b=document.createElement("button"); b.className="abtn done"; b.textContent="DONE! 🙌";
-      b.addEventListener("click",()=>phDone(p)); body.appendChild(b);
-    });
-    sTick();
-    later(()=>{ if(S&&!S.resolved){S.resolved=true;$("flash").textContent="Out of steam! No point this time.";$("flash").className="flash no";later(nextQ,1600);} },60000);
-  }else if(a.t==="team"&&!a.secs){
-    $("visual").innerHTML=`<div class="bigem">${a.em}</div><div class="judges"><button class="jbtn jt" id="teamBtn">WE DID IT! 🙌</button></div>`;
-    $("flash").textContent="Work together, Falcons! 🦅"; $("flash").className="flash ok";
-    [0,1].forEach(p=>{
-      const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column";
-      body.innerHTML=`<div class="movehint">TEAM UP!</div>`;
-    });
-    $("teamBtn").addEventListener("click",teamPoint);
-    sTick();
-  }else{
-    $("visual").innerHTML=`<div class="bigem">${a.em}</div><div class="count" id="cnum">${a.secs}</div>`;
-    $("flash").textContent=a.t==="team"?"Work together, Falcons! 🦅":"GO GO GO! 💥"; $("flash").className="flash ok";
-    [0,1].forEach(p=>{
-      const body=$("pb"+(p+1)); body.className="padbody"; body.style.display="flex"; body.style.flexDirection="column";
-      body.innerHTML=`<div class="movehint">${a.t==="team"?"TEAM UP!":"GET MOVING!"}</div>`;
-    });
-    sTick();
-    PH.iv=setInterval(()=>{
-      PH.left--;
-      const c=$("cnum"); if(c)c.textContent=Math.max(PH.left,0);
-      if(PH.left<=3&&PH.left>0)sTick();
-      if(PH.left<=0){clearInterval(PH.iv);PH.iv=null;if(a.t==="team"){teamPoint();}else{sWIN();judgePhase();}}
-    },1000);
-  }
-}
-function teamPoint(){
-  if(!S||S.resolved)return;
-  S.resolved=true; S.score[0]++; S.score[1]++; sWIN();
-  $("pts1").textContent=S.score[0]; $("pts2").textContent=S.score[1];
-  $("flash").textContent="Team point! You both earned it! 🎉";
-  $("flash").className="flash ok";
-  later(nextQ,1600);
-}
-function judgePhase(){
-  if(!S)return;
-  $("flash").textContent="Judges! Tap the winner, or give Both a point!";
-  $("flash").className="flash";
-  const n1=esc(S.names[0]), n2=esc(S.names[1]);
-  $("visual").innerHTML=`<div class="judges">
-    <button class="jbtn j1" data-j="0">🏆 ${n1}</button>
-    <button class="jbtn jb" data-j="2">🤝 Both!</button>
-    <button class="jbtn j2" data-j="1">🏆 ${n2}</button></div>`;
-  $("visual").querySelectorAll(".jbtn").forEach(b=>b.addEventListener("click",()=>{
-    if(!S||S.resolved)return; S.resolved=true;
-    const j=Number(b.dataset.j); sOK();
-    if(j===2){
-      S.score[0]++;S.score[1]++;
-      $("pts1").textContent=S.score[0];$("pts2").textContent=S.score[1];
-      $("flash").textContent="A point for everybody! 🎉";
-    }else{
-      S.score[j]++;$("pts"+(j+1)).textContent=S.score[j];
-      $("flash").textContent=`${S.names[j]} wins the round! 🎉`;
-    }
-    $("flash").className="flash ok";
-    later(nextQ,1500);
-  }));
-}
-function phDone(p){
-  if(!S||!S.ph||S.resolved||!PH||PH.phase!=="race")return;
-  S.resolved=true; S.score[p]++; sOK();
-  $("pts"+(p+1)).textContent=S.score[p];
-  $("flash").textContent=`${S.names[p]} finished first! 💨`;
-  $("flash").className="flash ok";
-  later(nextQ,1500);
-}
-
-/* ---------------- game engine ---------------- */
-const GAMES={
-  pv:{label:"Place Value",em:"🔢",title:"Place Value Face-Off",gen:genPV,n:10,tn:6,t:15000},
-  rd:{label:"Rounding",em:"🎯",title:"Rounding Rush",gen:genRD,n:10,tn:6,t:15000},
-  fv:{label:"Fun Trivia",em:"🎈",title:"Super Fun Trivia",gen:genFV,n:10,tn:6,t:15000},
-  lt:{label:"Lightning",em:"⚡",title:"Lightning Round",gen:genLT,n:15,tn:10,t:10000},
-  tr:{label:"Trivia",em:"🧠",title:"Trivia Face-Off",gen:genTR,n:10,tn:6,t:15000},
-  od:{label:"Odd One Out",em:"👀",title:"Odd One Out",gen:genOD,n:10,tn:6,t:15000},
-  mx:{label:"Mystery Mix",em:"🎲",title:"Mystery Mix",gen:genMX,n:12,tn:6,t:15000},
-  ph:{label:"Move It!",em:"💃",title:"Move It! Challenge",ph:true,acts:ACTS,n:8,tn:3},
-  ch:{label:"Cheer Practice",em:"📣",title:"Falcons Cheer Practice",ph:true,acts:CHEER_ACTS,n:8,tn:3},
-  gm:{label:"Gymnastics",em:"🤸",title:"Bella's Gymnastics Spotlight",solo:{perf:1,items:GYM_MOVES,coach:"coach",top:"NAILED IT!",low:"GREAT TRY!"},n:6,tn:3},
-  sg:{label:"Singing",em:"🎤",title:"Emma's Singing Star",solo:{perf:0,items:SONG_LIST,coach:"judge",top:"ROCKSTAR!",low:"GREAT SHOW!"},n:6,tn:3},
-  td:{label:"Truth or Dare",em:"🎭",title:"Truth or Dare",tod:true,n:8,tn:4},
-  gq:{label:"Ask Grandma",em:"👵",title:"Ask Grandma Rachel",gq:true,n:8,tn:4},
-  rb:{label:"Roblox Trivia",em:"🟥",title:"Roblox Trivia",gen:genRB,n:10,tn:6,t:15000},
-  sq:{label:"Squishy Trivia",em:"🧁",title:"Squishy Trivia",gen:genSQ,n:10,tn:6,t:15000},
-};
-const TOURNEY=["ch","pv","gm","fv","ph","sg","td","lt","ch"];
-const KEYS1={a:0,s:1,d:2,f:3}, KEYS2={h:0,j:1,k:2,l:3};
-const MKEYS1={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0]};
-const MKEYS2={ArrowUp:[0,-1],ArrowLeft:[-1,0],ArrowDown:[0,1],ArrowRight:[1,0]};
-let S=null, timers=[];
-
-function clearTimers(){timers.forEach(clearTimeout);timers=[];if(PH&&PH.iv){clearInterval(PH.iv);PH.iv=null}}
-function later(fn,ms){timers.push(setTimeout(fn,ms))}
-function show(id){["menu","gamesMenu","splash","game","resultWrap","speed","reading","shelf"].forEach(s=>$(s).hidden=(s!==id))}
-
-function startSet(keys,mode){
-  clearTimers();
-  const p1=$("name1").value.trim()||"Player 1", p2=$("name2").value.trim()||"Player 2";
-  S={mode,keys:[...keys],ki:0,score:[0,0],names:[p1,p2],cur:null,resolved:true,locked:[false,false],ph:false,solo:null,tod:false,gq:false,acts:null,aid:""};
-  phUsed=new Set(); soloUsed=new Set(); todUsed=new Set(); gqUsed=new Set();
-  $("gn1").textContent=p1;$("gn2").textContent=p2;
-  $("pw1").textContent=p1.toUpperCase();$("pw2").textContent=p2.toUpperCase();
-  $("pts1").textContent="0";$("pts2").textContent="0";
-  nextSegment();
-}
-function nextSegment(){
-  const g=GAMES[S.keys[S.ki]];
-  S.qn=0; S.qmax = S.mode==="tourney" ? (g.tn||g.n) : g.n;
-  S.gen=g.gen; S.tms=g.t; S.ph=!!g.ph; S.solo=g.solo||null;
-  S.tod=!!g.tod; S.gq=!!g.gq;
-  S.acts=g.acts||null; S.aid=S.keys[S.ki];
-  trivUsed=new Set(); funUsed=new Set(); rbUsed=new Set(); sqUsed=new Set();
-  $("gLabel").textContent=g.label;
-  $("spEm").textContent=g.em;$("spTitle").textContent=g.title;
-  $("spSub").textContent = S.mode==="tourney" ? `Game ${S.ki+1} of ${S.keys.length}. Get ready...` : "Get ready...";
-  show("splash"); sTick();
-  later(()=>{show("game");nextQ()},1700);
-}
-function nextQ(){
-  clearTimers();
-  if(S.qn>=S.qmax){ S.ki++; if(S.ki<S.keys.length) return nextSegment(); return finish(); }
-  S.qn++; S.resolved=false; S.locked=[false,false];
-  $("flash").textContent=" ";$("flash").className="flash";
-  $("pad1").classList.remove("locked");$("pad2").classList.remove("locked");
-  const bar=$("tbar");
-  if(S.solo||S.tod||S.gq){
-    bar.style.transition="none"; bar.style.width="100%";
-    if(S.solo)startSoloQ(); else if(S.tod)startTodQ(); else startGqQ();
-    return;
-  }
-  if(S.ph){
-    bar.style.transition="none"; bar.style.width="100%";
-    startPhQ();
-    return;
-  }
-  S.cur=S.gen();
-  $("qCount").textContent=`${S.qn} / ${S.qmax}`;
-  $("prompt").innerHTML=S.cur.prompt; $("prompt").style.display=S.cur.prompt?"":"none";
-  $("visual").innerHTML=S.cur.visual||"";
-  renderPads();
-  bar.style.transition="none"; bar.style.width="100%";
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.transition=`width ${S.tms}ms linear`;bar.style.width="0%";}));
-  later(()=>timeUp(),S.tms);
-}
-function renderPads(){
-  [0,1].forEach(p=>{
-    const body=$("pb"+(p+1)); body.innerHTML="";
-    if(S.cur.tiles)body.className="padbody tiles"; else body.className="padbody";
-    body.style.display="flex";
-    if(S.cur.tiles){body.style.display="grid";}
-    else{body.style.flexDirection="column";body.style.gap="8px";}
-    const hint=p===0?["A","S","D","F"]:["H","J","K","L"];
-    S.cur.opts.forEach((o,i)=>{
-      const b=document.createElement("button");
-      b.className="abtn"; b.innerHTML=`<span class="kk">${hint[i]}</span>${o}`;
-      b.addEventListener("click",()=>answer(p,i,b));
-      body.appendChild(b);
-    });
-  });
-}
-function answer(p,i,btn){
-  if(!S||S.ph||S.solo||S.tod||S.gq||S.resolved||S.locked[p]||!S.cur)return;
-  const body=$("pb"+(p+1));
-  btn=btn||body.querySelectorAll(".abtn")[i];
-  if(!btn)return;
-  if(i===S.cur.ci){
-    S.resolved=true; S.score[p]++; sOK();
-    $("pts"+(p+1)).textContent=S.score[p];
-    btn.classList.add("correct");
-    $("flash").textContent=`${S.names[p]} takes the point! 🎉`;
-    $("flash").className="flash ok";
-    later(nextQ,1200);
-  }else{
-    S.locked[p]=true; sNO();
-    btn.classList.add("wrongpick"); $("pad"+(p+1)).classList.add("locked");
-    if(S.locked[0]&&S.locked[1]){ S.resolved=true; reveal("Both locked out!"); }
-  }
-}
-function timeUp(){ if(!S||S.resolved)return; S.resolved=true; reveal("Time's up!"); }
-function reveal(msg){
-  [1,2].forEach(n=>{const b=$("pb"+n).querySelectorAll(".abtn")[S.cur.ci]; if(b)b.classList.add("correct");});
-  $("flash").textContent=`${msg} Answer: ${S.cur.opts[S.cur.ci].replace(/<[^>]*>/g,"")}`;
-  $("flash").className="flash no";
-  later(nextQ,1700);
-}
-function finish(){
-  clearTimers(); show("resultWrap");
-  const [a,b]=S.score, tie=a===b, w=a>=b?0:1;
-  $("fn1").textContent=S.names[0]; $("fn2").textContent=S.names[1];
-  $("fp1").textContent=a; $("fp2").textContent=b;
-  $("trophyEm").textContent=tie?"🤝":"🏆";
-  $("winLine").textContent=tie?"It's a tie!":`${S.names[w]} wins!`;
-  $("winSub").textContent=tie?"Rematch to settle it?":"Great game, both of you!";
-  const t=loadTotals();
-  t.p[0]+=a; t.p[1]+=b; t.names=[S.names[0],S.names[1]]; t.games++;
-  saveTotals(t); renderTotals();
-  $("allLine").textContent=`🦅 All-time: ${t.names[0]} ${t.p[0]} · ${t.names[1]} ${t.p[1]} (${t.games} ${t.games===1?"game":"games"})`;
-  sWIN(); if(!tie)confetti();
-}
-function confetti(){
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  const c=$("confetti"),x=c.getContext("2d");
-  c.width=c.offsetWidth;c.height=c.offsetHeight;
-  const cols=["#8C2332","#FFC72C","#F2B705","#FFFFFF","#5A1220"];
-  const ps=Array.from({length:120},()=>({x:Math.random()*c.width,y:-20-Math.random()*c.height,w:rint(6,11),h:rint(8,16),v:1.5+Math.random()*2.5,r:Math.random()*6.28,col:pick(cols)}));
-  let n=0;
-  (function tick(){
-    x.clearRect(0,0,c.width,c.height);
-    ps.forEach(p=>{p.y+=p.v;p.r+=.05;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.col;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});
-    if(++n<340)requestAnimationFrame(tick); else x.clearRect(0,0,c.width,c.height);
-  })();
-}
-
-/* ---------------- wiring ---------------- */
-document.querySelectorAll(".gcard").forEach(b=>b.addEventListener("click",()=>startSet([b.dataset.game],"single")));
-$("tourney").addEventListener("click",()=>startSet(TOURNEY,"tourney"));
-$("quit").addEventListener("click",()=>finish());
-$("rematch").addEventListener("click",()=>startSet(S.keys,S.mode));
-$("toMenu").addEventListener("click",()=>{clearTimers();S=null;show("menu")});
-document.addEventListener("keydown",e=>{
-  if(!S||$("game").hidden)return;
-  if(S.solo||S.tod||S.gq)return;
-  if(S.ph){
-    if(e.repeat||!PH||PH.phase!=="race")return;
-    const k=e.key.toLowerCase();
-    if(k in KEYS1)phDone(0); else if(k in KEYS2)phDone(1);
-    return;
-  }
-  if(e.repeat)return;
-  const k=e.key.toLowerCase();
-  if(k in KEYS1)answer(0,KEYS1[k]);
-  else if(k in KEYS2)answer(1,KEYS2[k]);
-});
-/* ---------------- all-time scoreboard ---------------- */
-function loadTotals(){
-  try{const t=JSON.parse(localStorage.getItem("arenaTotals")||"null");
-    if(t&&Array.isArray(t.p)&&Array.isArray(t.names))return t;}catch(e){}
-  return {p:[0,0],names:[$("name1").value.trim()||"Player 1",$("name2").value.trim()||"Player 2"],games:0};
-}
-function saveTotals(t){try{localStorage.setItem("arenaTotals",JSON.stringify(t))}catch(e){}}
-function renderTotals(){
-  const t=loadTotals();
-  $("at1").textContent=`${t.names[0]}: ${t.p[0]}`;
-  $("at2").textContent=`${t.names[1]}: ${t.p[1]}`;
-  $("atg").textContent=`${t.games} ${t.games===1?"game":"games"} played`;
-}
-let resetArmed=false;
-$("atReset").addEventListener("click",()=>{
-  if(!resetArmed){
-    resetArmed=true; $("atReset").textContent="tap again to wipe the scoreboard";
-    setTimeout(()=>{resetArmed=false;$("atReset").textContent="reset scoreboard"},3000);
-    return;
-  }
-  saveTotals({p:[0,0],names:[$("name1").value.trim()||"Player 1",$("name2").value.trim()||"Player 2"],games:0});
-  resetArmed=false; $("atReset").textContent="reset scoreboard"; renderTotals();
-});
-renderTotals();
+function show(id){if(id==="menu"&&typeof QUEST!=="undefined")QUEST.active=null;["quest","menu","parent","speed","reading","school","shelf"].forEach(s=>$(s).hidden=(s!==id))}
 
 /* ================= EMMA'S SPEED MATH ================= */
 const SM={mode:"add",kind:"sprint",style:"pad",ans:0,entry:"",ok:0,att:0,miss:[],left:60,iv:null,lock:false,last:"",timers:[],penStale:""};
 const SM_MODES={add:"➕ Adding",sub:"➖ Taking Away",mul:"✖️ Times",div:"➗ Sharing",mix:"🌀 Surprise Mix",dec:"🔟 Decimal ×"};
-const SM_TEST_SECS=300, SM_TEST_N=100, SM_DEC_N=15;
+const SM_TEST_SECS=300, SM_TEST_N=100, SM_DEC_N=18;
 function smTestN(){return SM.mode==="dec"?SM_DEC_N:SM_TEST_N}
 function smMaxLen(){return SM.mode==="dec"?6:3}
 const DAD_NUM="+17329399393";
@@ -1568,7 +906,7 @@ function smCheck(){
   if(SM.style==="pen")SM.penStale=penFilter($("penIn").value);
   let delay;
   if(Math.abs(Number(SM.entry)-SM.ans)<1e-9){
-    SM.ok++; $("smSolved").textContent=`⭐ ${SM.ok}`;
+    SM.ok++; $("smSolved").textContent=`⭐ ${SM.ok}`; rwPts(1,true);
     $("smProb").className="smprob yay"; sOK();
     delay=160;
   }else{
@@ -1582,7 +920,7 @@ function smCheck(){
   else smLater(()=>{SM.lock=false;smGen()},delay);
 }
 function smStart(mode,kind,fromChallenge){
-  smClear();
+  smClear(); PT.round=0;PT.ups=[];
   if(!fromChallenge)CH.active=false;
   SM.mode=mode; SM.kind=kind||"sprint";
   SM.untimed=(SM.mode==="dec");
@@ -1648,8 +986,10 @@ function smEnd(){
   const kindTxt=SM.kind==="test"?`${SM.mode==="dec"?"Decimal × Test":"Real Test"} (${SM.ok} of ${smTestN()})`:`sprint: ${SM.ok} solved`;
   $("smTextDad").href=smsHref(`Emma's ${SM_MODES[SM.mode]} ${kindTxt}, ${accTxt}% right, grade ${em} ${g}${isRec?" 🎉 NEW RECORD!":""}`);
   const medal=(isRec?1:0)+((g==="A"||g==="A+")?1:0);
-  const msgs=rwEarn(medal?{medals:medal,why:medal===2?"a record AND an A!":isRec?"a new record!":"an A grade!"}:null);
-  rwBanner("smRw",msgs);
+  const qm=CH.active?(document.querySelectorAll(".mapback").forEach(b=>b.hidden=true),[]):questFinish(SM.ok>=15?3:SM.ok>=8?2:1);
+  const smPass=["A+","A","B+","B"].includes(g);
+  const msgs=rwEarn({pass:smPass,bonus:smPass?(SM.kind==="test"?20:10):0,medals:medal,why:medal===2?"a record AND an A!":isRec?"a new record!":"an A grade!",passHint:"Get a B or better to win a bonus squishy!"});
+  rwBanner("smRw",qm.concat(msgs));
   if(CH.active){
     CH.results.push({mode:SM.mode,ok:SM.ok,att:SM.att,g:g,em:em});
     const last=CH.idx>=CH_ORDER.length-1;
@@ -1851,13 +1191,11 @@ $("chSkip").addEventListener("click",()=>{if(CH.iv){clearInterval(CH.iv);CH.iv=n
 $("chProg").addEventListener("click",smRenderProg);
 $("chHome").addEventListener("click",()=>show("menu"));
 
-$("gamesBtn").addEventListener("click",()=>show("gamesMenu"));
-$("gamesBack").addEventListener("click",()=>show("menu"));
-$("mathBtn").addEventListener("click",()=>smShow("smSetup"));
+$("speedBtn").addEventListener("click",()=>smShow("smSetup"));
 $("togPad").addEventListener("click",()=>smSetStyle("pad"));
 $("togPen").addEventListener("click",()=>smSetStyle("pen"));
 document.querySelectorAll(".smmode").forEach(b=>b.addEventListener("click",()=>smStart(b.dataset.m,b.dataset.k||"sprint")));
-$("smHome").addEventListener("click",()=>{smClear();show("menu")});
+$("smHome").addEventListener("click",()=>{smClear();scHome("math")});
 $("smHome2").addEventListener("click",()=>{smClear();show("menu")});
 $("smToProg").addEventListener("click",smRenderProg);
 $("smToProg2").addEventListener("click",smRenderProg);
@@ -1867,7 +1205,7 @@ $("smTestBtn").addEventListener("click",()=>smShow("smPickT"));
 $("pickSBack").addEventListener("click",()=>smShow("smSetup"));
 $("pickTBack").addEventListener("click",()=>smShow("smSetup"));
 $("smAgain").addEventListener("click",()=>smStart(SM.mode,SM.kind));
-$("smPick").addEventListener("click",()=>smShow(SM.kind==="test"?"smPickT":"smPickS"));
+$("smPick").addEventListener("click",()=>{if(SM.mode==="dec"){scHome("math");return}smShow(SM.kind==="test"?"smPickT":"smPickS")});
 function smAbandon(){
   smClear(); SM.lock=true;
   $("smDrill").classList.remove("fx"); document.body.classList.remove("smlock");
@@ -1904,7 +1242,7 @@ $("smReset").addEventListener("click",()=>{
 /* ================= MAGIC SYNC (merge progress between browsers) ================= */
 function syncExport(){
   const o={v:1};
-  ["emmaSpeedRuns","emmaRewards","emmaFluency","emmaReadBest","arenaTotals"].forEach(k=>{
+  ["emmaSpeedRuns","emmaRewards","emmaFluency","emmaReadBest","emmaSchoolBest","emmaQuest","emmaLog"].forEach(k=>{
     try{const v=localStorage.getItem(k); if(v!=null)o[k]=v}catch(e){}
   });
   return "EMMA1."+btoa(unescape(encodeURIComponent(JSON.stringify(o))));
@@ -1934,7 +1272,7 @@ function syncMergeIn(code){
     if(theirs&&Array.isArray(theirs.sq)){
       const mine=rwLoad(), sq=mine.sq.slice();
       theirs.sq.forEach(i=>{if(sq.indexOf(i)<0)sq.push(i)});
-      rwSave({medals:Math.max(mine.medals||0,Number(theirs.medals)||0),sq:sq,acts:Math.max(mine.acts||0,Number(theirs.acts)||0)});
+      rwSave({medals:Math.max(mine.medals||0,Number(theirs.medals)||0),sq:sq,acts:Math.max(mine.acts||0,Number(theirs.acts)||0),pts:Math.max(Number(mine.pts)||0,Number(theirs.pts)||0),days:dayMax(mine.days,theirs.days),butter:!!(mine.butter||theirs.butter)});
     }
   }catch(e){}
   // Reading fluency: keep every speed-read from both sides
@@ -1957,23 +1295,35 @@ function syncMergeIn(code){
     const b=Math.max(Number(localStorage.getItem("emmaReadBest")||0),Number(o.emmaReadBest)||0);
     if(b)localStorage.setItem("emmaReadBest",String(b));
   }catch(e){}
-  // Game-room scoreboard: keep the bigger totals
+  // School practice tests: keep the better score for each test
   try{
-    const theirs=JSON.parse(o.arenaTotals||"null");
-    if(theirs&&Array.isArray(theirs.p)){
-      const mine=loadTotals();
-      mine.p=[Math.max(Number(mine.p[0])||0,Number(theirs.p[0])||0),Math.max(Number(mine.p[1])||0,Number(theirs.p[1])||0)];
-      mine.games=Math.max(Number(mine.games)||0,Number(theirs.games)||0);
-      saveTotals(mine);
+    const theirs=JSON.parse(o.emmaSchoolBest||"{}");
+    if(theirs&&typeof theirs==="object"){
+      const mine=scLoadBest();
+      Object.keys(theirs).forEach(k=>{
+        const t=theirs[k]; if(!t||!Number(t.n))return;
+        const m=mine[k];
+        if(!m||!m.n||t.ok/t.n>m.ok/m.n)mine[k]={ok:Number(t.ok)||0,n:Number(t.n)};
+      });
+      scSaveBest(mine);
     }
   }catch(e){}
+  // Quest map and activity log: same rules as the auto save
+  ["emmaQuest","emmaLog"].forEach(k=>{
+    try{
+      if(typeof o[k]!=="string")return;
+      const mine=localStorage.getItem(k);
+      const mv=mine==null?o[k]:CS_MERGE[k](mine,o[k],true);
+      if(mv!=null&&mv!==mine)localStorage.setItem(k,mv);
+    }catch(e){}
+  });
   return "";
 }
 function syncSay(msg,good){const m=$("syncMsg");m.textContent=msg;m.style.color=good?"#1B9E4B":"#B3261E";}
 $("syncCopy").addEventListener("click",()=>{
   const code=syncExport();
   const done=()=>syncSay("Copied! Now paste it in the other browser. ✅",true);
-  const fallback=()=>{const t=$("syncIn");t.value=code;t.focus();t.select();syncSay("Code is in the box below — copy it yourself!",true)};
+  const fallback=()=>{const t=$("syncIn");t.value=code;t.focus();t.select();syncSay("Code is in the box below. Copy it yourself!",true)};
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code).then(done).catch(fallback)}else{fallback()}
 });
 $("syncMerge").addEventListener("click",()=>{
@@ -1982,6 +1332,7 @@ $("syncMerge").addEventListener("click",()=>{
   $("syncIn").value="";
   syncSay("Merged! All progress from both browsers is together now. 🎉",true);
   smRenderProg();
+  try{csRefresh()}catch(e){}
 });
 
 /* ================= PRIZE SHELF (medals + squishies) ================= */
@@ -1989,20 +1340,62 @@ const SQUISHIES=[["🍓","Berry"],["🧁","Cupcake"],["🐼","Panda Puff"],["�
  ["🐸","Hoppy"],["🍩","Sprinkles"],["🐱","Mochi"],["🌈","Rainy"],["🍉","Melony"],["🐧","Waddles"],
  ["🦊","Foxy"],["🍪","Chippy"],["🐢","Sheldon"],["🌙","Luna"],["🍋","Zesty"],["🐥","Peep"],
  ["🧇","Waffles"],["🦋","Flutter"],["🍦","Swirly"],["🐙","Squiddy"],["⭐","Twinkle"],["🫧","Bubbles"]];
-function rwLoad(){try{const r=JSON.parse(localStorage.getItem("emmaRewards")||"null");if(r&&Array.isArray(r.sq))return r}catch(e){}return{medals:0,sq:[],acts:0}}
-function rwSave(r){try{localStorage.setItem("emmaRewards",JSON.stringify(r))}catch(e){}}
+/* SQUISH POINTS: 1 per right answer, bonuses for passing. Bigger squishies unlock as points grow. */
+const LADDER=[[25,"🐹","Mini Hamster",30],[100,"🐰","Small Bunny",40],[250,"🐨","Medium Koala",52],[500,"🦭","Large Seal",64],[1000,"🐳","Jumbo Whale",78],[1750,"🦕","Mega Dino",92],[2500,"🐻","Giant Bear",108]];
+const PT={round:0,ups:[],last:0};
+function rwLoad(){
+  let r=null; try{r=JSON.parse(localStorage.getItem("emmaRewards")||"null")}catch(e){}
+  if(!r||!Array.isArray(r.sq))r={medals:0,sq:[],acts:0};
+  if(typeof r.pts!=="number")r.pts=(Number(r.acts)||0)*5+(Number(r.medals)||0)*10; // head start for work done before points existed
+  return r;
+}
+function rwSave(r){try{localStorage.setItem("emmaRewards",JSON.stringify(r))}catch(e){} try{hudRender()}catch(e){}}
+function dayMax(a,b){const o=Object.assign({},b||{});Object.keys(a||{}).forEach(k=>{o[k]=Math.max(Number(a[k])||0,Number(o[k])||0)});return o}
+function ladGot(pts){return LADDER.filter(l=>pts>=l[0]).length}
+function ptsAdd(r,n){
+  const before=ladGot(r.pts); r.pts+=n; r.days=r.days||{}; const dk=todayKey(); r.days[dk]=(r.days[dk]||0)+n; const after=ladGot(r.pts), ups=[];
+  for(let i=before;i<after;i++){const L=LADDER[i];ups.push(`<span style="font-size:${Math.min(L[3],70)}px">${L[1]}</span><br>LEVEL UP! You reached ${fmt(L[0])} points and unlocked the <b>${L[2].toUpperCase()}</b> squishy!`)}
+  return ups;
+}
+function logLoad(){try{const l=JSON.parse(localStorage.getItem("emmaLog")||"[]");return Array.isArray(l)?l:[]}catch(e){return[]}}
+function logAct(o){try{const l=logLoad();l.push(Object.assign({t:Date.now()},o,{miss:(o.miss||[]).slice(0,8)}));localStorage.setItem("emmaLog",JSON.stringify(l.slice(-600)))}catch(e){}}
+function rwToast(html){const d=document.createElement("div");d.className="cheer gold";d.innerHTML=html;document.body.appendChild(d);setTimeout(()=>d.remove(),2800)}
+function rwPts(n,quiet){
+  if(!n)return;
+  const r=rwLoad(), ups=ptsAdd(r,n); rwSave(r);
+  PT.round+=n; PT.ups.push(...ups);
+  if(!quiet){const d=document.createElement("div");d.className="ptpop";d.textContent=`+${n} ⭐`;document.body.appendChild(d);setTimeout(()=>d.remove(),1200)}
+  if(ups.length&&!quiet){rwToast("🎉 "+ups[ups.length-1].split("<br>")[1]);sWIN()}
+}
+let COMBO=0;
+function comboHit(){COMBO++;if(COMBO>=3&&COMBO%3===0){rwPts(2,true);const d=document.createElement("div");d.className="ptpop combo";d.textContent=`🔥 ${COMBO} in a row! +2`;document.body.appendChild(d);setTimeout(()=>d.remove(),1300)}}
+function comboBreak(){COMBO=0}
+function streakDays(r){const d=Object.keys(r.days||{}).filter(k=>r.days[k]>0);let n=0;const t=new Date();for(;;){const k=t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0");if(d.includes(k)){n++;t.setDate(t.getDate()-1)}else{if(n===0&&k===todayKey()){t.setDate(t.getDate()-1);continue}break}}return n}
 function rwEarn(opts){
+  opts=opts||{};
   const r=rwLoad(); const msgs=[];
-  r.acts++;
-  if(r.acts%2===0&&r.sq.length<SQUISHIES.length){
-    const unowned=SQUISHIES.filter(s=>!r.sq.includes(s[1]));
-    const nw=pick(unowned); r.sq.push(nw[1]);
-    msgs.push(`${nw[0]} A new squishy joined your shelf: <b>${nw[1]}</b>!`);
-  }
-  if(opts&&opts.medals){r.medals+=opts.medals;
+  r.acts=(r.acts||0)+1;
+  if(opts.bonus){PT.ups.push(...ptsAdd(r,opts.bonus));PT.round+=opts.bonus}
+  if(PT.round>0)msgs.push(`⭐ You earned <b>${PT.round} Squish Points</b>${opts.bonus?` (with ${opts.bonus} bonus)`:""}! Total: <b>${fmt(r.pts)}</b>`);
+  msgs.push(...PT.ups);
+  if(opts.pass){
+    const unowned=SQUISHIES.filter(x=>!r.sq.includes(x[1]));
+    if(unowned.length){const nw=pick(unowned); r.sq.push(nw[1]); msgs.push(`🎁 You passed, so you get a BONUS SQUISHY: ${nw[0]} <b>${nw[1]}</b>!`)}
+    else msgs.push(`🎁 You passed! Your whole squishy collection is complete!`);
+  }else if(opts.passHint){msgs.push(`🎁 ${opts.passHint}`)}
+  if(opts.medals){r.medals+=opts.medals;
     msgs.push(`🥇 ${opts.medals===1?"You earned a GOLD MEDAL":"You earned "+opts.medals+" GOLD MEDALS"}: ${esc(opts.why||"amazing work!")}`);}
+  const nx=LADDER.find(l=>r.pts<l[0]);
+  if(nx)msgs.push(`🪜 Only <b>${fmt(nx[0]-r.pts)}</b> more points to the ${nx[1]} <b>${nx[2]}</b>!`);
+  PT.last=PT.round; PT.round=0; PT.ups=[];
   rwSave(r);
   return msgs;
+}
+function hudRender(){
+  const h=$("hud"); if(!h)return;
+  const r=rwLoad(), got=ladGot(r.pts), nx=LADDER[got], prev=got?LADDER[got-1][0]:0;
+  const pct=nx?Math.round(100*(r.pts-prev)/(nx[0]-prev)):100;
+  h.innerHTML=`<span class="hp">⭐ ${fmt(r.pts)}<small>POINTS</small></span><span class="hmid"><span class="hn">${nx?`Next: ${nx[1]} ${nx[2]} · ${fmt(nx[0]-r.pts)} to go`:"🏆 Every ladder squishy unlocked!"}</span><span class="hbar"><i style="width:${pct}%"></i></span></span><span class="hs">${(()=>{const k=streakDays(r);return k>1?`🔥${k}`:""})()} 🧸 ${r.sq.length+got+(r.butter?1:0)}</span>`;
 }
 function rwBanner(elId,msgs){
   const el=$(elId); if(!el)return; el.innerHTML="";
@@ -2016,7 +1409,21 @@ function rwBanner(elId,msgs){
 function shelfRender(){
   const r=rwLoad();
   $("shMedals").textContent=`🥇 ${r.medals} gold medal${r.medals===1?"":"s"}`;
-  $("shCount").textContent=`🧸 ${r.sq.length} of ${SQUISHIES.length} squishies`;
+  const got=ladGot(r.pts);
+  $("shPts").innerHTML=`⭐ ${fmt(r.pts)}<small>SQUISH POINTS</small>`;
+  $("shCount").textContent=`🧸 ${r.sq.length+got+(r.butter?1:0)} squishies`;
+  const lad=$("shLad"); lad.innerHTML="";
+  LADDER.slice().reverse().forEach(L=>{
+    const i=LADDER.indexOf(L), own=r.pts>=L[0], isNext=i===got, prev=i?LADDER[i-1][0]:0;
+    const d=document.createElement("div"); d.className="lrung "+(own?"got":isNext?"next":"lock");
+    d.innerHTML=`<div class="le" style="font-size:${L[3]}px">${L[1]}</div><div style="flex:1"><h3>${own?"✅ ":"🔒 "}${L[2]}</h3><p>${own?"Unlocked! It's yours.":`Unlocks at ${fmt(L[0])} points`}</p>${isNext?`<div class="lbar"><i style="width:${Math.round(100*(r.pts-prev)/(L[0]-prev))}%"></i></div><p>${fmt(L[0]-r.pts)} more points to go!</p>`:""}</div>`;
+    lad.appendChild(d);
+  });
+  const bg=$("shBig");
+  bg.innerHTML=r.butter
+    ?`<div class="butter"><div class="bb">🧈</div><div><h3>Huge Butter Squishy</h3><p>The rarest squishy on the shelf! You won it at the Castle Challenge.</p></div></div>`
+    :`<div class="butter locked"><div class="bb">🧈</div><div><h3>Huge Butter Squishy</h3><p>🔒 Win the Castle Challenge to get this one. It's the biggest squishy of all! No timer, and every right answer still earns points.</p><button class="smbig" id="shBoss">🏰 Try the Castle Challenge</button></div></div>`;
+  if($("shBoss"))$("shBoss").addEventListener("click",()=>scStart("boss"));
   const g=$("shGrid"); g.innerHTML="";
   SQUISHIES.forEach(([em,nm])=>{
     const own=r.sq.includes(nm);
@@ -2029,6 +1436,7 @@ function shelfRender(){
   show("shelf");
 }
 $("shelfBtn").addEventListener("click",shelfRender);
+$("hud").addEventListener("click",shelfRender);
 $("shBack").addEventListener("click",()=>show("menu"));
 
 /* ================= READING: story + quiz ================= */
@@ -2066,6 +1474,24 @@ const RD_QS=[
   ["The wind scatters the flyers, showing the same star that is on the twins' wagon","Mary Anne finds the twins' names in the record book","The twins confess at the welcome table","Mrs. Newton hires a detective"],0],
  ["What lesson does Kristy's new club rule teach?",
   ["Never trust families who cancel jobs","Answer lies with proof and actions instead of arguing","Always charge less than the competition","Emergency meetings solve every problem"],1],
+ ["Why does Mary Anne feel nervous before the phone call?",
+  ["She lost the phone number","She thinks Mrs. Newton is angry at her","Talking on the phone to adults makes her stomach flip","She has never used a phone before"],2],
+ ["How does Dawn help solve the mystery?",
+  ["She finds fingerprints on the flyer","She remembers the Marshall twins said babysitting was easy money","She calls the New York phone number","She follows the twins home"],1],
+ ["What kind of person is Kristy in this story?",
+  ["Someone who gives up easily","Someone who blames her friends","A shy member who never talks","A calm leader who wants proof before acting"],3],
+];
+const RD_WHY=[
+ "At the start, the Delaneys and the Newtons both stopped hiring the club.",
+ "Kristy wants facts first. The club doesn't know yet if it did anything wrong.",
+ "Stacey saw the New York City phone number. Nobody from the city would ride a train to babysit for half price.",
+ "No stamps means someone walked around and put the flyers in mailboxes by hand.",
+ "The games day was a test. Real sitters would come and play with kids. Fakes would not.",
+ "The wind blew the flyers around, and every one had the same star as the twins' wagon.",
+ "Kristy's rule says: don't argue with a lie, just show the truth.",
+ "The story says talking on the phone to adults made her stomach flip like a gymnast.",
+ "Dawn remembered the twins told Jamie Newton babysitting was easy money, and their cousin lives in New York.",
+ "Kristy says to get information before anyone panics, and she plans a way to prove the truth.",
 ];
 let RD={i:0,ok:0,lock:false};
 function rdOpenStory(){
@@ -2075,7 +1501,7 @@ function rdOpenStory(){
   $("rdStory").hidden=false; show("reading"); window.scrollTo(0,0);
 }
 function rdShowSub(sub){["rdHome","rdStory","rdQuiz","rdRes","flHome","flRead","flRes"].forEach(s=>$(s).hidden=(s!==sub));show("reading");window.scrollTo(0,0)}
-function rdStartQuiz(){RD={i:0,ok:0,lock:false};rdShowSub("rdQuiz");rdPaintQ()}
+function rdStartQuiz(){PT.round=0;PT.ups=[];COMBO=0;RD={i:0,ok:0,lock:false,miss:[]};rdShowSub("rdQuiz");rdPaintQ()}
 function rdPaintQ(){
   const [q,opts]=RD_QS[RD.i];
   $("rdQc").textContent=`${RD.i+1} / ${RD_QS.length}`;
@@ -2092,18 +1518,19 @@ function rdAnswer(i,btn){
   if(RD.lock)return; RD.lock=true;
   const ci=RD_QS[RD.i][2];
   const btns=$("rdOpts").querySelectorAll(".rdopt");
-  if(i===ci){RD.ok++;btn.classList.add("yes");sOK();$("rdFlash").textContent="That's right! 🎉";$("rdFlash").className="flash ok";}
-  else{btn.classList.add("no");btns[ci].classList.add("yes");sNO();$("rdFlash").textContent="Good try! The green one is it.";$("rdFlash").className="flash no";}
+  if(i===ci){RD.ok++;btn.classList.add("yes");sOK();rwPts(1);comboHit();$("rdFlash").textContent="That's right! 🎉";$("rdFlash").className="flash ok";}
+  else{RD.miss.push(RD_QS[RD.i][0]);comboBreak();btn.classList.add("no");btns[ci].classList.add("yes");sNO();$("rdFlash").textContent="Good try! The green one is it.";$("rdFlash").className="flash no";}
   setTimeout(()=>{RD.i++; if(RD.i<RD_QS.length)rdPaintQ(); else rdFinish();},i===ci?900:1700);
 }
 function rdFinish(){
   let best=0; try{best=Number(localStorage.getItem("emmaReadBest")||0)}catch(e){}
   const nb=Math.max(best,RD.ok); try{localStorage.setItem("emmaReadBest",String(nb))}catch(e){}
-  const em=RD.ok>=7?"🏆 A+":RD.ok>=6?"🌟 A":RD.ok>=5?"💪 B+":RD.ok>=4?"👍 B":"🌱 Good practice!";
+  const em=RD.ok>=10?"🏆 A+":RD.ok>=9?"🌟 A":RD.ok>=8?"💪 B+":RD.ok>=7?"👍 B":"🌱 Good practice!";
   $("rdGrade").textContent=em;
   $("rdScore").textContent=`${RD.ok} of ${RD_QS.length}`;
   $("rdBest").textContent=`Best: ${nb}`;
-  const msgs=rwEarn(RD.ok>=6?{medals:1,why:"a super reading score!"}:null);
+  const msgs=rwEarn({pass:RD.ok>=7,bonus:RD.ok>=7?(RD.ok>=9?20:10):0,medals:RD.ok>=9?1:0,why:"a super reading score!",passHint:"Get 7 of 10 to win a bonus squishy!"});
+  logAct({sub:"eng",id:"story",title:"Story + Quiz",ok:RD.ok,n:RD_QS.length,pts:PT.last,miss:RD.miss});
   rwBanner("rdRw",msgs);
   rdShowSub("rdRes");
 }
@@ -2131,7 +1558,7 @@ function flRenderHome(){
   rdShowSub("flHome");
 }
 function flOpen(p){
-  FL={p,iv:null,left:60,running:false,done:false};
+PT.round=0;PT.ups=[];  FL={p,iv:null,left:60,running:false,done:false};
   const words=p.text.split(/\s+/);
   const box=$("flWords"); box.innerHTML="";
   words.forEach((w,i)=>{
@@ -2181,13 +1608,16 @@ function flPick(n,el){
   const ch=$("flChart"); ch.innerHTML="";
   const last=runs.slice(-8); const mx=Math.max(10,...last.map(r=>r.w));
   last.forEach(r=>{const b=document.createElement("div");b.className="cbar";b.style.height=Math.max(14,Math.round(110*r.w/mx))+"px";b.textContent=r.w;ch.appendChild(b)});
-  const msgs=rwEarn(isRec?{medals:1,why:"a new reading speed record!"}:null);
-  rwBanner("flRw",msgs);
+  rwPts(Math.max(1,Math.floor(n/10)),true);
+  const flQ=questFinish(3);
+  const flPass=runs.length===1||n>=runs[runs.length-2].w;
+  const msgs=rwEarn({pass:flPass,bonus:flPass?10:0,medals:isRec?1:0,why:"a new reading speed record!",passHint:"Read as far as last time to win a bonus squishy!"});
+  rwBanner("flRw",flQ.concat(msgs));
   setTimeout(()=>rdShowSub("flRes"),600);
 }
 
 /* reading wiring */
-$("readBtn").addEventListener("click",()=>rdShowSub("rdHome"));
+$("readBtn").addEventListener("click",()=>scHome("read"));
 $("rdBack").addEventListener("click",()=>show("menu"));
 $("rdStoryBtn").addEventListener("click",rdOpenStory);
 $("rdStoryBack").addEventListener("click",()=>rdShowSub("rdHome"));
@@ -2199,7 +1629,779 @@ $("flBack").addEventListener("click",()=>rdShowSub("rdHome"));
 $("flAgain").addEventListener("click",()=>flOpen(FL.p));
 $("flHome2").addEventListener("click",flRenderHome);
 
-show("menu");
+
+/* ================= THIS WEEK AT SCHOOL (Mrs. Mattes, 5th grade) =================
+   Topics from the class emails of Oct 25, Nov 1 and Nov 8. */
+function dstr(v,d){ // integer v with d decimal places, trailing zeros trimmed
+  while(d<0){v*=10;d++}
+  while(d>0&&v%10===0){v=v/10;d--}
+  return numStr(v,d);
+}
+const SUP={1:"¹",2:"²",3:"³",4:"⁴",5:"⁵"};
+const P10W={1:"10",2:"100",3:"1,000",4:"10,000"};
+function scMC(q,ans,wrongs,why,extra){
+  const opts=[ans];
+  wrongs.forEach(w=>{if(opts.length<4&&w!=null&&opts.indexOf(String(w))<0)opts.push(String(w))});
+  shuffle(opts);
+  return Object.assign({q:q,opts:opts,a:opts.indexOf(ans),why:why},extra||{});
+}
+function scDecNum(){ // a number like 0.6, 4.7 or 3.47 as [digits, decimals]
+  const d=rint(1,2); let v;
+  do{v=d===1?rint(1,99):rint(1,999)}while(v%10===0);
+  return [v,d];
+}
+function genP10(){
+  const t=rint(0,5);
+  if(t===1){
+    const k=rint(2,4);
+    return scMC(`What is 10${SUP[k]}?`,fmt(10**k),[fmt(10*k),fmt(10**(k-1)),fmt(10**(k+1))],
+      `10${SUP[k]} means ${Array(k).fill("10").join(" × ")}. That's a 1 with ${k} zeros: ${fmt(10**k)}.`);
+  }
+  if(t===2){
+    let n; do{n=rint(2,99)}while(n%10===0);
+    const k=rint(1,3), ex=Math.random()<.4;
+    return scMC(`${n} × ${ex?"10"+SUP[k]:P10W[k]}`,fmt(n*10**k),[fmt(n*10**(k-1)),fmt(n*10**(k+1)),fmt(n*k*10),fmt(n+10**k)],
+      `${ex?`10${SUP[k]} is ${P10W[k]}. `:""}Times ${P10W[k]} adds ${k} zero${k>1?"s":""} to the end: ${fmt(n*10**k)}.`);
+  }
+  if(t===3){
+    const [v,d]=scDecNum(), k=rint(1,3);
+    return scMC(`${dstr(v,d)} × ___ = ${dstr(v,d-k)}`,P10W[k],["10","100","1,000","10,000"],
+      `The decimal point moved ${k} place${k>1?"s":""} to the right, so it was times ${P10W[k]}.`);
+  }
+  if(t===4){
+    const k=rint(2,4);
+    return scMC(`Which one equals ${P10W[k]}?`,"10"+SUP[k],["10"+SUP[k-1],"10"+SUP[k+1],`${k} × 10`],
+      `Count the zeros in ${P10W[k]}: there are ${k}. So it's 10${SUP[k]}.`,{wordy:true});
+  }
+  const [v,d]=scDecNum(), k=rint(1,3), ex=Math.random()<.4;
+  return scMC(`${dstr(v,d)} × ${ex?"10"+SUP[k]:P10W[k]}`,dstr(v,d-k),[dstr(v,d-k+1),dstr(v,d-k-1),dstr(v,d-k+2),dstr(v,d+k)],
+    `${ex?`10${SUP[k]} is ${P10W[k]}. `:""}Times ${P10W[k]} moves the decimal point ${k} place${k>1?"s":""} to the RIGHT. ${dstr(v,d)} becomes ${dstr(v,d-k)}.`);
+}
+function genMdec(){
+  const t=rint(0,2); let a,da,b,db;
+  if(t===0){a=rint(2,9);da=1;b=rint(2,9);db=0}
+  else if(t===1){a=rint(2,9);da=1;b=rint(2,9);db=1}
+  else{do{a=rint(11,49)}while(a%10===0);da=1;b=rint(2,9);db=pick([0,1])}
+  const p=a*b, d=da+db, ans=dstr(p,d), full=numStr(p,d);
+  return scMC(`${dstr(a,da)} × ${dstr(b,db)}`,ans,[dstr(p,d-1),dstr(p,d+1),dstr(p,d+2)],
+    `Multiply like whole numbers: ${a} × ${b} = ${p}. The problem has ${d} decimal place${d>1?"s":""}, so the answer does too: ${full}${full!==ans?`, which is the same as ${ans}`:""}.`);
+}
+function genBig(){
+  const a=Math.random()<.65?rint(12,98):rint(102,489); let b; do{b=rint(12,48)}while(b%10===0);
+  const ans=a*b, o=b%10, tn=b-o;
+  return scMC(`${a} × ${b}`,fmt(ans),[fmt(a*o+a*(tn/10)),fmt(ans+100),fmt(ans-10),fmt(ans+a)],
+    `${a} × ${o} = ${fmt(a*o)}. ${a} × ${tn} = ${fmt(a*tn)} (don't forget the zero!). Add them: ${fmt(a*o)} + ${fmt(a*tn)} = ${fmt(ans)}.`,{hint:"Use scratch paper!"});
+}
+function gen22(){
+  const two=()=>{let n;do{n=rint(12,98)}while(n%10===0);return n};
+  const a=two(), b=two(), ans=a*b, o=b%10, tn=b-o;
+  const why=`${a} × ${o} = ${fmt(a*o)}. ${a} × ${tn} = ${fmt(a*tn)} (don't forget the zero!). Add them: ${fmt(a*o)} + ${fmt(a*tn)} = ${fmt(ans)}.`;
+  const wr=[fmt(a*o+a*(tn/10)),fmt(ans+10*a),fmt(ans-100),fmt(ans+100),fmt(ans+10)];
+  if(Math.random()<.25){
+    const W=pick([[`A school bus holds ${a} kids. How many kids can ride on ${b} buses?`,"kids"],[`Each box has ${a} crayons. How many crayons are in ${b} boxes?`,"crayons"],[`A farmer plants ${b} rows with ${a} seeds in each row. How many seeds is that?`,"seeds"],[`The class reads ${a} pages a day for ${b} days. How many pages is that?`,"pages"]]);
+    return scMC(W[0],`${fmt(ans)} ${W[1]}`,wr.map(x=>`${x} ${W[1]}`),`It's ${a} × ${b}. `+why,{wordy:true,hint:"Use scratch paper!"});
+  }
+  return scMC(`${a} × ${b}`,fmt(ans),wr,why,{hint:"Use scratch paper!"});
+}
+function genSdec(){
+  const da=rint(1,2), db=rint(1,2); let A,B;
+  do{A=rint(200,1999)}while(da===1?A%10!==0:A%10===0);
+  do{B=rint(25,A-15)}while(db===1?B%10!==0:B%10===0);
+  const ans=A-B;
+  const w=[ans+10,ans-10,ans+100,ans-100,ans+1].filter(x=>x>0).map(x=>dstr(x,2));
+  return scMC(`${dstr(A,2)} − ${dstr(B,2)}`,dstr(ans,2),w,
+    `Line up the decimal points and fill empty spots with zeros: ${numStr(A,2)} − ${numStr(B,2)} = ${numStr(ans,2)}.`);
+}
+
+const SC_PC_OPTS=["✂️ Physical","⚗️ Chemical"];
+const SC_PC=[
+ ["An ice cube melts into a puddle.",0,"It is still water, just a liquid now. Melting is a change of state, and that is physical."],
+ ["Wood burns in a campfire.",1,"Burning makes brand new stuff: ash, smoke, and gases. You can't turn ash back into wood."],
+ ["You cut a piece of paper into confetti.",0,"The pieces are smaller, but they are still paper."],
+ ["Cake batter bakes into a cake.",1,"Heat turns the batter into a new substance. You can't un-bake a cake!"],
+ ["An old bike chain gets rusty.",1,"Rust is a new substance that forms when iron meets water and air."],
+ ["Water boils and turns into steam.",0,"Steam is still water, just a gas. Boiling is a change of state."],
+ ["Milk left out too long turns sour.",1,"New substances form that change the smell and taste. That's chemical."],
+ ["A glass cup falls and breaks.",0,"The pieces are still glass. Only the shape and size changed."],
+ ["You stir sugar into lemonade and it dissolves.",0,"The sugar is still sugar, just in tiny pieces. If the water dried up, the sugar would be left behind."],
+ ["Baking soda and vinegar fizz and bubble.",1,"The bubbles are a new gas that wasn't there before. Gas bubbles are a sign of a chemical change."],
+ ["A sliced apple turns brown.",1,"The apple reacts with the air and makes new stuff, so the color changes."],
+ ["You crush an empty soda can.",0,"The can changed shape, but it is still the same metal."],
+ ["An egg cooks in a frying pan.",1,"Heat changes the egg into new stuff. You can't make it raw again."],
+ ["Fireworks explode in the sky.",1,"They give off light, heat, and smoke. New substances form."],
+ ["A chocolate bar melts in your hand.",0,"Melted chocolate is still chocolate. Put it in the fridge and it gets hard again."],
+ ["Leaves turn red and orange in the fall.",1,"Chemicals inside the leaf break down and change, so the color changes."],
+ ["Juice freezes into a popsicle.",0,"Freezing is a change of state. It's still juice."],
+ ["You tear a sheet of aluminum foil.",0,"Smaller pieces, same foil."],
+ ["A candle's wick burns and makes smoke.",1,"Burning always makes new substances, like smoke and gases."],
+ ["Your body digests your lunch.",1,"Your stomach breaks food down into new substances your body can use."],
+ ["You mix sand and pebbles in a bucket.",0,"You could pick them apart again. Nothing new was made."],
+ ["Butter melts on warm toast.",0,"Melted butter is still butter. Melting is a change of state."],
+ ["Dew drops form on the grass on a cool morning.",0,"Water in the air turns into liquid drops. That's condensation, a change of state."],
+ ["A puddle dries up on a sunny day.",0,"The water evaporates into the air. It's still water, just a gas now."],
+ ["You sharpen a pencil and get wood shavings.",0,"The shavings are still wood. Only the shape and size changed."],
+ ["Dry ice turns into a cloud of foggy gas.",0,"Tricky! It's still the same stuff (carbon dioxide), just a gas now. A change of state is physical."],
+ ["You fold paper into a paper airplane.",0,"Folding only changes the shape. It's still paper."],
+ ["Salt dissolves in a glass of water.",0,"Let the water evaporate and the salt is left behind. Dissolving is physical."],
+ ["You blow up a balloon.",0,"The balloon just stretches and fills with air. Nothing new is made."],
+ ["You squish clay into the shape of a bowl.",0,"Same clay, new shape. That's physical."],
+ ["You chop carrots into little pieces.",0,"Smaller pieces, but still carrots."],
+ ["A metal spoon gets hot in a bowl of soup.",0,"Tricky! Getting hot doesn't always mean chemical. The spoon is still the same metal, and it cools back down."],
+ ["Water boils and makes bubbles.",0,"Tricky! These bubbles are just water turning into gas (steam). No new substance, so it's physical."],
+ ["You snap a glow stick and it starts to glow.",1,"Giving off light is a sign of a chemical change. Two liquids inside mix and make new stuff."],
+ ["Bread dough rises because of yeast.",1,"Yeast makes a new gas that puffs up the dough. A new gas means chemical."],
+ ["Bread turns brown in the toaster.",1,"Toasting makes new substances, so the color and smell change. You can't un-toast it!"],
+ ["A shiny penny turns green after many years outside.",1,"The copper reacts with the air and water and makes a new green coating."],
+ ["Gasoline burns in a car engine.",1,"Burning makes new substances, like exhaust gases."],
+ ["A marshmallow gets roasted until it turns black.",1,"The heat makes new black stuff that wasn't there before. That's chemical."],
+ ["A banana turns brown and spotty as it gets older.",1,"Chemicals inside the banana change and make new stuff, so the color changes."],
+ ["An antacid tablet fizzes when you drop it in water.",1,"The fizz is a new gas. Gas bubbles from mixing things are a sign of a chemical change."],
+ ["Hydrogen peroxide bubbles when it touches a cut.",1,"The bubbles are a new gas (oxygen) being made. That's chemical."],
+ ["Leaves rot into dirt in a compost pile.",1,"Rotting breaks the leaves down into brand new stuff. That's chemical."],
+ ["A match bursts into flame.",1,"Light, heat, and smoke are all signs of a chemical change."],
+ ["A plant uses sunlight to make its own food.",1,"The plant turns water and air into sugar, a new substance. That's chemical."],
+ ["Grape juice slowly turns into vinegar.",1,"New substances form that change the smell and taste. That's chemical."],
+ ["Cookie dough bakes into crunchy cookies.",1,"Heat turns the dough into new stuff. You can't turn cookies back into dough."],
+];
+const SC_SCIW=[
+ ["What happens in a PHYSICAL change?",["The size, shape, or state changes, but it's still the same stuff","A brand new substance is made","It always catches on fire","It always changes color"],"In a physical change, the stuff stays the same stuff. Only how it looks or its state changes."],
+ ["What happens in a CHEMICAL change?",["New substances are made","Only the shape changes","It only gets smaller","Nothing changes at all"],"Chemical change means new stuff is made."],
+ ["Which one is a SIGN of a chemical change?",["Bubbles of gas appear","It gets cut in half","It gets folded","It gets wet"],"Signs of a chemical change: gas bubbles, a new color, a new smell, light or heat, or a new solid forming."],
+ ["Which one is NOT a sign of a chemical change?",["The shape changes","A new smell","Light and heat are given off","The color changes"],"Changing shape is physical. The other three are clues that new stuff formed."],
+ ["Melting, freezing, and boiling are all changes of...",["State (solid, liquid, gas)","Color","Smell","Taste"],"They are changes of state, and changes of state are physical changes."],
+ ["Which change can usually be undone?",["Water freezing into ice","Paper burning","Bread toasting","A nail rusting"],"Ice can melt back into water. Burned, toasted, and rusted things can't go back."],
+ ["You mix salt into water. How could you get the salt back?",["Let the water evaporate","Burn the water","Freeze the salt","You can never get it back"],"When the water evaporates, the salt is left behind. That shows dissolving is a physical change."],
+ ["What are the three states of matter we see every day?",["Solid, liquid, gas","Hot, cold, warm","Big, medium, small","Rock, paper, scissors"],"Solid, liquid, and gas. Changing between them is a physical change."],
+ ["When baking soda and vinegar mix, the bubbles tell you...",["A new gas was made, so it's a chemical change","The vinegar got colder","It's a physical change","Nothing happened"],"Gas bubbles are a clue that a new substance formed."],
+ ["Two liquids are mixed and a new solid appears. What kind of change is it?",["Chemical","Physical","Just a change of state","No change"],"A new solid showing up means new stuff was made. That's chemical."],
+ ["What does EVAPORATE mean?",["A liquid turns into a gas","A gas turns into a liquid","A solid turns into a liquid","A liquid turns into a solid"],"When a puddle dries up, the water evaporates. It turns into a gas in the air."],
+ ["What does CONDENSE mean?",["A gas turns into a liquid","A liquid turns into a gas","A liquid turns into a solid","Something catches fire"],"Drops on the outside of a cold glass come from water in the air condensing."],
+ ["Which one is a PHYSICAL property?",["Color","Being able to burn","Being able to rust","Being able to rot"],"You can see color without changing the stuff. Burning, rusting, and rotting all make new stuff."],
+ ["A fire gives off heat and light. That is usually a sign of...",["A chemical change","A physical change","A change of state","No change"],"Heat and light from a fire mean new substances are forming."],
+ ["Why is cutting a cake physical but baking it chemical?",["Cutting only changes the shape, but baking makes new stuff","Cutting makes new stuff, but baking doesn't","They are both physical","They are both chemical"],"Cut cake is still cake. Baking turns batter into a brand new substance."],
+ ["Bubbles in boiling water and bubbles from baking soda and vinegar are different because...",["Boiling bubbles are just steam, but the fizz is a brand new gas","They are exactly the same","Boiling bubbles are a new gas","Baking soda bubbles are just water"],"Boiling is a change of state (physical). The fizz makes a new gas (chemical)."],
+];
+const SC_FO_OPTS=["✅ Fact","💭 Opinion"];
+const SC_FO=[
+ ["George Washington was the first President of the United States.",0,"You can check this in a history book. It can be proven."],
+ ["George Washington was the greatest President ever.",1,"'Greatest' is what someone thinks. Other people might pick a different President."],
+ ["The President lives and works in the White House.",0,"This can be checked, so it's a fact."],
+ ["Being President is the hardest job in the world.",1,"Some people might think a different job is harder. That's a feeling, not proof."],
+ ["A President is elected every four years.",0,"Presidential elections happen every four years. You can look it up."],
+ ["The White House is the prettiest building in Washington, D.C.",1,"'Prettiest' is someone's opinion."],
+ ["A person has to be at least 35 years old to be President.",0,"This rule is written in the U.S. Constitution."],
+ ["Abraham Lincoln was the 16th President.",0,"You can prove this with a list of Presidents."],
+ ["Every kid should want to be President someday.",1,"'Should' tells what someone thinks people ought to do. That's an opinion."],
+ ["Going to the zoo is the most fun field trip.",1,"'Most fun' is a feeling. Someone else might love the museum more!"],
+ ["Some zoos help protect animals that are endangered.",0,"Zoos keep records of the programs that help endangered animals. It can be proven."],
+ ["It is mean to keep animals in zoos.",1,"Some people believe this and others disagree. That makes it an opinion."],
+ ["Giraffes are the tallest animals on Earth.",0,"Giraffes can be measured, and they are the tallest. That's a fact."],
+ ["Elephants are the coolest animals at the zoo.",1,"'Coolest' depends on who you ask."],
+ ["Many zoos have animal doctors called veterinarians.",0,"You can check this, so it's a fact."],
+ ["Animals are happier in the wild than in a zoo.",1,"People argue about this. It's a belief, not something everyone agrees can be proven."],
+ ["There are 50 states in the United States.",0,"You can count them on a map."],
+ ["The zoo should be free for everyone.",1,"'Should' is a clue that it's an opinion."],
+];
+const SC_FO2=[
+ ["Cheetahs are the fastest land animals.",0,"'Fastest' sounds like an opinion, but speed can be measured. Cheetahs really are the fastest runners."],
+ ["Jupiter is the biggest planet in our solar system.",0,"'Biggest' can be measured, so this is a fact you can check."],
+ ["Abraham Lincoln was the tallest U.S. President.",0,"Height can be measured. Lincoln was 6 feet 4 inches, the tallest so far."],
+ ["The White House has 132 rooms.",0,"You can count the rooms, so it can be proven."],
+ ["Some people think zoos are boring.",0,"Tricky! The sentence doesn't say zoos ARE boring. It says some people think so, and that is true. You can prove people think it."],
+ ["Many kids say pizza is their favorite lunch.",0,"Tricky! You could ask kids and count the answers. The sentence reports what kids say, so it's a fact."],
+ ["In a class survey, 18 out of 24 kids picked recess as their favorite part of the day.",0,"Numbers from a survey can be checked. It's a fact about what the kids picked."],
+ ["Water freezes at 32 degrees Fahrenheit.",0,"You can test this with a thermometer. It's a fact."],
+ ["Theodore Roosevelt helped protect millions of acres of land as national parks and forests.",0,"History books and park records can prove this."],
+ ["Giant pandas spend most of their day eating bamboo.",0,"Scientists have watched and timed pandas eating. It can be proven."],
+ ["The sun is a star.",0,"Scientists can prove the sun is a star. It just looks different because it's so close to us."],
+ ["George Washington never lived in the White House.",0,"Surprising, but true! The White House wasn't finished until after he was President. You can check it."],
+ ["Everyone knows cats are smarter than dogs.",1,"'Everyone knows' tries to make it sound like a fact. But 'smarter' is a judgment, and lots of people disagree."],
+ ["Science says summer is the best season.",1,"Saying 'science says' doesn't make it true. 'Best season' is a feeling, and science can't prove that."],
+ ["It is a fact that our zoo has the best snacks in town.",1,"Tricky! Saying 'it is a fact' doesn't make it one. 'Best snacks' is still an opinion."],
+ ["Studies show 3 out of 4 kids like chocolate milk, so chocolate milk is the best drink.",1,"The number part could be checked, but the sentence ends with an opinion: 'the best drink.' When a sentence has an opinion in it, it's an opinion."],
+ ["Abraham Lincoln was the most important President in history.",1,"'Most important' is a judgment. People pick different Presidents."],
+ ["Recess should be at least 30 minutes long.",1,"'Should' is a signal word. It tells what someone wants, not what can be proven."],
+ ["Homework is a waste of time.",1,"Some people agree and some disagree. It can't be proven, so it's an opinion."],
+ ["A good President always listens to the people.",1,"'Good' and 'always' are what someone believes a President should be. That's an opinion."],
+ ["Zookeepers have the most exciting job in the world.",1,"'Most exciting' is a feeling. Someone else might think pilots or doctors have more exciting jobs."],
+ ["Giraffes look silly when they run.",1,"'Silly' is how someone feels about it. Not everyone would agree."],
+ ["Clearly, the full moon is prettier than the half moon.",1,"'Clearly' makes it sound sure, but 'prettier' is still an opinion."],
+ ["I think the best way to learn about animals is to visit a zoo.",1,"'I think' and 'best' are signal words for an opinion."],
+];
+const SC_ARGB=[
+ ["What is a REASON in an argument?",["A sentence that tells WHY the claim is right","A joke for the reader","The title","A made-up story"],"Reasons answer 'Why?' Each reason needs evidence to back it up."],
+ ["Which transition shows you are adding ANOTHER reason?",["In addition,","In conclusion,","However,","Once upon a time,"],"'In addition' tells the reader another reason is coming."],
+ ["What is the job of the INTRODUCTION?",["Hook the reader and state the claim","Answer the counterclaim","List all your sources","Say goodbye"],"The introduction grabs attention and tells your side."],
+ ["What is an ARGUMENTATIVE essay?",["An essay that takes a side and proves it with reasons and evidence","A made-up story with characters","Steps for how to do something","A poem about your feelings"],"An argument picks a side (the claim) and backs it up with proof."],
+ ["What is the CLAIM in an argument?",["The writer's side, the position they are proving","The last sentence of the essay","A fun fact","The title"],"The claim is the side you are arguing for. Everything else supports it."],
+ ["How is an argument different from just giving your opinion?",["It proves the claim with facts and evidence, and it answers the other side","It uses more exclamation points","It never says which side the writer is on","It only talks about feelings"],"An opinion is what you think. An argument PROVES it with evidence and answers people who disagree."],
+ ["What is EVIDENCE?",["Facts, numbers, examples, or expert quotes that prove a reason","The writer's favorite part","A question for the reader","A made-up example"],"Evidence is proof. Facts, numbers, examples, and expert quotes are all strong evidence."],
+ ["What is REASONING?",["Explaining HOW the evidence proves your reason","Repeating the claim three times","Listing every fact you know","Asking the reader a question"],"Reasoning connects the dots: 'This evidence shows that...'"],
+ ["What is a COUNTERCLAIM?",["What someone on the other side would argue","Your strongest reason","The title of the essay","A fact that agrees with you"],"The counterclaim is the other side's argument."],
+ ["What is a REBUTTAL?",["Your answer that shows why the counterclaim is weaker","A second claim on a new topic","The first sentence of the essay","A list of sources"],"After you share the counterclaim, the rebuttal explains why your side is still stronger."],
+ ["Which order makes the best argument essay?",["Claim, reasons with evidence, counterclaim and rebuttal, conclusion","Conclusion, claim, evidence, title","Counterclaim, conclusion, claim, reasons","Evidence, title, claim, nothing else"],"Start with your claim, prove it, answer the other side, then wrap it up."],
+ ["Where does the CLAIM usually go?",["In the introduction, near the end of the first paragraph","Only in the very last sentence","In the middle of the rebuttal","It doesn't need to be written down"],"Readers should know your side right away, so the claim goes in the introduction."],
+ ["Which sentence is the best HOOK for an essay about recess?",["Did you know some schools give kids only 15 minutes of recess a day?","This essay is about recess.","Recess.","I am going to write about recess now."],"A hook grabs the reader's attention. A surprising fact or question works great."],
+ ["Why should an argument use a calm, respectful tone?",["It makes the writer sound fair and easy to trust","It makes the essay longer","It hides the claim","It means you don't need evidence"],"People listen to arguments that sound fair. Name-calling makes readers stop trusting you."],
+ ["What should the CONCLUSION do?",["Restate the claim in new words and remind the reader of the best reasons","Start a brand new argument","Add a joke and stop","Say the other side is right"],"The conclusion wraps up your argument and leaves the reader convinced."],
+];
+const SC_ARGC=[
+ ["Claim: Every classroom should have a class pet. Which is the BEST evidence?",["A teacher survey found students who cared for a class pet missed fewer days of school.","Hamsters are cute.","My cousin has a fish.","Pets need food."],"A survey with a result that connects to the claim is strong evidence."],
+ ["Which source would be BEST for facts about how much sleep kids need?",["A children's health website from a hospital","A comic book","A video game","A friend's guess"],"Doctors and hospitals are experts on kids' health."],
+ ["Claim: Phones should be allowed at school. Which evidence is RELEVANT?",["Parents say phones help them reach kids in an emergency.","Phones come in many colors.","The first phone was invented long ago.","My phone has a sparkly case."],"It connects right to why phones could help at school."],
+ ["Which is the strongest CLAIM?",["Our school should have a longer recess because kids learn better after they move.","Recess is a time of day.","Do you like recess?","I had fun at recess yesterday."],"A strong claim takes a clear side and hints at why."],
+ ["Which sentence is a CLAIM, not just a fact?",["Students should be allowed to keep water bottles at their desks.","Water is made of hydrogen and oxygen.","Our school has 3 water fountains.","Most water bottles hold about 2 cups."],"A claim takes a side that someone could argue against. Facts just tell what is true."],
+ ["Claim: Schools should not give homework on weekends. Which is the BEST evidence?",["A survey at our school found 7 out of 10 families say weekends are their main family time.","Homework is super annoying.","My friend hates homework.","Weekends are Saturday and Sunday."],"A survey with numbers is real proof. Feelings and one friend's opinion are weak."],
+ ["Claim: Kids should eat more vegetables. Which evidence is RELEVANT (it actually proves the claim)?",["Doctors say vegetables have vitamins that help kids grow strong.","Vegetables come in many colors.","Pizza is my favorite food.","Some vegetables grow underground."],"It's true that vegetables come in many colors, but that doesn't prove kids should eat more of them."],
+ ["Which source is the MOST trustworthy for evidence?",["A science magazine written by experts","A post online with no name on it","A rumor from the lunch table","A guess"],"Experts and real sources make evidence you can trust."],
+ ["Claim: Our town should build a new library. Which is the best REASON?",["Kids would have more books and a quiet place to study.","Libraries are buildings.","The old library is painted brown.","I like how books smell."],"A reason answers 'Why?' in a way that helps the claim."],
+ ["Which sentence uses a NUMBER as evidence?",["In our class survey, 21 of 25 students said they read more when they pick their own books.","Reading is the best.","Lots of kids like books, I think.","Books are fun to read."],"Numbers from a survey make strong evidence because they can be checked."],
+ ["Which is an EXPERT quote?",["'Kids need at least 60 minutes of activity every day,' says a children's doctor.","'Recess rules!' says my cousin.","'I want more recess,' says a third grader.","'Who knows?' says a stranger."],"A doctor knows a lot about kids' health, so the quote makes strong evidence."],
+ ["Claim: Schools should start later. Which evidence does NOT belong?",["School buses are usually yellow.","Doctors say kids need 9 to 12 hours of sleep.","Tired students have a harder time paying attention.","Some schools that started later had fewer kids show up late."],"Bus color has nothing to do with start times. Evidence has to prove the claim."],
+ ["Claim: Dogs make great class pets. Evidence: Dogs can learn to follow many commands. Which sentence gives the best REASONING?",["Because dogs can learn commands, a class dog could learn to stay calm and follow class rules.","Dogs are cute.","Dogs have four legs.","My dog is named Max."],"Reasoning explains how the evidence proves the claim."],
+ ["Which claim is TOO WEAK to argue?",["Some people like ice cream.","Our school should sell ice cream at lunch on Fridays.","Ice cream should be a prize for perfect attendance.","Kids should get to vote on the lunch menu."],"Nobody would argue against 'some people like ice cream.' A claim needs a side people could disagree with."],
+ ["Which word makes a claim sound the strongest?",["should","maybe","sort of","might possibly"],"'Should' shows you really mean it. 'Maybe' makes it sound like you're not sure."],
+];
+const SC_ARGE_OPTS=["💪 Strong","🫤 Weak"];
+const SC_ARGE=[
+ ["Claim: Recess should be longer. Evidence: A study found kids pay better attention after a break to play.",0,"A study is real proof, and it connects to learning better."],
+ ["Claim: Recess should be longer. Evidence: Recess is awesome!",1,"That's just a feeling. It doesn't prove anything."],
+ ["Claim: Recess should be longer. Evidence: My best friend says recess is too short.",1,"One person's opinion isn't strong proof."],
+ ["Claim: Recess should be longer. Evidence: Doctors say kids need 60 minutes of activity every day.",0,"Experts plus a fact about kids' health makes strong evidence."],
+ ["Claim: Recess should be longer. Evidence: Everyone knows recess is the best part of the day.",1,"'Everyone knows' isn't proof. It's an opinion pretending to be a fact."],
+ ["Claim: Recess should be longer. Evidence: In a survey of 300 students at our school, 260 said they want more recess.",0,"Real numbers from a survey can be checked. That's strong."],
+ ["Claim: Recess should be longer. Evidence: Recess was invented a long time ago.",1,"Even if it's true, it doesn't prove recess should be longer. It's off topic."],
+ ["Claim: Recess should be longer. Evidence: Teachers said kids behave better on days with longer recess.",0,"Teachers see this every day, so their report is good evidence."],
+ ["Claim: Animals belong in zoos. Evidence: Zoos helped save the California condor when only 27 were left.",0,"A real example with a number. That's strong!"],
+ ["Claim: Animals belong in zoos. Evidence: Zoo animals look really cute.",1,"Cute is a feeling, and it doesn't prove animals belong there."],
+ ["Claim: Kids should drink more water. Evidence: Water helps your body stay cool and helps your brain work.",0,"These are health facts that connect right to the claim."],
+ ["Claim: Kids should drink more water. Evidence: I drank water yesterday.",1,"One thing you did doesn't prove what all kids should do."],
+ ["Claim: Our school needs more books. Evidence: The library has only 2 books for each student.",0,"A number that shows the problem is strong evidence."],
+ ["Claim: Our school needs more books. Evidence: Books are better than movies.",1,"That's an opinion, and it's off topic."],
+];
+const SC_ARGR=[
+ ["Claim: School uniforms are a good idea. Which is a COUNTERCLAIM?",["Some people say uniforms stop kids from showing who they are.","Uniforms save time in the morning.","Uniforms can cost less than new clothes.","Uniforms help everyone feel like one team."],"Only the first one is what the other side would say."],
+ ["Counterclaim: 'Kids need recess to rest, not run.' Which REBUTTAL is best?",["However, doctors say moving around actually helps kids feel rested and focused.","That's dumb.","Recess is fun.","I like running."],"A strong rebuttal uses facts or experts to answer the other side."],
+ ["Which phrase is a polite way to start a rebuttal?",["That may be true, but...","You're totally wrong!","Whatever.","Nobody cares."],"'That may be true, but' sounds fair and keeps your tone respectful."],
+ ["Claim: Kids should be allowed to have phones at school. Which is a COUNTERCLAIM?",["Some people worry phones will distract kids during class.","Phones help kids call home in an emergency.","Many kids have phones.","Phones can take pictures."],"The counterclaim is what the other side would say."],
+ ["The counterclaim is 'Phones will distract kids.' Which is the best REBUTTAL?",["Phones could stay in backpacks during class and only come out at lunch or in an emergency.","Phones are never distracting, ever.","That's a silly thing to say.","I don't care what they think."],"A good rebuttal answers the worry with a smart fix or a fact. It doesn't just say 'nope.'"],
+ ["Why do strong writers include a counterclaim?",["It shows they thought about both sides, which makes their argument stronger","It makes the essay confusing","It means they changed their mind","It's only for the conclusion"],"Answering the other side shows you've done your thinking."],
+ ["Which words often START a counterclaim?",["Some people may argue that...","In conclusion...","First of all...","Once upon a time..."],"'Some people may argue' tells the reader you're showing the other side."],
+ ["Which word often STARTS a rebuttal?",["However,","Also,","Once upon a time,","For example, my dog"],"'However' turns back to your side after the counterclaim."],
+ ["Claim: Animals belong in zoos. Counterclaim: Animals are happier in the wild. Which is the best REBUTTAL?",["However, many zoos give animals big habitats, good food, and doctors, and they protect animals in danger in the wild.","Animals are never happy anywhere.","The wild is boring.","Zoos sell ice cream."],"The best rebuttal uses reasons and facts to show your side is still stronger."],
+ ["What makes a rebuttal WEAK?",["It just calls the other side dumb without giving reasons","It uses a fact","It stays respectful","It explains why your side is stronger"],"Name-calling isn't proof. A strong rebuttal uses reasons and facts."],
+ ["Claim: Our school should have a four-day week. Which is a COUNTERCLAIM?",["Some families might not have anyone to watch their kids on the fifth day.","Kids would get more rest.","Teachers could plan better lessons.","Families could spend more time together."],"The others all support the claim. Only the first is what the other side would say."],
+ ["A good rebuttal should be...",["Respectful and backed up with facts or reasons","Loud and angry","Just one word, like 'Wrong!'","About a different topic"],"Stay calm and prove it. That's how you win an argument."],
+ ["Where do the counterclaim and rebuttal usually go?",["In their own paragraph, after your reasons and before the conclusion","In the title","In the very first sentence","They don't go in the essay at all"],"Prove your side first, then answer the other side, then wrap up."],
+ ["Claim: Homework should be banned. Counterclaim: Homework helps kids practice. Which rebuttal is strongest?",["However, kids can practice during class, and studies show too much homework can make kids stressed.","Homework is the worst thing ever.","My teacher gives too much.","Nobody likes homework."],"It answers the counterclaim with reasons and evidence, not feelings."],
+ ["Which sentence shows a writer ADMITTING the other side has a point, then rebutting?",["It's true that uniforms cost money, but they can save families money on clothes in the long run.","Uniforms are bad and that's that.","Some people like blue.","Uniforms."],"Saying 'It's true that..., but...' sounds fair and makes your side stronger."],
+];
+const SC_PER=[
+ ["Which sentence is the best HOOK for an essay about zoos?",["Imagine watching a baby elephant take its very first steps.","This essay is about zoos.","Zoos.","I will now write about zoos."],"A hook grabs the reader. A picture in the reader's mind or a surprising fact works great."],
+ ["Which reason BEST supports the claim 'Our school should have a garden'?",["Students could learn how plants grow and eat the vegetables they grow.","Gardens are green.","My grandma has a garden.","Dirt is brown."],"A good reason explains WHY the claim is a good idea."],
+ ["Which word shows the writer is giving their LAST reason?",["Finally","First","Also","Once upon a time"],"'Finally' tells the reader this is the last reason."],
+ ["In a persuasive essay, what is the CLAIM?",["The writer's main opinion that they want you to agree with","A list of facts at the very end","The title of the essay","A question with no answer"],"The claim is the big idea the writer is trying to convince you of."],
+ ["Which sentence is the best CLAIM for an essay about zoos?",["Animals belong in zoos because zoos keep them safe and healthy.","Zoos have animals.","I went to the zoo last summer.","Do you like the zoo?"],"A strong claim takes a side and hints at why."],
+ ["What does a REASON do in a persuasive essay?",["It tells WHY the writer believes the claim","It tells a joke","It lists the writer's favorite animals","It ends the essay"],"Reasons answer the question 'Why?' about the claim."],
+ ["Which is the best EVIDENCE for the reason 'Zoos help save endangered animals'?",["Zoos helped bring back the California condor when only 27 were left.","Zoos are really fun to visit.","My best friend loves zoos.","Zoos sell yummy snacks."],"Evidence is a fact or example that proves the reason. Facts and numbers make strong evidence."],
+ ["What is a COUNTERCLAIM?",["What someone on the other side might say","The writer's first sentence","A picture in the essay","Another word for the title"],"A counterclaim shows the other side. Answering it makes your argument stronger."],
+ ["Your essay says animals DO belong in zoos. Which sentence is a counterclaim?",["Some people think animals are happier in the wild.","Zoos have animal doctors.","Zoos teach kids about animals.","Zoos protect animals from hunters."],"This is what the other side would say. Then you explain why you still disagree."],
+ ["Which sentence sounds the MOST convincing?",["Zoos should keep protecting endangered animals.","Zoos are kind of maybe okay, I guess.","I don't really know about zoos.","Some zoos exist."],"Strong words like 'should' show you really believe your claim."],
+ ["What should a strong CONCLUSION do?",["Say the claim again in new words and leave the reader thinking","Start a brand new topic","List every animal at the zoo","Tell the reader to stop reading"],"The conclusion wraps up by restating the claim and the best reasons."],
+ ["Which one is a FACT that could be used as evidence?",["Zoos in the U.S. get millions of visitors every year.","Zoos are the best.","Everyone loves zoos.","Zoos are boring."],"A fact can be proven. Opinions like 'best' or 'boring' are not strong evidence."],
+ ["Why do writers use words like 'First,' 'Also,' and 'Finally'?",["To help the reader follow the reasons in order","To make the essay longer","To confuse the reader","To show it's a fact"],"Transition words are like road signs. They guide the reader from one reason to the next."],
+];
+const SC_TF=[
+ ["What is a TABLE OF CONTENTS for?",["It shows the chapters and the pages they start on","It explains hard words","It shows a picture","It tells the ending"],"The table of contents is at the front and helps you find each part."],
+ ["Why might an author put a word in BOLD print?",["It's an important word, often in the glossary","It's a mistake","It's the author's name","It's the last word on the page"],"Bold words are important. You can usually find them in the glossary."],
+ ["A graph shows favorite fruits: apples 8, bananas 5, grapes 12. Which is the favorite?",["Grapes","Apples","Bananas","They are all the same"],"Grapes has the biggest number, 12, so it's the favorite."],
+ ["What does a HEADING tell you?",["What the next part of the text is mostly about","The author's name","The page number","How many words are on the page"],"Headings are like labels. They tell you what that section is about."],
+ ["An article is called 'The Future of Transportation.' Which heading fits a part about electric cars?",["Cars That Run on Batteries","Our Favorite Pets","How to Bake Bread","The Ocean Floor"],"This heading matches the topic of electric cars."],
+ ["Under the heading 'Flying Taxis,' you would MOST likely read about...",["Small aircraft that could carry people around a city","How trains run underground","Why bikes have two wheels","Old horse carriages"],"The heading tells you the section is about flying taxis."],
+ ["Why do authors use GRAPHS?",["To show numbers so you can compare them quickly","To decorate the page","To tell a story with characters","To hide information"],"Graphs turn numbers into pictures, so you can compare them fast."],
+ ["A bar graph called 'How Kids Get to School' has the tallest bar for BUS. What does that tell you?",["More kids ride the bus than any other way","Nobody rides the bus","The bus is the fastest","Buses are yellow"],"The tallest bar means the biggest number."],
+ ["What is a CAPTION?",["Words near a picture that tell what it shows","The first word of a chapter","The name of the book","A list of hard words"],"Captions explain pictures and photos."],
+ ["Where would you look to find the meaning of a bold word?",["The glossary","The title","The cover","A graph"],"The glossary is a mini dictionary at the back of the book."],
+ ["Read this: 'Electric buses are a smart choice for our town. They are quieter than gas buses and don't puff out smoky exhaust. Our town should buy them.' What is the author's claim?",["Our town should buy electric buses","Gas buses are yellow","Buses are loud","The author rides the bus"],"The claim is what the author wants you to agree with: buy electric buses."],
+ ["In the electric bus paragraph, which part is a REASON?",["They are quieter than gas buses","Our town should buy them","Buses have wheels","The town is big"],"'They are quieter' tells WHY the author thinks the town should buy them."],
+ ["An author writes, 'Self-driving cars will make roads safer, because computers don't get tired.' What is the author's claim?",["Self-driving cars will make roads safer","Computers get tired","Roads are long","Cars cost a lot"],"The claim is the main point. 'Because computers don't get tired' is the reason."],
+];
+/* PICTURE SCIENCE: before and after pictures. ans 0 = physical, 1 = chemical.
+   A picture is [emoji, label, css filter or transform]. */
+const RUST="sepia(1) saturate(4) hue-rotate(-25deg) brightness(.7)", BROWN="sepia(1) saturate(2.2) brightness(.62)", TOASTY="sepia(.9) saturate(2) brightness(.55)", GREEN="sepia(1) saturate(5) hue-rotate(70deg) brightness(.8)", SOUR="sepia(.6) saturate(3) hue-rotate(20deg)";
+const SC_PICS=[
+ [["🧊","Ice cube"],["💧","Puddle of water"],0,"It's still water, just a liquid now. Melting is a change of state, so it's physical."],
+ [["🪵","Log"],["🔥","Burning into ash and smoke"],1,"Burning makes brand new stuff: ash, smoke, and gases. Light and heat are clues!"],
+ [["📄","Sheet of paper"],["🎊","Paper confetti"],0,"The pieces are smaller, but it's still paper. Cutting is physical."],
+ [["🥣","Cake batter"],["🎂","Baked cake"],1,"Heat turns batter into a brand new substance. You can't un-bake a cake!"],
+ [["🔩","Shiny new bolt"],["🔩","Rusty bolt",RUST],1,"Rust is a NEW substance made when iron meets water and air. The new color is a clue."],
+ [["🥚","Raw egg"],["🍳","Cooked egg"],1,"Cooking changes the egg into new stuff. You can't make it raw again."],
+ [["🍫","Chocolate bar"],["🍫","Melted chocolate","scaleY(.55) scaleX(1.25)"],0,"Melted chocolate is still chocolate. Put it in the fridge and it gets hard again."],
+ [["🍞","Bread"],["🍞","Toast",TOASTY],1,"Toasting makes new stuff, so the color and smell change. You can't un-toast it!"],
+ [["🥛","Fresh milk"],["🥛","Sour, stinky milk",SOUR],1,"Sour milk has new substances that smell and taste different. A new smell is a clue."],
+ [["💧","Water in a pot"],["♨️","Steam"],0,"Steam is still water, just a gas. Boiling is a change of state."],
+ [["🎈","Flat balloon","scale(.6)"],["🎈","Blown-up balloon","scale(1.15)"],0,"The balloon just stretches and fills with air. Nothing new is made."],
+ [["🕯️","Candle"],["🔥","Burning candle and smoke"],1,"Burning always makes new substances like smoke. Light and heat are clues."],
+ [["🥫","Soda can"],["🥫","Crushed can","scaleY(.45) scaleX(1.2)"],0,"The can changed shape, but it's still the same metal."],
+ [["🧪","Baking soda + vinegar"],["🫧","Fizzing bubbles"],1,"The bubbles are a NEW gas that wasn't there before. That's chemical."],
+ [["🍌","Yellow banana"],["🍌","Old brown banana",BROWN],1,"Chemicals inside the banana change and make new stuff, so the color changes."],
+ [["🥕","Carrot"],["🥕","Chopped carrot","rotate(90deg) scale(.6)"],0,"Smaller pieces, but still carrot. Chopping is physical."],
+ [["🧃","Juice"],["🧊","Frozen juice pop"],0,"Freezing is a change of state. It's still juice."],
+ [["🪙","Shiny penny"],["🪙","Green old penny",GREEN],1,"The copper reacts with air and water and makes a new green coating."],
+ [["🍂","Fallen leaves"],["🪱","Rotted into dirt"],1,"Rotting breaks the leaves down into brand new stuff."],
+ [["🍎","Fresh apple slice"],["🍎","Brown apple slice",BROWN],1,"The apple reacts with the air and makes new stuff, so it turns brown."],
+ [["🧂","Salt + water"],["🥤","Salt water"],0,"Tricky! Let the water evaporate and the salt is left behind. Dissolving is physical."],
+ [["🥄","Cold spoon"],["🥄","Spoon hot from soup","drop-shadow(0 0 10px #FF6B00)"],0,"Tricky! Getting hot doesn't always mean chemical. It's the same metal, and it cools back down."],
+ [["🪄","Glow stick, not snapped"],["✨","Snapped and glowing"],1,"Giving off light is a sign of a chemical change. The liquids inside make new stuff."],
+ [["🍬","Marshmallow"],["🍬","Burned black marshmallow","brightness(.25)"],1,"The heat made new black stuff that wasn't there before. That's chemical."],
+ [["☁️","Water vapor in the air"],["💦","Drops on a cold glass"],0,"Water in the air turns into liquid drops. That's condensation, a change of state."],
+];
+const SC_SIGN_OPTS=["🫧 Gas bubbles","🔥 Light and heat","🎨 A new color","👃 A new smell"];
+const SC_PICSIGN=[
+ [["🫧","Antacid tablet fizzing in water"],0,"Gas bubbles from mixing things mean a new gas was made."],
+ [["🎆","Fireworks"],1,"Fireworks give off light and heat. New substances form."],
+ [["🍌","A banana turning brown",BROWN],2,"The banana changed color because new stuff formed inside it."],
+ [["🥛","Milk that smells bad",SOUR],3,"Sour milk has a new smell because new substances formed."],
+ [["🔥","A campfire"],1,"Fire gives off light and heat. Those are clues of a chemical change."],
+ [["🪙","A penny turning green",GREEN],2,"The new green color is a new substance forming on the copper."],
+ [["🍞","Bread dough rising with yeast"],0,"Yeast makes a new gas that puffs up the dough."],
+ [["🥚","A rotten egg"],3,"Rotten eggs smell because new substances formed."],
+];
+function picPanel(p,t){return {e:p[0],l:p[1],s:p[2]||"",t:t}}
+function picBuild(n){
+  const k=Math.round(n*3/4);
+  const ch=shuffle(SC_PICS.slice()).slice(0,k).map(([b,a,ans,why])=>({q:"What kind of change is this?",cap:`${b[1]} → ${a[1]}`,pic:[picPanel(b,"Before"),picPanel(a,"After")],opts:SC_PC_OPTS,a:ans,why:why,two:true}));
+  const sg=shuffle(SC_PICSIGN.slice()).slice(0,n-k).map(([p,ans,why])=>({q:"This is a chemical change. Which clue do you SEE?",cap:p[1],pic:[picPanel(p,"Look!")],opts:SC_SIGN_OPTS,a:ans,why:why,two:false}));
+  return shuffle(ch.concat(sg));
+}
+function picHTML(pic){
+  return pic.map((p,i)=>(i?'<div class="parr">➡️</div>':'')+`<div class="pp"><div class="pt">${esc(p.t)}</div><span class="pe" style="${p.s?(/\(/.test(p.s)&&!/^(scale|rotate)/.test(p.s)?"filter:"+p.s:"transform:"+p.s):""}">${p.e}</span><div class="pl">${esc(p.l)}</div></div>`).join("");
+}
+function scTwo(bank,labels){return bank.map(([q,a,why])=>({q:q,opts:labels,a:a,why:why}))}
+function scFour(bank){return bank.map(([q,o,why])=>scMC(q,o[0],o.slice(1),why))}
+const SC_TESTS={
+ sci:{cat:"sci",title:"Physical or Chemical?",n:18,two:true,bank:()=>scTwo(SC_PC,SC_PC_OPTS)},
+ pic:{cat:"sci",title:"Picture Science",n:15,build:()=>picBuild(15)},
+ sciw:{cat:"sci",title:"Science Study Guide",n:11,bank:()=>scFour(SC_SCIW)},
+ p10:{cat:"math",title:"Powers of 10",n:13,math:true,gens:[genP10]},
+ mdec:{cat:"math",title:"Multiply Decimals",n:13,math:true,gens:[genMdec]},
+ big:{cat:"math",title:"Big Multiplication",n:11,math:true,gens:[genBig]},
+ m22:{cat:"math",title:"2-Digit × 2-Digit",n:15,math:true,gens:[gen22]},
+ sdec:{cat:"math",title:"Subtract Decimals",n:13,math:true,gens:[genSdec]},
+ mmix:{cat:"math",title:"Math Test Mix",n:15,math:true,gens:[genP10,genMdec,genBig,gen22,genSdec]},
+ fo:{cat:"read",title:"Fact or Opinion?",n:17,two:true,bank:n=>{const k=Math.ceil(n*0.7);return shuffle(scTwo(SC_FO2,SC_FO_OPTS)).slice(0,k).concat(shuffle(scTwo(SC_FO,SC_FO_OPTS)).slice(0,n-k))}},
+ per:{cat:"read",title:"Persuasive Writing",n:11,bank:()=>scFour(SC_PER)},
+ tf:{cat:"read",title:"Headings and Graphs",n:11,bank:()=>scFour(SC_TF)},
+ argb:{cat:"arg",title:"Argument Basics",n:13,bank:()=>scFour(SC_ARGB)},
+ argc:{cat:"arg",title:"Claims and Evidence",n:13,bank:()=>scFour(SC_ARGC)},
+ arge:{cat:"arg",title:"Strong or Weak Evidence?",n:13,two:true,bank:()=>scTwo(SC_ARGE,SC_ARGE_OPTS)},
+ argr:{cat:"arg",title:"Counterclaims and Rebuttals",n:13,bank:()=>scFour(SC_ARGR)},
+ argmix:{cat:"arg",title:"Argument Test Mix",n:15,bank:()=>shuffle(scFour(SC_ARGB)).slice(0,4).concat(shuffle(scFour(SC_ARGC)).slice(0,4),shuffle(scTwo(SC_ARGE,SC_ARGE_OPTS).map(q=>Object.assign(q,{two:true}))).slice(0,3),shuffle(scFour(SC_ARGR)).slice(0,4))},
+ boss:{cat:"boss",title:"Castle Challenge",n:23,build:bossBuild},
+};
+/* CASTLE CHALLENGE (the big test): 2 questions from every piece Emma has practiced. Pass with 16 of 20 to win the Huge Butter Squishy. */
+const BOSS_PASS=18;
+function bossBuild(){
+  const tag=(qs,name,extra)=>qs.map(q=>Object.assign({},q,extra||{},{hint:name+(q.hint?" · "+q.hint:"")}));
+  const gen=(g,name,k)=>{const out=[],seen={};let n=0;while(out.length<k&&n<200){n++;const q=g();if(seen[q.q]||q.a<0)continue;seen[q.q]=1;out.push(q)}return tag(out,name,{math:true})};
+  const two=(bank,labels,name,k)=>tag(shuffle(scTwo(bank,labels)).slice(0,k),name,{two:true});
+  const four=(bank,name,k)=>tag(shuffle(scFour(bank)).slice(0,k),name);
+  const story=k=>tag(shuffle(RD_QS.map(([q,o,ci],i)=>scMC(q,o[ci],o.filter((x,j)=>j!==ci),RD_WHY[i]))).slice(0,k),"Story Quiz");
+  const pieces=[k=>gen(genP10,"Powers of 10",k),k=>gen(genMdec,"Multiply Decimals",k),k=>gen(genBig,"Big Multiplication",k),k=>gen(genSdec,"Subtract Decimals",k),
+    k=>two(SC_FO2.concat(SC_FO),SC_FO_OPTS,"Fact or Opinion",k),k=>four(SC_PER,"Persuasive Writing",k),k=>four(SC_TF,"Headings and Graphs",k),
+    story,k=>two(SC_PC,SC_PC_OPTS,"Physical or Chemical",k),k=>four(SC_SCIW,"Study Guide",k)];
+  const ks=pieces.map(()=>2); shuffle(pieces.map((_,i)=>i)).slice(0,3).forEach(i=>ks[i]=3);
+  return shuffle([].concat(...pieces.map((f,i)=>f(ks[i]))));
+}
+let SC={id:null,qs:[],i:0,ok:0,lock:false,miss:[]};
+function scLoadBest(){try{const o=JSON.parse(localStorage.getItem("emmaSchoolBest")||"{}");return o&&typeof o==="object"?o:{}}catch(e){return{}}}
+function scSaveBest(o){try{localStorage.setItem("emmaSchoolBest",JSON.stringify(o))}catch(e){}}
+function scShowSub(sub){["scMathHome","scSciHome","scQuiz","scRes"].forEach(s=>$(s).hidden=(s!==sub));show("school");window.scrollTo(0,0)}
+function scBadges(){
+  const b=scLoadBest();
+  document.querySelectorAll("[data-best]").forEach(el=>{
+    const r=b[el.dataset.best];
+    if(r&&r.n){el.hidden=false;el.textContent=`⭐ Best: ${r.ok} of ${r.n}`}else el.hidden=true;
+  });
+}
+function scHome(cat){
+  scBadges();
+  if(cat==="boss"){show("menu");return}
+  if(cat==="read"||cat==="arg"){rdShowSub("rdHome");return}
+  scShowSub(cat==="sci"?"scSciHome":"scMathHome");
+}
+function scBuild(id,nn){
+  const t=Object.assign({},SC_TESTS[id]); if(nn)t.n=nn;
+  if(t.build) return t.build();
+  if(t.bank) return shuffle(t.bank(t.n)).slice(0,t.n);
+  const seen={},out=[]; let tries=0;
+  while(out.length<t.n&&tries<400){
+    tries++;
+    const g=t.gens[out.length%t.gens.length]();
+    if(seen[g.q]||g.a<0||g.opts.length<2)continue;
+    seen[g.q]=1; out.push(g);
+  }
+  return t.gens.length>1?shuffle(out):out;
+}
+function scStart(id,nn){
+PT.round=0;PT.ups=[];COMBO=0;  SC={id:id,nn:nn,qs:scBuild(id,nn),i:0,ok:0,lock:false,miss:[]};
+  scShowSub("scQuiz"); scPaint();
+}
+function scPaint(){
+  const t=SC_TESTS[SC.id], q=SC.qs[SC.i];
+  $("scCount").textContent=`${SC.i+1} / ${SC.qs.length}`;
+  $("scScore").textContent=`⭐ ${SC.ok}`;
+  $("scBar").style.width=(SC.i/SC.qs.length*100)+"%";
+  $("scTitle").textContent=t.title+(q.hint?` · ${q.hint}`:"");
+  const isMath=q.math!=null?q.math:t.math, isTwo=q.two!=null?q.two:t.two;
+  const pe=$("scPic"); if(q.pic){pe.innerHTML=picHTML(q.pic);pe.hidden=false}else{pe.innerHTML="";pe.hidden=true}
+  const qe=$("scQ"); qe.textContent=q.q; qe.className="scq"+(isMath&&!q.wordy?" math":"");
+  const box=$("scOpts"); box.innerHTML="";
+  box.className="scopts"+(isTwo?" two":isMath?" grid":"");
+  q.opts.forEach((o,i)=>{
+    const b=document.createElement("button"); b.className="rdopt"; b.textContent=o;
+    b.addEventListener("click",()=>scAnswer(i,b)); box.appendChild(b);
+  });
+  $("scFlash").textContent=" "; $("scFlash").className="flash";
+  $("scWhy").hidden=true; $("scNext").hidden=true;
+  SC.lock=false;
+}
+function scAnswer(i,btn){
+  if(SC.lock)return; SC.lock=true;
+  const q=SC.qs[SC.i], btns=$("scOpts").querySelectorAll(".rdopt");
+  if(i===q.a){
+    SC.ok++; btn.classList.add("yes"); sOK(); rwPts(1); comboHit();
+    $("scFlash").textContent=pick(["That's right! 🎉","Nailed it! ⭐","Yes! 🙌","You got it! 💪"]); $("scFlash").className="flash ok";
+    $("scScore").textContent=`⭐ ${SC.ok}`;
+    setTimeout(scNextQ,900);
+  }else{
+    btn.classList.add("no"); btns[q.a].classList.add("yes"); sNO(); comboBreak();
+    $("scFlash").textContent="Good try! The green one is right."; $("scFlash").className="flash no";
+    SC.miss.push(q);
+    if(q.why){$("scWhy").textContent="💡 "+q.why;$("scWhy").hidden=false}
+    $("scNext").hidden=false;
+  }
+}
+function scNextQ(){SC.i++; if(SC.i<SC.qs.length)scPaint(); else scFinish();}
+function scFinish(){
+  const t=SC_TESTS[SC.id], n=SC.qs.length, ok=SC.ok, pct=ok/n;
+  const b=scLoadBest(), old=b[SC.id];
+  if(!old||!old.n||ok/n>old.ok/old.n){b[SC.id]={ok:ok,n:n};scSaveBest(b)}
+  const best=b[SC.id];
+  $("scResTitle").textContent=t.title;
+  $("scGrade").textContent=pct>=1?"🏆 A+":pct>=.9?"🌟 A":pct>=.8?"💪 B":pct>=.7?"👍 C":"🌱 Keep practicing!";
+  $("scResScore").textContent=`${ok} of ${n}`;
+  $("scResBest").textContent=`Best: ${best.ok} of ${best.n}`;
+  const scQ=questFinish(pct>=.9?3:pct>=.7?2:1);
+  const scPass=SC.id==="boss"?ok>=BOSS_PASS:pct>=.7;
+  const scMsgs=rwEarn({pass:scPass,bonus:(scPass?10:0)+(pct>=.9?10:0)+(SC.id==="boss"&&scPass?50:0),medals:pct>=.9?1:0,why:`${ok} of ${n} on ${t.title}!`,passHint:SC.id==="boss"?null:`Get ${Math.ceil(n*.7)} of ${n} to win a bonus squishy!`});
+  logAct({sub:t.cat==="math"?"math":t.cat==="sci"?"sci":t.cat==="boss"?"boss":"eng",id:SC.id,title:t.title,ok:ok,n:n,pts:PT.last,miss:SC.miss.map(q=>(q.cap?q.cap+": ":"")+q.q)});
+  if(scPass)setTimeout(()=>smConfetti("scConf"),150);
+  if(SC.id==="boss"){
+    const r=rwLoad();
+    if(ok>=BOSS_PASS&&!r.butter){r.butter=true;rwSave(r);
+      scMsgs.unshift(`<div class="butterwin">🧈</div>YOU WON THE <b>HUGE BUTTER SQUISHY!</b> It's waiting on your Prize Shelf. 🎉`)}
+    else if(ok>=BOSS_PASS)scMsgs.unshift(`🧈 You won the Castle Challenge again! Your Huge Butter Squishy is proud of you.`);
+    else scMsgs.unshift(`🧈 So close! You got ${ok} of ${n}, and every right one earned points. Look over the misses below, then try again. ${BOSS_PASS} wins the Huge Butter Squishy!`);
+  }
+  rwBanner("scRw",scQ.concat(scMsgs));
+  const m=$("scMiss"); m.innerHTML="";
+  if(!SC.miss.length){$("scMissH").textContent="No misses at all. Amazing! 🎉"}
+  else{
+    $("scMissH").textContent="Let's look at the ones to practice";
+    SC.miss.forEach(q=>{
+      const d=document.createElement("div"); d.className="missrow";
+      d.innerHTML=`<b>${q.pic?q.pic.map(p=>p.e).join(" ➡️ ")+" "+esc(q.cap)+": ":""}${esc(q.q)}</b><br>✅ ${esc(q.opts[q.a])}${q.why?`<br>💡 ${esc(q.why)}`:""}`;
+      m.appendChild(d);
+    });
+  }
+  scShowSub("scRes");
+}
+$("mathBtn").addEventListener("click",()=>scHome("math"));
+$("sciBtn").addEventListener("click",()=>scHome("sci"));
+$("bossBtn").addEventListener("click",()=>scStart("boss"));
+$("scDecTest").addEventListener("click",()=>smStart("dec","test"));
+document.querySelectorAll("[data-sc]").forEach(b=>b.addEventListener("click",()=>scStart(b.dataset.sc)));
+document.querySelectorAll("[data-schome]").forEach(b=>b.addEventListener("click",()=>show("menu")));
+$("scQuit").addEventListener("click",()=>{if(QUEST.active!=null)questOpen();else scHome(SC_TESTS[SC.id].cat)});
+$("scNext").addEventListener("click",scNextQ);
+$("scAgain").addEventListener("click",()=>scStart(SC.id,SC.nn));
+$("scHome2").addEventListener("click",()=>scHome(SC_TESTS[SC.id].cat));
+
+
+/* today as YYYY-MM-DD (the quest map resets each day) */
+const todayKey=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+
+/* ================= QUEST MAP (today's levels) ================= */
+const QUEST_LEVELS=[
+ {em:"🔟",name:"Powers of 10",sub:"Math",what:"13 quick questions about × 10, × 100 and exponents.",type:"sc",id:"p10",n:13,x:130,y:478},
+ {em:"🦁",name:"Fact or Opinion?",sub:"Reading",what:"13 sentences, and some are tricky! Can it be proven?",type:"sc",id:"fo",n:13,x:250,y:462},
+ {em:"⚡",name:"Times Sprint",sub:"Speed Math",what:"1 minute of times facts. How many can you get?",type:"sm",mode:"mul",x:308,y:384},
+ {em:"⚗️",name:"Physical or Chemical?",sub:"Science",what:"13 questions for your science test.",type:"sc",id:"sci",n:13,x:196,y:348},
+ {em:"✖️",name:"Multiply Decimals",sub:"Math",what:"13 questions. Where does the decimal point go?",type:"sc",id:"mdec",n:13,x:78,y:318},
+ {em:"⏱️",name:"1-Minute Speed Read",sub:"Reading",what:"Pick a story and read it out loud for 1 minute.",type:"fl",x:66,y:226},
+ {em:"✍️",name:"Persuasive Writing",sub:"Writing",what:"13 questions about claims, reasons, and evidence.",type:"sc",id:"per",n:13,x:174,y:204},
+ {em:"🔬",name:"Study Guide Quiz",sub:"Science",what:"13 questions from your science study guide.",type:"sc",id:"sciw",n:13,x:292,y:172},
+ {em:"🧮",name:"Math Mix",sub:"Math",what:"13 mixed math questions. Use scratch paper!",type:"sc",id:"mmix",n:13,x:300,y:96},
+ {em:"🏰",name:"Castle Challenge",sub:"Everything",what:"The last stop! A fun mix of 23 questions from everything you've practiced. No timer. Get 18 right to win the Huge Butter Squishy!",type:"sc",id:"boss",x:164,y:70,castle:true},
+];
+const QUEST_DAYS={
+ "2026-11-17":{title:"Sick Day Quest",note:"Feel better soon! 💛 Go slow, take breaks, and drink lots of water. Walk your falcon all the way to Falcon Castle."},
+};
+const QUEST_DEFAULT={title:"Today's Quest",note:"Finish each level to walk your falcon to Falcon Castle!"};
+const QUEST={active:null,sel:null};
+function qLoad(){
+  let q=null; try{q=JSON.parse(localStorage.getItem("emmaQuest")||"null")}catch(e){}
+  if(!q||q.day!==todayKey()||!Array.isArray(q.stars))q={day:todayKey(),stars:QUEST_LEVELS.map(()=>0),won:false};
+  while(q.stars.length<QUEST_LEVELS.length)q.stars.push(0); // a map saved before a new level was added
+  return q;
+}
+function qSave(q){try{localStorage.setItem("emmaQuest",JSON.stringify(q))}catch(e){}}
+function qCur(q){const i=q.stars.findIndex(s=>!s);return i<0?QUEST_LEVELS.length:i}
+const qStars=n=>n?"⭐".repeat(n):"";
+function questOpen(){
+  QUEST.active=null;
+  const q=qLoad(), cur=qCur(q), plan=QUEST_DAYS[todayKey()]||QUEST_DEFAULT;
+  if(QUEST.sel==null||QUEST.sel>=QUEST_LEVELS.length)QUEST.sel=Math.min(cur,QUEST_LEVELS.length-1);
+  $("qHi").textContent=`Hi Emma! ${plan.title}`;
+  $("qNote").textContent=plan.note;
+  const done=q.stars.filter(Boolean).length;
+  $("qProgTxt").textContent=`${done} of ${QUEST_LEVELS.length} levels done`;
+  $("qProgBar").style.width=(100*done/QUEST_LEVELS.length)+"%";
+  // map
+  const W=360,H=540,m=$("qMap"),pts=[[52,502]].concat(QUEST_LEVELS.map(l=>[l.x,l.y]));
+  const path=pts.map((p,i)=>(i?"L":"M")+p[0]+" "+p[1]).join(" ");
+  const tree=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s||1})"><rect x="-3" y="4" width="6" height="12" rx="2" fill="#7A4E2A"/><circle r="13" fill="#3E8E4F"/><circle cx="-6" cy="-5" r="7" fill="#57A866"/></g>`;
+  m.innerHTML=`<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">
+    <rect width="${W}" height="${H}" fill="#BFE3F2"/>
+    <path d="M30 70 Q10 20 80 18 L290 14 Q352 18 344 90 L350 300 Q356 360 340 420 L346 500 Q340 532 290 530 L60 532 Q14 530 18 480 L24 300 Q8 230 22 160 Z" fill="#F3E2B5"/>
+    <path d="M44 84 Q30 40 90 36 L280 32 Q330 36 326 96 L332 300 Q338 360 322 420 L328 492 Q322 514 286 512 L70 514 Q36 512 38 476 L42 300 Q28 232 40 168 Z" fill="#CFE8B0"/>
+    <ellipse cx="270" cy="270" rx="34" ry="20" fill="#9ED3EA"/><ellipse cx="262" cy="266" rx="12" ry="5" fill="#C9E9F5"/>
+    <path d="M110 120 l26 -34 l26 34 Z" fill="#B8A07A"/><path d="M128 120 l22 -26 l22 26 Z" fill="#C9B38C"/>
+    ${tree(40,410)}${tree(320,250,.9)}${tree(110,410,.8)}${tree(250,120,.9)}${tree(320,470,.8)}${tree(36,140,.85)}${tree(230,300,.7)}${tree(120,265,.75)}
+    <path d="${path}" fill="none" stroke="#B8946A" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${path}" fill="none" stroke="#FFF7E0" stroke-width="5" stroke-dasharray="2 14" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="52" y="512" text-anchor="middle" font-size="34">🏠</text>
+    <text x="70" y="70" text-anchor="middle" font-size="20">☁️</text>
+  </svg>`;
+  QUEST_LEVELS.forEach((l,i)=>{
+    const b=document.createElement("button");
+    const st=q.stars[i]?"done":i===cur?"cur":i>cur?"locked":"";
+    b.className=`qnode ${st}${l.castle?" castle":""}${i===QUEST.sel?" sel":""}`;
+    b.style.left=(100*l.x/W)+"%"; b.style.top=(100*l.y/H)+"%";
+    b.innerHTML=`${i>cur?"🔒":l.em}<span class="qn">${i+1}</span>${q.stars[i]?`<span class="qs">${qStars(q.stars[i])}</span>`:""}`;
+    b.setAttribute("aria-label",`Level ${i+1}: ${l.name}`);
+    b.addEventListener("click",()=>{QUEST.sel=i;questOpen()});
+    m.appendChild(b);
+  });
+  const bird=document.createElement("div"); bird.className="qbird"; bird.textContent="🦅";
+  const at=cur<QUEST_LEVELS.length?QUEST_LEVELS[cur]:QUEST_LEVELS[QUEST_LEVELS.length-1];
+  bird.style.left=(100*at.x/W)+"%"; bird.style.top=(100*at.y/H)+"%"; m.appendChild(bird);
+  // panel
+  const s=QUEST.sel, L=QUEST_LEVELS[s], p=$("qPanel");
+  const lockd=s>cur, isDone=!!q.stars[s];
+  p.innerHTML=`<div class="ql">Level ${s+1} · ${L.sub}</div><h3>${L.em} ${L.name}</h3><p>${L.what}</p>${isDone?`<div style="font-size:22px">${qStars(q.stars[s])}</div>`:""}`;
+  const go=document.createElement("button"); go.className="smbig"+(lockd?" alt":"");
+  go.textContent=lockd?`🔒 Finish level ${cur+1} first`:isDone?"🔁 Play it again":"▶️ Start this level";
+  if(!lockd)go.addEventListener("click",()=>questPlay(s)); else go.disabled=true;
+  p.appendChild(go);
+  // tasks
+  const t=$("qTasks"); t.innerHTML="";
+  QUEST_LEVELS.forEach((l,i)=>{
+    const r=document.createElement("button");
+    r.className="qtask"+(q.stars[i]?" done":i===cur?" cur":i>cur?" locked":"");
+    r.innerHTML=`<span class="ck">${q.stars[i]?"✅":i===cur?"👉":"⬜"}</span><span>${esc(l.em+" "+l.name)}<small>${esc(l.sub)}${q.stars[i]?" · "+qStars(q.stars[i]):""}</small></span>`;
+    r.addEventListener("click",()=>{QUEST.sel=i;questOpen();window.scrollTo(0,0)});
+    t.appendChild(r);
+  });
+  $("qWin").hidden=cur<QUEST_LEVELS.length;
+  show("quest");
+}
+function questPlay(i){
+  const L=QUEST_LEVELS[i];
+  QUEST.active=i;
+  if(L.type==="sc")scStart(L.id,L.n);
+  else if(L.type==="sm")smStart(L.mode,"sprint");
+  else if(L.type==="fl")flRenderHome();
+}
+function questFinish(stars){
+  const on=QUEST.active!=null;
+  document.querySelectorAll(".mapback").forEach(b=>b.hidden=!on);
+  if(!on)return [];
+  const q=qLoad(), i=QUEST.active, had=q.stars[i]||0;
+  q.stars[i]=Math.max(had,Math.max(1,Math.min(3,stars)));
+  rwPts(5*(q.stars[i]-had),true);
+  const msgs=[];
+  if(qCur(q)>=QUEST_LEVELS.length&&!q.won){
+    q.won=true;
+    const r=rwLoad(); r.medals+=2; rwSave(r); rwPts(50,true);
+    msgs.push("🏰 You reached Falcon Castle! The whole map is done! 🥇🥇 2 GOLD MEDALS and 50 bonus points!");
+  }
+  qSave(q);
+  return msgs;
+}
+document.querySelectorAll(".mapback").forEach(b=>b.addEventListener("click",()=>{if(typeof smClear==="function")smClear();QUEST.sel=null;questOpen()}));
+$("questBtn").addEventListener("click",questOpen);
+$("qAll").addEventListener("click",()=>show("menu"));
+$("qShelf").addEventListener("click",shelfRender);
+
+/* ================= GROWN-UPS DASHBOARD (patterns from everything Emma does) ================= */
+const P_SUB={math:"➗ Math",speed:"⚡ Speed Math",eng:"📚 English",sci:"🧪 Science",boss:"🏰 Castle Challenge"};
+const dkey=t=>{const d=new Date(t);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+function pAll(){
+  const out=[];
+  logLoad().forEach(e=>out.push({t:e.t,sub:e.sub,id:e.id,title:e.title,score:`${e.ok} of ${e.n}`,pct:e.n?e.ok/e.n:null,pts:e.pts,miss:e.miss||[]}));
+  smLoadRuns().forEach(r=>{const test=(r.kind||"sprint")==="test",n=r.n||100;
+    out.push({t:r.t,sub:r.mode==="dec"?"math":"speed",id:"sm-"+r.mode+"-"+(r.kind||"sprint"),title:r.mode==="dec"?"Decimal × Test":`${SM_MODES[r.mode]} ${test?"Real Test":"Sprint"}`,
+      score:test?`${r.ok} of ${n}`:`${r.ok} solved, ${r.att?Math.round(100*r.ok/r.att):0}% right`,pct:test?r.ok/n:(r.att?r.ok/r.att:null),miss:(r.miss||[]).map(([q,a])=>q.replace(/ = .*$/,"")+" = "+a)})});
+  const fl=flLoad();
+  FL_PASSAGES.forEach(fp=>(fl[fp.id]||[]).forEach(r=>out.push({t:r.t,sub:"eng",id:"fl-"+fp.id,title:"Speed Read: "+fp.title.replace(/^\S+ /,""),score:`${r.w} words in 1 minute`,pct:null,w:r.w})));
+  return out.sort((a,b)=>a.t-b.t);
+}
+function pAnalyze(){
+  const all=pAll(), now=Date.now(), day=864e5, today=todayKey(), r=rwLoad();
+  const d14=all.filter(a=>now-a.t<14*day), d7=all.filter(a=>now-a.t<7*day), d30=all.filter(a=>now-a.t<30*day);
+  const td=all.filter(a=>dkey(a.t)===today);
+  const ptsToday=(r.days||{})[today]||0;
+  const work=[],good=[];
+  const by={}; d30.forEach(a=>{if(a.pct==null)return;(by[a.id]=by[a.id]||[]).push(a)});
+  Object.values(by).forEach(l=>{
+    const avg=l.reduce((x,a)=>x+a.pct,0)/l.length, nm=l[0].title;
+    if(avg<.7)work.push([avg,`<b>${esc(nm)}</b>: averaging ${Math.round(100*avg)}% over ${l.length} ${l.length===1?"try":"tries"}. Assign another round of this one.`]);
+    if(l.length>=2&&l[l.length-1].pct-l[0].pct>=.15)good.push(`<b>${esc(nm)}</b>: up from ${Math.round(100*l[0].pct)}% to ${Math.round(100*l[l.length-1].pct)}%.`);
+  });
+  work.sort((a,b)=>a[0]-b[0]);
+  const mc={}; d30.forEach(a=>(a.miss||[]).forEach(m=>{mc[m]=(mc[m]||0)+1}));
+  const tops=Object.entries(mc).filter(([,c])=>c>=2).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  const fl=flLoad();
+  FL_PASSAGES.forEach(fp=>{const l=fl[fp.id]||[];if(l.length>=2){const d=l[l.length-1].w-l[0].w;if(d>0)good.push(`<b>Speed Read (${esc(fp.title.replace(/^\S+ /,""))})</b>: ${l[0].w} → ${l[l.length-1].w} words a minute.`);else if(l.length>=3)work.push([.99,`<b>Speed Read</b>: "${esc(fp.title.replace(/^\S+ /,""))}" hasn't grown yet (${l[0].w} → ${l[l.length-1].w} words). Try reading it out loud together once first.`])}});
+  const subs={}; d14.forEach(a=>{const s=subs[a.sub]=subs[a.sub]||{n:0,p:[],last:null};s.n++;if(a.pct!=null)s.p.push(a.pct);s.last=a});
+  const daysActive=new Set(d7.map(a=>dkey(a.t))).size;
+  return {all,d14,d7,td,ptsToday,work:work.map(w=>w[1]),good,tops,subs,daysActive,r};
+}
+function parentRender(){
+  const A=pAnalyze(), r=A.r;
+  $("pTiles").innerHTML=[
+    [A.td.length,`activities today · ${A.ptsToday} points`],
+    [A.d7.length,`activities this week · ${A.daysActive} of 7 days`],
+    [streakDays(r)+" 🔥","day streak"],
+    [fmt(r.pts)+" ⭐",`points · ${r.sq.length+ladGot(r.pts)+(r.butter?1:0)} squishies`]
+  ].map(([b,t])=>`<div class="ptile"><b>${b}</b><span>${t}</span></div>`).join("");
+  const ch=$("pChart"), dl=$("pDays"); ch.innerHTML=""; dl.innerHTML="";
+  const counts=[]; for(let i=13;i>=0;i--){const t=Date.now()-i*864e5,k=dkey(t);counts.push([k,A.all.filter(a=>dkey(a.t)===k).length,new Date(t)])}
+  const mx=Math.max(3,...counts.map(c=>c[1]));
+  counts.forEach(([k,n,d])=>{const b=document.createElement("div");b.className="cbar";b.style.height=Math.max(6,Math.round(120*n/mx))+"px";b.textContent=n||"";if(!n)b.style.opacity=".25";ch.appendChild(b);
+    const l=document.createElement("span");l.textContent=`${d.getMonth()+1}/${d.getDate()}`;dl.appendChild(l)});
+  const sb=$("pSubs"); sb.innerHTML="";
+  Object.keys(P_SUB).forEach(k=>{const s=A.subs[k];const c=document.createElement("div");c.className="pmcard";
+    c.innerHTML=`<h3>${P_SUB[k]}</h3>`+(s?`<div class="pmline">${s.n} ${s.n===1?"activity":"activities"}${s.p.length?` · average ${Math.round(100*s.p.reduce((x,y)=>x+y,0)/s.p.length)}%`:""}</div><div class="pmline">Last: ${esc(s.last.title)}, ${esc(s.last.score)}</div>`:`<div class="pmtrend flat">Nothing yet in the last 14 days</div>`);
+    sb.appendChild(c)});
+  const note=(el,list,cls,empty)=>{$(el).innerHTML=list.length?list.map(h=>`<div class="pnote ${cls}">${h}</div>`).join(""):`<div class="pnote">${empty}</div>`};
+  const work=A.work.slice();
+  if(A.tops.length)work.push(`<b>Missed more than once:</b><br>${A.tops.map(([m,c])=>`• ${esc(m)} (${c}×)`).join("<br>")}`);
+  note("pWork",work,"warn","No weak spots yet. Keep practicing and patterns will show up here.");
+  note("pGood",A.good,"good","Do the same test twice and improvements will show up here.");
+  const rc=$("pRecent"); rc.innerHTML="";
+  A.all.slice(-20).reverse().forEach(a=>{const d=new Date(a.t),row=document.createElement("div");row.className="histrow";
+    row.innerHTML=`<span>${d.getMonth()+1}/${d.getDate()} ${d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}</span><span>${esc(a.title)}</span><b>${esc(a.score)}</b>`;rc.appendChild(row)});
+  if(!A.all.length)rc.innerHTML=`<div class="pnote">No activity yet.</div>`;
+  const txt=parentReportText(A);
+  const to=["moc.liamg@627kanaira","moc.noitadnuofredart@dalv"].map(x=>x.split("").reverse().join("")).join(",");
+  $("pEmail").href=`mailto:${to}?subject=${encodeURIComponent("Emma's practice report "+todayKey())}&body=${encodeURIComponent(txt)}`;
+  $("pText").href=smsHref(txt.slice(0,600));
+  show("parent"); window.scrollTo(0,0);
+}
+function parentReportText(A){
+  A=A||pAnalyze();
+  const strip=h=>h.replace(/<br>/g,"\n").replace(/<[^>]+>/g,"");
+  const lines=[`Emma's practice report (${todayKey()})`,"",
+   `Today: ${A.td.length} activities, ${A.ptsToday} points.`,`This week: ${A.d7.length} activities on ${A.daysActive} of 7 days. Streak: ${streakDays(A.r)} days.`,`Total: ${A.r.pts} points.`,""];
+  if(A.td.length){lines.push("Today's work:");A.td.forEach(a=>lines.push(`- ${a.title}: ${a.score}`));lines.push("")}
+  lines.push("What to work on:");(A.work.length?A.work:["Nothing flagged yet."]).forEach(w=>lines.push("- "+strip(w)));
+  if(A.tops.length){lines.push("Missed more than once:");A.tops.forEach(([m,c])=>lines.push(`- ${m} (${c}x)`))}
+  if(A.good.length){lines.push("","Getting better at:");A.good.forEach(g=>lines.push("- "+strip(g)))}
+  return lines.join("\n");
+}
+$("parentBtn").addEventListener("click",parentRender);
+$("pBack").addEventListener("click",()=>show("menu"));
+
+/* ================= CLOUD SAVE (Emma's progress follows her to any device) =================
+   Every progress key lives in this browser AND in the artifact's db (progress/<key>).
+   On load the two are merged so nothing is lost; each later save merges again before writing.
+   If the db isn't available, the app keeps working with this browser only. */
+const CS_KEYS=["emmaSpeedRuns","emmaRewards","emmaFluency","emmaReadBest","emmaSchoolBest","emmaQuest","emmaLog"];
+const CS={db:null,chain:{},timers:{}};
+const csJ=(s,d)=>{try{const v=JSON.parse(s);return v==null?d:v}catch(e){return d}};
+let csRawSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const csGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+const CS_MERGE={
+  emmaSpeedRuns:(a,b)=>{const seen={},all=[];[].concat(csJ(a,[]),csJ(b,[])).forEach(r=>{if(!r||typeof r.t!=="number")return;const k=r.t+"|"+(r.mode||"")+"|"+(r.kind||"");if(!seen[k]){seen[k]=1;all.push(r)}});all.sort((x,y)=>x.t-y.t);return JSON.stringify(all.slice(-200))},
+  emmaRewards:(a,b)=>{const x=csJ(a,{}),y=csJ(b,{});const sq=(Array.isArray(x.sq)?x.sq:[]).slice();(Array.isArray(y.sq)?y.sq:[]).forEach(i=>{if(sq.indexOf(i)<0)sq.push(i)});return JSON.stringify(Object.assign({},y,x,{medals:Math.max(Number(x.medals)||0,Number(y.medals)||0),sq:sq,acts:Math.max(Number(x.acts)||0,Number(y.acts)||0),pts:Math.max(Number(x.pts)||0,Number(y.pts)||0),days:dayMax(x.days,y.days),butter:!!(x.butter||y.butter)}))},
+  emmaFluency:(a,b)=>{const x=csJ(a,{}),y=csJ(b,{}),out={};new Set(Object.keys(x).concat(Object.keys(y))).forEach(p=>{const seen={},l=[];[].concat(Array.isArray(x[p])?x[p]:[],Array.isArray(y[p])?y[p]:[]).forEach(r=>{if(r&&typeof r.t==="number"&&!seen[r.t]){seen[r.t]=1;l.push(r)}});l.sort((m,n)=>m.t-n.t);out[p]=l.slice(-25)});return JSON.stringify(out)},
+  emmaLog:(a,b)=>{const seen={},all=[];[].concat(csJ(a,[]),csJ(b,[])).forEach(r=>{if(!r||typeof r.t!=="number")return;const k=r.t+"|"+r.id;if(!seen[k]){seen[k]=1;all.push(r)}});all.sort((x,y)=>x.t-y.t);return JSON.stringify(all.slice(-600))},
+  emmaReadBest:(a,b)=>String(Math.max(Number(a)||0,Number(b)||0)),
+  emmaSchoolBest:(a,b)=>{const x=csJ(a,{}),y=csJ(b,{}),out=Object.assign({},y);Object.keys(x).forEach(k=>{const m=x[k],t=out[k];if(!m||!Number(m.n))return;if(!t||!Number(t.n)||m.ok/m.n>t.ok/t.n)out[k]=m});return JSON.stringify(out)},
+  emmaQuest:(a,b)=>{const x=csJ(a,null),y=csJ(b,null);if(!x||!Array.isArray(x.stars))return b;if(!y||!Array.isArray(y.stars))return a;
+    if(x.day!==y.day)return x.day>y.day?a:b;
+    const len=Math.max(x.stars.length,y.stars.length);return JSON.stringify({day:x.day,stars:Array.from({length:len},(_,i)=>Math.max(Number(x.stars[i])||0,Number(y.stars[i])||0)),won:!!(x.won||y.won)})},
+};
+function csOnce(k,localChanged){
+  const ref=CS.db.doc("progress/"+k);
+  return ref.get().then(snap=>{
+    const body=snap.exists?snap.data():null;
+    const cv=body&&typeof body.v==="string"?body.v:null, lv=csGet(k);
+    const mv=lv==null?cv:cv==null?lv:CS_MERGE[k](lv,cv,localChanged);
+    if(mv==null)return false;
+    const changedHere=mv!==lv;
+    if(changedHere)csRawSet(k,mv);
+    return (mv!==cv?ref.set({v:mv,t:Date.now()}):Promise.resolve()).then(()=>changedHere);
+  });
+}
+function csQueue(k,localChanged){
+  const p=(CS.chain[k]||Promise.resolve()).then(()=>csOnce(k,localChanged));
+  CS.chain[k]=p.catch(()=>false);
+  return p;
+}
+function csSchedule(k){
+  if(!CS.db)return;
+  clearTimeout(CS.timers[k]);
+  CS.timers[k]=setTimeout(()=>{csQueue(k,true).then(ch=>{if(ch)csRefresh()}).catch(()=>csStatus("local"))},700);
+}
+function csStatus(s){const el=$("qSave");if(el)el.textContent=s==="cloud"?"☁️ Your progress saves to every device":s==="local"?"📱 Progress is saving on this device":""}
+function csRefresh(){
+  if(!$("quest").hidden)questOpen();
+  else if(!$("school").hidden||!$("reading").hidden)scBadges();
+  else if(!$("shelf").hidden)shelfRender();
+}
+(function(){
+  try{
+    const P=Storage.prototype, orig=P.setItem;
+    csRawSet=(k,v)=>{try{orig.call(localStorage,k,v)}catch(e){}};
+    P.setItem=function(k,v){orig.call(this,k,v);try{if(this===localStorage&&CS_KEYS.indexOf(k)>=0)csSchedule(k)}catch(e){}};
+  }catch(e){}
+})();
+async function csInit(){
+  let db=null;
+  try{if(window.claude&&typeof window.claude.use==="function")db=await window.claude.use("db")}catch(e){db=null}
+  if(!db){csStatus("local");return}
+  CS.db=db;
+  try{
+    const res=await Promise.race([
+      Promise.all(CS_KEYS.map(k=>csQueue(k,false))),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error("timeout")),15000))
+    ]);
+    csStatus("cloud");
+    if(res.some(Boolean))csRefresh();
+  }catch(e){csStatus("local")}
+}
+csInit();
+
+try{localStorage.removeItem("emmaLogin");localStorage.removeItem("emmaCode")}catch(e){}
+hudRender();
+QUEST.sel=null;
+questOpen();
+
 </script>
+
 </body>
 </html>
