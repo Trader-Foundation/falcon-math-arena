@@ -326,6 +326,17 @@ svg.ang{width:min(300px,70vw);height:auto}
 .pnotes{width:100%;max-width:560px;display:flex;flex-direction:column;gap:8px;text-align:left}
 .pnote{background:#FFF;border:2px solid var(--line);border-left:8px solid var(--gold);border-radius:12px;padding:10px 12px;font:700 15px/1.45 var(--body)}
 .pnote.warn{border-left-color:var(--bad)} .pnote.good{border-left-color:var(--good)}
+.advstory{width:100%;max-width:660px;background:#FFFDF6;border:3px solid #CFE3F5;border-radius:22px;padding:16px 18px;text-align:left}
+.advstory h3{font-size:24px;color:#123F75;margin:0 0 8px}
+.advstory .rdp{font-size:18px;line-height:1.75}
+.advtrail{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;width:100%;max-width:660px}
+.advtrail span{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;background:#E9E2D6;border:3px solid #B9AC98;filter:grayscale(.8)}
+.advtrail span.done{background:var(--p2);border-color:var(--p2-deep);filter:none}
+.advtrail span.cur{background:#FFF;border-color:#1D5FA8;filter:none;box-shadow:0 0 0 4px #CFE3F5}
+.advq{width:100%;max-width:660px;font:800 15px var(--disp);letter-spacing:.06em;text-transform:uppercase;color:#1D5FA8;text-align:left}
+.gcard.advcard{grid-column:1/-1;background:linear-gradient(135deg,#1D5FA8,#0E7C86);border-color:#0E5A63}
+.gcard.advcard h3,.gcard.advcard p{color:#FFF}
+.gcard.advcard .newtag{display:inline-block;background:var(--p2);color:var(--p2-deep);font:800 12px var(--disp);border-radius:99px;padding:2px 10px;margin-left:6px;vertical-align:middle}
 .bs-shelf{background:linear-gradient(135deg,#7A5600,#5A3E00)}
 .foldlbl{font:800 14px var(--disp);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:6px 4px -4px}
 .bigsect.fold{border-left:12px solid rgba(255,255,255,.35)}
@@ -397,6 +408,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <div class="sect">✅ Today's tasks</div>
       <div class="qtasks" id="qTasks"></div>
       <div class="qlinks">
+        <button class="smbig" id="qAdv" style="background:linear-gradient(135deg,#1D5FA8,#0E7C86)">🔦 Adventure Story</button>
         <button class="smbig alt" id="qAll">🏫 All my subjects</button>
         <button class="smbig alt" id="qShelf">🏆 Prize Shelf</button>
       </div>
@@ -416,7 +428,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <button class="bigsect bs-quest" id="questBtn"><span class="be">🗺️</span><span><h3>My Quest Map</h3><p>Today's levels and tasks. Walk your falcon to Falcon Castle!</p></span></button>
       <div class="foldlbl">📁 My subject folders</div>
       <button class="bigsect bs-math fold" id="mathBtn"><span class="be">➗</span><span><h3>Math</h3><p>Class math, the Decimal × Test, and Speed Math</p></span><span class="fa">›</span></button>
-      <button class="bigsect bs-read fold" id="readBtn"><span class="be">📚</span><span><h3>English</h3><p>Reading, fact or opinion, persuasive and argument writing</p></span><span class="fa">›</span></button>
+      <button class="bigsect bs-read fold" id="readBtn"><span class="be">📚</span><span><h3>English</h3><p>NEW adventure story! Plus reading, fact or opinion, and writing</p></span><span class="fa">›</span></button>
       <button class="bigsect bs-sci fold" id="sciBtn"><span class="be">🧪</span><span><h3>Science</h3><p>Physical and chemical changes, with picture questions</p></span><span class="fa">›</span></button>
       <div class="foldlbl">⭐ Prizes</div>
       <button class="bigsect bs-boss" id="bossBtn"><span class="be">🏰</span><span><h3>Castle Challenge</h3><p>A fun mix of everything you've practiced. No timer! Get 18 of 23 to win the Huge Butter Squishy.</p></span></button>
@@ -567,6 +579,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       <h2 style="font-size:26px">📁 📚 English</h2>
       <div class="subhead">📖 Reading and Writing</div>
       <div class="gamegrid" style="max-width:560px;width:100%">
+        <button class="gcard advcard" data-sc="adv1"><span class="em">🔦</span><h3>Adventure Story: The Secret of Gull Rock Lighthouse <span class="newtag">NEW</span></h3><p>Read a chapter, answer questions to unlock the next one, and solve Captain Lou's riddles! 7 chapters, 13 questions.</p><span class="scbest" data-best="adv1" hidden></span></button>
         <button class="gcard" id="rdStoryBtn"><span class="em">🕵️</span><h3>Story + Quiz</h3><p>Read the mystery, then answer 10 questions!</p></button>
         <button class="gcard" id="flBtn"><span class="em">⏱️</span><h3>1-Minute Speed Read</h3><p>Read out loud, tap your last word, beat your record!</p></button>
         <button class="gcard" data-sc="fo"><span class="em">🦁</span><h3>Fact or Opinion?</h3><p>Presidents, zoos, and more. Some tricky ones! Can it be proven?</p><span class="scbest" data-best="fo" hidden></span></button>
@@ -684,6 +697,7 @@ svg.ang{width:min(300px,70vw);height:auto}
       </div>
       <div class="scbar"><i id="scBar" style="width:0"></i></div>
       <div class="sect" id="scTitle"></div>
+      <div id="scStory" style="display:flex;flex-direction:column;gap:12px;align-items:center;width:100%" hidden></div>
       <div class="scpic" id="scPic" hidden></div>
       <div class="scq" id="scQ"></div>
       <div class="scopts" id="scOpts"></div>
@@ -1977,9 +1991,25 @@ function picBuild(n){
 function picHTML(pic){
   return pic.map((p,i)=>(i?'<div class="parr">➡️</div>':'')+`<div class="pp"><div class="pt">${esc(p.t)}</div><span class="pe" style="${p.s?(/\(/.test(p.s)&&!/^(scale|rotate)/.test(p.s)?"filter:"+p.s:"transform:"+p.s):""}">${p.e}</span><div class="pl">${esc(p.l)}</div></div>`).join("");
 }
+/* ADVENTURE STORY: read a chapter, answer its questions to unlock the next one */
+const ADV1={"title": "The Secret of Gull Rock Lighthouse", "ch": [{"em": "📮", "title": "A Postcard in a Library Book", "paras": ["Rain drummed on the roof of the beach house, and Emma was bored. She had already beaten her own speed-math record twice and squeezed every squishy on her shelf, including Pudding, the butter-yellow squishy she carried everywhere. So she flopped onto the couch with a library book called Lighthouses of the Jersey Shore.", "Halfway through, something slid out from between the pages: an old postcard, soft and yellow at the corners. On the front was a picture of a red-and-white lighthouse. On the back, in curly handwriting, someone had written:", "“To whoever finds this: The light still keeps its promise. Count the steps, follow the gulls, and look where the sun says goodnight. — Captain Lou”", "Emma flipped the card over again. Under the picture, tiny letters said GULL ROCK LIGHT. She knew that lighthouse! It stood at the far end of the boardwalk, and it had been closed for as long as she could remember.", "“Pudding,” she whispered, “I think we just found a treasure hunt.” Pudding, being a squishy, said nothing. But Emma was pretty sure he looked excited."]}, {"em": "🏖️", "title": "The Keeper's Granddaughter", "paras": ["The next morning the sky was bright and washed clean. Emma and her dad walked the whole boardwalk, past the go-kart track and the ice cream stand, until the boards ended at a rocky point. There stood Gull Rock Light, its paint peeling like a sunburned nose.", "A woman with silver braids was sweeping sand off the front steps. “Sorry, we're not open,” she said. Then she saw the postcard in Emma's hand, and she froze. “Where did you get that?”", "Emma explained about the library book. The woman's eyes got shiny. “Captain Lou was my grandfather. He kept this light for forty years, and he loved riddles more than anything. When I was your age, he hid little puzzles all over this lighthouse for me to solve.”", "She smiled and pulled a ring of keys from her pocket. “My name is Rosa. I'm fixing the lighthouse up so it can open again. I think Grandpa would want you to have a look.”", "Dad raised his eyebrows at Emma. Emma raised hers right back. Then all three of them went inside."]}, {"em": "🪜", "title": "Count the Steps", "paras": ["Inside, a spiral staircase twisted up and up like the inside of a seashell. “Count the steps,” Emma said. “That's the first clue.”", "She counted out loud. Dad counted too, mostly to make sure she didn't trip. Rosa waited at the bottom holding the flashlight, and Pudding sat on her shoulder to supervise.", "“Ninety-eight... ninety-nine... one hundred... one hundred and ONE!” Emma shouted from the top. “There are one hundred and one steps!”", "“That's odd,” Rosa called up. “Grandpa always said there were exactly one hundred.”", "Emma looked down. The very last step was different from all the others. It was made of wood, not iron, and it was a little taller. She knelt and knocked on it. Knock, knock. It sounded hollow, like a drum.", "Very carefully, Emma lifted the top board. Underneath was a small tin box with a seagull painted on the lid."]}, {"em": "🐦", "title": "Follow the Gulls", "paras": ["Inside the tin box was a brass key and a note: “Well done, sharp eyes! Now follow the gulls.”", "Emma hurried to the big window in the lamp room. Down on the beach, dozens of seagulls were walking in every direction, squawking and fighting over a dropped french fry. “Follow them WHERE?” she groaned.", "Dad leaned on the railing. “Maybe Captain Lou didn't mean real gulls.”", "Emma looked around the room again. Painted along the bottom of the walls was a border of tiny seagulls, all flying in a line. She had walked right past them! She traced the painted birds with her finger. Every gull flew to the left... except one. One little gull flew to the right, pointing straight at a wooden cabinet by the door.", "The cabinet had a small brass lock. Emma held her breath, slid in the key, and turned it. Click."]}, {"em": "🌅", "title": "Where the Sun Says Goodnight", "paras": ["The cabinet held a rolled-up map of the lighthouse grounds. A dotted line ran from the front door to a spot marked with a tiny sun. Next to it, Captain Lou had written one more riddle: “Where the sun says goodnight, the light keeps its promise.”", "“The sun says goodnight when it sets,” Emma said slowly. “And the sun sets in the west!”", "Rosa pulled a compass out of her toolbox. They followed the needle west, out the door and around the base of the lighthouse to the side that faced the bay. There, half hidden by beach grass, was a stone with a sun carved into it. The stone was loose.", "Emma and Dad wiggled it free. Behind it was a hole in the wall, and inside the hole was a metal box, much bigger than the first one, sealed with wax.", "Rosa's hands shook as she lifted it out. “I never found this one,” she said quietly. “Not in all those years.”"]}, {"em": "💌", "title": "The Promise", "paras": ["They opened the box right there on the lighthouse steps. There was no gold inside, and no jewels. Instead, it was full of letters, dozens of them, tied together with string. Some were written in pencil, and some in crayon. Every single one was from a kid.", "Rosa read one out loud. “Dear Captain Lou, thank you for letting me ring the fog bell. I was scared of the storm, but you said the light always keeps its promise to bring the boats home. I'm not scared anymore. Love, Tommy, age 9.”", "At the bottom of the box was one last note in Captain Lou's curly handwriting: “Every child who climbed my stairs left a little light behind. If you found this, add yours. Then hide the box again for the next sharp eyes.”", "Emma didn't say anything for a long moment. Then she reached into her pocket, past Pudding, and pulled out a pencil."]}, {"em": "✨", "title": "Emma's Light", "paras": ["Emma wrote her letter right there on the steps, using the tin box as a desk. She wrote about the rainy day, the postcard, the one hundred and one steps, and the little gull that flew the wrong way. “Sometimes,” she wrote, “the one that goes a different way is the one that finds the answer.”", "She folded the letter, tied it in with the others, and set Pudding on top for one second, just so he could be part of it. Then she took him back. A squishy that brave belongs at home.", "Rosa sealed the box, and together they slid the sun stone back into place. “When the lighthouse opens this summer,” Rosa said, “I'm putting your postcard in a frame by the front door, with a sign: The girl who solved Captain Lou's last riddle.”", "Walking home along the boardwalk, Emma squeezed Pudding and looked back. For the first time in years, a light was shining at the top of Gull Rock. Rosa had switched it on, just for them.", "The light, Emma thought, still keeps its promise."]}], "qs": [[0, "Where did Emma find the postcard?", ["Inside a library book", "In the mailbox", "Under the couch cushions", "At the lighthouse door"], "The postcard slid out from between the pages of the library book about lighthouses."], [0, "The postcard was “soft and yellow at the corners.” What does that clue tell you?", ["The postcard is very old", "The postcard was just printed", "The postcard is made of cloth", "Someone spilled lemonade on it"], "Old paper turns soft and yellow over time. That's a clue the postcard is old."], [1, "Why does Rosa decide to let Emma inside the lighthouse?", ["She sees her grandfather's postcard and thinks he would want Emma to look", "Emma buys a ticket", "It starts to rain again", "Dad asks her nicely three times"], "Rosa recognizes Captain Lou's postcard and says, “I think Grandpa would want you to have a look.”"], [1, "The paint was “peeling like a sunburned nose.” What two things is the author comparing?", ["Peeling paint and peeling sunburned skin", "A nose and a lighthouse", "Paint and the ocean", "Sunscreen and paint"], "This is a simile. It compares the lighthouse's peeling paint to skin peeling after a sunburn."], [2, "What made the last step different from the others?", ["It was wood, not iron, and a little taller", "It was painted gold", "It had a light on it", "It was missing"], "The story says the last step was made of wood, not iron, and it was a little taller."], [2, "Why was counting 101 steps an important clue?", ["Rosa said there were 100, so the extra step was added on purpose to hide something", "Emma counted wrong", "It meant the lighthouse was growing", "Dad skipped some steps"], "Captain Lou said 100 steps. An extra, different step was a sign that something was hidden there."], [3, "At first, why couldn't Emma follow the gulls?", ["The real seagulls were walking in every direction", "She is afraid of birds", "It was too dark to see", "The gulls all flew away"], "The real gulls were walking every which way and fighting over a french fry, so they couldn't be the clue."], [3, "Which painted gull showed Emma where to look next?", ["The only gull flying the other way, to the right", "The biggest gull", "The gold gull", "The gull next to the window"], "Every painted gull flew left except one. That one pointed at the cabinet."], [4, "How did Emma figure out where “the sun says goodnight”?", ["She knew the sun sets in the west", "Rosa told her the answer", "She found an X on the map", "Pudding pointed at it"], "The sun sets (says goodnight) in the west, so they followed the compass west."], [4, "How does Rosa most likely feel when she lifts the big box?", ["Excited and emotional, because she never found it as a kid", "Bored", "Angry at Emma", "Sleepy"], "Her hands shake and she says she never found this one in all those years. She's full of feelings!"], [5, "What was the real “treasure” Captain Lou hid?", ["Letters from kids who visited the lighthouse", "Gold coins", "A new lamp for the lighthouse", "A pirate map"], "There was no gold. The box was full of letters from kids, each one leaving “a little light behind.”"], [5, "What lesson does this story teach?", ["Kindness and memories can be a treasure worth more than gold", "Never read old library books", "Lighthouses are scary places", "Always run up the stairs"], "The treasure was memories and kindness, which mattered more than gold or jewels."], [6, "What does Emma mean when she writes, “the one that goes a different way is the one that finds the answer”?", ["Being different can help you solve a problem, like the gull flying the other way", "You should always walk backwards", "Seagulls are smarter than people", "She got lost on the boardwalk"], "The one gull flying the other way gave the clue. Emma means being different can lead to the answer."]]};
+function advBuild(){
+  return ADV1.qs.map(([ch,q,o,why],i)=>Object.assign(scMC(q,o[0],o.slice(1),why),{ch:ch,hint:`Chapter ${ch+1} of ${ADV1.ch.length}`}));
+}
+function advRender(q){
+  const el=$("scStory");
+  if(q.ch==null){el.hidden=true;el.innerHTML="";return}
+  const c=ADV1.ch[q.ch], inCh=SC.qs.filter(x=>x.ch===q.ch), k=inCh.indexOf(q)+1;
+  const trail=ADV1.ch.map((x,i)=>`<span class="${i<q.ch?"done":i===q.ch?"cur":""}">${i<=q.ch?x.em:"🔒"}</span>`).join("");
+  el.innerHTML=`<div class="advtrail">${trail}</div><div class="advstory"><h3>${c.em} Chapter ${q.ch+1}: ${esc(c.title)}</h3>${c.paras.map(t=>`<p class="rdp">${esc(t)}</p>`).join("")}</div><div class="advq">🧭 Question ${k} of ${inCh.length} for this chapter</div>`;
+  el.hidden=false;
+  const prev=SC.qs[SC.i-1];
+  if(!prev||prev.ch!==q.ch){window.scrollTo(0,0);if(prev)rwToast(`${c.em} Chapter ${q.ch+1} unlocked!`)}
+}
 function scTwo(bank,labels){return bank.map(([q,a,why])=>({q:q,opts:labels,a:a,why:why}))}
 function scFour(bank){return bank.map(([q,o,why])=>scMC(q,o[0],o.slice(1),why))}
 const SC_TESTS={
+ adv1:{cat:"read",title:"Adventure: Gull Rock Lighthouse",n:13,build:advBuild,win:"💌 You solved Captain Lou's last riddle and found the treasure!"},
  sci:{cat:"sci",title:"Physical or Chemical?",n:18,two:true,bank:()=>scTwo(SC_PC,SC_PC_OPTS)},
  pic:{cat:"sci",title:"Picture Science",n:15,build:()=>picBuild(15)},
  sciw:{cat:"sci",title:"Science Study Guide",n:11,bank:()=>scFour(SC_SCIW)},
@@ -2054,6 +2084,7 @@ function scPaint(){
   $("scBar").style.width=(SC.i/SC.qs.length*100)+"%";
   $("scTitle").textContent=t.title+(q.hint?` · ${q.hint}`:"");
   const isMath=q.math!=null?q.math:t.math, isTwo=q.two!=null?q.two:t.two;
+  advRender(q);
   const pe=$("scPic"); if(q.pic){pe.innerHTML=picHTML(q.pic);pe.hidden=false}else{pe.innerHTML="";pe.hidden=true}
   const qe=$("scQ"); qe.textContent=q.q; qe.className="scq"+(isMath&&!q.wordy?" math":"");
   const box=$("scOpts"); box.innerHTML="";
@@ -2097,6 +2128,7 @@ function scFinish(){
   const scMsgs=rwEarn({pass:scPass,bonus:(scPass?10:0)+(pct>=.9?10:0)+(SC.id==="boss"&&scPass?50:0),medals:pct>=.9?1:0,why:`${ok} of ${n} on ${t.title}!`,passHint:SC.id==="boss"?null:`Get ${Math.ceil(n*.7)} of ${n} to win a bonus squishy!`});
   logAct({sub:t.cat==="math"?"math":t.cat==="sci"?"sci":t.cat==="boss"?"boss":"eng",id:SC.id,title:t.title,ok:ok,n:n,pts:PT.last,miss:SC.miss.map(q=>(q.cap?q.cap+": ":"")+q.q)});
   if(scPass)setTimeout(()=>smConfetti("scConf"),150);
+  if(t.win&&scPass)scMsgs.unshift(t.win);
   if(SC.id==="boss"){
     const r=rwLoad();
     if(ok>=BOSS_PASS&&!r.butter){r.butter=true;rwSave(r);
@@ -2146,6 +2178,7 @@ const QUEST_LEVELS=[
  {em:"🏰",name:"Castle Challenge",sub:"Everything",what:"The last stop! A fun mix of 23 questions from everything you've practiced. No timer. Get 18 right to win the Huge Butter Squishy!",type:"sc",id:"boss",x:164,y:70,castle:true},
 ];
 const QUEST_DAYS={
+ "2026-11-20":{title:"Day Off Adventure",note:"No school today! 🎉 Start with the new 🔦 Adventure Story (tap the blue button below the map), then walk your falcon to Falcon Castle if you want more."},
  "2026-11-17":{title:"Sick Day Quest",note:"Feel better soon! 💛 Go slow, take breaks, and drink lots of water. Walk your falcon all the way to Falcon Castle."},
 };
 const QUEST_DEFAULT={title:"Today's Quest",note:"Finish each level to walk your falcon to Falcon Castle!"};
@@ -2244,6 +2277,7 @@ document.querySelectorAll(".mapback").forEach(b=>b.addEventListener("click",()=>
 $("questBtn").addEventListener("click",questOpen);
 $("qAll").addEventListener("click",()=>show("menu"));
 $("qShelf").addEventListener("click",shelfRender);
+$("qAdv").addEventListener("click",()=>scStart("adv1"));
 
 /* ================= GROWN-UPS DASHBOARD (patterns from everything Emma does) ================= */
 const P_SUB={math:"➗ Math",speed:"⚡ Speed Math",eng:"📚 English",sci:"🧪 Science",boss:"🏰 Castle Challenge"};
