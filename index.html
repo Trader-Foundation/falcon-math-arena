@@ -1003,6 +1003,7 @@ function smEnd(){
   const qm=CH.active?(document.querySelectorAll(".mapback").forEach(b=>b.hidden=true),[]):questFinish(SM.ok>=15?3:SM.ok>=8?2:1);
   const smPass=["A+","A","B+","B"].includes(g);
   const msgs=rwEarn({pass:smPass,bonus:smPass?(SM.kind==="test"?20:10):0,medals:medal,why:medal===2?"a record AND an A!":isRec?"a new record!":"an A grade!",passHint:"Get a B or better to win a bonus squishy!"});
+  cloudSend({sub:SM.mode==="dec"?"math":"speed",title:SM.mode==="dec"?"Decimal × Test":`${SM_MODES[SM.mode].replace(/^\S+ /,"")} ${SM.kind==="test"?"Real Test":"Sprint"}`,ok:SM.ok,n:SM.kind==="test"?smTestN():"",pts:PT.last,miss:SM.miss.map(([q,a])=>q.replace(/ = .*$/,"")+" = "+a)});
   rwBanner("smRw",qm.concat(msgs));
   if(CH.active){
     CH.results.push({mode:SM.mode,ok:SM.ok,att:SM.att,g:g,em:em});
@@ -1372,7 +1373,21 @@ function ptsAdd(r,n){
   return ups;
 }
 function logLoad(){try{const l=JSON.parse(localStorage.getItem("emmaLog")||"[]");return Array.isArray(l)?l:[]}catch(e){return[]}}
-function logAct(o){try{const l=logLoad();l.push(Object.assign({t:Date.now()},o,{miss:(o.miss||[]).slice(0,8)}));localStorage.setItem("emmaLog",JSON.stringify(l.slice(-600)))}catch(e){}}
+function logAct(o){try{const l=logLoad();const row=Object.assign({t:Date.now()},o,{miss:(o.miss||[]).slice(0,8)});l.push(row);localStorage.setItem("emmaLog",JSON.stringify(l.slice(-600)));cloudSend(row)}catch(e){}}
+/* Parent report: each finished activity also goes to the family's Google Sheet (it emails Mom and Dad each evening). */
+const LOG_URL="https://script.google.com/macros/s/AKfycbxkP5uA0F2hEwkx9GT1eMhkJmkLpXkKMEzXJAjPaLxY4a8BYo-YBBOw_-WvOdEWjts7/exec", LOG_KEY="falcon-emma-2026";
+function outLoad(){try{const o=JSON.parse(localStorage.getItem("emmaOutbox")||"[]");return Array.isArray(o)?o:[]}catch(e){return[]}}
+function outSave(o){try{localStorage.setItem("emmaOutbox",JSON.stringify(o.slice(-100)))}catch(e){}}
+let outBusy=false;
+function cloudFlush(){
+  if(outBusy)return; const box=outLoad(); if(!box.length)return;
+  const rows=box.slice(0,20); outBusy=true;
+  fetch(LOG_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({k:LOG_KEY,rows:rows})})
+    .then(()=>{const left=outLoad().filter(r=>!rows.some(x=>x.t===r.t&&x.title===r.title));outSave(left);outBusy=false;if(left.length)setTimeout(cloudFlush,1500)})
+    .catch(()=>{outBusy=false});
+}
+function cloudSend(r){try{const box=outLoad();box.push({t:r.t||Date.now(),sub:r.sub,title:r.title,ok:r.ok,n:r.n,pts:r.pts||0,miss:(r.miss||[]).slice(0,8)});outSave(box);cloudFlush()}catch(e){}}
+window.addEventListener("online",cloudFlush);
 function rwToast(html){const d=document.createElement("div");d.className="cheer gold";d.innerHTML=html;document.body.appendChild(d);setTimeout(()=>d.remove(),2800)}
 function rwPts(n,quiet){
   if(!n)return;
@@ -1626,6 +1641,7 @@ function flPick(n,el){
   const flQ=questFinish(3);
   const flPass=runs.length===1||n>=runs[runs.length-2].w;
   const msgs=rwEarn({pass:flPass,bonus:flPass?10:0,medals:isRec?1:0,why:"a new reading speed record!",passHint:"Read as far as last time to win a bonus squishy!"});
+  cloudSend({sub:"eng",title:"Speed Read: "+FL.p.title.replace(/^\S+ /,""),ok:n,n:"",pts:PT.last});
   rwBanner("flRw",flQ.concat(msgs));
   setTimeout(()=>rdShowSub("flRes"),600);
 }
@@ -2432,6 +2448,7 @@ csInit();
 
 try{localStorage.removeItem("emmaLogin");localStorage.removeItem("emmaCode")}catch(e){}
 hudRender();
+setTimeout(cloudFlush,2000);
 QUEST.sel=null;
 questOpen();
 
